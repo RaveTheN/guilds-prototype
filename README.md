@@ -63,3 +63,6 @@ dotnet test tests
 - **Temi visivi**: copia `data/themes/semplice` in `data/themes/<nome>`, cambia `theme.json` (colori, altezze, `"models": {"W": "models/muro.obj"}` per sostituire la geometria di un tipo di casella) e i file OBJ. Il tema compare da solo fra quelli selezionabili.
 - **Token dei Guildmaster**: campo `tokenModel` della carta, relativo alla cartella del tema; se il file manca si usa il segnalino generico. Riconversione dagli STL: `python tools/convert_stl.py`.
 - **Tabella delle feature**: stato in `data/features/impl_status.json`, poi `python tools/build_feature_registry.py`.
+
+## Versioni milestone
+- v0.9.2 Test parziale - prima iterazione funzionante, solo DMs, AI primitiva
