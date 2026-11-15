@@ -1,0 +1,15 @@
+# Unity: rigenerati all'apertura del progetto
+/Library/
+/Temp/
+/Logs/
+/UserSettings/
+/obj/
+*.csproj.user
+# build .NET
+bin/
+obj/
+# installazione di Blender (916 MB): non fa parte del prototipo
+/Blender/
+# materiale di partenza privato (foto, documenti, PSD): resta solo in locale
+/reference/
+__pycache__/

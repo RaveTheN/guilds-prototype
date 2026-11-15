@@ -1,0 +1,28 @@
+{
+ "id": "deck_green",
+ "name": "Mazzo verde di prova (Hunters)",
+ "version": 1,
+ "guildmaster": "gm_senya",
+ "cards": [
+  {
+   "card": "res_green",
+   "count": 9
+  },
+  {
+   "card": "g_field_dressing",
+   "count": 4
+  },
+  {
+   "card": "g_regrowth",
+   "count": 4
+  },
+  {
+   "card": "g_hunters_net",
+   "count": 4
+  },
+  {
+   "card": "g_hunters_bow",
+   "count": 4
+  }
+ ]
+}

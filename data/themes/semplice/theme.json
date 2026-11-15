@@ -1,0 +1,30 @@
+{
+ "name": "semplice",
+ "description": "Geometrie semplici generate da codice.",
+ "colors": {
+  ".": "#D8D2C4",
+  "alt": "#C4BEB0",
+  "W": "#3A3A3A",
+  "H": "#A9794F",
+  "J": "#4F8A4F",
+  "M": "#7A4FA9",
+  "T1": "#EEEEEE",
+  "T2": "#EEEEEE"
+ },
+ "heights": {
+  ".": 0.1,
+  "W": 0.9,
+  "H": 0.3,
+  "J": 0.1,
+  "M": 0.3,
+  "T1": 0.1,
+  "T2": 0.1
+ },
+ "guildColors": {
+  "Red": "#D0262B",
+  "Blue": "#2F6FD6",
+  "Green": "#2E9A45",
+  "Yellow": "#E0B020"
+ },
+ "models": {}
+}

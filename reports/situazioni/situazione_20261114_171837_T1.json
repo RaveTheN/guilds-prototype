@@ -1,0 +1,781 @@
+{
+  "preset": {
+    "id": "P01",
+    "name": "Duello dei Guildmaster",
+    "description": "Ciclo base: movimento obbligatorio → risposta → combattimento automatico → danni. Un eroe per giocatore.",
+    "featureSet": "P01",
+    "map": "mappa_8x8",
+    "theme": "semplice",
+    "partial": true,
+    "builtIn": true,
+    "choices": {},
+    "numbers": {},
+    "hypotheses": [
+      "H1 Carte risorsa: una per turno; restano in gioco; producono 1 risorsa del loro colore a inizio turno (dal turno successivo). 9 per mazzo.",
+      "H2 Le carte risorsa non sono unità, non passano dalla pila e non possono essere attaccate.",
+      "H3 20 PV a tutti e quattro i Guildmaster (le quattro carte spoiler riportano 20).",
+      "H4 La schivata col tap usa il movimento normale dell'unità.",
+      "H6 Il difensore in mischia restituisce danno solo se adiacente all'attaccante.",
+      "H8 Una finestra di risposta dopo ogni movimento e ogni carta: risponde l'avversario; quando chi ha la priorità passa, si risolve la cima della pila. Uno spostamento in risposta non apre un secondo combattimento.",
+      "H9 Si perde nel momento in cui si deve pescare da un mazzo vuoto.",
+      "H11 Contatto in mischia anche in diagonale (parametro).",
+      "H12 La Torre inerte blocca movimento e linea di vista come un muro.",
+      "H13 La casella mostro è highground con un ostacolo inerte (mostri rinviati).",
+      "H14 Le carte risorsa non contano per il limite di copie.",
+      "H15 L'obbligo di movimento è soddisfatto solo dal movimento col tap; decade se il Guildmaster è tappato, sotto Root o senza caselle raggiungibili.",
+      "H16 Un mazzo contiene solo carte della gilda del suo Guildmaster.",
+      "H17 Root e i malus «fino al prossimo turno» durano fino alla fine del primo turno del proprietario del bersaglio che termina dopo la risoluzione.",
+      "H18 Il percorso del movimento è il più breve, calcolato dal programma e scritto nel registro; nessuna regola di P01 dipende dal percorso.",
+      "H19 Entrare, uscire o muoversi sull'highground non costa nulla e non dà bonus.",
+      "ND Entrambi i Guildmaster sconfitti nello stesso scambio: esito non definito (D21); la partita finisce senza vincitore."
+    ],
+    "limits": [
+      "Test parziale: sottoinsieme delle feature dell'inventario. Non è il regolamento definitivo.",
+      "Abilità attivate dei Guildmaster non incluse (Fiaran richiede le aree d'effetto, Dalia Venomous).",
+      "Nessun alleato, evocazione, mostro, edificio; Torre e mostri sono ostacoli inerti; Jungle senza regole.",
+      "Zone personali non definite nella mappa (foglio Zone: «da definire»): niente LOS-Z, niente parte di F1-38 sulle zone di evocazione.",
+      "Il foglio Note dell'Excel descrive una disposizione diversa dalle celle dei fogli Mappa: usate le celle (Torri in A1 e H8, non H1 e A8 come in F4b-11)."
+    ],
+    "deferred": [
+      "Alleati, evocazione, token (F1-10/17/29/30, F2-01, F4C-01/02)",
+      "Ruoli degli scacchi (F2-13/14, F4B-04)",
+      "Mostri, Jungle, vittoria coi mostri (F3-06/07/08, F4b-07)",
+      "Torre con PV, danno, vittoria (F4b-12/14/15, F4C-05/06)",
+      "Edifici (F2-08, F3-12/13, F4b-18)",
+      "Punti azione e moneta (F4A-04..15, F2-16)",
+      "Parole chiave: Armor, Flying, Swift, Taunt, Unique, Venomous",
+      "Aree d'effetto (F1-39/40)",
+      "Magie continuative, esilio, ricerca nel mazzo, dadi",
+      "P02 Alleati: N-01..N-05 (vita ripristinata, Assalto, doppio profilo)"
+    ]
+  },
+  "map": {
+    "id": "mappa_8x8",
+    "name": "Mappa 8x8",
+    "source": "reference/fase 4b - mappa.xlsx — foglio 'Mappa 8x8'",
+    "changedCells": [],
+    "width": 8,
+    "height": 8,
+    "legend": {
+      ".": "normale",
+      "W": "muro",
+      "H": "highground",
+      "M": "mostro",
+      "J": "jungle",
+      "T1": "Torre G1",
+      "T2": "Torre G2",
+      "": "fuori mappa"
+    },
+    "cells": [
+      [
+        "W",
+        "W",
+        "H",
+        "H",
+        ".",
+        ".",
+        ".",
+        "T2"
+      ],
+      [
+        "W",
+        "M",
+        "H",
+        "H",
+        "H",
+        ".",
+        ".",
+        "."
+      ],
+      [
+        "W",
+        "H",
+        "H",
+        "H",
+        "H",
+        ".",
+        ".",
+        "."
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "W",
+        "W",
+        ".",
+        ".",
+        "."
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "W",
+        "W",
+        ".",
+        ".",
+        "."
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "H",
+        "H",
+        "H",
+        "H",
+        "W"
+      ],
+      [
+        ".",
+        ".",
+        ".",
+        "H",
+        "H",
+        "H",
+        "M",
+        "W"
+      ],
+      [
+        "T1",
+        ".",
+        ".",
+        ".",
+        "H",
+        "H",
+        "W",
+        "W"
+      ]
+    ],
+    "explicitZones": {
+      "A8": "Muri",
+      "B8": "Muri",
+      "C8": "Highground",
+      "D8": "Highground",
+      "E8": "da definire",
+      "F8": "da definire",
+      "G8": "da definire",
+      "H8": "da definire",
+      "A7": "Muri",
+      "B7": "da definire",
+      "C7": "Highground",
+      "D7": "Highground",
+      "E7": "Highground",
+      "F7": "da definire",
+      "G7": "da definire",
+      "H7": "da definire",
+      "A6": "Muri",
+      "B6": "Highground",
+      "C6": "Highground",
+      "D6": "Highground",
+      "E6": "Highground",
+      "F6": "da definire",
+      "G6": "da definire",
+      "H6": "da definire",
+      "A5": "da definire",
+      "B5": "da definire",
+      "C5": "da definire",
+      "D5": "Muri",
+      "E5": "Muri",
+      "F5": "da definire",
+      "G5": "da definire",
+      "H5": "da definire",
+      "A4": "da definire",
+      "B4": "da definire",
+      "C4": "da definire",
+      "D4": "Muri",
+      "E4": "Muri",
+      "F4": "da definire",
+      "G4": "da definire",
+      "H4": "da definire",
+      "A3": "da definire",
+      "B3": "da definire",
+      "C3": "da definire",
+      "D3": "Highground",
+      "E3": "Highground",
+      "F3": "Highground",
+      "G3": "Highground",
+      "H3": "Muri",
+      "A2": "da definire",
+      "B2": "da definire",
+      "C2": "da definire",
+      "D2": "Highground",
+      "E2": "Highground",
+      "F2": "Highground",
+      "G2": "da definire",
+      "H2": "Muri",
+      "A1": "da definire",
+      "B1": "da definire",
+      "C1": "da definire",
+      "D1": "da definire",
+      "E1": "Highground",
+      "F1": "Highground",
+      "G1": "Muri",
+      "H1": "Muri"
+    },
+    "zoneWarnings": []
+  },
+  "seed": 353557,
+  "cards": {
+    "res_red": {
+      "id": "res_red",
+      "version": 1,
+      "name": "Essenza rossa",
+      "guild": "Red",
+      "type": "Resource",
+      "costColored": 0,
+      "costGeneric": 0,
+      "attack": 0,
+      "health": 0,
+      "target": "none",
+      "effects": [],
+      "originKind": "nuova proposta",
+      "originSource": "carta di test proposta",
+      "tests": "Modello di risorse F2-09 (ipotesi H1)",
+      "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09",
+      "key": "res_red@v1"
+    },
+    "r_thermal_surge": {
+      "id": "r_thermal_surge",
+      "version": 1,
+      "name": "Thermal Surge (test)",
+      "guild": "Red",
+      "type": "Action",
+      "costColored": 1,
+      "costGeneric": 1,
+      "attack": 0,
+      "health": 0,
+      "target": "any",
+      "effects": [
+        {
+          "kind": "damage",
+          "amount": 3
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Thermal Surge, 3 danni a un'unità (testo originale basato su regole boardless)",
+      "tests": "Danni diretti (F2-29) e bersaglio in linea di vista",
+      "rationale": "3 danni per 2 risorse: più di un attacco base (2), ma solo a velocità normale",
+      "key": "r_thermal_surge@v1"
+    },
+    "r_fury": {
+      "id": "r_fury",
+      "version": 1,
+      "name": "Furia della Fucina (test)",
+      "guild": "Red",
+      "type": "Instant",
+      "costColored": 1,
+      "costGeneric": 0,
+      "attack": 0,
+      "health": 0,
+      "target": "self",
+      "effects": [
+        {
+          "kind": "mod",
+          "amount": 2,
+          "stat": "attack",
+          "duration": "turn"
+        }
+      ],
+      "originKind": "nuova proposta",
+      "originSource": "carta di test proposta",
+      "tests": "Modificatore di attacco (F1-68) giocato prima o in risposta al proprio movimento",
+      "rationale": "+2 raddoppia il danno del combattimento automatico per un turno",
+      "key": "r_fury@v1"
+    },
+    "r_rush": {
+      "id": "r_rush",
+      "version": 1,
+      "name": "Rincorsa (test)",
+      "guild": "Red",
+      "type": "Action",
+      "costColored": 1,
+      "costGeneric": 0,
+      "attack": 0,
+      "health": 0,
+      "target": "self",
+      "effects": [
+        {
+          "kind": "mod",
+          "amount": 2,
+          "stat": "move",
+          "duration": "turn"
+        }
+      ],
+      "originKind": "nuova proposta",
+      "originSource": "carta di test proposta",
+      "tests": "Modificatore di movimento (F1-22): raggiungere il contatto in mischia",
+      "rationale": "Da 3 a 5 caselle per un turno: velocità, identità rossa",
+      "key": "r_rush@v1"
+    },
+    "r_flame_gauntlet": {
+      "id": "r_flame_gauntlet",
+      "version": 1,
+      "name": "Flame Gauntlet (test)",
+      "guild": "Red",
+      "type": "Item",
+      "costColored": 1,
+      "costGeneric": 1,
+      "attack": 0,
+      "health": 0,
+      "target": "none",
+      "effects": [
+        {
+          "kind": "mod",
+          "amount": 1,
+          "stat": "attack",
+          "duration": "permanent"
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Flame Gauntlet, oggetto (testo originale basato su regole boardless)",
+      "tests": "Oggetti assegnati al Guildmaster (F1-11/12)",
+      "rationale": "+1 permanente per 2 risorse; cumulabile (F1-12)",
+      "key": "r_flame_gauntlet@v1"
+    },
+    "res_green": {
+      "id": "res_green",
+      "version": 1,
+      "name": "Essenza verde",
+      "guild": "Green",
+      "type": "Resource",
+      "costColored": 0,
+      "costGeneric": 0,
+      "attack": 0,
+      "health": 0,
+      "target": "none",
+      "effects": [],
+      "originKind": "nuova proposta",
+      "originSource": "carta di test proposta",
+      "tests": "Modello di risorse F2-09 (ipotesi H1)",
+      "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09",
+      "key": "res_green@v1"
+    },
+    "g_field_dressing": {
+      "id": "g_field_dressing",
+      "version": 1,
+      "name": "Field Dressing (test)",
+      "guild": "Green",
+      "type": "Action",
+      "costColored": 1,
+      "costGeneric": 1,
+      "attack": 0,
+      "health": 0,
+      "target": "own",
+      "effects": [
+        {
+          "kind": "heal",
+          "amount": 4
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Field Dressing, cura (testo originale basato su regole boardless)",
+      "tests": "Cure fino al massimo (F1-67) contro danni persistenti (F1-34)",
+      "rationale": "4 = due attacchi base annullati per 2 risorse",
+      "key": "g_field_dressing@v1"
+    },
+    "g_regrowth": {
+      "id": "g_regrowth",
+      "version": 1,
+      "name": "Regrowth (test)",
+      "guild": "Green",
+      "type": "Instant",
+      "costColored": 1,
+      "costGeneric": 0,
+      "attack": 0,
+      "health": 0,
+      "target": "own",
+      "effects": [
+        {
+          "kind": "heal",
+          "amount": 2
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Regrowth, cura (testo originale basato su regole boardless)",
+      "tests": "Cura a velocità istantanea",
+      "rationale": "2 = un attacco base",
+      "key": "g_regrowth@v1"
+    },
+    "g_hunters_net": {
+      "id": "g_hunters_net",
+      "version": 1,
+      "name": "Hunter's Net (test)",
+      "guild": "Green",
+      "type": "Action",
+      "costColored": 1,
+      "costGeneric": 1,
+      "attack": 0,
+      "health": 0,
+      "target": "enemy",
+      "effects": [
+        {
+          "kind": "root",
+          "amount": 0
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Hunter's Net, Root (CS-21) (testo originale basato su regole boardless)",
+      "tests": "Root contro movimento obbligatorio: l'obbligo decade e il nemico non attacca",
+      "rationale": "2 risorse: nega un intero turno di movimento e quindi di combattimento",
+      "key": "g_hunters_net@v1"
+    },
+    "g_hunters_bow": {
+      "id": "g_hunters_bow",
+      "version": 1,
+      "name": "Hunter's Bow (test)",
+      "guild": "Green",
+      "type": "Item",
+      "costColored": 1,
+      "costGeneric": 1,
+      "attack": 0,
+      "health": 0,
+      "target": "none",
+      "effects": [
+        {
+          "kind": "mod",
+          "amount": 1,
+          "stat": "attack",
+          "duration": "permanent"
+        }
+      ],
+      "originKind": "adattamento",
+      "originSource": "Core set - fase 4: Hunter's Bow, oggetto (testo originale basato su regole boardless)",
+      "tests": "Oggetto d'attacco su un Guildmaster a distanza",
+      "rationale": "+1 permanente",
+      "key": "g_hunters_bow@v1"
+    },
+    "gm_fiaran": {
+      "id": "gm_fiaran",
+      "version": 1,
+      "name": "Fiaran Rushblood",
+      "guild": "Red",
+      "type": "Guildmaster",
+      "costColored": 0,
+      "costGeneric": 0,
+      "attack": 2,
+      "health": 20,
+      "range": "melee",
+      "target": "none",
+      "effects": [],
+      "originKind": "adattamento",
+      "originSource": "reference/Guild References/Spoilers - red/Fiaran Rushblood",
+      "tests": "Ciclo base: movimento obbligatorio, combattimento automatico in mischia",
+      "rationale": "Attacco 2, Salute 20 e portata presi dalla carta spoiler (definiti). Abilità attivata rinviata.",
+      "deferredText": "[Bomba]: bersaglia una casella in linea di vista; 2 danni a tutte le unità in una Croce; una volta per turno. Rinviata: richiede le aree d'effetto (F1-39/40).",
+      "tokenModel": "models/fiaran.obj",
+      "key": "gm_fiaran@v1"
+    },
+    "gm_senya": {
+      "id": "gm_senya",
+      "version": 1,
+      "name": "Senya Windseeker",
+      "guild": "Green",
+      "type": "Guildmaster",
+      "costColored": 0,
+      "costGeneric": 0,
+      "attack": 2,
+      "health": 20,
+      "range": "ranged",
+      "target": "none",
+      "effects": [],
+      "originKind": "adattamento",
+      "originSource": "reference/Guild References/Spoiler - green/Senya Windseeker",
+      "tests": "Ciclo base: movimento obbligatorio, combattimento automatico a distanza",
+      "rationale": "Attacco 2, Salute 20 e portata presi dalla carta spoiler (definiti). Abilità attivata rinviata.",
+      "deferredText": "[Arco]: 1 danno a un'unità nemica e cura 1 a un'unità amica in linea di vista; una volta per turno. Rinviata: abilità attivate dei Guildmaster non incluse in P01.",
+      "tokenModel": "models/senya.obj",
+      "key": "gm_senya@v1"
+    }
+  },
+  "decks": [
+    {
+      "id": "deck_red",
+      "name": "Mazzo rosso di prova (Artificers)",
+      "guildmaster": "gm_fiaran",
+      "version": 1,
+      "cards": [
+        {
+          "card": "res_red",
+          "count": 9
+        },
+        {
+          "card": "r_thermal_surge",
+          "count": 4
+        },
+        {
+          "card": "r_fury",
+          "count": 4
+        },
+        {
+          "card": "r_rush",
+          "count": 4
+        },
+        {
+          "card": "r_flame_gauntlet",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "deck_green",
+      "name": "Mazzo verde di prova (Hunters)",
+      "guildmaster": "gm_senya",
+      "version": 1,
+      "cards": [
+        {
+          "card": "res_green",
+          "count": 9
+        },
+        {
+          "card": "g_field_dressing",
+          "count": 4
+        },
+        {
+          "card": "g_regrowth",
+          "count": 4
+        },
+        {
+          "card": "g_hunters_net",
+          "count": 4
+        },
+        {
+          "card": "g_hunters_bow",
+          "count": 4
+        }
+      ]
+    }
+  ],
+  "players": [
+    {
+      "deckId": "deck_red",
+      "deck": [
+        "r_rush",
+        "res_red",
+        "r_fury",
+        "r_rush",
+        "res_red",
+        "res_red",
+        "r_fury",
+        "res_red",
+        "r_thermal_surge",
+        "r_fury",
+        "r_thermal_surge",
+        "r_flame_gauntlet",
+        "res_red",
+        "res_red",
+        "res_red",
+        "r_rush",
+        "r_thermal_surge",
+        "r_flame_gauntlet",
+        "res_red",
+        "r_rush"
+      ],
+      "hand": [
+        "r_flame_gauntlet",
+        "res_red",
+        "r_fury",
+        "r_thermal_surge",
+        "r_flame_gauntlet"
+      ],
+      "discard": [],
+      "resources": [],
+      "pool": {
+        "Red": 0,
+        "Blue": 0,
+        "Green": 0,
+        "Yellow": 0
+      },
+      "resourcesPlayedThisTurn": 0,
+      "drawn": [
+        "r_flame_gauntlet",
+        "res_red",
+        "r_fury",
+        "r_thermal_surge",
+        "r_flame_gauntlet"
+      ],
+      "played": []
+    },
+    {
+      "deckId": "deck_green",
+      "deck": [
+        "g_hunters_bow",
+        "res_green",
+        "res_green",
+        "g_hunters_net",
+        "g_regrowth",
+        "g_hunters_net",
+        "g_regrowth",
+        "g_hunters_bow",
+        "g_field_dressing",
+        "g_hunters_bow",
+        "g_hunters_net",
+        "res_green",
+        "g_hunters_net",
+        "g_regrowth",
+        "g_hunters_bow",
+        "res_green",
+        "g_field_dressing",
+        "res_green",
+        "res_green",
+        "g_field_dressing"
+      ],
+      "hand": [
+        "g_regrowth",
+        "res_green",
+        "res_green",
+        "g_field_dressing",
+        "res_green"
+      ],
+      "discard": [],
+      "resources": [],
+      "pool": {
+        "Red": 0,
+        "Blue": 0,
+        "Green": 0,
+        "Yellow": 0
+      },
+      "resourcesPlayedThisTurn": 0,
+      "drawn": [
+        "g_regrowth",
+        "res_green",
+        "res_green",
+        "g_field_dressing",
+        "res_green"
+      ],
+      "played": []
+    }
+  ],
+  "units": [
+    {
+      "id": 0,
+      "owner": 0,
+      "cardId": "gm_fiaran",
+      "pos": {
+        "x": 3,
+        "y": 2,
+        "name": "D3"
+      },
+      "placed": true,
+      "damage": 0,
+      "tapped": true,
+      "hasAttacked": false,
+      "movedThisTurn": true,
+      "mods": [],
+      "items": []
+    },
+    {
+      "id": 1,
+      "owner": 1,
+      "cardId": "gm_senya",
+      "pos": {
+        "x": 7,
+        "y": 4,
+        "name": "H5"
+      },
+      "placed": true,
+      "damage": 0,
+      "tapped": true,
+      "hasAttacked": false,
+      "movedThisTurn": true,
+      "mods": [],
+      "items": []
+    }
+  ],
+  "turn": 1,
+  "active": 0,
+  "firstPlayer": 0,
+  "priority": 0,
+  "setupPlayer": 1,
+  "winner": -1,
+  "phase": "Main",
+  "stack": [],
+  "log": [
+    {
+      "turn": 0,
+      "player": -1,
+      "kind": "setup",
+      "text": "Partita iniziata. Preset P01, mappa mappa_8x8, seed 353557. Primo giocatore sorteggiato: G1.",
+      "auto": true,
+      "debug": false
+    },
+    {
+      "turn": 0,
+      "player": 0,
+      "kind": "setup",
+      "text": "Fiaran Rushblood parte in A2.",
+      "auto": false,
+      "debug": false
+    },
+    {
+      "turn": 0,
+      "player": 1,
+      "kind": "setup",
+      "text": "Senya Windseeker parte in G7.",
+      "auto": false,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "turn",
+      "text": "— Turno 1: G1. Untap; risorse prodotte: 0.",
+      "auto": true,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "draw",
+      "text": "Il primo giocatore salta la prima pesca (F1-52).",
+      "auto": true,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "move",
+      "text": "Fiaran Rushblood si tappa e muove: A2 → B1 → C2 → D3.",
+      "auto": false,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "kind": "dodge",
+      "text": "Senya Windseeker si sposta in risposta tappandosi (SCH-TAP): G7 → G6 → H5.",
+      "auto": false,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "pass",
+      "text": "G1 non ha risposte possibili: passa automaticamente.",
+      "auto": true,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "pass",
+      "text": "G1 passa.",
+      "auto": false,
+      "debug": false
+    },
+    {
+      "turn": 1,
+      "player": 0,
+      "kind": "combat",
+      "text": "Nessun combattimento: nessun nemico a contatto di Fiaran Rushblood.",
+      "auto": true,
+      "debug": false
+    }
+  ],
+  "rng": {
+    "state": 9339735403433517640
+  },
+  "debugTouched": false,
+  "actor": 0
+}

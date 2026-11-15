@@ -1,0 +1,134 @@
+[
+ {
+  "id": "gm_senya",
+  "version": 1,
+  "name": "Senya Windseeker",
+  "guild": "Green",
+  "type": "Guildmaster",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "adattamento",
+  "originSource": "reference/Guild References/Spoiler - green/Senya Windseeker",
+  "tests": "Ciclo base e abilità propria del Guildmaster, una volta per turno",
+  "rationale": "Attacco 2, Salute 20, portata e abilità presi dalla carta spoiler. Costo dell'abilità: 1 risorsa della gilda (il simbolo prima dei due punti).",
+  "attack": 2,
+  "health": 20,
+  "range": "ranged",
+  "tokenModel": "models/senya.obj",
+  "keywords": [],
+  "ability": {
+   "name": "Freccia di Senya",
+   "costColored": 1,
+   "target": "enemy",
+   "effects": [
+    {
+     "kind": "damage",
+     "amount": 1
+    },
+    {
+     "kind": "healOwn",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "res_green",
+  "version": 1,
+  "name": "Essenza verde",
+  "guild": "Green",
+  "type": "Resource",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modello di risorse F2-09 (ipotesi H1)",
+  "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09"
+ },
+ {
+  "id": "g_field_dressing",
+  "version": 1,
+  "name": "Field Dressing (test)",
+  "guild": "Green",
+  "type": "Action",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "own",
+  "effects": [
+   {
+    "kind": "heal",
+    "amount": 4
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Field Dressing, cura (testo originale basato su regole boardless)",
+  "tests": "Cure fino al massimo (F1-67) contro danni persistenti (F1-34)",
+  "rationale": "4 = due attacchi base annullati per 2 risorse"
+ },
+ {
+  "id": "g_regrowth",
+  "version": 1,
+  "name": "Regrowth (test)",
+  "guild": "Green",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "own",
+  "effects": [
+   {
+    "kind": "heal",
+    "amount": 2
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Regrowth, cura (testo originale basato su regole boardless)",
+  "tests": "Cura a velocità istantanea",
+  "rationale": "2 = un attacco base"
+ },
+ {
+  "id": "g_hunters_net",
+  "version": 1,
+  "name": "Hunter's Net (test)",
+  "guild": "Green",
+  "type": "Action",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "enemy",
+  "effects": [
+   {
+    "kind": "root",
+    "amount": 0
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Hunter's Net, Root (CS-21) (testo originale basato su regole boardless)",
+  "tests": "Root contro movimento obbligatorio: l'obbligo decade e il nemico non attacca",
+  "rationale": "2 risorse: nega un intero turno di movimento e quindi di combattimento"
+ },
+ {
+  "id": "g_hunters_bow",
+  "version": 1,
+  "name": "Hunter's Bow (test)",
+  "guild": "Green",
+  "type": "Item",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 1,
+    "stat": "attack",
+    "duration": "permanent"
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Hunter's Bow, oggetto (testo originale basato su regole boardless)",
+  "tests": "Oggetto d'attacco su un Guildmaster a distanza",
+  "rationale": "+1 permanente"
+ }
+]

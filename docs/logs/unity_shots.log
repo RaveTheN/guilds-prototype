@@ -1,0 +1,63 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-peppe" at "2026-11-14T15:42:26.487608Z"
+OS: 'Windows 11  (10.0.26300) Core' Language: 'en' Physical Memory: 32653 MB
+BatchMode: 0, IsHumanControllingUs: 1, StartBugReporterOnCrash: 1, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-11-14T15:42:26Z
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 23120, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Error: Unexpected message Type: ApiErrorResponse, expected: HandshakeResponse
+[Licensing::Client] Error: Timed-out after 30.00s, waiting for HandshakeResponse
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-peppe"
+[Licensing::IpcConnector] LicenseClient-peppe channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-peppe-6000.3.10 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 29316)
+Starting IPC server.
+Waiting for clients to connect on \\.\pipe\Unity-LicenseClient-peppe-6000.3.10, press Ctrl-C to exit.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-peppe-6000.3.10" at "2026-11-14T15:42:57.2124261Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              bcca0834f70e45a087b89d2a92c26bc8
+  Correlation Id:          959574d132c52aef5e4f8e22d1592434
+  External correlation Id: 1118680523667328010
+  Machine Id:              2yT+1IAXjpDHmmMLvG0L+EiJI2s=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-peppe-6000.3.10" (connect: 0.56s, validation: 0.11s, handshake: 2.70s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-peppe-6000.3.10-notifications" at "2026-11-14T15:43:00.0265274Z"
+[Licensing::Module] Connected to LicensingClient (PId: 29316, launch time: 0.02, total connection time: 3.38s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-VXVT-TVJG-6AYU-8AUM-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.03
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 33.62s
+Assertion failed on expression: 'CurrentThread::IsMainThread()'
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+Assertion failed on expression: 'CurrentThread::IsMainThread()'
+Assertion failed on expression: 'm_OwningThread == CurrentThread::GetID()'
+Assertion failed on expression: 'm_OwningThread == CurrentThread::GetID()'
+Assertion failed on expression: 'CurrentThread::IsMainThread()'
+Assertion failed on expression: 'CurrentThread::IsMainThread()'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: 'CurrentThread::IsMainThread()'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+Assertion failed on expression: '!m_Running && "Thread shouldn't be running anymore"'
+SetStackTraceLogType should be called only from main thread
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1794671346444,"processId":31000,"allocatedMemory":157220,"memoryLabels":[{"NewDelete":51509},{"Thread":128},{"Manager":8915},{"GfxDevice":72},{"Audio":752},{"Serialization":40},{"BaseObject":10392},{"String":5520},{"DynamicArray":2628},{"HashMap":19529},{"Utility":896},{"Curl":48},{"PoolAlloc":48},{"GI":7296},{"VR":312},{"EditorUtility":9237},{"UnityConnect":29304},{"LocalIPC":280},{"ProfilerEditor":9650},{"Licensing":664}]}
+SetStackTraceLogType should be called only from main thread
+NativeWindowManager: Class destructor called before Windowing System was fully shutdown.
+C:\build\output\unity\unity\PlatformDependent\Win\External\baselib\builds\Include\C\Baselib_ThreadLocalStorage.inl.h(20): Assertion failed ((result != NULL) || (GetLastError() == 0L))
+C:\build\output\unity\unity\PlatformDependent\Win\External\baselib\builds\Include\C\Baselib_ThreadLocalStorage.inl.h(14): Assertion failed (success != 0)

@@ -1,0 +1,134 @@
+[
+ {
+  "id": "gm_fiaran",
+  "version": 1,
+  "name": "Fiaran Rushblood",
+  "guild": "Red",
+  "type": "Guildmaster",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "adattamento",
+  "originSource": "reference/Guild References/Spoilers - red/Fiaran Rushblood",
+  "tests": "Ciclo base e abilità propria del Guildmaster, una volta per turno",
+  "rationale": "Attacco 2, Salute 20, portata e abilità presi dalla carta spoiler. Costo dell'abilità: 1 risorsa della gilda (il simbolo prima dei due punti).",
+  "attack": 2,
+  "health": 20,
+  "range": "melee",
+  "tokenModel": "models/fiaran.obj",
+  "keywords": [],
+  "ability": {
+   "name": "Bomba di Fiaran",
+   "costColored": 1,
+   "target": "none",
+   "effects": [
+    {
+     "kind": "damageCross",
+     "amount": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "res_red",
+  "version": 1,
+  "name": "Essenza rossa",
+  "guild": "Red",
+  "type": "Resource",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modello di risorse F2-09 (ipotesi H1)",
+  "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09"
+ },
+ {
+  "id": "r_thermal_surge",
+  "version": 1,
+  "name": "Thermal Surge (test)",
+  "guild": "Red",
+  "type": "Action",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "any",
+  "effects": [
+   {
+    "kind": "damage",
+    "amount": 3
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Thermal Surge, 3 danni a un'unità (testo originale basato su regole boardless)",
+  "tests": "Danni diretti (F2-29) e bersaglio in linea di vista",
+  "rationale": "3 danni per 2 risorse: più di un attacco base (2), ma solo a velocità normale"
+ },
+ {
+  "id": "r_fury",
+  "version": 1,
+  "name": "Furia della Fucina (test)",
+  "guild": "Red",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "self",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 2,
+    "stat": "attack",
+    "duration": "turn"
+   }
+  ],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modificatore di attacco (F1-68) giocato prima o in risposta al proprio movimento",
+  "rationale": "+2 raddoppia il danno del combattimento automatico per un turno"
+ },
+ {
+  "id": "r_rush",
+  "version": 1,
+  "name": "Rincorsa (test)",
+  "guild": "Red",
+  "type": "Action",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "self",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 2,
+    "stat": "move",
+    "duration": "turn"
+   }
+  ],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modificatore di movimento (F1-22): raggiungere il contatto in mischia",
+  "rationale": "Da 3 a 5 caselle per un turno: velocità, identità rossa"
+ },
+ {
+  "id": "r_flame_gauntlet",
+  "version": 1,
+  "name": "Flame Gauntlet (test)",
+  "guild": "Red",
+  "type": "Item",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 1,
+    "stat": "attack",
+    "duration": "permanent"
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Flame Gauntlet, oggetto (testo originale basato su regole boardless)",
+  "tests": "Oggetti assegnati al Guildmaster (F1-11/12)",
+  "rationale": "+1 permanente per 2 risorse; cumulabile (F1-12)"
+ }
+]

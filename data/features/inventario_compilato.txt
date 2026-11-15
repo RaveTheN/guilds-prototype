@@ -1,0 +1,1759 @@
+Inventario da compilare • 26 settembre 2026
+
+Tutte le 263 voci della lista in conversazione, raggruppate per provenienza e con gli stessi codici. Compila il campo Scelta accanto a ogni codice e usa le note per precisazioni o modifiche. Poi reinvia questo DOCX.
+
+-   L — Lasciare: mantenere la feature.
+
+-   T — Testare: provarla prima di decidere.
+
+-   X — Escludere: eliminarla.
+
+-   Campo vuoto — In sospeso: nessuna decisione.
+
+Come compilare
+
+Sostituisci i trattini dopo Scelta con una lettera. Esempio: F1-03 Scelta: L. Le note sono facoltative e puoi ampliarle liberamente in Word.
+
+Puoi selezionare alternative incompatibili per test separati. Le selezioni non le rendono automaticamente compatibili nello stesso regolamento. I dettagli non definiti restano tali finché non vengono precisati.
+
+Attenzione ai codici: F4B indica Another Version / Chess; F4b indica l’aggiornamento con scacchiera, zone e Torri. La differenza fra B maiuscola e b minuscola è mantenuta per corrispondere alla lista originale.
+
+Sezioni
+
+F1 — Fase 1 Regolamento originale • 68 voci
+
+F2 — Fase 2 Riduzione dei segnalini e interazione • 29 voci
+
+F3 — Fase 3 Zero permanents • 16 voci
+
+F4A — Fase 4A Nuovo Guilds • 19 voci
+
+F4B — Fase 4B Another Version Chess • 10 voci
+
+F4C — Fase 4C Semi Chess • 6 voci
+
+U — Fase 4 Versione unificata • 7 voci
+
+BL — Fase 4 Ramo boardless • 59 voci
+
+CS — Fase 4 Core Set e meccaniche delle carte • 29 voci
+
+F4b — Fase 4b Scacchiera zone e Torri • 19 voci
+
+P — Prototipi fotografati • 1 voci
+
+Fase 1 Regolamento originale
+
+F1-01 – F1-10
+
+Rules versione 0.9 beta. Regole formulate nel documento.
+
+F1-01 Scelta: L
+
+Formato per 2 giocatori.
+
+Note: ______________________________________________________________
+
+F1-02 Scelta: L
+
+Precedenza delle carte: quando una carta contraddice il regolamento, prevale la carta.
+
+Note: ______________________________________________________________
+
+F1-03 Scelta: L
+
+Deck building: ogni giocatore costruisce il proprio mazzo.
+
+Note: ______________________________________________________________
+
+F1-04 Scelta: T
+
+Mazzo di almeno 25 carte, Guildmaster escluso.
+
+Note: ______________________________________________________________
+
+F1-05 Scelta: T
+
+Massimo 4 copie della stessa carta per nome.
+
+Note: ______________________________________________________________
+
+F1-06 Scelta: L
+
+Guildmaster fuori dal mazzo, già in gioco all’inizio.
+
+Note: ______________________________________________________________
+
+F1-07 Scelta: T
+
+Buildings esclusi dal mazzo principale.
+
+Note: ______________________________________________________________
+
+F1-08 Scelta: L
+
+Identità di gilda delle carte determinata dai simboli nel loro valore, anche più gilde sulla stessa carta.
+
+Note: ______________________________________________________________
+
+F1-09 Scelta: L
+
+Tipi di carta: Guildmaster, alleati, azioni e oggetti.
+
+Note: Anche se le azioni potrebbero essere anche altro, oltre le carte. Alleati potrebbe essere anche “unità”, testerò entrambi.
+
+F1-10 Scelta: T
+
+Guildmaster e alleati rappresentati da pedine sulla board; le carte corrispondenti stanno nella zona di gioco.
+
+Note: Sicuramente il guildmaster avrà la sua pedina, per le altre unità è da vedere
+
+Fase 1 Regolamento originale
+
+F1-11 – F1-20
+
+F1-11 Scelta: L
+
+Oggetti senza pedina, alcuni assegnati a un’unità.
+
+Note: ______________________________________________________________
+
+F1-12 Scelta: L
+
+Più oggetti sulla stessa unità, anche con lo stesso nome.
+
+Note: ______________________________________________________________
+
+F1-13 Scelta: L
+
+Gli oggetti assegnati vanno al cimitero quando lascia il gioco il portatore.
+
+Note: ______________________________________________________________
+
+F1-14 Scelta: L
+
+Azioni monouso: si risolvono e vanno al cimitero; giocabili nella propria fase principale.
+
+Note: ______________________________________________________________
+
+F1-15 Scelta: L
+
+Zone distinte: mazzo, mano, cimitero, carte in gioco e board.
+
+Note: ______________________________________________________________
+
+F1-16 Scelta: T
+
+Board 9×7 con due caselle aggiuntive agli angoli opposti.
+
+Note: ______________________________________________________________
+
+F1-17 Scelta: L
+
+Zone di evocazione personali, una per giocatore.
+
+Note: ______________________________________________________________
+
+F1-18 Scelta: T
+
+Guildmaster su una casella iniziale prestabilita.
+
+Note: ______________________________________________________________
+
+F1-19 Scelta: L
+
+Muri: bloccano movimento, evocazione e linea di vista.
+
+Note: ______________________________________________________________
+
+F1-20 Scelta: L
+
+Highground: attraversabile, ma non utilizzabile per evocare alleati.
+
+Note: ______________________________________________________________
+
+Fase 1 Regolamento originale
+
+F1-21 – F1-30
+
+F1-21 Scelta: L
+
+Una sola unità per casella.
+
+Note: ______________________________________________________________
+
+F1-22 Scelta: T
+
+Movimento base di 3 caselle, modificabile dalle carte.
+
+Note: ______________________________________________________________
+
+F1-23 Scelta: T
+
+Movimento anche diagonale.
+
+Note: ______________________________________________________________
+
+F1-24 Scelta: L
+
+Movimento attivato tappando la carta.
+
+Note: ______________________________________________________________
+
+F1-25 Scelta: L
+
+Percorso dichiarato: non si attraversano muri o unità nemiche.
+
+Note: Qualora ci dovrebbe essere un movimento tipo quello degli scacchi non c’è bisogno di dichiarare, ma il movimento non può finire su un muro
+
+F1-26 Scelta: x
+
+Attacco e movimento separati: il tap traccia il movimento, un segnalino traccia l’attacco.
+
+Note: ______________________________________________________________
+
+F1-27 Scelta: L
+
+Un attacco per unità, salvo effetti che modificano la disponibilità dell’attacco.
+
+Note: ______________________________________________________________
+
+F1-28 Scelta: X
+
+Possibilità di mettere il segnalino attacco anche senza un bersaglio valido, senza attivare gli effetti “quando attacca”.
+
+Note: ______________________________________________________________
+
+F1-29 Scelta: L
+
+Alleati evocabili nella propria zona.
+
+Note: ______________________________________________________________
+
+F1-30 Scelta: T
+
+Alleati appena evocati non possono muovere o attaccare, salvo eccezioni.
+
+Note: ______________________________________________________________
+
+Fase 1 Regolamento originale
+
+F1-31 – F1-40
+
+F1-31 Scelta: L
+
+Mischia contro unità adiacenti.
+
+Note: ______________________________________________________________
+
+F1-32 Scelta: L
+
+Attacchi ranged contro bersagli validi in linea di vista, senza una distanza numerica generale indicata.
+
+Note: ______________________________________________________________
+
+F1-33 Scelta: T
+
+Danni reciproci nel combattimento secondo la portata; il difensore ranged non risponde con danni.
+
+Note: ______________________________________________________________
+
+F1-34 Scelta: T
+
+Danni persistenti, rimossi attraverso cure.
+
+Note: ______________________________________________________________
+
+F1-35 Scelta: L
+
+Morte quando i danni raggiungono o superano la salute.
+
+Note: ______________________________________________________________
+
+F1-36 Scelta: L
+
+Linea di vista geometrica tra angoli delle caselle.
+
+Note: ______________________________________________________________
+
+F1-37 Scelta: L
+
+Unità nemiche che bloccano la linea di vista.
+
+Note: ______________________________________________________________
+
+F1-38 Scelta: L
+
+Linea di vista vietata direttamente tra le due zone di evocazione; può partire o terminare nell’highground.
+
+Note: ______________________________________________________________
+
+F1-39 Scelta: L
+
+Effetti ad area con forme e caselle interessate.
+
+Note: ______________________________________________________________
+
+F1-40 Scelta: L
+
+Effetti lungo una riga o colonna davanti all’unità.
+
+Note: ______________________________________________________________
+
+Fase 1 Regolamento originale
+
+F1-41 – F1-50
+
+F1-41 Scelta: T
+
+Risorse automatiche a inizio turno: si sommano i simboli delle carte in gioco.
+
+Note: ______________________________________________________________
+
+F1-42 Scelta: X
+
+Il valore della carta determina sia il costo sia la produzione di risorse.
+
+Note: ______________________________________________________________
+
+F1-43 Scelta: L
+
+Risorse colorate: i costi richiedono le gilde corrispondenti.
+
+Note: ______________________________________________________________
+
+F1-44 Scelta: L
+
+Valori generici: pagabili con qualsiasi risorsa; nella produzione permettono di scegliere il colore.
+
+Note: ______________________________________________________________
+
+F1-45 Scelta: L
+
+Risorse inutilizzate perse a fine turno.
+
+Note: ______________________________________________________________
+
+F1-46 Scelta: L
+
+Turno con inizio, fase principale e fine.
+
+Note: ______________________________________________________________
+
+F1-47 Scelta: L
+
+Ripristino delle carte e rimozione dei segnalini attacco a inizio turno.
+
+Note: ______________________________________________________________
+
+F1-48 Scelta: L
+
+Azioni della fase principale eseguibili nell’ordine scelto dal giocatore.
+
+Note: ______________________________________________________________
+
+F1-49 Scelta: T
+
+Mano iniziale di 5 carte.
+
+Note: ______________________________________________________________
+
+F1-50 Scelta: L
+
+Pesca automatica di una carta per turno.
+
+Note: ______________________________________________________________
+
+Fase 1 Regolamento originale
+
+F1-51 – F1-60
+
+F1-51 Scelta: T
+
+Il primo giocatore salta la pesca del primo turno.
+
+Note: ______________________________________________________________
+
+F1-52 Scelta: T
+
+Limite di mano di 7 carte, con scarto dell’eccesso a fine turno.
+
+Note: ______________________________________________________________
+
+F1-53 Scelta: L
+
+Primo giocatore determinato casualmente con moneta.
+
+Note: ______________________________________________________________
+
+F1-54 Scelta: L
+
+Vittoria sconfiggendo il Guildmaster avversario.
+
+Note: ______________________________________________________________
+
+F1-55 Scelta: T
+
+Mazzo esaurito senza sconfitta: si continua senza pescare.
+
+Note: ______________________________________________________________
+
+F1-56 Scelta: L
+
+Abilità statiche, attivate e innescate, con eventi come ingresso, movimento e attacco.
+
+Note: ______________________________________________________________
+
+F1-57 Scelta: L
+
+Bersagli multipli: un effetto si applica ai bersagli ancora validi.
+
+Note: ______________________________________________________________
+
+F1-58 Scelta: L
+
+Possibilità di bersagliare sé stessi, salvo restrizioni della carta.
+
+Note: ______________________________________________________________
+
+F1-59 Scelta: T
+
+Armor X: riduce di X il danno subito.
+
+Note: ______________________________________________________________
+
+F1-60 Scelta: T
+
+Flying: permette di muovere di qualsiasi numero di caselle.
+
+Note: ______________________________________________________________
+
+Fase 1 Regolamento originale
+
+F1-61 – F1-68
+
+F1-61 Scelta: X
+
+Reposition: mettere un segnalino attacco sull’unità la stappa.
+
+Note: ______________________________________________________________
+
+F1-62 Scelta: L
+
+Swift: l’unità può agire nel turno d’ingresso.
+
+Note: ______________________________________________________________
+
+F1-63 Scelta: L
+
+Taunt: protegge dagli attacchi le unità senza Taunt adiacenti.
+
+Note: ______________________________________________________________
+
+F1-64 Scelta: L
+
+Unique: limita la presenza contemporanea degli alleati o oggetti con questo sottotipo, secondo la formulazione originale.
+
+Note: ______________________________________________________________
+
+F1-65 Scelta: L
+
+Venomous: applica veleno; un’unità avvelenata subisce 1 danno all’inizio del proprio turno, indipendentemente dal numero di segnalini.
+
+Note: ______________________________________________________________
+
+F1-66 Scelta: L
+
+Alleati token: unità create dagli effetti, che cessano di esistere quando lasciano la zona di gioco.
+
+Note: ______________________________________________________________
+
+F1-67 Scelta: L
+
+Cure senza superare la salute massima.
+
+Note: ______________________________________________________________
+
+F1-68 Scelta: L
+
+Modificatori di attacco, salute e movimento sulle unità.
+
+Note: ______________________________________________________________
+
+Fase 2 Riduzione dei segnalini e interazione
+
+F2-01 – F2-10
+
+Design Document. Le prime quattro voci sono nelle regole generali; le successive sono proposte o possibilità esplorate.
+
+F2-01 Scelta: T
+
+Massimo cinque miniature con nomi diversi, Guildmaster incluso. Ambito per giocatore o globale non esplicitato.
+
+Note: Ambito per giocatore. Potrebbe essere anche con nomi diversi in realtà se si trova il modo di segnalare chiaramente quale è quale (o se non ce n’è bisogno)
+
+F2-02 Scelta: L
+
+Eliminazione del segnalino attacco.
+
+Note: ______________________________________________________________
+
+F2-03 Scelta: L
+
+Combattimento automatico dopo il movimento, per adiacenza o linea di vista nel caso ranged.
+
+Note: Ranged è da pensare meglio un attimo, ma in linea di massima deve andare così
+
+F2-04 Scelta: L
+
+Risposte dell’avversario al movimento prima del combattimento, con priorità e pila.
+
+Note: ______________________________________________________________
+
+F2-05 Scelta: X
+
+Carte come comandi: attacchi, spostamenti o altre azioni delle pedine eseguiti tramite carte.
+
+Note: ______________________________________________________________
+
+F2-06 Scelta: L
+
+Attacchi e magie istantanei, giocabili in risposta.
+
+Note: ______________________________________________________________
+
+F2-07 Scelta: L
+
+Magie permanenti o continuative.
+
+Note: ______________________________________________________________
+
+F2-08 Scelta: T
+
+Edifici come supporto per giocare altre carte.
+
+Note: ______________________________________________________________
+
+F2-09 Scelta: T
+
+Risorse attraverso carte nel mazzo, come alternativa da valutare.
+
+Note: ______________________________________________________________
+
+F2-10 Scelta: T
+
+Risorse esterne al mazzo in quantità prefissata, come alternativa da valutare.
+
+Note: ______________________________________________________________
+
+Fase 2 Riduzione dei segnalini e interazione
+
+F2-11 – F2-20
+
+F2-11 Scelta: X
+
+Board composta da due metà personali, unite all’inizio della partita.
+
+Note: ______________________________________________________________
+
+F2-12 Scelta: X
+
+Metà della board personalizzabili.
+
+Note: ______________________________________________________________
+
+F2-13 Scelta: T
+
+Movimenti fissi ispirati agli scacchi.
+
+Note: ______________________________________________________________
+
+F2-14 Scelta: T
+
+Ruoli delle pedine ispirati agli scacchi, con possibile limite per ruolo o sostituzione della pedina precedente.
+
+Note: ______________________________________________________________
+
+F2-15 Scelta: T
+
+Basette per tracciare i punti vita.
+
+Note: Sicuramente sì per il GM, sto pensando anche a una variante dove le carte hanno la costituzione fissa come le carte di Magic. In quel caso non ci sarebbe bisogno di basette per la vita, anche se comunque si possono fare basette per segnare forza e costituzione
+
+F2-16 Scelta: T
+
+Moneta dell’azione, citata ma senza funzionamento completo.
+
+Note: La moneta dava qualcosa come una risorsa o una azione extra, ma è da testare sia con che senza.
+
+F2-17 Scelta: L
+
+Zona di esilio distinta dal cimitero.
+
+Note: ______________________________________________________________
+
+F2-18 Scelta: T
+
+Dadi per mira o probabilità.
+
+Note: ______________________________________________________________
+
+F2-19 Scelta: L
+
+Schivare o evitare un attacco muovendosi in risposta.
+
+Note: ______________________________________________________________
+
+F2-20 Scelta: L
+
+Teletrasporto, sparizione e ricomparsa delle unità.
+
+Note: ______________________________________________________________
+
+Fase 2 Riduzione dei segnalini e interazione
+
+F2-21 – F2-29
+
+F2-21 Scelta: L
+
+Scambio di posizione tra due pedine.
+
+Note: ______________________________________________________________
+
+F2-22 Scelta: L
+
+Movimento sui muri.
+
+Note: ______________________________________________________________
+
+F2-23 Scelta: X
+
+Attacchi alle spalle.
+
+Note: ______________________________________________________________
+
+F2-24 Scelta: X
+
+Trappole.
+
+Note: ______________________________________________________________
+
+F2-25 Scelta: T
+
+Attacchi multipli o unità che si stappano giocando carte attacco.
+
+Note: ______________________________________________________________
+
+F2-26 Scelta: L
+
+Recuperare o rianimare creature e riutilizzare carte dal cimitero.
+
+Note: ______________________________________________________________
+
+F2-27 Scelta: L
+
+Interferire con la mano e il mazzo avversari: scarto, mill, furto o uso delle carte avversarie.
+
+Note: ______________________________________________________________
+
+F2-28 Scelta: L
+
+Neutralizzare azioni o effetti avversari.
+
+Note: ______________________________________________________________
+
+F2-29 Scelta: L
+
+Danni diretti tramite carte o abilità.
+
+Note: ______________________________________________________________
+
+Fase 3 Zero permanents
+
+F3-01 – F3-10
+
+Zero permanents version. Tutte le voci sono possibili implementazioni.
+
+F3-01 Scelta: T
+
+Una sola pedina eroe per giocatore.
+
+Note: ______________________________________________________________
+
+F3-02 Scelta: T
+
+Mazzo dedicato all’eroe.
+
+Note: ______________________________________________________________
+
+F3-03 Scelta: L
+
+Movimento obbligatorio ogni turno.
+
+Note: ______________________________________________________________
+
+F3-04 Scelta: T
+
+Movimento da un minimo di 1 a un massimo di 3 caselle.
+
+Note: ______________________________________________________________
+
+F3-05 Scelta: X
+
+Eroe che diventa più potente durante la partita, con sistema ancora da definire.
+
+Note: ______________________________________________________________
+
+F3-06 Scelta: T
+
+Mostri neutrali nella Jungle.
+
+Note: Mi piacerebbe molto se ci fosse
+
+F3-07 Scelta: T
+
+Benefici ottenuti sconfiggendo i mostri.
+
+Note: ______________________________________________________________
+
+F3-08 Scelta: L
+
+Vittoria sconfiggendo un numero di mostri, quantità ancora da stabilire.
+
+Note: ______________________________________________________________
+
+F3-09 Scelta: T
+
+Recupero di 1 PV entrando nella casella iniziale.
+
+Note: ______________________________________________________________
+
+F3-10 Scelta: T
+
+Ogni eroe dispone di un attacco melee e uno ranged.
+
+Note: ______________________________________________________________
+
+Fase 3 Zero permanents
+
+F3-11 – F3-16
+
+F3-11 Scelta: L
+
+Cambiare casella evita il danno dell’attacco subito.
+
+Note: ______________________________________________________________
+
+F3-12 Scelta: T
+
+Costruzione e distruzione di edifici.
+
+Note:
+
+F3-13 Scelta: T
+
+Edificio Gilda che fornisce risorse, con annotazione di una Gilda gratuita per turno.
+
+Note: ______________________________________________________________
+
+F3-14 Scelta: T
+
+Torre che danneggia unità entro un raggio.
+
+Note: ______________________________________________________________
+
+F3-15 Scelta: T
+
+Torre come elemento della board anziché carta, alternativa esplicitamente valutata.
+
+Note: ______________________________________________________________
+
+F3-16 Scelta: X
+
+Dadi con modificatori dei personaggi.
+
+Note: ______________________________________________________________
+
+Fase 4A Nuovo Guilds
+
+F4A-01 – F4A-10
+
+Archivio Versioni Grezze, versione 1; trascrizione dei fogli 1–4.
+
+F4A-01 Scelta: T
+
+Mazzo principale da 40 carte, come riportato nell’archivio.
+
+Note: ______________________________________________________________
+
+F4A-02 Scelta: T
+
+Mazzo principale da 45 carte, come riportato nella trascrizione. È un’alternativa documentale, non una revisione accertata.
+
+Note: ______________________________________________________________
+
+F4A-03 Scelta: T
+
+Mazzo strutture separato da 15 carte.
+
+Note: ______________________________________________________________
+
+F4A-04 Scelta: T
+
+Moneta della gilda come componente di gioco.
+
+Note: ______________________________________________________________
+
+F4A-05 Scelta: T
+
+3 punti azione per turno.
+
+Note: ______________________________________________________________
+
+F4A-06 Scelta: T
+
+Azioni ripetibili nello stesso turno, tranne costruire strutture.
+
+Note: ______________________________________________________________
+
+F4A-07 Scelta: T
+
+Girare la moneta e produrre risorse costa 0 PA.
+
+Note: ______________________________________________________________
+
+F4A-08 Scelta: T
+
+La moneta produce una risorsa di qualsiasi tipo.
+
+Note: ______________________________________________________________
+
+F4A-09 Scelta: T
+
+Pescare una carta costa 1 PA.
+
+Note: ______________________________________________________________
+
+F4A-10 Scelta: T
+
+Costruire una struttura costa 1 PA, massimo una per turno.
+
+Note: ______________________________________________________________
+
+Fase 4A Nuovo Guilds
+
+F4A-11 – F4A-19
+
+F4A-11 Scelta: T
+
+Giocare una carta costa 1 PA oltre alle risorse richieste.
+
+Note: ______________________________________________________________
+
+F4A-12 Scelta: T
+
+Attaccare l’avversario costa 1 PA.
+
+Note: ______________________________________________________________
+
+F4A-13 Scelta: T
+
+Attaccare un mostro costa 2 PA.
+
+Note: ______________________________________________________________
+
+F4A-14 Scelta: T
+
+Mulligan durante il turno per 3 PA: «scarti tutto, peschi tutto». Quantità e procedura non ulteriormente precisate.
+
+Note: ______________________________________________________________
+
+F4A-15 Scelta: T
+
+Conversione di risorse in danni: 1 risorsa = 1 danno.
+
+Note: ______________________________________________________________
+
+F4A-16 Scelta: T
+
+Reazione dei mostri determinata dai dadi.
+
+Note: ______________________________________________________________
+
+F4A-17 Scelta: X
+
+Requisito di forza del party per affrontare il mostro. Il confronto esatto è incompleto negli appunti.
+
+Note: ______________________________________________________________
+
+F4A-18 Scelta: T
+
+Vittoria controllando 3 mostri.
+
+Note: ______________________________________________________________
+
+F4A-19 Scelta: L
+
+Esaurimento del mazzo come condizione di fine partita, poi esplicitato nella versione unificata come sconfitta dell’avversario che lo termina.
+
+Note: ______________________________________________________________
+
+Fase 4B Another Version Chess
+
+F4B-01 – F4B-10
+
+F4B è il codice dell’inventario, distinto da F4b dell’aggiornamento finale. Fonti: archivio versione 2 e fogli 5–6.
+
+F4B-01 Scelta: T
+
+Una sola pedina eroe sul campo. La formulazione non esplicita “per giocatore”.
+
+Note: Per giocatore
+
+F4B-02 Scelta: X
+
+Movimenti eseguiti tramite carte movimento.
+
+Note: ______________________________________________________________
+
+F4B-03 Scelta: X
+
+Carte movimento con pattern dei pezzi degli scacchi.
+
+Note: ______________________________________________________________
+
+F4B-04 Scelta: T
+
+Movimento base dell’eroe come il Re.
+
+Note: Oppure inizialmente come il re e successivamente – o in alternativa - come regina + cavallo
+
+F4B-05 Scelta: L
+
+Tappare la carta dell’eroe per il movimento base.
+
+Note: ______________________________________________________________
+
+F4B-06 Scelta: T
+
+Movimenti in risposta, esplicitamente previsti come elemento da mettere a punto.
+
+Note: ______________________________________________________________
+
+F4B-07 Scelta: T
+
+Mostri negli highground agli angoli.
+
+Note: ______________________________________________________________
+
+F4B-08 Scelta: T
+
+Minimazzo strutture precostruito da 5–7 carte, al posto delle 15.
+
+Note: ______________________________________________________________
+
+F4B-09 Scelta: X
+
+Conservare una risorsa non utilizzata tappando un edificio. Il significato operativo di «tenere in mano» resta indefinito.
+
+Note: ______________________________________________________________
+
+F4B-10 Scelta: L
+
+Scarto a fine turno oltre il limite di mano, con limite numerico non specificato in questa versione.
+
+Note: ______________________________________________________________
+
+Fase 4C Semi Chess
+
+F4C-01 – F4C-06
+
+Archivio versione 3 e foglio 7. «Tutto torna come prima» non chiarisce quali regole ripristinare: scegliere direttamente le feature desiderate.
+
+F4C-01 Scelta: T
+
+Ogni pedina ha un tipo corrispondente a un pezzo degli scacchi.
+
+Note: Proprio in questi giorni sto pensando che si potrebbe fare che ogni giocatore ha disposizione un tipo per pezzo e può assegnare una unità a quel pezzo. Per assegnarla allo stesso pezzo deve sacrificare l’unità assegnata e ripartire da un pezzo legale. Questa feature apre possibilità a scenari del tipo “se giochi questa corta come TORRE allora (EFFETTO)”
+
+F4C-02 Scelta: T
+
+Massimo una pedina per tipo contemporaneamente. Ambito per giocatore o globale non specificato.
+
+Note: PER GIOCATORE
+
+F4C-03 Scelta: L
+
+Linea di vista tra zone adiacenti.
+
+Note: ______________________________________________________________
+
+F4C-04 Scelta: L
+
+Jungle mantenuta sulla board.
+
+Note: ______________________________________________________________
+
+F4C-05 Scelta: T
+
+Torre all’angolo da conquistare.
+
+Note: ______________________________________________________________
+
+F4C-06 Scelta: T
+
+La Torre conquistabile infligge danni, secondo l’idea annotata.
+
+Note: ______________________________________________________________
+
+Fase 4 Versione unificata
+
+U-01 – U-07
+
+Specificazioni della versione unificata non già isolate nelle sezioni precedenti.
+
+U-01 Scelta: T
+
+Uso di una scacchiera standard reperibile commercialmente.
+
+Note: ______________________________________________________________
+
+U-02 Scelta: L
+
+Board divisa diagonalmente da muri e highground.
+
+Note: ______________________________________________________________
+
+U-03 Scelta: L
+
+Una metà della board per ciascun giocatore, con highground condiviso.
+
+Note: ______________________________________________________________
+
+U-04 Scelta: L
+
+Highground attraversabile dalle unità.
+
+Note: ______________________________________________________________
+
+U-05 Scelta: L
+
+Linea di vista che può entrare, uscire o restare nell’highground, ma non attraversarlo completamente tra due zone esterne.
+
+Note: ______________________________________________________________
+
+U-06 Scelta: L
+
+Partenza degli eroi negli angoli liberi opposti.
+
+Note: ______________________________________________________________
+
+U-07 Scelta: L
+
+Vittoria quando l’avversario termina il mazzo.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-01 – BL-10
+
+Collocazione storica incerta. Le alternative interne sono tutte selezionabili; non sono automaticamente compatibili.
+
+BL-01 Scelta: ______
+
+Campo senza scacchiera fisica, organizzato attraverso le posizioni delle carte.
+
+Note: ______________________________________________________________
+
+BL-02 Scelta: ______
+
+Tre fasce Close / Mid / Far.
+
+Note: ______________________________________________________________
+
+BL-03 Scelta: ______
+
+Alternativa a zone e colonne: Frontline propria, Midline, Frontline nemica, ciascuna con slot A/B/C.
+
+Note: ______________________________________________________________
+
+BL-04 Scelta: ______
+
+Unità che entrano nella propria Frontline.
+
+Note: ______________________________________________________________
+
+BL-05 Scelta: ______
+
+Più unità nello stesso slot, anche nemiche.
+
+Note: ______________________________________________________________
+
+BL-06 Scelta: ______
+
+City Ring: edifici attorno all’avatar, massimo 6 posti.
+
+Note: ______________________________________________________________
+
+BL-07 Scelta: ______
+
+Stronghold Row al posto del City Ring: avatar ed edifici disposti in fila.
+
+Note: ______________________________________________________________
+
+BL-08 Scelta: ______
+
+Stronghold Row senza limite di lunghezza, con eventuale seconda fila.
+
+Note: ______________________________________________________________
+
+BL-09 Scelta: ______
+
+Adiacenza degli edifici a destra e sinistra, limitata alla stessa fila.
+
+Note: ______________________________________________________________
+
+BL-10 Scelta: ______
+
+Mazzo da 30 carte.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-11 – BL-20
+
+BL-11 Scelta: ______
+
+Mazzo mono-gilda.
+
+Note: ______________________________________________________________
+
+BL-12 Scelta: ______
+
+Massimo 3 copie delle carte non leggendarie.
+
+Note: ______________________________________________________________
+
+BL-13 Scelta: ______
+
+Guildmaster a 15 HP.
+
+Note: ______________________________________________________________
+
+BL-14 Scelta: ______
+
+Avatar inizialmente in Mid, nella prima formulazione.
+
+Note: ______________________________________________________________
+
+BL-15 Scelta: ______
+
+Avatar inizialmente nella Stronghold Row, nella revisione.
+
+Note: ______________________________________________________________
+
+BL-16 Scelta: ______
+
+Un edificio gratuito al setup, nella prima formulazione.
+
+Note: ______________________________________________________________
+
+BL-17 Scelta: ______
+
+Nessun edificio al setup, nella revisione.
+
+Note: ______________________________________________________________
+
+BL-18 Scelta: ______
+
+Un edificio gratuito dalla mano per turno.
+
+Note: ______________________________________________________________
+
+BL-19 Scelta: ______
+
+Edifici con 2 punti Structure, distruttibili e con danni persistenti.
+
+Note: ______________________________________________________________
+
+BL-20 Scelta: ______
+
+Risorse automatiche: 1 per edificio a inizio turno.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-21 – BL-30
+
+BL-21 Scelta: T
+
+Una risorsa base aggiuntiva prodotta dal Guildmaster.
+
+Note: ______________________________________________________________
+
+BL-22 Scelta: ______
+
+Risorse degli edifici del colore della loro gilda, spendibili anche per costi generici.
+
+Note: ______________________________________________________________
+
+BL-23 Scelta: ______
+
+Fase specifica per costruire, City Step poi Stronghold Step.
+
+Note: ______________________________________________________________
+
+BL-24 Scelta: ______
+
+Un solo movimento base complessivo per turno, assegnato a una unità.
+
+Note: ______________________________________________________________
+
+BL-25 Scelta: ______
+
+Movimento base di una zona avanti o indietro nella stessa colonna.
+
+Note: ______________________________________________________________
+
+BL-26 Scelta: ______
+
+Movimenti laterali attraverso effetti delle carte.
+
+Note: ______________________________________________________________
+
+BL-27 Scelta: ______
+
+Commander Step: usare il movimento disponibile per schierare o spostare l’avatar.
+
+Note: ______________________________________________________________
+
+BL-28 Scelta: ______
+
+Avatar schierato trattato come una normale unità.
+
+Note: ______________________________________________________________
+
+BL-29 Scelta: ______
+
+Avatar nella Stronghold Row non bersagliabile da Melee/Reach, ma da Ranged, Flying e magie.
+
+Note: ______________________________________________________________
+
+BL-30 Scelta: ______
+
+Un’azione per unità pronta: attacco, abilità attivata oppure Guard.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-31 – BL-40
+
+BL-31 Scelta: ______
+
+Abilità del Guildmaster una volta per turno.
+
+Note: ______________________________________________________________
+
+BL-32 Scelta: ______
+
+Finestra di reazione quando si dichiara un’azione o si scelgono i bersagli, con prima opportunità al non attivo.
+
+Note: ______________________________________________________________
+
+BL-33 Scelta: ______
+
+Ricontrollo dei bersagli dopo le reazioni: l’effetto fallisce per quelli diventati illegali.
+
+Note: ______________________________________________________________
+
+BL-34 Scelta: ______
+
+Dodge scartando una carta: spostamento in risposta. Le formulazioni a fasce e a slot differiscono.
+
+Note: ______________________________________________________________
+
+BL-35 Scelta: ______
+
+Guard: intercettare attacchi di unità e riceverne i danni.
+
+Note: ______________________________________________________________
+
+BL-36 Scelta: ______
+
+Guard posizionato in Frontline e protezione nella stessa colonna, nella revisione a slot.
+
+Note: ______________________________________________________________
+
+BL-37 Scelta: ______
+
+Guard protegge anche avatar ed edifici, secondo le condizioni di posizione.
+
+Note: ______________________________________________________________
+
+BL-38 Scelta: ______
+
+Guard non intercetta magie, tattiche o veleno.
+
+Note: ______________________________________________________________
+
+BL-39 Scelta: ______
+
+Melee nello stesso slot, con danni simultanei quando entrambi sono melee.
+
+Note: ______________________________________________________________
+
+BL-40 Scelta: ______
+
+Melee nella Frontline nemica può attaccare lo Stronghold adiacente, nella regola generale; resta un conflitto con la protezione dell’avatar descritta sopra.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-41 – BL-50
+
+BL-41 Scelta: ______
+
+Reach: attacchi alle zone adiacenti nella stessa colonna.
+
+Note: ______________________________________________________________
+
+BL-42 Scelta: ______
+
+Ranged: attacchi a qualsiasi slot, anche Stronghold; danno base 1 salvo diversa indicazione e nessuno scambio di danni.
+
+Note: ______________________________________________________________
+
+BL-43 Scelta: ______
+
+Flying: attacchi a qualsiasi slot e superamento dei Guard non volanti.
+
+Note: ______________________________________________________________
+
+BL-44 Scelta: ______
+
+Un solo equipaggiamento per portatore, salvo eccezioni.
+
+Note: ______________________________________________________________
+
+BL-45 Scelta: ______
+
+Ongoing Tactics: tattiche persistenti collocate in uno slot o nella Stronghold Row.
+
+Note: ______________________________________________________________
+
+BL-46 Scelta: ______
+
+Ongoing non attaccabili normalmente dalle unità, ma rimovibili da effetti o danni appropriati.
+
+Note: ______________________________________________________________
+
+BL-47 Scelta: ______
+
+Limite opzionale di 3 unità per giocatore.
+
+Note: ______________________________________________________________
+
+BL-48 Scelta: ______
+
+Mulligan opzionale iniziale: mettere carte in fondo al mazzo e pescarne altrettante meno una, una sola volta.
+
+Note: ______________________________________________________________
+
+BL-49 Scelta: ______
+
+Statistiche separate RNG / ATK / HP, usate nelle revisioni delle carte.
+
+Note: ______________________________________________________________
+
+BL-50 Scelta: ______
+
+Poison: a fine turno infligge danni pari ai segnalini, poi ne viene rimosso uno.
+
+Note: ______________________________________________________________
+
+Fase 4 Ramo boardless
+
+BL-51 – BL-59
+
+BL-51 Scelta: ______
+
+Shield: previene danni fino al numero dei segnalini scudo, poi li rimuove tutti.
+
+Note: ______________________________________________________________
+
+BL-52 Scelta: ______
+
+Quick: carte giocabili nelle finestre di reazione.
+
+Note: ______________________________________________________________
+
+BL-53 Scelta: ______
+
+Counter per tipo: annulla una tattica o abilità della categoria indicata.
+
+Note: ______________________________________________________________
+
+BL-54 Scelta: ______
+
+Sabotage: gli edifici danneggiati non producono risorse nel turno successivo.
+
+Note: ______________________________________________________________
+
+BL-55 Scelta: ______
+
+Overclock: bonus se per la carta è stata spesa almeno una risorsa rossa.
+
+Note: ______________________________________________________________
+
+BL-56 Scelta: ______
+
+Companion: sottotipo di unità, con sinergie dedicate.
+
+Note: ______________________________________________________________
+
+BL-57 Scelta: ______
+
+Channel: pagare una risorsa in meno e rinviare ingresso o risoluzione al proprio inizio turno successivo.
+
+Note: ______________________________________________________________
+
+BL-58 Scelta: ______
+
+Sneak: evita l’intercettazione dei Guard quando attacca edifici.
+
+Note: ______________________________________________________________
+
+BL-59 Scelta: ______
+
+Haste: agire nel turno d’ingresso.
+
+Note: ______________________________________________________________
+
+Fase 4 Core Set e meccaniche delle carte
+
+CS-01 – CS-10
+
+Feature degli effetti delle carte, non regole universali. Numeri, costi e nomi potranno essere trattati nel bilanciamento.
+
+CS-01 Scelta: T
+
+Abilità rossa del Guildmaster: pagare 1 rosso per fare 2 danni a un edificio e 1 agli edifici adiacenti.
+
+Note: ______________________________________________________________
+
+CS-02 Scelta: T
+
+Abilità gialla del Guildmaster: pagare 1 giallo per fare 1 danno e applicare 1 veleno.
+
+Note: ______________________________________________________________
+
+CS-03 Scelta: T
+
+Abilità verde del Guildmaster: fare 1 danno a un’unità e curare 1 a una propria unità o edificio.
+
+Note: ______________________________________________________________
+
+CS-04 Scelta: T
+
+Abilità blu del Guildmaster: aggiungere un segnalino scudo a un’unità o avatar.
+
+Note: ______________________________________________________________
+
+CS-05 Scelta: T
+
+Edifici con abilità aggiuntive alla produzione di risorse.
+
+Note: ______________________________________________________________
+
+CS-06 Scelta: T
+
+Danneggiare propri edifici o unità per ottenere vantaggi: risorse, attacco o altri effetti.
+
+Note: ______________________________________________________________
+
+CS-07 Scelta: T
+
+Bonus proporzionali ai danni presenti sui propri edifici.
+
+Note: ______________________________________________________________
+
+CS-08 Scelta: T
+
+Danni ad area su fasce, slot o edifici adiacenti.
+
+Note: ______________________________________________________________
+
+CS-09 Scelta: T
+
+Tappare più edifici per alimentare un effetto.
+
+Note: ______________________________________________________________
+
+CS-10 Scelta: T
+
+Schivate gratuite o ricompensate con attacco e altri effetti.
+
+Note: ______________________________________________________________
+
+Fase 4 Core Set e meccaniche delle carte
+
+CS-11 – CS-20
+
+CS-11 Scelta: T
+
+Danni aggiuntivi contro bersagli avvelenati.
+
+Note: ______________________________________________________________
+
+CS-12 Scelta: X
+
+Trappole o reazioni che puniscono movimento, Dodge o ingresso in una zona.
+
+Note: In realtà sarebbe da testare, ma è una cosa molto difficile, meglio farla quando c’è un prototipo più avanzato
+
+CS-13 Scelta: T
+
+Creazione di compagni e copie di unità.
+
+Note: ______________________________________________________________
+
+CS-14 Scelta: L
+
+Bonus per la presenza di compagni o altre bestie.
+
+Note: ______________________________________________________________
+
+CS-15 Scelta: T
+
+Edifici che assorbono parte dei danni destinati alle unità.
+
+Note: ______________________________________________________________
+
+CS-16 Scelta: T
+
+Cure distribuite fra più unità o edifici.
+
+Note: ______________________________________________________________
+
+CS-17 Scelta: L
+
+Ricerca di carte specifiche nel mazzo.
+
+Note: ______________________________________________________________
+
+CS-18 Scelta: X
+
+Conservazione di risorse per le reazioni, attraverso un’abilità specifica.
+
+Note: ______________________________________________________________
+
+CS-19 Scelta: T
+
+Effetti che fanno saltare la pesca avversaria.
+
+Note: ______________________________________________________________
+
+CS-20 Scelta: L
+
+Pesca aggiuntiva e selezione delle carte, anche tramite pesca/scarto o controllo della cima.
+
+Note: ______________________________________________________________
+
+Fase 4 Core Set e meccaniche delle carte
+
+CS-21 – CS-29
+
+CS-21 Scelta: L
+
+Root: impedire il movimento per un turno.
+
+Note: ______________________________________________________________
+
+CS-22 Scelta: L
+
+Ritorno di unità in mano.
+
+Note: ______________________________________________________________
+
+CS-23 Scelta: X
+
+Bonus o effetti legati alla posizione: Frontline nemica, Midline, Far o stesso slot.
+
+Note: ______________________________________________________________
+
+CS-24 Scelta: L
+
+Effetti alla morte delle unità.
+
+Note: ______________________________________________________________
+
+CS-25 Scelta: L
+
+Attacchi all’avatar che ignorano Guard.
+
+Note: ______________________________________________________________
+
+CS-26 Scelta: T
+
+Effetti persistenti sugli slot: bonus ai danni, vulnerabilità, veleno all’ingresso o prevenzione del danno.
+
+Note: ______________________________________________________________
+
+CS-27 Scelta: X
+
+Sinergie con gli scudi: trasferimento, maggiore prevenzione o potenziamento di altri effetti.
+
+Note: ______________________________________________________________
+
+CS-28 Scelta: T
+
+Potenziamenti al raggiungimento di una quantità di edifici della propria gilda.
+
+Note: ______________________________________________________________
+
+CS-29 Scelta: L
+
+Unità che non possono effettuare Dodge.
+
+Note: ______________________________________________________________
+
+Fase 4b Scacchiera zone e Torri
+
+F4b-01 – F4b-10
+
+Documento di aggiornamento fase4b. Decisioni registrate come confermate, salvo le parti segnalate. Codici distinti da F4B della variante Chess.
+
+F4b-01 Scelta: T
+
+Scacchiera fisica 8×8.
+
+Note: Attraverso le varie iterazioni mi sono reso conto che in realtà se il sistema di movimento è valido, anche la vecchia board potrebbe funzionare benissimo, si potrebbe addirittura pensare a board ad hoc per partite con più di due giocatori o espansioni specifiche, e tenere la board 8x8 come board principale e di facile accesso a giocatori di tutti i livelli
+
+F4b-02 Scelta: X
+
+Sistema ibrido caselle e zone: movimento sulle caselle, organizzazione delle regole per zone.
+
+Note: Detta così non è chiara questa regola, ma in sostanza è esattamente quello che c’è già
+
+F4b-03 Scelta: L
+
+Coordinate usate per setup e linea di vista.
+
+Note: ______________________________________________________________
+
+F4b-04 Scelta: L
+
+Overlay stampato per mostrare le zone.
+
+Note: ______________________________________________________________
+
+F4b-05 Scelta: L
+
+Una zona personale per giocatore.
+
+Note: ______________________________________________________________
+
+F4b-06 Scelta: L
+
+Highground conteso lungo la diagonale.
+
+Note: ______________________________________________________________
+
+F4b-07 Scelta: L
+
+Jungle laterali accessibili a entrambi, con mostri che conferiscono vantaggi ancora da definire.
+
+Note: ______________________________________________________________
+
+F4b-08 Scelta: L
+
+Caselle normali senza effetti speciali.
+
+Note: ______________________________________________________________
+
+F4b-09 Scelta: L
+
+Mappa con posizioni prestabilite di muri, highground e mostri, riportata nel documento.
+
+Note: ______________________________________________________________
+
+F4b-10 Scelta: L
+
+Una Torre fissa per giocatore, presente dall’inizio e non costruibile.
+
+Note: ______________________________________________________________
+
+Fase 4b Scacchiera zone e Torri
+
+F4b-11 – F4b-19
+
+F4b-11 Scelta: T
+
+Torri negli angoli H1 e A8.
+
+Note: ______________________________________________________________
+
+F4b-12 Scelta: T
+
+Torri con punti vita e distruttibili.
+
+Note: ______________________________________________________________
+
+F4b-13 Scelta: X
+
+Possibilità di valori di HP delle Torri diversi fra gilde, lasciata aperta al testing.
+
+Note: ______________________________________________________________
+
+F4b-14 Scelta: T
+
+Torre che danneggia nemici in ingresso nelle caselle adiacenti. Valore del danno e attivazione ancora aperti.
+
+Note: ______________________________________________________________
+
+F4b-15 Scelta: T
+
+Vittoria distruggendo la Torre avversaria.
+
+Note: ______________________________________________________________
+
+F4b-16 Scelta: L
+
+Guildmaster inizialmente adiacente alla propria Torre, non sulla Torre.
+
+Note: ______________________________________________________________
+
+F4b-17 Scelta: L
+
+Scelta della casella iniziale fra le tre adiacenti alla Torre.
+
+Note: ______________________________________________________________
+
+F4b-18 Scelta: T
+
+Edifici fuori dalla scacchiera, nella zona del giocatore.
+
+Note: ______________________________________________________________
+
+F4b-19 Scelta: L
+
+HP dei Guildmaster da determinare tramite playtest, senza obbligo che siano uguali per tutti.
+
+Note: ______________________________________________________________
+
+Prototipi fotografati
+
+P-01 – P-01
+
+Dato delle carte fisiche di Fiaran e Senya.
+
+P-01 Scelta: T
+
+Fiaran e Senya a 20 HP, alternativa numerica documentata rispetto ai 15 HP del ramo boardless.
+
+Note: ______________________________________________________________

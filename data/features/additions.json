@@ -1,0 +1,54 @@
+{
+ "note": "Voci aggiunte da Peppe dopo l'inventario del 26 settembre 2026. Codici N-xx per non confonderli con quelli originali.",
+ "section": "Aggiunte successive all'inventario (14 nov 2026)",
+ "features": [
+  {
+   "code": "N-01",
+   "choice": "T",
+   "description": "Vita che si ripristina: le unità NON Guildmaster non accumulano danni; la loro vita torna al valore pieno all'inizio del turno di ogni giocatore.",
+   "note": "Richiesta in chat il 14 nov 2026."
+  },
+  {
+   "code": "N-02",
+   "choice": "T",
+   "description": "Scambio automatico in mischia: quando due unità melee finiscono in caselle adiacenti si infliggono entrambe, automaticamente, danno pari alla propria forza.",
+   "note": "Richiesta in chat il 14 nov 2026. Parte della modalità N-01."
+  },
+  {
+   "code": "N-03",
+   "choice": "T",
+   "description": "Assalto (nome proposto): se l'unità che muove vuole finire il movimento sulla casella dell'unità nemica, gli scambi di danno si ripetono finché una delle due muore.",
+   "note": "Richiesta in chat il 14 nov 2026. Nome proposto da Claude, da confermare."
+  },
+  {
+   "code": "N-04",
+   "choice": "T",
+   "description": "Nell'Assalto, un'unità ranged di cui si vuole prendere la casella infligge comunque 1 danno a ogni scambio, anche se normalmente non restituirebbe danni.",
+   "note": "Richiesta in chat il 14 nov 2026."
+  },
+  {
+   "code": "N-05",
+   "choice": "T",
+   "description": "Carte con doppio attacco: la stessa unità può essere sia melee sia ranged, con valori di danno diversi.",
+   "note": "Richiesta in chat il 14 nov 2026."
+  },
+  {
+   "code": "N-06",
+   "choice": "T",
+   "description": "Mulligan iniziale facoltativo, una sola volta: si mettono in fondo al mazzo le carte scelte e se ne pescano altrettante meno una.",
+   "note": "Richiesto da Peppe dopo la prima prova (14 nov 2026). Procedura ripresa da BL-48, che nell'inventario è non decisa: da confermare. F4A-14 (Mulligan a 3 PA durante il turno) resta rinviata coi punti azione."
+  },
+  {
+   "code": "N-07",
+   "choice": "L",
+   "description": "Abilità proprie dei Guildmaster (quelle stampate sulle carte spoiler), giocabili al massimo una volta per turno.",
+   "note": "Richiesta da Peppe il 14 nov 2026 dopo la seconda prova. Corrisponde a BL-31, che nell'inventario è non decisa."
+  },
+  {
+   "code": "N-08",
+   "choice": "L",
+   "description": "Lo spostamento in risposta avviene solo scartando una carta dalla mano, ed è possibile solo in risposta a un attacco.",
+   "note": "Deciso da Peppe il 14 nov 2026. Riprende BL-34 (schivata scartando una carta), che nell'inventario era non decisa."
+  }
+ ]
+}

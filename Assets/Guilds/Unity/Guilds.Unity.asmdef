@@ -1,0 +1,1 @@
+{ "name": "Guilds.Unity", "rootNamespace": "Guilds.Unity", "references": ["Guilds.Core"], "autoReferenced": true }

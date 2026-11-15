@@ -1,0 +1,28 @@
+{
+ "id": "deck_blue",
+ "name": "Mazzo blu di prova (Wizards)",
+ "version": 1,
+ "guildmaster": "gm_nebros",
+ "cards": [
+  {
+   "card": "res_blue",
+   "count": 9
+  },
+  {
+   "card": "b_blink_step",
+   "count": 4
+  },
+  {
+   "card": "b_arcane_dart",
+   "count": 4
+  },
+  {
+   "card": "b_frost",
+   "count": 4
+  },
+  {
+   "card": "b_runic_staff",
+   "count": 4
+  }
+ ]
+}

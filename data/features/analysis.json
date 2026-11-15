@@ -1,0 +1,1503 @@
+{
+ "conflicts": [
+  {
+   "id": "C1",
+   "kind": "conflitto fra L",
+   "codes": [
+    "U-06",
+    "F4b-16",
+    "F4b-17"
+   ],
+   "text": "Posizione iniziale: angoli liberi opposti (U-06) contro casella scelta fra le tre adiacenti alla propria Torre (F4b-16/17). F1-18 (T, casella prestabilita) è una terza formulazione.",
+   "handling": "Parametro esclusivo del preset 'Posizione iniziale': S-A (U-06) | S-B (F4b-16/17). Entrambe richiedono la mappa."
+  },
+  {
+   "id": "C2",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-36",
+    "F1-37",
+    "F1-38",
+    "F4C-03",
+    "U-05",
+    "F4b-03"
+   ],
+   "text": "Linea di vista: geometrica fra angoli delle caselle, con unità nemiche che bloccano (F1-36/37/38) contro 'solo fra zone adiacenti' (F4C-03). U-05 (highground) si applica come filtro aggiuntivo a entrambe. F4b-03 (coordinate usate per la linea di vista) è coerente solo con la geometrica.",
+   "handling": "Parametro esclusivo 'Linea di vista': LOS-G (F1-36/37/38+U-05) | LOS-Z (F4C-03+U-05). LOS-Z richiede la definizione delle zone e della loro adiacenza: non ricavabile senza mappa."
+  },
+  {
+   "id": "C3",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-47",
+    "F2-02",
+    "F1-27",
+    "F1-62"
+   ],
+   "text": "F2-02 elimina il segnalino attacco, ma F1-47 ne prevede la rimozione a inizio turno, F1-27 limita a un attacco per unità e la formulazione originale di Swift (F1-62) cita i segnalini.",
+   "handling": "Interpretazione dichiarata: di F1-47 resta attivo solo il ripristino (untap); il limite di F1-27 è tracciato dal tap, perché il combattimento nasce dal movimento (F2-03) e il movimento tappa (F1-24). Da confermare: domanda aperta D5."
+  },
+  {
+   "id": "C4",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-48",
+    "F1-27",
+    "F2-03"
+   ],
+   "text": "F1-48 elenca l'attacco fra le azioni eseguibili liberamente in fase principale; F2-03 rende il combattimento una conseguenza automatica del movimento, non un'azione dichiarata.",
+   "handling": "Con F2-03 attivo l'attacco non è un'azione separata. Variante futura 'attacco dichiarato' possibile solo reintroducendo un tracciamento (F1-26 è X)."
+  },
+  {
+   "id": "C5",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-14",
+    "F2-06",
+    "F2-04"
+   ],
+   "text": "F1-14: le azioni si giocano nella propria fase principale. F2-06/F2-04: attacchi e magie istantanei giocabili in risposta, anche nel turno avversario.",
+   "handling": "Interpretazione dichiarata: due velocità di carta (azione normale: solo propria fase principale; istantanea: anche in risposta). Coerente con 'Indecisione - riflessioni' (azioni/reazioni)."
+  },
+  {
+   "id": "C6",
+   "kind": "nodo critico (ciclo base)",
+   "codes": [
+    "F3-03",
+    "F2-03",
+    "F2-04",
+    "F1-27",
+    "F3-11",
+    "F2-19",
+    "BL-34",
+    "F1-24",
+    "F4B-06"
+   ],
+   "text": "Ogni turno si muove per forza, il movimento innesca il combattimento, l'avversario può evitarlo spostandosi. Indefiniti: costo della schivata (BL-34 vuota), portata di F3-03 con più unità, esito se dopo la schivata c'è ancora contatto.",
+   "handling": "Varianti esplicite in docs/PRESET_01_PROPOSTA.md: OBB-A/OBB-B (portata obbligo), SCH-TAP/SCH-CARTE (schivata), RIC-GEO/RIC-ANNULLA (ricontrollo). Peppe ha indicato OBB-A (14 nov 2026). Il preset 01 dichiara OBB-A, SCH-TAP+carte, RIC-GEO."
+  },
+  {
+   "id": "C7",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F3-03",
+    "CS-21",
+    "F1-24",
+    "F1-25"
+   ],
+   "text": "Movimento obbligatorio contro Root (CS-21) e contro i casi in cui nessun movimento legale esiste (unità circondata, o già tappata per un'abilità visto che il movimento richiede il tap).",
+   "handling": "Deciso il 14 nov 2026: se un'unità è bloccata ed è l'unica in grado di muoversi, l'obbligo decade. Resta da confermare che 'bloccata' includa Root e 'già tappata'."
+  },
+  {
+   "id": "C8",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F3-08",
+    "F3-06",
+    "F4b-07",
+    "F4b-09"
+   ],
+   "text": "F3-08 (vittoria sconfiggendo mostri, L) richiede mostri: F3-06 è T, ma F4b-07 (L) e F4b-09 (L) prevedono già mostri nelle Jungle. Quantità e benefici non definiti.",
+   "handling": "Attiva solo nei preset con mostri implementati. Rinviata: servono mappa e regole dei mostri."
+  },
+  {
+   "id": "C9",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F1-44",
+    "F1-43",
+    "F1-45",
+    "F1-41",
+    "F1-42",
+    "F2-09",
+    "F2-10",
+    "F4A-08",
+    "BL-21",
+    "F3-13"
+   ],
+   "text": "Le regole L sulle risorse (colori, generici, perdita a fine turno) richiedono un modello di produzione; tutti i modelli sono T, e F1-41 poggia su F1-42 che è X.",
+   "handling": "Parametro esclusivo 'Modello risorse'. F1-41 non è attivabile così com'è (dipende da una X). Preset 01: F2-09 (carte risorsa nel mazzo), deciso il 14 nov 2026."
+  },
+  {
+   "id": "C10",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F1-62",
+    "F1-30"
+   ],
+   "text": "Swift ha senso solo se le unità appena evocate non agiscono (F1-30, T).",
+   "handling": "Swift disponibile solo nei preset con F1-30 e con alleati sulla board."
+  },
+  {
+   "id": "C11",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "CS-25",
+    "BL-35",
+    "CS-29",
+    "BL-34",
+    "CS-14",
+    "CS-13",
+    "BL-56"
+   ],
+   "text": "CS-25 richiede Guard (BL-35 vuota). CS-29 (unità che non possono fare Dodge) richiede un modello di schivata: soddisfatto da F2-19, non da BL-34. CS-14 richiede compagni (CS-13 T, BL-56 vuota).",
+   "handling": "CS-25 non attivabile finché Guard non è decisa. CS-29 e CS-14 attive nei preset con le rispettive dipendenze."
+  },
+  {
+   "id": "C12",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F4b-16",
+    "F4b-17",
+    "F4b-10",
+    "F4b-11",
+    "U-06"
+   ],
+   "text": "La partenza adiacente alla Torre richiede la Torre (F4b-10 L) e una sua posizione (F4b-11 è T). U-06 parla di 'angoli liberi': quali siano dipende da dove stanno Torri e mostri.",
+   "handling": "S-B attivabile solo con F4b-11 o altra posizione documentata. Serve la mappa."
+  },
+  {
+   "id": "C13",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-17",
+    "F1-29",
+    "F1-20",
+    "F1-19",
+    "U-03",
+    "F4b-05",
+    "F1-10",
+    "F3-01",
+    "F4B-01"
+   ],
+   "text": "Zone di evocazione e alleati evocabili (L) presuppongono più unità sulla board; F1-10, F3-01 e F4B-01 (una sola pedina eroe) sono T.",
+   "handling": "Parametro 'Presenza unità': solo eroe | alleati sulla board. Le L sull'evocazione sono attive solo nella seconda modalità."
+  },
+  {
+   "id": "C14",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F4A-19",
+    "U-07",
+    "F1-55"
+   ],
+   "text": "Mazzo esaurito: sconfitta di chi lo termina (F4A-19, U-07, L) contro 'si continua senza pescare' (F1-55, T).",
+   "handling": "Non è un conflitto fra L: F1-55 è una variante T del parametro 'Mazzo esaurito'. Momento esatto della sconfitta non definito: ipotesi H9."
+  },
+  {
+   "id": "C15",
+   "kind": "risolto (14 nov 2026)",
+   "codes": [
+    "F2-03",
+    "F1-32",
+    "F1-33"
+   ],
+   "text": "Combattimento automatico a distanza: non è definito se scatta solo quando chi ha mosso è ranged e vede un nemico, o anche quando chi ha mosso entra nella linea di vista di un ranged nemico (nota di F2-03: 'ranged è da pensare meglio').",
+   "handling": "Deciso: il ranged attacca solo nel proprio turno; entrare nella sua linea di vista fuori dal suo turno non fa nulla, salvo effetti di carte attive sulla board."
+  },
+  {
+   "id": "C16",
+   "kind": "ambiguità",
+   "codes": [
+    "F1-25",
+    "F2-22",
+    "F1-19"
+   ],
+   "text": "F1-25/F1-19: non si attraversano muri. F2-22: movimento sui muri (L).",
+   "handling": "Interpretazione: F2-22 è un effetto di carta che fa eccezione alla regola (F1-02). La nota di F1-25 aggiunge che il movimento non può mai finire su un muro: da chiarire se vale anche per F2-22."
+  },
+  {
+   "id": "C17",
+   "kind": "nuova modalità T contro L esistenti",
+   "codes": [
+    "N-01",
+    "N-03",
+    "N-04",
+    "F1-21",
+    "F1-27",
+    "F1-33",
+    "F1-34",
+    "F1-25"
+   ],
+   "text": "La modalità 'vita che si ripristina + Assalto' tocca regole L: una unità per casella (F1-21), un attacco per unità (F1-27), percorso che non attraversa nemici (F1-25); e regole T: danni persistenti (F1-34), difensore ranged che non restituisce (F1-33).",
+   "handling": "Parametri esclusivi del preset con alleati: 'Vita delle unità' = persistente (F1-34) | ripristinata (N-01); 'Assalto' = spento | attivo (N-03/04). Le eccezioni valgono solo dentro l'Assalto."
+  }
+ ],
+ "features": {
+  "F1-01": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-02": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-03": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "mazzi pronti forniti; editor di mazzi rinviato"
+  },
+  "F1-04": {
+   "deps": [],
+   "incompat": [
+    "F4A-01",
+    "F4A-02",
+    "BL-10"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-05": {
+   "deps": [],
+   "incompat": [
+    "BL-12"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-06": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-07": {
+   "deps": [
+    "F2-08 o F3-12 (edifici)"
+   ],
+   "incompat": [],
+   "presetNote": "nessun edificio in P01"
+  },
+  "F1-08": {
+   "deps": [
+    "F1-43"
+   ],
+   "incompat": [
+    "BL-11 (mazzo mono-gilda, se attivo)"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Con F1-42 esclusa, il 'valore' è solo il costo: l'identità deriva dai simboli nel costo."
+  },
+  "F1-09": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parziale: Guildmaster, azioni, oggetti; alleati rinviati",
+   "interp": "La nota lascia aperto il nome (alleati/unità) e che le azioni non siano solo carte."
+  },
+  "F1-10": {
+   "deps": [],
+   "incompat": [
+    "F3-01",
+    "F4B-01"
+   ],
+   "interp": "Pedina del Guildmaster certa; per le altre unità resta aperto (parametro 'Token delle altre unità')."
+  },
+  "F1-11": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-12": {
+   "deps": [
+    "F1-11"
+   ],
+   "incompat": [
+    "BL-44"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-13": {
+   "deps": [
+    "F1-11"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "in P01 il portatore è solo il Guildmaster, quindi non si osserva"
+  },
+  "F1-14": {
+   "deps": [],
+   "incompat": [
+    "F2-06 (vedi C5)"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Vale per le azioni non istantanee."
+  },
+  "F1-15": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-16": {
+   "deps": [
+    "mappa 9x7 (figura del regolamento fase 1, non disponibile come dati)"
+   ],
+   "incompat": [
+    "F4b-01",
+    "U-01"
+   ]
+  },
+  "F1-17": {
+   "deps": [
+    "alleati sulla board (F1-10)"
+   ],
+   "incompat": [],
+   "presetNote": "inattiva con solo eroe (C13)"
+  },
+  "F1-18": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [
+    "F4b-17",
+    "U-06 (formulazioni diverse)"
+   ]
+  },
+  "F1-19": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parte 'evocazione' inattiva con solo eroe"
+  },
+  "F1-20": {
+   "deps": [
+    "mappa",
+    "alleati sulla board"
+   ],
+   "incompat": [],
+   "presetNote": "inattiva con solo eroe"
+  },
+  "F1-21": {
+   "deps": [],
+   "incompat": [
+    "BL-05",
+    "N-03 (solo durante l'Assalto: da chiarire, D17)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-22": {
+   "deps": [],
+   "incompat": [
+    "F2-13",
+    "F4B-04"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-23": {
+   "deps": [],
+   "incompat": [
+    "F2-13",
+    "F4B-04 (ridondante)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-24": {
+   "deps": [],
+   "incompat": [
+    "F2-05 (X)",
+    "F4B-02 (X)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-25": {
+   "deps": [
+    "F1-22 o F3-04"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Nota: con movimento a scacchi non serve dichiarare il percorso, ma non si può finire su un muro."
+  },
+  "F1-26": {
+   "deps": [],
+   "incompat": [
+    "F2-02"
+   ],
+   "interp": "'x' minuscola letta come X."
+  },
+  "F1-27": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Senza segnalino (F2-02) il limite è tracciato dal tap (C3)."
+  },
+  "F1-28": {
+   "deps": [],
+   "incompat": []
+  },
+  "F1-29": {
+   "deps": [
+    "F1-17",
+    "alleati sulla board"
+   ],
+   "incompat": [],
+   "presetNote": "inattiva con solo eroe"
+  },
+  "F1-30": {
+   "deps": [
+    "alleati sulla board"
+   ],
+   "incompat": []
+  },
+  "F1-31": {
+   "deps": [],
+   "incompat": [
+    "BL-39"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-32": {
+   "deps": [
+    "modello di linea di vista (C2)"
+   ],
+   "incompat": [
+    "BL-42"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-33": {
+   "deps": [],
+   "incompat": [
+    "N-04 (eccezione nell'Assalto)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-34": {
+   "deps": [],
+   "incompat": [
+    "N-01 (per le unità non GM)",
+    "variante 'costituzione fissa' (nota di F2-15)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-35": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-36": {
+   "deps": [
+    "F4b-03"
+   ],
+   "incompat": [
+    "F4C-03"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G"
+  },
+  "F1-37": {
+   "deps": [
+    "F1-36"
+   ],
+   "incompat": [
+    "F4C-03"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G; con solo eroe non c'è un terzo corpo che blocchi"
+  },
+  "F1-38": {
+   "deps": [
+    "F1-36",
+    "zone dalla mappa"
+   ],
+   "incompat": [
+    "F4C-03"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G; richiede la mappa"
+  },
+  "F1-39": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "rinviata",
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-40": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "rinviata",
+   "presets": []
+  },
+  "F1-41": {
+   "deps": [
+    "F1-42 (X)"
+   ],
+   "incompat": [
+    "F2-09",
+    "F2-10",
+    "F4A-08",
+    "BL-20"
+   ],
+   "interp": "Non attivabile com'è: il meccanismo dei simboli che producono è F1-42, esclusa."
+  },
+  "F1-42": {
+   "deps": [],
+   "incompat": []
+  },
+  "F1-43": {
+   "deps": [
+    "modello di produzione (C9)"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-44": {
+   "deps": [
+    "modello di produzione (C9)"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "interp": "In P01 (F2-09) la parte 'produzione' vale per eventuali carte risorsa generiche: producono una risorsa del colore scelto."
+  },
+  "F1-45": {
+   "deps": [
+    "modello di produzione (C9)"
+   ],
+   "incompat": [
+    "F4B-09 (X)",
+    "CS-18 (X)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-46": {
+   "deps": [],
+   "incompat": [
+    "BL-23",
+    "F4A-05 (struttura a punti azione)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-47": {
+   "deps": [],
+   "incompat": [
+    "F2-02 (parte segnalini)"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "solo ripristino/untap"
+  },
+  "F1-48": {
+   "deps": [],
+   "incompat": [
+    "F2-03 (per l'attacco, C4)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-49": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-50": {
+   "deps": [],
+   "incompat": [
+    "F4A-09"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-51": {
+   "deps": [
+    "F1-50"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-52": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-53": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "sorteggio con seed registrato"
+  },
+  "F1-54": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-55": {
+   "deps": [],
+   "incompat": [
+    "F4A-19",
+    "U-07"
+   ]
+  },
+  "F1-56": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parziale: solo i tipi usati dalle carte di P01"
+  },
+  "F1-57": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-58": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-62": {
+   "deps": [
+    "F1-30 (T)",
+    "alleati sulla board"
+   ],
+   "incompat": [],
+   "interp": "Attiva solo nei preset con F1-30 (C10)."
+  },
+  "F1-63": {
+   "deps": [
+    "alleati sulla board"
+   ],
+   "incompat": [],
+   "interp": "Da riformulare con F2-03: 'attacco' non è più un'azione dichiarata. Non analizzato oltre."
+  },
+  "F1-67": {
+   "deps": [
+    "F1-34"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-68": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F2-01": {
+   "deps": [
+    "alleati sulla board"
+   ],
+   "incompat": [
+    "F3-01",
+    "F4B-01",
+    "BL-47"
+   ],
+   "interp": "Ambito: per giocatore. La seconda frase della nota è ambigua (probabilmente intende miniature con lo stesso nome): da chiarire."
+  },
+  "F2-02": {
+   "deps": [],
+   "incompat": [
+    "F1-26 (X)",
+    "F1-28 (X)",
+    "F1-61 (X)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F2-03": {
+   "deps": [
+    "modello di movimento",
+    "modello di linea di vista"
+   ],
+   "incompat": [
+    "F4A-12 (attacco come azione a PA)"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Deciso il 14 nov 2026: un'unità ranged attacca solo nel turno del proprio controllore. Un'unità che finisce nella linea di vista di un ranged fuori dal turno di quest'ultimo non subisce nulla, salvo effetti di carte attive sulla board."
+  },
+  "F2-04": {
+   "deps": [
+    "F2-06"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F2-05": {
+   "deps": [],
+   "incompat": [
+    "F1-24",
+    "F4B-05"
+   ]
+  },
+  "F2-06": {
+   "deps": [
+    "F2-04"
+   ],
+   "incompat": [
+    "F1-14 (C5)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F2-07": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "rinviata"
+  },
+  "F2-09": {
+   "deps": [
+    "regole delle carte risorsa (non definite: H1)"
+   ],
+   "incompat": [
+    "F2-10",
+    "F1-41"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Scelta da Peppe il 14 nov 2026 come modello di risorse del primo preset. Quante se ne giocano a turno, se restano in gioco e cosa producono non è scritto in nessuna fonte: ipotesi H1."
+  },
+  "F2-10": {
+   "deps": [],
+   "incompat": [
+    "F2-09",
+    "F1-41",
+    "F4A-08"
+   ],
+   "presets": [],
+   "interp": "La fonte (fase 2) cita come esempi Hearthstone (crescente) e Slay the Spire (fissa): la quantità non è definita.",
+   "presetNote": "sostituita da F2-09 in P01 per decisione del 14 nov 2026; resta variante per M4"
+  },
+  "F2-13": {
+   "deps": [
+    "F2-14 o F4C-01 (per sapere quale pezzo)"
+   ],
+   "incompat": [
+    "F1-22",
+    "F3-04"
+   ]
+  },
+  "F2-14": {
+   "deps": [
+    "alleati sulla board"
+   ],
+   "incompat": []
+  },
+  "F2-15": {
+   "deps": [],
+   "incompat": [],
+   "interp": "Sul tavolo; nel prototipo i PV sono mostrati sul token. Variante 'costituzione fissa' citata nella nota: non in inventario."
+  },
+  "F2-16": {
+   "deps": [],
+   "incompat": [],
+   "interp": "Funzionamento non definito: non implementabile senza una regola."
+  },
+  "F2-17": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "zona presente; nessuna carta di P01 la usa"
+  },
+  "F2-19": {
+   "deps": [
+    "F2-04",
+    "un modo di muoversi in risposta: F4B-06 o carte F2-06"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F2-20": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "come effetto di carta, dopo P01"
+  },
+  "F2-21": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "richiede due pedine: non in P01"
+  },
+  "F2-22": {
+   "deps": [],
+   "incompat": [
+    "F1-25 (C16)"
+   ],
+   "presetNote": "rinviata"
+  },
+  "F2-28": {
+   "deps": [
+    "F2-04"
+   ],
+   "incompat": [],
+   "presetNote": "candidata per P01 (carta 'neutralizza'), da confermare in M3"
+  },
+  "F2-29": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F3-01": {
+   "deps": [],
+   "incompat": [
+    "F1-10 (alleati)",
+    "F2-01",
+    "F4C-01",
+    "F4C-02"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F3-02": {
+   "deps": [
+    "F3-01"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Letta come: mazzo costruito attorno al proprio Guildmaster. Regole di costruzione specifiche non definite."
+  },
+  "F3-03": {
+   "deps": [
+    "modello di movimento"
+   ],
+   "incompat": [
+    "CS-21 (C7)"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "OBB-A",
+   "interp": "Deciso il 14 nov 2026: se un'unità è bloccata ed è l'unica in grado di muoversi, l'obbligo decade. Letto come: l'obbligo si soddisfa muovendo almeno un'unità (OBB-A); se un'altra unità può muovere, l'obbligo resta. Lettura da confermare (D4)."
+  },
+  "F3-04": {
+   "deps": [],
+   "incompat": [
+    "F2-13",
+    "F4B-04",
+    "F1-60 (Flying)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F3-06": {
+   "deps": [
+    "mappa",
+    "regole dei mostri"
+   ],
+   "incompat": []
+  },
+  "F3-07": {
+   "deps": [
+    "F3-06"
+   ],
+   "incompat": []
+  },
+  "F3-08": {
+   "deps": [
+    "F3-06 (T) o F4b-07 (L)",
+    "quantità da stabilire"
+   ],
+   "incompat": [],
+   "interp": "Attiva solo nei preset con mostri (C8)."
+  },
+  "F3-10": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "non in P01",
+   "interp": "Caso particolare di N-05 limitato agli eroi."
+  },
+  "F3-11": {
+   "deps": [
+    "F2-19"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante RIC-GEO per il combattimento automatico; letterale per effetti con bersaglio"
+  },
+  "F4A-05": {
+   "deps": [],
+   "incompat": [
+    "F1-46/F1-48 (turno libero)"
+   ]
+  },
+  "F4A-08": {
+   "deps": [
+    "F4A-04"
+   ],
+   "incompat": [
+    "F2-10",
+    "F2-09"
+   ]
+  },
+  "F4A-19": {
+   "deps": [],
+   "incompat": [
+    "F1-55"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4B-01": {
+   "deps": [],
+   "incompat": [
+    "F1-10 (alleati)",
+    "F2-01"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Per giocatore (nota)."
+  },
+  "F4B-04": {
+   "deps": [],
+   "incompat": [
+    "F1-22",
+    "F3-04"
+   ],
+   "interp": "Nota: in alternativa o in seguito regina + cavallo. Variante di movimento per M4."
+  },
+  "F4B-05": {
+   "deps": [],
+   "incompat": [
+    "F2-05 (X)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4B-06": {
+   "deps": [
+    "F2-04"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante SCH-TAP"
+  },
+  "F4B-10": {
+   "deps": [
+    "un limite numerico (F1-52)"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4C-01": {
+   "deps": [
+    "alleati sulla board"
+   ],
+   "incompat": [
+    "F3-01"
+   ],
+   "interp": "Nota: un pezzo per tipo a disposizione, assegnazione di un'unità al pezzo, sacrificio per riassegnare; apre a effetti 'se giocata come TORRE'."
+  },
+  "F4C-02": {
+   "deps": [
+    "F4C-01"
+   ],
+   "incompat": [
+    "F3-01"
+   ],
+   "interp": "Per giocatore (nota)."
+  },
+  "F4C-03": {
+   "deps": [
+    "zone e adiacenze dalla mappa"
+   ],
+   "incompat": [
+    "F1-36",
+    "F1-37",
+    "F1-38"
+   ],
+   "presetNote": "variante LOS-Z, non in P01"
+  },
+  "F4C-04": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presetNote": "sulla mappa, se la mappa la riporta; senza regole proprie in P01"
+  },
+  "F4C-05": {
+   "deps": [
+    "F4b-10"
+   ],
+   "incompat": [
+    "F4b-15 (distruggere contro conquistare: da chiarire)"
+   ]
+  },
+  "U-01": {
+   "deps": [],
+   "incompat": [
+    "F1-16"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "U-02": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "U-03": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "U-04": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "U-05": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "U-06": {
+   "deps": [
+    "mappa (quali angoli sono 'liberi')"
+   ],
+   "incompat": [
+    "F4b-16",
+    "F4b-17"
+   ],
+   "presets": [
+    "P01b"
+   ],
+   "presetNote": "variante S-A"
+  },
+  "U-07": {
+   "deps": [],
+   "incompat": [
+    "F1-55"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "BL-13": {
+   "deps": [],
+   "incompat": [
+    "P-01"
+   ],
+   "interp": "Vuota: non usata come base. Citata solo come alternativa numerica a P-01."
+  },
+  "BL-21": {
+   "deps": [],
+   "incompat": [],
+   "interp": "Unica voce BL con una scelta (T). Modello di risorse alternativo/aggiuntivo: non in P01."
+  },
+  "BL-34": {
+   "deps": [],
+   "incompat": [],
+   "interp": "Vuota: il costo 'scarta una carta' non è selezionabile. Vedi C6."
+  },
+  "BL-35": {
+   "deps": [],
+   "incompat": [],
+   "interp": "Vuota: blocca CS-25 (C11)."
+  },
+  "CS-12": {
+   "deps": [],
+   "incompat": [],
+   "interp": "X con rinvio esplicito a un prototipo più avanzato: esclusa ora, non scartata."
+  },
+  "CS-14": {
+   "deps": [
+    "CS-13 (T) o BL-56 (vuota)",
+    "alleati sulla board"
+   ],
+   "incompat": []
+  },
+  "CS-21": {
+   "deps": [],
+   "incompat": [
+    "F3-03 (C7)"
+   ],
+   "presetNote": "ora utilizzabile in P01: l'obbligo decade se il GM è bloccato"
+  },
+  "CS-25": {
+   "deps": [
+    "BL-35 (vuota)"
+   ],
+   "incompat": [],
+   "interp": "Non attivabile finché Guard non è decisa."
+  },
+  "CS-29": {
+   "deps": [
+    "F2-19"
+   ],
+   "incompat": []
+  },
+  "F4b-01": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [
+    "F1-16"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "Nota: 8x8 come board principale; la vecchia board e board ad hoc restano possibili."
+  },
+  "F4b-02": {
+   "deps": [],
+   "incompat": [],
+   "interp": "X sulla formulazione, ma la nota dice che il contenuto 'è esattamente quello che c'è già'. Letta così: la voce è esclusa come regola separata perché ridondante; il comportamento (movimento sulle caselle, regole per zone) resta tramite F4b-03/04/05/06/07. Da confermare."
+  },
+  "F4b-03": {
+   "deps": [],
+   "incompat": [
+    "F4C-03 (per la linea di vista)"
+   ],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4b-04": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "zone colorate sulla board; richiede la mappa"
+  },
+  "F4b-05": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "F4b-06": {
+   "deps": [
+    "mappa"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  "F4b-07": {
+   "deps": [
+    "mappa",
+    "regole dei mostri (non definite)"
+   ],
+   "incompat": [],
+   "presetNote": "zone Jungle mostrate; mostri non in P01"
+  },
+  "F4b-08": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4b-09": {
+   "deps": [
+    "documento di aggiornamento fase 4b (non disponibile a M0)"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "bloccata finché non arriva la mappa"
+  },
+  "F4b-10": {
+   "deps": [
+    "una posizione (F4b-11)"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "Torre come pezzo fisso inerte: senza PV, danno o vittoria (F4b-12/14/15 sono T, spente)"
+  },
+  "F4b-11": {
+   "deps": [
+    "F4b-10"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F4b-12": {
+   "deps": [
+    "F4b-10"
+   ],
+   "incompat": [],
+   "presetNote": "non in P01"
+  },
+  "F4b-14": {
+   "deps": [
+    "F4b-10"
+   ],
+   "incompat": [],
+   "presetNote": "non in P01; valore e attivazione non definiti"
+  },
+  "F4b-15": {
+   "deps": [
+    "F4b-12"
+   ],
+   "incompat": [],
+   "presetNote": "non in P01"
+  },
+  "F4b-16": {
+   "deps": [
+    "F4b-10",
+    "F4b-11"
+   ],
+   "incompat": [
+    "U-06"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante S-B"
+  },
+  "F4b-17": {
+   "deps": [
+    "F4b-16"
+   ],
+   "incompat": [
+    "U-06",
+    "F1-18"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante S-B"
+  },
+  "F4b-19": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "PV per Guildmaster come parametro"
+  },
+  "P-01": {
+   "deps": [],
+   "incompat": [
+    "BL-13"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "20 PV per tutti e quattro come ipotesi H3 (la fonte lo documenta solo per Fiaran e Senya)"
+  },
+  "N-01": {
+   "deps": [
+    "alleati sulla board (F1-10)"
+   ],
+   "incompat": [
+    "F1-34 (per le unità non GM)",
+    "F1-65 Venomous e cure F1-67 (perdono quasi tutto il senso sulle unità non GM)"
+   ],
+   "presetNote": "variante 'Vita delle unità' del preset con alleati (P02)",
+   "interp": "I Guildmaster mantengono danni persistenti. Vicina alla 'costituzione fissa come Magic' della nota di F2-15, che però ripristinava a fine turno."
+  },
+  "N-02": {
+   "deps": [
+    "F2-03",
+    "F1-31"
+   ],
+   "incompat": [],
+   "presetNote": "P02",
+   "interp": "Coincide con F2-03 + F1-33 per il caso melee contro melee; registrata a parte perché fa parte della modalità richiesta."
+  },
+  "N-03": {
+   "deps": [
+    "N-02",
+    "un'unità nemica sulla casella di arrivo"
+   ],
+   "incompat": [
+    "F1-21 (durante l'Assalto)",
+    "F1-27 (più scambi nello stesso movimento)",
+    "F1-25 (la casella nemica diventa destinazione legale)"
+   ],
+   "presetNote": "P02",
+   "interp": "Dentro un Assalto i danni si accumulano da uno scambio all'altro anche con N-01, altrimenti non finirebbe mai. Non definiti: esito se muoiono entrambe, Assalto contro un Guildmaster, Assalto dichiarato da un ranged, caso in cui nessuna delle due può fare danno."
+  },
+  "N-04": {
+   "deps": [
+    "N-03"
+   ],
+   "incompat": [
+    "F1-33 (il difensore ranged non restituisce danni)"
+   ],
+   "presetNote": "P02"
+  },
+  "N-05": {
+   "deps": [],
+   "incompat": [],
+   "presetNote": "variante 'Profilo d'attacco' (P02; applicabile anche ai GM)",
+   "interp": "Generalizza F3-10. Ipotesi H10: adiacente si usa il valore melee, a distanza quello ranged."
+  },
+  "N-06": {
+   "deps": [],
+   "incompat": [
+    "F4A-14"
+   ],
+   "presets": [
+    "P01"
+   ],
+   "interp": "BL-48 usata come definizione operativa."
+  },
+  "N-07": {
+   "deps": [
+    "F1-56"
+   ],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "F1-65": {
+   "deps": [],
+   "incompat": [],
+   "presets": [
+    "P01"
+   ]
+  },
+  "N-08": {
+   "deps": [
+    "F2-04",
+    "F2-19"
+   ],
+   "incompat": [
+    "F4B-06"
+   ],
+   "presets": [
+    "P01"
+   ]
+  }
+ }
+}

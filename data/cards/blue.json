@@ -1,0 +1,132 @@
+[
+ {
+  "id": "gm_nebros",
+  "version": 1,
+  "name": "Nebros Clearmind",
+  "guild": "Blue",
+  "type": "Guildmaster",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "adattamento",
+  "originSource": "reference/Guild References/Spoilers - blue/Nebros Clearmind",
+  "tests": "Ciclo base e abilità propria del Guildmaster, una volta per turno",
+  "rationale": "Attacco 2, Salute 20, portata e abilità presi dalla carta spoiler. Costo dell'abilità: 1 risorsa della gilda (il simbolo prima dei due punti).",
+  "attack": 2,
+  "health": 20,
+  "range": "ranged",
+  "tokenModel": "models/nebros.obj",
+  "keywords": [],
+  "ability": {
+   "name": "Fiamma di Nebros",
+   "costColored": 1,
+   "target": "any",
+   "effects": [
+    {
+     "kind": "reposition",
+     "amount": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "res_blue",
+  "version": 1,
+  "name": "Essenza blu",
+  "guild": "Blue",
+  "type": "Resource",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modello di risorse F2-09 (ipotesi H1)",
+  "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09"
+ },
+ {
+  "id": "b_blink_step",
+  "version": 1,
+  "name": "Blink Step (test)",
+  "guild": "Blue",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "any",
+  "effects": [
+   {
+    "kind": "reposition",
+    "amount": 2
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Blink Step, sposta un'unità (testo originale basato su regole boardless)",
+  "tests": "Spostamento in risposta con carte, anche del nemico: rompe contatto o linea di vista (F2-19)",
+  "rationale": "2 caselle come l'abilità stampata di Nebros; 2 risorse perché può annullare un combattimento"
+ },
+ {
+  "id": "b_arcane_dart",
+  "version": 1,
+  "name": "Dardo arcano (test)",
+  "guild": "Blue",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "enemy",
+  "effects": [
+   {
+    "kind": "damage",
+    "amount": 2
+   }
+  ],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Danno diretto istantaneo e ricontrollo del bersaglio (F3-11)",
+  "rationale": "2 danni a velocità istantanea per 2 risorse"
+ },
+ {
+  "id": "b_frost",
+  "version": 1,
+  "name": "Gelo (test)",
+  "guild": "Blue",
+  "type": "Action",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "enemy",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": -2,
+    "stat": "move",
+    "duration": "targetNextTurn"
+   }
+  ],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Controllo del movimento avversario senza bloccarlo (confronto con Root)",
+  "rationale": "Il nemico muove di 1 nel suo prossimo turno"
+ },
+ {
+  "id": "b_runic_staff",
+  "version": 1,
+  "name": "Runic Staff (test)",
+  "guild": "Blue",
+  "type": "Item",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 1,
+    "stat": "move",
+    "duration": "permanent"
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Runic Staff, oggetto (testo originale basato su regole boardless)",
+  "tests": "Oggetto di posizionamento per un Guildmaster a distanza",
+  "rationale": "+1 movimento permanente"
+ }
+]

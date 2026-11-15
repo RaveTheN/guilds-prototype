@@ -1,0 +1,59 @@
+{
+ "id": "P01g",
+ "name": "Duello — abilità solo nel proprio turno",
+ "basedOn": "P01",
+ "description": "Come P01, ma l'abilità del Guildmaster si usa solo nel proprio turno, non in risposta.",
+ "featureSet": "P01",
+ "map": "mappa_8x8",
+ "theme": "semplice",
+ "partial": true,
+ "builtIn": true,
+ "choices": {
+  "gmAbilities": "turno"
+ },
+ "numbers": {},
+ "hypotheses": [
+  "H1 Carte risorsa: una per turno; restano in gioco sul tavolo; si TAPPANO per pagare 1 risorsa del loro colore e si stappano all'inizio del proprio turno. Entrano stappate e producono subito (deciso il 14 nov; parametro per provarle tappate). Quelle rimaste pronte servono per istantanee e abilità nel turno avversario. 9 per mazzo.",
+  "H2 Le carte risorsa non sono unità, non passano dalla pila e non possono essere attaccate.",
+  "H3 20 PV a tutti e quattro i Guildmaster (le quattro carte spoiler riportano 20).",
+  "H4 Lo spostamento in risposta (con scarto o con tap) usa il movimento normale dell'unità. Con lo scarto l'unità non si tappa e non conta come movimento obbligatorio.",
+  "H26 Torre con punti vita: si colpisce col combattimento automatico (danno = Attacco) se non c'è un'unità nemica da colpire ed è a contatto o in linea di tiro; non restituisce danni. Per le caselle della Torre conta la casella d'arrivo, non quelle attraversate.",
+  "H24 «Attacco» = un movimento nemico che porterebbe al combattimento automatico contro quell'unità, oppure una carta o un'abilità nemica che le infliggerebbe danni.",
+  "H6 Il difensore in mischia restituisce danno solo se adiacente all'attaccante.",
+  "H8 Una finestra di risposta dopo ogni movimento e ogni carta: risponde l'avversario; quando chi ha la priorità passa, si risolve la cima della pila. Uno spostamento in risposta non apre un secondo combattimento.",
+  "H9 Si perde nel momento in cui si deve pescare da un mazzo vuoto.",
+  "H11 Contatto in mischia anche in diagonale (parametro).",
+  "H12 La Torre inerte blocca movimento e linea di vista come un muro.",
+  "H13 La casella mostro è highground con un ostacolo inerte (mostri rinviati).",
+  "H14 Le carte risorsa non contano per il limite di copie.",
+  "H15 L'obbligo di movimento è soddisfatto solo dal movimento col tap; decade se il Guildmaster è tappato, sotto Root o senza caselle raggiungibili.",
+  "H16 Un mazzo contiene solo carte della gilda del suo Guildmaster.",
+  "H17 Root e i malus «fino al prossimo turno» durano fino alla fine del primo turno del proprietario del bersaglio che termina dopo la risoluzione.",
+  "H18 Il percorso del movimento è il più breve, calcolato dal programma e scritto nel registro; nessuna regola di P01 dipende dal percorso.",
+  "H19 Entrare, uscire o muoversi sull'highground non costa nulla e non dà bonus.",
+  "H20 Mulligan iniziale (chiesto il 14 nov): una volta per giocatore, prima di scegliere la partenza; le carte scelte vanno in fondo al mazzo e se ne pescano altrettante meno una (procedura di BL-48, da confermare).",
+  "H21 Croce (abilità di Fiaran): la casella scelta più le 4 adiacenti in orizzontale e verticale; colpisce tutte le unità, anche le proprie. La forma non è scritta nelle fonti lette.",
+  "H22 Abilità dei Guildmaster: costano 1 risorsa della gilda, non tappano il Guildmaster, una volta per turno (anche in quello avversario), si usano come un'istantanea (esempio di Nebros nel documento fase 2) e passano dalla pila.",
+  "H23 Senya: il nemico deve essere in linea di vista; l'unità amica curata è il suo Guildmaster (non ci sono altre unità).",
+  "ND Veleno (F1-65): le fonti non dicono come si toglie un segnalino: per ora non si toglie mai (D31).",
+  "ND Entrambi i Guildmaster sconfitti nello stesso scambio: esito non definito (D21); la partita finisce senza vincitore."
+ ],
+ "limits": [
+  "Test parziale: sottoinsieme delle feature dell'inventario. Non è il regolamento definitivo.",
+  "Nessun alleato, evocazione, mostro, edificio; Torre e mostri sono ostacoli inerti; Jungle senza regole.",
+  "Zone personali non definite nella mappa (foglio Zone: «da definire»): niente LOS-Z, niente parte di F1-38 sulle zone di evocazione.",
+  "Il foglio Note dell'Excel descrive una disposizione diversa dalle celle dei fogli Mappa: usate le celle (Torri in A1 e H8, non H1 e A8 come in F4b-11)."
+ ],
+ "deferred": [
+  "Alleati, evocazione, token (F1-10/17/29/30, F2-01, F4C-01/02)",
+  "Ruoli degli scacchi (F2-13/14, F4B-04)",
+  "Mostri, Jungle, vittoria coi mostri (F3-06/07/08, F4b-07)",
+  "Torre con PV, danno, vittoria (F4b-12/14/15, F4C-05/06)",
+  "Edifici (F2-08, F3-12/13, F4b-18)",
+  "Punti azione e moneta (F4A-04..15, F2-16)",
+  "Parole chiave: Armor, Flying, Swift, Taunt, Unique",
+  "Aree d'effetto diverse dalla Croce (F1-39/40)",
+  "Magie continuative, esilio, ricerca nel mazzo, dadi",
+  "P02 Alleati: N-01..N-05 (vita ripristinata, Assalto, doppio profilo)"
+ ]
+}

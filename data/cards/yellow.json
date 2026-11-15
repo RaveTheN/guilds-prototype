@@ -1,0 +1,134 @@
+[
+ {
+  "id": "gm_dalia",
+  "version": 1,
+  "name": "Dalia Shadowstep",
+  "guild": "Yellow",
+  "type": "Guildmaster",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "adattamento",
+  "originSource": "reference/Guild References/Spoilers - Yellow/Dalia Shadowstep",
+  "tests": "Ciclo base e abilità propria del Guildmaster, una volta per turno",
+  "rationale": "Attacco 2, Salute 20, portata e abilità presi dalla carta spoiler. Costo dell'abilità: 1 risorsa della gilda (il simbolo prima dei due punti).",
+  "attack": 2,
+  "health": 20,
+  "range": "melee",
+  "tokenModel": "models/daalia.obj",
+  "keywords": [
+   "venomous"
+  ],
+  "ability": {
+   "name": "Lama di Dalia",
+   "costColored": 1,
+   "target": "any",
+   "effects": [
+    {
+     "kind": "damage",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "res_yellow",
+  "version": 1,
+  "name": "Essenza gialla",
+  "guild": "Yellow",
+  "type": "Resource",
+  "costColored": 0,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Modello di risorse F2-09 (ipotesi H1)",
+  "rationale": "1 risorsa a turno: il minimo che fa funzionare F2-09"
+ },
+ {
+  "id": "y_smoke_step",
+  "version": 1,
+  "name": "Smoke Step (test)",
+  "guild": "Yellow",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "self",
+  "effects": [
+   {
+    "kind": "reposition",
+    "amount": 2
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Smoke Step, schivata gratuita (testo originale basato su regole boardless)",
+  "tests": "Spostamento in risposta con una carta nel turno avversario, quando l'unità è tappata",
+  "rationale": "Costa 1 invece di 0: quattro schivate gratuite toglierebbero senso al test"
+ },
+ {
+  "id": "y_toxic_shiv",
+  "version": 1,
+  "name": "Toxic Shiv (test)",
+  "guild": "Yellow",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "enemy",
+  "effects": [
+   {
+    "kind": "damage",
+    "amount": 1
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Toxic Shiv, 1 danno + veleno (testo originale basato su regole boardless)",
+  "tests": "Danno istantaneo economico",
+  "rationale": "Il veleno è rinviato: resta solo il danno"
+ },
+ {
+  "id": "y_blinding_dust",
+  "version": 1,
+  "name": "Polvere accecante (test)",
+  "guild": "Yellow",
+  "type": "Instant",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "enemy",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": -2,
+    "stat": "attack",
+    "duration": "turn"
+   }
+  ],
+  "originKind": "nuova proposta",
+  "originSource": "carta di test proposta",
+  "tests": "Risposta al movimento che riduce il danno del combattimento automatico",
+  "rationale": "-2 azzera un attacco base per un turno"
+ },
+ {
+  "id": "y_venom_blades",
+  "version": 1,
+  "name": "Venom Blades (test)",
+  "guild": "Yellow",
+  "type": "Item",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [
+   {
+    "kind": "mod",
+    "amount": 1,
+    "stat": "attack",
+    "duration": "permanent"
+   }
+  ],
+  "originKind": "adattamento",
+  "originSource": "Core set - fase 4: Venom Blades, oggetto (testo originale basato su regole boardless)",
+  "tests": "Oggetto d'attacco su un Guildmaster in mischia",
+  "rationale": "+1 permanente; il veleno è rinviato"
+ }
+]

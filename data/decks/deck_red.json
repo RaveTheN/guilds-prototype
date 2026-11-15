@@ -1,0 +1,28 @@
+{
+ "id": "deck_red",
+ "name": "Mazzo rosso di prova (Artificers)",
+ "version": 1,
+ "guildmaster": "gm_fiaran",
+ "cards": [
+  {
+   "card": "res_red",
+   "count": 9
+  },
+  {
+   "card": "r_thermal_surge",
+   "count": 4
+  },
+  {
+   "card": "r_fury",
+   "count": 4
+  },
+  {
+   "card": "r_rush",
+   "count": 4
+  },
+  {
+   "card": "r_flame_gauntlet",
+   "count": 4
+  }
+ ]
+}

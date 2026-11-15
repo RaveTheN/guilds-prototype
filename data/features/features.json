@@ -1,0 +1,4802 @@
+{
+ "source": "Guilds-Feature-da-compilare1.docx (inventario 26 settembre 2026, compilato)",
+ "count": 271,
+ "inventoryCount": 263,
+ "conflicts": [
+  {
+   "id": "C1",
+   "kind": "conflitto fra L",
+   "codes": [
+    "U-06",
+    "F4b-16",
+    "F4b-17"
+   ],
+   "text": "Posizione iniziale: angoli liberi opposti (U-06) contro casella scelta fra le tre adiacenti alla propria Torre (F4b-16/17). F1-18 (T, casella prestabilita) è una terza formulazione.",
+   "handling": "Parametro esclusivo del preset 'Posizione iniziale': S-A (U-06) | S-B (F4b-16/17). Entrambe richiedono la mappa."
+  },
+  {
+   "id": "C2",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-36",
+    "F1-37",
+    "F1-38",
+    "F4C-03",
+    "U-05",
+    "F4b-03"
+   ],
+   "text": "Linea di vista: geometrica fra angoli delle caselle, con unità nemiche che bloccano (F1-36/37/38) contro 'solo fra zone adiacenti' (F4C-03). U-05 (highground) si applica come filtro aggiuntivo a entrambe. F4b-03 (coordinate usate per la linea di vista) è coerente solo con la geometrica.",
+   "handling": "Parametro esclusivo 'Linea di vista': LOS-G (F1-36/37/38+U-05) | LOS-Z (F4C-03+U-05). LOS-Z richiede la definizione delle zone e della loro adiacenza: non ricavabile senza mappa."
+  },
+  {
+   "id": "C3",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-47",
+    "F2-02",
+    "F1-27",
+    "F1-62"
+   ],
+   "text": "F2-02 elimina il segnalino attacco, ma F1-47 ne prevede la rimozione a inizio turno, F1-27 limita a un attacco per unità e la formulazione originale di Swift (F1-62) cita i segnalini.",
+   "handling": "Interpretazione dichiarata: di F1-47 resta attivo solo il ripristino (untap); il limite di F1-27 è tracciato dal tap, perché il combattimento nasce dal movimento (F2-03) e il movimento tappa (F1-24). Da confermare: domanda aperta D5."
+  },
+  {
+   "id": "C4",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-48",
+    "F1-27",
+    "F2-03"
+   ],
+   "text": "F1-48 elenca l'attacco fra le azioni eseguibili liberamente in fase principale; F2-03 rende il combattimento una conseguenza automatica del movimento, non un'azione dichiarata.",
+   "handling": "Con F2-03 attivo l'attacco non è un'azione separata. Variante futura 'attacco dichiarato' possibile solo reintroducendo un tracciamento (F1-26 è X)."
+  },
+  {
+   "id": "C5",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-14",
+    "F2-06",
+    "F2-04"
+   ],
+   "text": "F1-14: le azioni si giocano nella propria fase principale. F2-06/F2-04: attacchi e magie istantanei giocabili in risposta, anche nel turno avversario.",
+   "handling": "Interpretazione dichiarata: due velocità di carta (azione normale: solo propria fase principale; istantanea: anche in risposta). Coerente con 'Indecisione - riflessioni' (azioni/reazioni)."
+  },
+  {
+   "id": "C6",
+   "kind": "nodo critico (ciclo base)",
+   "codes": [
+    "F3-03",
+    "F2-03",
+    "F2-04",
+    "F1-27",
+    "F3-11",
+    "F2-19",
+    "BL-34",
+    "F1-24",
+    "F4B-06"
+   ],
+   "text": "Ogni turno si muove per forza, il movimento innesca il combattimento, l'avversario può evitarlo spostandosi. Indefiniti: costo della schivata (BL-34 vuota), portata di F3-03 con più unità, esito se dopo la schivata c'è ancora contatto.",
+   "handling": "Varianti esplicite in docs/PRESET_01_PROPOSTA.md: OBB-A/OBB-B (portata obbligo), SCH-TAP/SCH-CARTE (schivata), RIC-GEO/RIC-ANNULLA (ricontrollo). Peppe ha indicato OBB-A (14 nov 2026). Il preset 01 dichiara OBB-A, SCH-TAP+carte, RIC-GEO."
+  },
+  {
+   "id": "C7",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F3-03",
+    "CS-21",
+    "F1-24",
+    "F1-25"
+   ],
+   "text": "Movimento obbligatorio contro Root (CS-21) e contro i casi in cui nessun movimento legale esiste (unità circondata, o già tappata per un'abilità visto che il movimento richiede il tap).",
+   "handling": "Deciso il 14 nov 2026: se un'unità è bloccata ed è l'unica in grado di muoversi, l'obbligo decade. Resta da confermare che 'bloccata' includa Root e 'già tappata'."
+  },
+  {
+   "id": "C8",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F3-08",
+    "F3-06",
+    "F4b-07",
+    "F4b-09"
+   ],
+   "text": "F3-08 (vittoria sconfiggendo mostri, L) richiede mostri: F3-06 è T, ma F4b-07 (L) e F4b-09 (L) prevedono già mostri nelle Jungle. Quantità e benefici non definiti.",
+   "handling": "Attiva solo nei preset con mostri implementati. Rinviata: servono mappa e regole dei mostri."
+  },
+  {
+   "id": "C9",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F1-44",
+    "F1-43",
+    "F1-45",
+    "F1-41",
+    "F1-42",
+    "F2-09",
+    "F2-10",
+    "F4A-08",
+    "BL-21",
+    "F3-13"
+   ],
+   "text": "Le regole L sulle risorse (colori, generici, perdita a fine turno) richiedono un modello di produzione; tutti i modelli sono T, e F1-41 poggia su F1-42 che è X.",
+   "handling": "Parametro esclusivo 'Modello risorse'. F1-41 non è attivabile così com'è (dipende da una X). Preset 01: F2-09 (carte risorsa nel mazzo), deciso il 14 nov 2026."
+  },
+  {
+   "id": "C10",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F1-62",
+    "F1-30"
+   ],
+   "text": "Swift ha senso solo se le unità appena evocate non agiscono (F1-30, T).",
+   "handling": "Swift disponibile solo nei preset con F1-30 e con alleati sulla board."
+  },
+  {
+   "id": "C11",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "CS-25",
+    "BL-35",
+    "CS-29",
+    "BL-34",
+    "CS-14",
+    "CS-13",
+    "BL-56"
+   ],
+   "text": "CS-25 richiede Guard (BL-35 vuota). CS-29 (unità che non possono fare Dodge) richiede un modello di schivata: soddisfatto da F2-19, non da BL-34. CS-14 richiede compagni (CS-13 T, BL-56 vuota).",
+   "handling": "CS-25 non attivabile finché Guard non è decisa. CS-29 e CS-14 attive nei preset con le rispettive dipendenze."
+  },
+  {
+   "id": "C12",
+   "kind": "L che dipende da T/X/vuoto",
+   "codes": [
+    "F4b-16",
+    "F4b-17",
+    "F4b-10",
+    "F4b-11",
+    "U-06"
+   ],
+   "text": "La partenza adiacente alla Torre richiede la Torre (F4b-10 L) e una sua posizione (F4b-11 è T). U-06 parla di 'angoli liberi': quali siano dipende da dove stanno Torri e mostri.",
+   "handling": "S-B attivabile solo con F4b-11 o altra posizione documentata. Serve la mappa."
+  },
+  {
+   "id": "C13",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F1-17",
+    "F1-29",
+    "F1-20",
+    "F1-19",
+    "U-03",
+    "F4b-05",
+    "F1-10",
+    "F3-01",
+    "F4B-01"
+   ],
+   "text": "Zone di evocazione e alleati evocabili (L) presuppongono più unità sulla board; F1-10, F3-01 e F4B-01 (una sola pedina eroe) sono T.",
+   "handling": "Parametro 'Presenza unità': solo eroe | alleati sulla board. Le L sull'evocazione sono attive solo nella seconda modalità."
+  },
+  {
+   "id": "C14",
+   "kind": "conflitto fra L",
+   "codes": [
+    "F4A-19",
+    "U-07",
+    "F1-55"
+   ],
+   "text": "Mazzo esaurito: sconfitta di chi lo termina (F4A-19, U-07, L) contro 'si continua senza pescare' (F1-55, T).",
+   "handling": "Non è un conflitto fra L: F1-55 è una variante T del parametro 'Mazzo esaurito'. Momento esatto della sconfitta non definito: ipotesi H9."
+  },
+  {
+   "id": "C15",
+   "kind": "risolto (14 nov 2026)",
+   "codes": [
+    "F2-03",
+    "F1-32",
+    "F1-33"
+   ],
+   "text": "Combattimento automatico a distanza: non è definito se scatta solo quando chi ha mosso è ranged e vede un nemico, o anche quando chi ha mosso entra nella linea di vista di un ranged nemico (nota di F2-03: 'ranged è da pensare meglio').",
+   "handling": "Deciso: il ranged attacca solo nel proprio turno; entrare nella sua linea di vista fuori dal suo turno non fa nulla, salvo effetti di carte attive sulla board."
+  },
+  {
+   "id": "C16",
+   "kind": "ambiguità",
+   "codes": [
+    "F1-25",
+    "F2-22",
+    "F1-19"
+   ],
+   "text": "F1-25/F1-19: non si attraversano muri. F2-22: movimento sui muri (L).",
+   "handling": "Interpretazione: F2-22 è un effetto di carta che fa eccezione alla regola (F1-02). La nota di F1-25 aggiunge che il movimento non può mai finire su un muro: da chiarire se vale anche per F2-22."
+  },
+  {
+   "id": "C17",
+   "kind": "nuova modalità T contro L esistenti",
+   "codes": [
+    "N-01",
+    "N-03",
+    "N-04",
+    "F1-21",
+    "F1-27",
+    "F1-33",
+    "F1-34",
+    "F1-25"
+   ],
+   "text": "La modalità 'vita che si ripristina + Assalto' tocca regole L: una unità per casella (F1-21), un attacco per unità (F1-27), percorso che non attraversa nemici (F1-25); e regole T: danni persistenti (F1-34), difensore ranged che non restituisce (F1-33).",
+   "handling": "Parametri esclusivi del preset con alleati: 'Vita delle unità' = persistente (F1-34) | ripristinata (N-01); 'Assalto' = spento | attivo (N-03/04). Le eccezioni valgono solo dentro l'Assalto."
+  }
+ ],
+ "features": [
+  {
+   "code": "F1-01",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Formato per 2 giocatori.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-02",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Precedenza delle carte: quando una carta contraddice il regolamento, prevale la carta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "principio generale: nessuna carta di P01 contraddice il regolamento",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-03",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Deck building: ogni giocatore costruisce il proprio mazzo.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: quattro mazzi pronti; editor di mazzi rinviato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "mazzi pronti forniti; editor di mazzi rinviato"
+  },
+  {
+   "code": "F1-04",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Mazzo di almeno 25 carte, Guildmaster escluso.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F4A-01",
+    "F4A-02",
+    "BL-10"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-05",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Massimo 4 copie della stessa carta per nome.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "BL-12"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-06",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Guildmaster fuori dal mazzo, già in gioco all’inizio.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-07",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Buildings esclusi dal mazzo principale.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-08 o F3-12 (edifici)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "nessun edificio in P01"
+  },
+  {
+   "code": "F1-08",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Identità di gilda delle carte determinata dai simboli nel loro valore, anche più gilde sulla stessa carta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Con F1-42 esclusa, il 'valore' è solo il costo: l'identità deriva dai simboli nel costo.",
+   "dependsOn": [
+    "F1-43"
+   ],
+   "incompatibleWith": [
+    "BL-11 (mazzo mono-gilda, se attivo)"
+   ],
+   "analyzed": true,
+   "implementation": "parziale: una sola gilda per carta",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-09",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Tipi di carta: Guildmaster, alleati, azioni e oggetti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "Anche se le azioni potrebbero essere anche altro, oltre le carte. Alleati potrebbe essere anche “unità”, testerò entrambi.",
+   "interpretation": "La nota lascia aperto il nome (alleati/unità) e che le azioni non siano solo carte.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: Guildmaster, azioni, oggetti; alleati rinviati",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parziale: Guildmaster, azioni, oggetti; alleati rinviati"
+  },
+  {
+   "code": "F1-10",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Guildmaster e alleati rappresentati da pedine sulla board; le carte corrispondenti stanno nella zona di gioco.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Sicuramente il guildmaster avrà la sua pedina, per le altre unità è da vedere",
+   "interpretation": "Pedina del Guildmaster certa; per le altre unità resta aperto (parametro 'Token delle altre unità').",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F3-01",
+    "F4B-01"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-11",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Oggetti senza pedina, alcuni assegnati a un’unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-12",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Più oggetti sulla stessa unità, anche con lo stesso nome.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-11"
+   ],
+   "incompatibleWith": [
+    "BL-44"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-13",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Gli oggetti assegnati vanno al cimitero quando lascia il gioco il portatore.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-11"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "inosservabile in P01: il portatore è solo il Guildmaster e la sua morte chiude la partita",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "in P01 il portatore è solo il Guildmaster, quindi non si osserva"
+  },
+  {
+   "code": "F1-14",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Azioni monouso: si risolvono e vanno al cimitero; giocabili nella propria fase principale.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Vale per le azioni non istantanee.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-06 (vedi C5)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-15",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Zone distinte: mazzo, mano, cimitero, carte in gioco e board.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-16",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Board 9×7 con due caselle aggiuntive agli angoli opposti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa 9x7 (figura del regolamento fase 1, non disponibile come dati)"
+   ],
+   "incompatibleWith": [
+    "F4b-01",
+    "U-01"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-17",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Zone di evocazione personali, una per giocatore.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "alleati sulla board (F1-10)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "inattiva con solo eroe (C13)"
+  },
+  {
+   "code": "F1-18",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Guildmaster su una casella iniziale prestabilita.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [
+    "F4b-17",
+    "U-06 (formulazioni diverse)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-19",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Muri: bloccano movimento, evocazione e linea di vista.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: movimento e linea di vista; evocazione rinviata",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parte 'evocazione' inattiva con solo eroe"
+  },
+  {
+   "code": "F1-20",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Highground: attraversabile, ma non utilizzabile per evocare alleati.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa",
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "inattiva con solo eroe"
+  },
+  {
+   "code": "F1-21",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Una sola unità per casella.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "BL-05",
+    "N-03 (solo durante l'Assalto: da chiarire, D17)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-22",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Movimento base di 3 caselle, modificabile dalle carte.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-13",
+    "F4B-04"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-23",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Movimento anche diagonale.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-13",
+    "F4B-04 (ridondante)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-24",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Movimento attivato tappando la carta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-05 (X)",
+    "F4B-02 (X)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-25",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Percorso dichiarato: non si attraversano muri o unità nemiche.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "Qualora ci dovrebbe essere un movimento tipo quello degli scacchi non c’è bisogno di dichiarare, ma il movimento non può finire su un muro",
+   "interpretation": "Nota: con movimento a scacchi non serve dichiarare il percorso, ma non si può finire su un muro.",
+   "dependsOn": [
+    "F1-22 o F3-04"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: percorso più breve calcolato dal programma e registrato (H18)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-26",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Attacco e movimento separati: il tap traccia il movimento, un segnalino traccia l’attacco.",
+   "choice": "X",
+   "choiceRaw": "x",
+   "note": "",
+   "interpretation": "'x' minuscola letta come X.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-02"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-27",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Un attacco per unità, salvo effetti che modificano la disponibilità dell’attacco.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Senza segnalino (F2-02) il limite è tracciato dal tap (C3).",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-28",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Possibilità di mettere il segnalino attacco anche senza un bersaglio valido, senza attivare gli effetti “quando attacca”.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-29",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Alleati evocabili nella propria zona.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-17",
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "inattiva con solo eroe"
+  },
+  {
+   "code": "F1-30",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Alleati appena evocati non possono muovere o attaccare, salvo eccezioni.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-31",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Mischia contro unità adiacenti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "BL-39"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-32",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Attacchi ranged contro bersagli validi in linea di vista, senza una distanza numerica generale indicata.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "modello di linea di vista (C2)"
+   ],
+   "incompatibleWith": [
+    "BL-42"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-33",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Danni reciproci nel combattimento secondo la portata; il difensore ranged non risponde con danni.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "N-04 (eccezione nell'Assalto)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-34",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Danni persistenti, rimossi attraverso cure.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "N-01 (per le unità non GM)",
+    "variante 'costituzione fissa' (nota di F2-15)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-35",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Morte quando i danni raggiungono o superano la salute.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-36",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Linea di vista geometrica tra angoli delle caselle.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-03"
+   ],
+   "incompatibleWith": [
+    "F4C-03"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G"
+  },
+  {
+   "code": "F1-37",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Unità nemiche che bloccano la linea di vista.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-36"
+   ],
+   "incompatibleWith": [
+    "F4C-03"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G; con solo eroe non c'è un terzo corpo che blocchi"
+  },
+  {
+   "code": "F1-38",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Linea di vista vietata direttamente tra le due zone di evocazione; può partire o terminare nell’highground.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-36",
+    "zone dalla mappa"
+   ],
+   "incompatibleWith": [
+    "F4C-03"
+   ],
+   "analyzed": true,
+   "implementation": "parziale: regola highground implementata; divieto fra zone di evocazione inattivo (zone non definite nella mappa)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante LOS-G; richiede la mappa"
+  },
+  {
+   "code": "F1-39",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Effetti ad area con forme e caselle interessate.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: solo la Croce dell'abilità di Fiaran, forma ipotizzata (H21)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "rinviata"
+  },
+  {
+   "code": "F1-40",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Effetti lungo una riga o colonna davanti all’unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "rinviata"
+  },
+  {
+   "code": "F1-41",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Risorse automatiche a inizio turno: si sommano i simboli delle carte in gioco.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "Non attivabile com'è: il meccanismo dei simboli che producono è F1-42, esclusa.",
+   "dependsOn": [
+    "F1-42 (X)"
+   ],
+   "incompatibleWith": [
+    "F2-09",
+    "F2-10",
+    "F4A-08",
+    "BL-20"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-42",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Il valore della carta determina sia il costo sia la produzione di risorse.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-43",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Risorse colorate: i costi richiedono le gilde corrispondenti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "modello di produzione (C9)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-44",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Valori generici: pagabili con qualsiasi risorsa; nella produzione permettono di scegliere il colore.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "In P01 (F2-09) la parte 'produzione' vale per eventuali carte risorsa generiche: producono una risorsa del colore scelto.",
+   "dependsOn": [
+    "modello di produzione (C9)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: costi generici pagabili con qualsiasi risorsa; scelta del colore in produzione inattiva (risorse monocolore)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-45",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Risorse inutilizzate perse a fine turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "modello di produzione (C9)"
+   ],
+   "incompatibleWith": [
+    "F4B-09 (X)",
+    "CS-18 (X)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato per le risorse sciolte; le carte risorsa non usate restano pronte fino al proprio turno successivo (H1)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-46",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Turno con inizio, fase principale e fine.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "BL-23",
+    "F4A-05 (struttura a punti azione)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-47",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Ripristino delle carte e rimozione dei segnalini attacco a inizio turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-02 (parte segnalini)"
+   ],
+   "analyzed": true,
+   "implementation": "parziale: solo untap (il segnalino attacco è eliminato, F2-02)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "solo ripristino/untap"
+  },
+  {
+   "code": "F1-48",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Azioni della fase principale eseguibili nell’ordine scelto dal giocatore.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-03 (per l'attacco, C4)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-49",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Mano iniziale di 5 carte.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-50",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Pesca automatica di una carta per turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F4A-09"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-51",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Il primo giocatore salta la pesca del primo turno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-50"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-52",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Limite di mano di 7 carte, con scarto dell’eccesso a fine turno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-53",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Primo giocatore determinato casualmente con moneta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "sorteggio con seed registrato"
+  },
+  {
+   "code": "F1-54",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Vittoria sconfiggendo il Guildmaster avversario.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-55",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Mazzo esaurito senza sconfitta: si continua senza pescare.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F4A-19",
+    "U-07"
+   ],
+   "analyzed": true,
+   "implementation": "implementato come variante (deckOut = salta)",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-56",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Abilità statiche, attivate e innescate, con eventi come ingresso, movimento e attacco.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: modificatori statici degli oggetti e abilità attivate dei Guildmaster; nessuna abilità innescata",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "parziale: solo i tipi usati dalle carte di P01"
+  },
+  {
+   "code": "F1-57",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Bersagli multipli: un effetto si applica ai bersagli ancora validi.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: un solo bersaglio per carta, ricontrollato alla risoluzione",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-58",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Possibilità di bersagliare sé stessi, salvo restrizioni della carta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-59",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Armor X: riduce di X il danno subito.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-60",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Flying: permette di muovere di qualsiasi numero di caselle.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-61",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Reposition: mettere un segnalino attacco sull’unità la stappa.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-62",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Swift: l’unità può agire nel turno d’ingresso.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Attiva solo nei preset con F1-30 (C10).",
+   "dependsOn": [
+    "F1-30 (T)",
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-63",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Taunt: protegge dagli attacchi le unità senza Taunt adiacenti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Da riformulare con F2-03: 'attacco' non è più un'azione dichiarata. Non analizzato oltre.",
+   "dependsOn": [
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-64",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Unique: limita la presenza contemporanea degli alleati o oggetti con questo sottotipo, secondo la formulazione originale.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-65",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Venomous: applica veleno; un’unità avvelenata subisce 1 danno all’inizio del proprio turno, indipendentemente dal numero di segnalini.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato (Dalia); non definito come si toglie il veleno (D31)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-66",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Alleati token: unità create dagli effetti, che cessano di esistere quando lasciano la zona di gioco.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-67",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Cure senza superare la salute massima.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-34"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F1-68",
+   "section": "Fase 1 - Regolamento originale",
+   "description": "Modificatori di attacco, salute e movimento sulle unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-01",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Massimo cinque miniature con nomi diversi, Guildmaster incluso. Ambito per giocatore o globale non esplicitato.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Ambito per giocatore. Potrebbe essere anche con nomi diversi in realtà se si trova il modo di segnalare chiaramente quale è quale (o se non ce n’è bisogno)",
+   "interpretation": "Ambito: per giocatore. La seconda frase della nota è ambigua (probabilmente intende miniature con lo stesso nome): da chiarire.",
+   "dependsOn": [
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [
+    "F3-01",
+    "F4B-01",
+    "BL-47"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-02",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Eliminazione del segnalino attacco.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-26 (X)",
+    "F1-28 (X)",
+    "F1-61 (X)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-03",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Combattimento automatico dopo il movimento, per adiacenza o linea di vista nel caso ranged.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "Ranged è da pensare meglio un attimo, ma in linea di massima deve andare così",
+   "interpretation": "Deciso il 14 nov 2026: un'unità ranged attacca solo nel turno del proprio controllore. Un'unità che finisce nella linea di vista di un ranged fuori dal turno di quest'ultimo non subisce nulla, salvo effetti di carte attive sulla board.",
+   "dependsOn": [
+    "modello di movimento",
+    "modello di linea di vista"
+   ],
+   "incompatibleWith": [
+    "F4A-12 (attacco come azione a PA)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-04",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Risposte dell’avversario al movimento prima del combattimento, con priorità e pila.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-06"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-05",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Carte come comandi: attacchi, spostamenti o altre azioni delle pedine eseguiti tramite carte.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-24",
+    "F4B-05"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-06",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Attacchi e magie istantanei, giocabili in risposta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-04"
+   ],
+   "incompatibleWith": [
+    "F1-14 (C5)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-07",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Magie permanenti o continuative.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "rinviata"
+  },
+  {
+   "code": "F2-08",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Edifici come supporto per giocare altre carte.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-09",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Risorse attraverso carte nel mazzo, come alternativa da valutare.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "Scelta da Peppe il 14 nov 2026 come modello di risorse del primo preset. Quante se ne giocano a turno, se restano in gioco e cosa producono non è scritto in nessuna fonte: ipotesi H1.",
+   "dependsOn": [
+    "regole delle carte risorsa (non definite: H1)"
+   ],
+   "incompatibleWith": [
+    "F2-10",
+    "F1-41"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-10",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Risorse esterne al mazzo in quantità prefissata, come alternativa da valutare.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "La fonte (fase 2) cita come esempi Hearthstone (crescente) e Slay the Spire (fissa): la quantità non è definita.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-09",
+    "F1-41",
+    "F4A-08"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "sostituita da F2-09 in P01 per decisione del 14 nov 2026; resta variante per M4"
+  },
+  {
+   "code": "F2-11",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Board composta da due metà personali, unite all’inizio della partita.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-12",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Metà della board personalizzabili.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-13",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Movimenti fissi ispirati agli scacchi.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-14 o F4C-01 (per sapere quale pezzo)"
+   ],
+   "incompatibleWith": [
+    "F1-22",
+    "F3-04"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-14",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Ruoli delle pedine ispirati agli scacchi, con possibile limite per ruolo o sostituzione della pedina precedente.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-15",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Basette per tracciare i punti vita.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Sicuramente sì per il GM, sto pensando anche a una variante dove le carte hanno la costituzione fissa come le carte di Magic. In quel caso non ci sarebbe bisogno di basette per la vita, anche se comunque si possono fare basette per segnare forza e costituzione",
+   "interpretation": "Sul tavolo; nel prototipo i PV sono mostrati sul token. Variante 'costituzione fissa' citata nella nota: non in inventario.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-16",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Moneta dell’azione, citata ma senza funzionamento completo.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "La moneta dava qualcosa come una risorsa o una azione extra, ma è da testare sia con che senza.",
+   "interpretation": "Funzionamento non definito: non implementabile senza una regola.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-17",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Zona di esilio distinta dal cimitero.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "inattiva in P01: nessuna carta usa l'esilio",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "zona presente; nessuna carta di P01 la usa"
+  },
+  {
+   "code": "F2-18",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Dadi per mira o probabilità.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-19",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Schivare o evitare un attacco muovendosi in risposta.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-04",
+    "un modo di muoversi in risposta: F4B-06 o carte F2-06"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-20",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Teletrasporto, sparizione e ricomparsa delle unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "come effetto di carta, dopo P01"
+  },
+  {
+   "code": "F2-21",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Scambio di posizione tra due pedine.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "richiede due pedine: non in P01"
+  },
+  {
+   "code": "F2-22",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Movimento sui muri.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-25 (C16)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "rinviata"
+  },
+  {
+   "code": "F2-23",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Attacchi alle spalle.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-24",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Trappole.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-25",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Attacchi multipli o unità che si stappano giocando carte attacco.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-26",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Recuperare o rianimare creature e riutilizzare carte dal cimitero.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-27",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Interferire con la mano e il mazzo avversari: scarto, mill, furto o uso delle carte avversarie.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F2-28",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Neutralizzare azioni o effetti avversari.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-04"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "candidata per P01 (carta 'neutralizza'), da confermare in M3"
+  },
+  {
+   "code": "F2-29",
+   "section": "Fase 2 - Riduzione segnalini e interazione",
+   "description": "Danni diretti tramite carte o abilità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-01",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Una sola pedina eroe per giocatore.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-10 (alleati)",
+    "F2-01",
+    "F4C-01",
+    "F4C-02"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-02",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Mazzo dedicato all’eroe.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "Letta come: mazzo costruito attorno al proprio Guildmaster. Regole di costruzione specifiche non definite.",
+   "dependsOn": [
+    "F3-01"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-03",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Movimento obbligatorio ogni turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Deciso il 14 nov 2026: se un'unità è bloccata ed è l'unica in grado di muoversi, l'obbligo decade. Letto come: l'obbligo si soddisfa muovendo almeno un'unità (OBB-A); se un'altra unità può muovere, l'obbligo resta. Lettura da confermare (D4).",
+   "dependsOn": [
+    "modello di movimento"
+   ],
+   "incompatibleWith": [
+    "CS-21 (C7)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato (OBB-A; OBB-B non distinguibile con un solo eroe)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "OBB-A"
+  },
+  {
+   "code": "F3-04",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Movimento da un minimo di 1 a un massimo di 3 caselle.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-13",
+    "F4B-04",
+    "F1-60 (Flying)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-05",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Eroe che diventa più potente durante la partita, con sistema ancora da definire.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-06",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Mostri neutrali nella Jungle.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Mi piacerebbe molto se ci fosse",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa",
+    "regole dei mostri"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-07",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Benefici ottenuti sconfiggendo i mostri.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F3-06"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-08",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Vittoria sconfiggendo un numero di mostri, quantità ancora da stabilire.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Attiva solo nei preset con mostri (C8).",
+   "dependsOn": [
+    "F3-06 (T) o F4b-07 (L)",
+    "quantità da stabilire"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-09",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Recupero di 1 PV entrando nella casella iniziale.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-10",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Ogni eroe dispone di un attacco melee e uno ranged.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "Caso particolare di N-05 limitato agli eroi.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "non in P01"
+  },
+  {
+   "code": "F3-11",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Cambiare casella evita il danno dell’attacco subito.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-19"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato (letterale per gli effetti con bersaglio; RIC-GEO o RIC-ANNULLA per il combattimento automatico)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante RIC-GEO per il combattimento automatico; letterale per effetti con bersaglio"
+  },
+  {
+   "code": "F3-12",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Costruzione e distruzione di edifici.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-13",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Edificio Gilda che fornisce risorse, con annotazione di una Gilda gratuita per turno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-14",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Torre che danneggia unità entro un raggio.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-15",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Torre come elemento della board anziché carta, alternativa esplicitamente valutata.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F3-16",
+   "section": "Fase 3 - Zero permanents",
+   "description": "Dadi con modificatori dei personaggi.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-01",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Mazzo principale da 40 carte, come riportato nell’archivio.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-02",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Mazzo principale da 45 carte, come riportato nella trascrizione. È un’alternativa documentale, non una revisione accertata.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-03",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Mazzo strutture separato da 15 carte.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-04",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Moneta della gilda come componente di gioco.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-05",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "3 punti azione per turno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-46/F1-48 (turno libero)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-06",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Azioni ripetibili nello stesso turno, tranne costruire strutture.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-07",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Girare la moneta e produrre risorse costa 0 PA.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-08",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "La moneta produce una risorsa di qualsiasi tipo.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4A-04"
+   ],
+   "incompatibleWith": [
+    "F2-10",
+    "F2-09"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-09",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Pescare una carta costa 1 PA.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-10",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Costruire una struttura costa 1 PA, massimo una per turno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-11",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Giocare una carta costa 1 PA oltre alle risorse richieste.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-12",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Attaccare l’avversario costa 1 PA.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-13",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Attaccare un mostro costa 2 PA.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-14",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Mulligan durante il turno per 3 PA: «scarti tutto, peschi tutto». Quantità e procedura non ulteriormente precisate.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-15",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Conversione di risorse in danni: 1 risorsa = 1 danno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-16",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Reazione dei mostri determinata dai dadi.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-17",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Requisito di forza del party per affrontare il mostro. Il confronto esatto è incompleto negli appunti.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-18",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Vittoria controllando 3 mostri.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4A-19",
+   "section": "Fase 4A - Nuovo Guilds",
+   "description": "Esaurimento del mazzo come condizione di fine partita, poi esplicitato nella versione unificata come sconfitta dell’avversario che lo termina.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-55"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-01",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Una sola pedina eroe sul campo. La formulazione non esplicita “per giocatore”.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Per giocatore",
+   "interpretation": "Per giocatore (nota).",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-10 (alleati)",
+    "F2-01"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-02",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Movimenti eseguiti tramite carte movimento.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-03",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Carte movimento con pattern dei pezzi degli scacchi.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-04",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Movimento base dell’eroe come il Re.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Oppure inizialmente come il re e successivamente – o in alternativa - come regina + cavallo",
+   "interpretation": "Nota: in alternativa o in seguito regina + cavallo. Variante di movimento per M4.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-22",
+    "F3-04"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-05",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Tappare la carta dell’eroe per il movimento base.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F2-05 (X)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-06",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Movimenti in risposta, esplicitamente previsti come elemento da mettere a punto.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-04"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante SCH-TAP"
+  },
+  {
+   "code": "F4B-07",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Mostri negli highground agli angoli.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-08",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Minimazzo strutture precostruito da 5–7 carte, al posto delle 15.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-09",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Conservare una risorsa non utilizzata tappando un edificio. Il significato operativo di «tenere in mano» resta indefinito.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4B-10",
+   "section": "Fase 4B - Another Version / Chess",
+   "description": "Scarto a fine turno oltre il limite di mano, con limite numerico non specificato in questa versione.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "un limite numerico (F1-52)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4C-01",
+   "section": "Fase 4C - Semi Chess",
+   "description": "Ogni pedina ha un tipo corrispondente a un pezzo degli scacchi.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Proprio in questi giorni sto pensando che si potrebbe fare che ogni giocatore ha disposizione un tipo per pezzo e può assegnare una unità a quel pezzo. Per assegnarla allo stesso pezzo deve sacrificare l’unità assegnata e ripartire da un pezzo legale. Questa feature apre possibilità a scenari del tipo “se giochi questa corta come TORRE allora (EFFETTO)”",
+   "interpretation": "Nota: un pezzo per tipo a disposizione, assegnazione di un'unità al pezzo, sacrificio per riassegnare; apre a effetti 'se giocata come TORRE'.",
+   "dependsOn": [
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [
+    "F3-01"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4C-02",
+   "section": "Fase 4C - Semi Chess",
+   "description": "Massimo una pedina per tipo contemporaneamente. Ambito per giocatore o globale non specificato.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "PER GIOCATORE",
+   "interpretation": "Per giocatore (nota).",
+   "dependsOn": [
+    "F4C-01"
+   ],
+   "incompatibleWith": [
+    "F3-01"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4C-03",
+   "section": "Fase 4C - Semi Chess",
+   "description": "Linea di vista tra zone adiacenti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "zone e adiacenze dalla mappa"
+   ],
+   "incompatibleWith": [
+    "F1-36",
+    "F1-37",
+    "F1-38"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "variante LOS-Z, non in P01"
+  },
+  {
+   "code": "F4C-04",
+   "section": "Fase 4C - Semi Chess",
+   "description": "Jungle mantenuta sulla board.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "sulla mappa, se la mappa la riporta; senza regole proprie in P01"
+  },
+  {
+   "code": "F4C-05",
+   "section": "Fase 4C - Semi Chess",
+   "description": "Torre all’angolo da conquistare.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-10"
+   ],
+   "incompatibleWith": [
+    "F4b-15 (distruggere contro conquistare: da chiarire)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4C-06",
+   "section": "Fase 4C - Semi Chess",
+   "description": "La Torre conquistabile infligge danni, secondo l’idea annotata.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "U-01",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Uso di una scacchiera standard reperibile commercialmente.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-16"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "U-02",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Board divisa diagonalmente da muri e highground.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato dalla mappa fornita",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "U-03",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Una metà della board per ciascun giocatore, con highground condiviso.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: la mappa non assegna le metà ai giocatori (zone «da definire»)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "U-04",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Highground attraversabile dalle unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "U-05",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Linea di vista che può entrare, uscire o restare nell’highground, ma non attraversarlo completamente tra due zone esterne.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "U-06",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Partenza degli eroi negli angoli liberi opposti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa (quali angoli sono 'liberi')"
+   ],
+   "incompatibleWith": [
+    "F4b-16",
+    "F4b-17"
+   ],
+   "analyzed": true,
+   "implementation": "implementato (S-A), ma non avviabile sulle mappe attuali: angoli non liberi",
+   "presets": [
+    "P01b"
+   ],
+   "presetNote": "variante S-A"
+  },
+  {
+   "code": "U-07",
+   "section": "Fase 4 - Versione unificata",
+   "description": "Vittoria quando l’avversario termina il mazzo.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F1-55"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-01",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Campo senza scacchiera fisica, organizzato attraverso le posizioni delle carte.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-02",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Tre fasce Close / Mid / Far.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-03",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Alternativa a zone e colonne: Frontline propria, Midline, Frontline nemica, ciascuna con slot A/B/C.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-04",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Unità che entrano nella propria Frontline.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-05",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Più unità nello stesso slot, anche nemiche.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-06",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "City Ring: edifici attorno all’avatar, massimo 6 posti.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-07",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Stronghold Row al posto del City Ring: avatar ed edifici disposti in fila.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-08",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Stronghold Row senza limite di lunghezza, con eventuale seconda fila.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-09",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Adiacenza degli edifici a destra e sinistra, limitata alla stessa fila.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-10",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Mazzo da 30 carte.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-11",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Mazzo mono-gilda.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-12",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Massimo 3 copie delle carte non leggendarie.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-13",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Guildmaster a 15 HP.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "Vuota: non usata come base. Citata solo come alternativa numerica a P-01.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "P-01"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-14",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Avatar inizialmente in Mid, nella prima formulazione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-15",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Avatar inizialmente nella Stronghold Row, nella revisione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-16",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Un edificio gratuito al setup, nella prima formulazione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-17",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Nessun edificio al setup, nella revisione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-18",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Un edificio gratuito dalla mano per turno.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-19",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Edifici con 2 punti Structure, distruttibili e con danni persistenti.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-20",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Risorse automatiche: 1 per edificio a inizio turno.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-21",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Una risorsa base aggiuntiva prodotta dal Guildmaster.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "Unica voce BL con una scelta (T). Modello di risorse alternativo/aggiuntivo: non in P01.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-22",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Risorse degli edifici del colore della loro gilda, spendibili anche per costi generici.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-23",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Fase specifica per costruire, City Step poi Stronghold Step.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-24",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Un solo movimento base complessivo per turno, assegnato a una unità.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-25",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Movimento base di una zona avanti o indietro nella stessa colonna.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-26",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Movimenti laterali attraverso effetti delle carte.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-27",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Commander Step: usare il movimento disponibile per schierare o spostare l’avatar.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-28",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Avatar schierato trattato come una normale unità.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-29",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Avatar nella Stronghold Row non bersagliabile da Melee/Reach, ma da Ranged, Flying e magie.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-30",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Un’azione per unità pronta: attacco, abilità attivata oppure Guard.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-31",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Abilità del Guildmaster una volta per turno.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-32",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Finestra di reazione quando si dichiara un’azione o si scelgono i bersagli, con prima opportunità al non attivo.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-33",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Ricontrollo dei bersagli dopo le reazioni: l’effetto fallisce per quelli diventati illegali.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-34",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Dodge scartando una carta: spostamento in risposta. Le formulazioni a fasce e a slot differiscono.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "Vuota: il costo 'scarta una carta' non è selezionabile. Vedi C6.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-35",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Guard: intercettare attacchi di unità e riceverne i danni.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "Vuota: blocca CS-25 (C11).",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-36",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Guard posizionato in Frontline e protezione nella stessa colonna, nella revisione a slot.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-37",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Guard protegge anche avatar ed edifici, secondo le condizioni di posizione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-38",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Guard non intercetta magie, tattiche o veleno.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-39",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Melee nello stesso slot, con danni simultanei quando entrambi sono melee.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-40",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Melee nella Frontline nemica può attaccare lo Stronghold adiacente, nella regola generale; resta un conflitto con la protezione dell’avatar descritta sopra.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-41",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Reach: attacchi alle zone adiacenti nella stessa colonna.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-42",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Ranged: attacchi a qualsiasi slot, anche Stronghold; danno base 1 salvo diversa indicazione e nessuno scambio di danni.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-43",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Flying: attacchi a qualsiasi slot e superamento dei Guard non volanti.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-44",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Un solo equipaggiamento per portatore, salvo eccezioni.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-45",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Ongoing Tactics: tattiche persistenti collocate in uno slot o nella Stronghold Row.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-46",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Ongoing non attaccabili normalmente dalle unità, ma rimovibili da effetti o danni appropriati.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-47",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Limite opzionale di 3 unità per giocatore.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-48",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Mulligan opzionale iniziale: mettere carte in fondo al mazzo e pescarne altrettante meno una, una sola volta.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-49",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Statistiche separate RNG / ATK / HP, usate nelle revisioni delle carte.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-50",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Poison: a fine turno infligge danni pari ai segnalini, poi ne viene rimosso uno.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-51",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Shield: previene danni fino al numero dei segnalini scudo, poi li rimuove tutti.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-52",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Quick: carte giocabili nelle finestre di reazione.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-53",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Counter per tipo: annulla una tattica o abilità della categoria indicata.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-54",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Sabotage: gli edifici danneggiati non producono risorse nel turno successivo.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-55",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Overclock: bonus se per la carta è stata spesa almeno una risorsa rossa.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-56",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Companion: sottotipo di unità, con sinergie dedicate.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-57",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Channel: pagare una risorsa in meno e rinviare ingresso o risoluzione al proprio inizio turno successivo.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-58",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Sneak: evita l’intercettazione dei Guard quando attacca edifici.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "BL-59",
+   "section": "Fase 4 - Ramo boardless",
+   "description": "Haste: agire nel turno d’ingresso.",
+   "choice": "",
+   "choiceRaw": "",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-01",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Abilità rossa del Guildmaster: pagare 1 rosso per fare 2 danni a un edificio e 1 agli edifici adiacenti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-02",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Abilità gialla del Guildmaster: pagare 1 giallo per fare 1 danno e applicare 1 veleno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-03",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Abilità verde del Guildmaster: fare 1 danno a un’unità e curare 1 a una propria unità o edificio.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-04",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Abilità blu del Guildmaster: aggiungere un segnalino scudo a un’unità o avatar.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-05",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Edifici con abilità aggiuntive alla produzione di risorse.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-06",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Danneggiare propri edifici o unità per ottenere vantaggi: risorse, attacco o altri effetti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-07",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Bonus proporzionali ai danni presenti sui propri edifici.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-08",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Danni ad area su fasce, slot o edifici adiacenti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-09",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Tappare più edifici per alimentare un effetto.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-10",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Schivate gratuite o ricompensate con attacco e altri effetti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-11",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Danni aggiuntivi contro bersagli avvelenati.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-12",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Trappole o reazioni che puniscono movimento, Dodge o ingresso in una zona.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "In realtà sarebbe da testare, ma è una cosa molto difficile, meglio farla quando c’è un prototipo più avanzato",
+   "interpretation": "X con rinvio esplicito a un prototipo più avanzato: esclusa ora, non scartata.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-13",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Creazione di compagni e copie di unità.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-14",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Bonus per la presenza di compagni o altre bestie.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "CS-13 (T) o BL-56 (vuota)",
+    "alleati sulla board"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-15",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Edifici che assorbono parte dei danni destinati alle unità.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-16",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Cure distribuite fra più unità o edifici.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-17",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Ricerca di carte specifiche nel mazzo.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-18",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Conservazione di risorse per le reazioni, attraverso un’abilità specifica.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-19",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Effetti che fanno saltare la pesca avversaria.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-20",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Pesca aggiuntiva e selezione delle carte, anche tramite pesca/scarto o controllo della cima.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-21",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Root: impedire il movimento per un turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F3-03 (C7)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "ora utilizzabile in P01: l'obbligo decade se il GM è bloccato"
+  },
+  {
+   "code": "CS-22",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Ritorno di unità in mano.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-23",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Bonus o effetti legati alla posizione: Frontline nemica, Midline, Far o stesso slot.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-24",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Effetti alla morte delle unità.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-25",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Attacchi all’avatar che ignorano Guard.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "Non attivabile finché Guard non è decisa.",
+   "dependsOn": [
+    "BL-35 (vuota)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-26",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Effetti persistenti sugli slot: bonus ai danni, vulnerabilità, veleno all’ingresso o prevenzione del danno.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-27",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Sinergie con gli scudi: trasferimento, maggiore prevenzione o potenziamento di altri effetti.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-28",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Potenziamenti al raggiungimento di una quantità di edifici della propria gilda.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "CS-29",
+   "section": "Fase 4 - Core Set e meccaniche delle carte",
+   "description": "Unità che non possono effettuare Dodge.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-19"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-01",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Scacchiera fisica 8×8.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Attraverso le varie iterazioni mi sono reso conto che in realtà se il sistema di movimento è valido, anche la vecchia board potrebbe funzionare benissimo, si potrebbe addirittura pensare a board ad hoc per partite con più di due giocatori o espansioni specifiche, e tenere la board 8x8 come board principale e di facile accesso a giocatori di tutti i livelli",
+   "interpretation": "Nota: 8x8 come board principale; la vecchia board e board ad hoc restano possibili.",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [
+    "F1-16"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-02",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Sistema ibrido caselle e zone: movimento sulle caselle, organizzazione delle regole per zone.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "Detta così non è chiara questa regola, ma in sostanza è esattamente quello che c’è già",
+   "interpretation": "X sulla formulazione, ma la nota dice che il contenuto 'è esattamente quello che c'è già'. Letta così: la voce è esclusa come regola separata perché ridondante; il comportamento (movimento sulle caselle, regole per zone) resta tramite F4b-03/04/05/06/07. Da confermare.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-03",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Coordinate usate per setup e linea di vista.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F4C-03 (per la linea di vista)"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-04",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Overlay stampato per mostrare le zone.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: tipi di casella colorati; territori dei giocatori non definiti nella mappa",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "zone colorate sulla board; richiede la mappa"
+  },
+  {
+   "code": "F4b-05",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Una zona personale per giocatore.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "parziale: zone personali non definite nella mappa",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "F4b-06",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Highground conteso lungo la diagonale.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato dalla mappa fornita",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "richiede la mappa"
+  },
+  {
+   "code": "F4b-07",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Jungle laterali accessibili a entrambi, con mostri che conferiscono vantaggi ancora da definire.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "mappa",
+    "regole dei mostri (non definite)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "zone Jungle mostrate; mostri non in P01"
+  },
+  {
+   "code": "F4b-08",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Caselle normali senza effetti speciali.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-09",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Mappa con posizioni prestabilite di muri, highground e mostri, riportata nel documento.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "documento di aggiornamento fase 4b (non disponibile a M0)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato: mappe 8x8 e 9x7 convertite dall'Excel; mostri come ostacoli inerti",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "bloccata finché non arriva la mappa"
+  },
+  {
+   "code": "F4b-10",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Una Torre fissa per giocatore, presente dall’inizio e non costruibile.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "una posizione (F4b-11)"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato come pezzo fisso inerte (H12)",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "Torre come pezzo fisso inerte: senza PV, danno o vittoria (F4b-12/14/15 sono T, spente)"
+  },
+  {
+   "code": "F4b-11",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Torri negli angoli H1 e A8.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-10"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "divergente: nella mappa fornita le Torri sono in A1 e H8, non in H1 e A8",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-12",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Torri con punti vita e distruttibili.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-10"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "non in P01"
+  },
+  {
+   "code": "F4b-13",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Possibilità di valori di HP delle Torri diversi fra gilde, lasciata aperta al testing.",
+   "choice": "X",
+   "choiceRaw": "X",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-14",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Torre che danneggia nemici in ingresso nelle caselle adiacenti. Valore del danno e attivazione ancora aperti.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-10"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "non in P01; valore e attivazione non definiti"
+  },
+  {
+   "code": "F4b-15",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Vittoria distruggendo la Torre avversaria.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-12"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "non in P01"
+  },
+  {
+   "code": "F4b-16",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Guildmaster inizialmente adiacente alla propria Torre, non sulla Torre.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-10",
+    "F4b-11"
+   ],
+   "incompatibleWith": [
+    "U-06"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante S-B"
+  },
+  {
+   "code": "F4b-17",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Scelta della casella iniziale fra le tre adiacenti alla Torre.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [
+    "F4b-16"
+   ],
+   "incompatibleWith": [
+    "U-06",
+    "F1-18"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "variante S-B"
+  },
+  {
+   "code": "F4b-18",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "Edifici fuori dalla scacchiera, nella zona del giocatore.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": null,
+   "incompatibleWith": null,
+   "analyzed": false,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": ""
+  },
+  {
+   "code": "F4b-19",
+   "section": "Fase 4b - Scacchiera, zone e Torri",
+   "description": "HP dei Guildmaster da determinare tramite playtest, senza obbligo che siano uguali per tutti.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato: Salute sulla carta di ogni Guildmaster",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "PV per Guildmaster come parametro"
+  },
+  {
+   "code": "P-01",
+   "section": "Prototipi fotografati",
+   "description": "Fiaran e Senya a 20 HP, alternativa numerica documentata rispetto ai 15 HP del ramo boardless.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "",
+   "interpretation": "",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "BL-13"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": "20 PV per tutti e quattro come ipotesi H3 (la fonte lo documenta solo per Fiaran e Senya)"
+  },
+  {
+   "code": "N-01",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Vita che si ripristina: le unità NON Guildmaster non accumulano danni; la loro vita torna al valore pieno all'inizio del turno di ogni giocatore.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesta in chat il 14 nov 2026.",
+   "interpretation": "I Guildmaster mantengono danni persistenti. Vicina alla 'costituzione fissa come Magic' della nota di F2-15, che però ripristinava a fine turno.",
+   "dependsOn": [
+    "alleati sulla board (F1-10)"
+   ],
+   "incompatibleWith": [
+    "F1-34 (per le unità non GM)",
+    "F1-65 Venomous e cure F1-67 (perdono quasi tutto il senso sulle unità non GM)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "variante 'Vita delle unità' del preset con alleati (P02)"
+  },
+  {
+   "code": "N-02",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Scambio automatico in mischia: quando due unità melee finiscono in caselle adiacenti si infliggono entrambe, automaticamente, danno pari alla propria forza.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesta in chat il 14 nov 2026. Parte della modalità N-01.",
+   "interpretation": "Coincide con F2-03 + F1-33 per il caso melee contro melee; registrata a parte perché fa parte della modalità richiesta.",
+   "dependsOn": [
+    "F2-03",
+    "F1-31"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "P02"
+  },
+  {
+   "code": "N-03",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Assalto (nome proposto): se l'unità che muove vuole finire il movimento sulla casella dell'unità nemica, gli scambi di danno si ripetono finché una delle due muore.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesta in chat il 14 nov 2026. Nome proposto da Claude, da confermare.",
+   "interpretation": "Dentro un Assalto i danni si accumulano da uno scambio all'altro anche con N-01, altrimenti non finirebbe mai. Non definiti: esito se muoiono entrambe, Assalto contro un Guildmaster, Assalto dichiarato da un ranged, caso in cui nessuna delle due può fare danno.",
+   "dependsOn": [
+    "N-02",
+    "un'unità nemica sulla casella di arrivo"
+   ],
+   "incompatibleWith": [
+    "F1-21 (durante l'Assalto)",
+    "F1-27 (più scambi nello stesso movimento)",
+    "F1-25 (la casella nemica diventa destinazione legale)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "P02"
+  },
+  {
+   "code": "N-04",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Nell'Assalto, un'unità ranged di cui si vuole prendere la casella infligge comunque 1 danno a ogni scambio, anche se normalmente non restituirebbe danni.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesta in chat il 14 nov 2026.",
+   "interpretation": "",
+   "dependsOn": [
+    "N-03"
+   ],
+   "incompatibleWith": [
+    "F1-33 (il difensore ranged non restituisce danni)"
+   ],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "P02"
+  },
+  {
+   "code": "N-05",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Carte con doppio attacco: la stessa unità può essere sia melee sia ranged, con valori di danno diversi.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesta in chat il 14 nov 2026.",
+   "interpretation": "Generalizza F3-10. Ipotesi H10: adiacente si usa il valore melee, a distanza quello ranged.",
+   "dependsOn": [],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "non implementato",
+   "presets": [],
+   "presetNote": "variante 'Profilo d'attacco' (P02; applicabile anche ai GM)"
+  },
+  {
+   "code": "N-06",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Mulligan iniziale facoltativo, una sola volta: si mettono in fondo al mazzo le carte scelte e se ne pescano altrettante meno una.",
+   "choice": "T",
+   "choiceRaw": "T",
+   "note": "Richiesto da Peppe dopo la prima prova (14 nov 2026). Procedura ripresa da BL-48, che nell'inventario è non decisa: da confermare. F4A-14 (Mulligan a 3 PA durante il turno) resta rinviata coi punti azione.",
+   "interpretation": "BL-48 usata come definizione operativa.",
+   "dependsOn": [],
+   "incompatibleWith": [
+    "F4A-14"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "N-07",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Abilità proprie dei Guildmaster (quelle stampate sulle carte spoiler), giocabili al massimo una volta per turno.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "Richiesta da Peppe il 14 nov 2026 dopo la seconda prova. Corrisponde a BL-31, che nell'inventario è non decisa.",
+   "interpretation": "",
+   "dependsOn": [
+    "F1-56"
+   ],
+   "incompatibleWith": [],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  },
+  {
+   "code": "N-08",
+   "section": "Aggiunte successive all'inventario (14 nov 2026)",
+   "description": "Lo spostamento in risposta avviene solo scartando una carta dalla mano, ed è possibile solo in risposta a un attacco.",
+   "choice": "L",
+   "choiceRaw": "L",
+   "note": "Deciso da Peppe il 14 nov 2026. Riprende BL-34 (schivata scartando una carta), che nell'inventario era non decisa.",
+   "interpretation": "",
+   "dependsOn": [
+    "F2-04",
+    "F2-19"
+   ],
+   "incompatibleWith": [
+    "F4B-06"
+   ],
+   "analyzed": true,
+   "implementation": "implementato",
+   "presets": [
+    "P01"
+   ],
+   "presetNote": ""
+  }
+ ]
+}
