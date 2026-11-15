@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P02a — Alleati — vita ripristinata e Assalto (clone di P02) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -8,7 +8,7 @@
 - Tema visivo: semplice
 - Seed: 20261114
 - Inizio: 2026-11-14 10:00:00 — durata: 20.0 minuti
-- Turni: 8 — primo giocatore: G2
+- Turni: 7 — primo giocatore: G2
 - Vincitore: G2 — Nebros Clearmind è stato sconfitto (F1-54)
 - Interventi di debug: 0
 
@@ -85,7 +85,7 @@
 
 ## Mazzi e carte (pescate / giocate)
 
-### G1: Mazzo blu con alleati (Wizards) (deck_blue_alleati v1) — Nebros Clearmind gm_nebros@v1, Salute finale 0/20
+### G1: Mazzo blu con alleati (Wizards) (deck_blue_alleati v1) — Nebros Clearmind gm_nebros@v1, Salute finale -1/20
 
 Abilità del Guildmaster usata 3 volte.
 
@@ -96,30 +96,34 @@ Abilità del Guildmaster usata 3 volte.
 | Dardo arcano (test) | b_arcane_dart@v1 | 2 | 1 | 0 |
 | Gelo (test) | b_frost@v1 | 2 | 1 | 1 |
 | Runic Staff (test) | b_runic_staff@v1 | 2 | 0 | 0 |
-| Golem runico (test) | b_rune_golem@v1 | 4 | 2 | 1 |
-| Apprendista arcano (test) | b_apprentice@v1 | 4 | 0 | 0 |
+| Golem runico (test) | b_rune_golem@v1 | 2 | 2 | 1 |
+| Apprendista arcano (test) | b_apprentice@v1 | 2 | 0 | 0 |
+| Sentinella di brina (test) | b_frost_sentinel@v1 | 2 | 0 | 0 |
+| Adepta della scintilla (test) | b_spark_adept@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo giallo con alleati (Rogues) (deck_yellow_alleati v1) — Dalia Shadowstep gm_dalia@v1, Salute finale 14/20
 
-Abilità del Guildmaster usata 3 volte.
+Abilità del Guildmaster usata 2 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
 | Essenza gialla | res_yellow@v1 | 9 | 3 | 3 |
 | Smoke Step (test) | y_smoke_step@v1 | 2 | 1 | 1 |
 | Toxic Shiv (test) | y_toxic_shiv@v1 | 2 | 0 | 0 |
-| Polvere accecante (test) | y_blinding_dust@v1 | 2 | 2 | 2 |
+| Polvere accecante (test) | y_blinding_dust@v1 | 2 | 2 | 1 |
 | Venom Blades (test) | y_venom_blades@v1 | 2 | 0 | 0 |
-| Tagliaborse (test) | y_cutpurse@v1 | 4 | 1 | 1 |
-| Lanciacoltelli (test) | y_knife_thrower@v1 | 4 | 1 | 1 |
+| Tagliaborse (test) | y_cutpurse@v1 | 2 | 0 | 0 |
+| Lanciacoltelli (test) | y_knife_thrower@v1 | 2 | 1 | 1 |
+| Guardaspalle (test) | y_bodyguard@v1 | 2 | 0 | 0 |
+| Sicario (test) | y_assassin@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
 - setup: 1 passaggi automatici
-- turn: 8 passaggi automatici
+- turn: 7 passaggi automatici
 - draw: 7 passaggi automatici
-- combat: 20 passaggi automatici
-- venom: 12 passaggi automatici
+- combat: 23 passaggi automatici
+- venom: 10 passaggi automatici
 - end: 1 passaggi automatici
 
 ## Interventi di debug
@@ -166,111 +170,102 @@ nota di prova
 - T3 [auto] — Turno 3: G2. Le sue unità e le sue 1 carte risorsa si stappano.
 - T3 [auto] G2 pesca una carta.
 - T3 G2 gioca Essenza gialla (entra pronta).
-- T3 G2 gioca Tagliaborse (test) verso F8 (costo [Stivale]).
+- T3 G2 gioca Lanciacoltelli (test) verso F8 (costo 1[Stivale]).
 - T3 G1 passa.
-- T3 Tagliaborse (test) entra in gioco in F8, pronto.
-- T3 Dalia Shadowstep usa la sua abilità su Nebros Clearmind (costo [Stivale]).
-- T3 G1 passa.
-- T3 Lama di Dalia: 1 danni a Nebros Clearmind (Salute 17/20).
-- T3 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T3 Dalia Shadowstep si tappa e muove: A5 → B4 → B3.
+- T3 Lanciacoltelli (test) entra in gioco in F8, tappato: agirà dal prossimo turno (F1-30).
+- T3 Dalia Shadowstep si tappa e muove: A5 → B4.
 - T3 G1 passa.
 - T3 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T3 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 15/20).
+- T3 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 16/20).
 - T3 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
-- T3 Tagliaborse (test) si tappa e muove: F8 → E7 → D6 → C5.
-- T3 G1 passa.
-- T3 [auto] Nessun combattimento: nessun nemico a contatto di Tagliaborse (test).
 - T3 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T3 G1 passa.
 - T3 G2 termina il turno. Risorse non spese perse (F1-45).
 - T4 [auto] — Turno 4: G1. Le sue unità e le sue 1 carte risorsa si stappano.
-- T4 [auto] Nebros Clearmind è avvelenato: subisce 1 danno (Salute 14/20).
+- T4 [auto] Nebros Clearmind è avvelenato: subisce 1 danno (Salute 15/20).
 - T4 [auto] G1 pesca una carta.
 - T4 G1 gioca Gelo (test) su Dalia Shadowstep (costo [Fiamma]).
 - T4 G2 passa.
 - T4 Gelo (test): Dalia Shadowstep -2 move fino alla fine del turno 5.
 - T4 G1 gioca Essenza blu (entra pronta).
-- T4 Nebros Clearmind si tappa e muove: A4 → B4.
+- T4 Nebros Clearmind si tappa e muove: A4 → B5.
 - T4 G2 passa.
-- T4 [auto] Più nemici a portata: Nebros Clearmind attacca Dalia Shadowstep (scelta automatica).
 - T4 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Dalia Shadowstep (Salute 16/20).
 - T4 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T4 [auto] Dalia Shadowstep restituisce 2 a Nebros Clearmind (Salute 12/20).
+- T4 [auto] Dalia Shadowstep restituisce 2 a Nebros Clearmind (Salute 13/20).
 - T4 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T4 G2 passa.
 - T4 G1 termina il turno. Risorse non spese perse (F1-45).
 - T5 [auto] — Turno 5: G2. Le sue unità e le sue 2 carte risorsa si stappano.
 - T5 [auto] G2 pesca una carta.
 - T5 Dalia Shadowstep usa la sua abilità su Nebros Clearmind (costo [Stivale]).
+- T5 Nebros Clearmind usa la sua abilità su Dalia Shadowstep verso A3 (costo [Fiamma]).
+- T5 G2 passa.
+- T5 Fiamma di Nebros: Dalia Shadowstep è spostato da B4 a A3.
 - T5 G1 passa.
-- T5 Lama di Dalia: 1 danni a Nebros Clearmind (Salute 11/20).
+- T5 Lama di Dalia: 1 danni a Nebros Clearmind (Salute 12/20).
 - T5 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T5 G2 gioca Polvere accecante (test) su Nebros Clearmind (costo [Stivale]).
 - T5 G1 passa.
 - T5 Polvere accecante (test): Nebros Clearmind -2 attack fino alla fine del turno 5.
 - T5 G2 gioca Essenza gialla (entra pronta).
-- T5 Dalia Shadowstep si tappa e muove: B3 → A4.
+- T5 Dalia Shadowstep si tappa e muove: A3 → A4.
 - T5 G1 passa.
 - T5 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T5 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 9/20).
+- T5 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 10/20).
 - T5 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
-- T5 Tagliaborse (test) si tappa e muove: C5 → B5.
+- T5 Lanciacoltelli (test) si tappa e muove: F8 → E7 → D6 → C6.
 - T5 G1 passa.
-- T5 [auto] Combattimento automatico: Tagliaborse (test) (melee) infligge 1 a Nebros Clearmind (Salute 8/20).
+- T5 [auto] Combattimento automatico: Lanciacoltelli (test) (ranged) infligge 1 a Nebros Clearmind (Salute 9/20).
 - T5 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
 - T5 G2 dichiara la fine del turno: finestra di risposta di fine turno.
-- T5 Nebros Clearmind usa la sua abilità su Dalia Shadowstep verso A3 (costo [Fiamma]).
-- T5 G2 passa.
-- T5 Fiamma di Nebros: Dalia Shadowstep è spostato da A4 a A3.
 - T5 G1 passa.
 - T5 G2 termina il turno. Risorse non spese perse (F1-45).
 - T6 [auto] — Turno 6: G1. Le sue unità e le sue 2 carte risorsa si stappano.
-- T6 [auto] Nebros Clearmind è avvelenato: subisce 1 danno (Salute 7/20).
+- T6 [auto] Nebros Clearmind è avvelenato: subisce 1 danno (Salute 8/20).
 - T6 [auto] G1 pesca una carta.
-- T6 G1 gioca Golem runico (test) verso C5 (costo 1[Fiamma]).
+- T6 Nebros Clearmind usa la sua abilità su Dalia Shadowstep verso A2 (costo [Fiamma]).
 - T6 Dalia Shadowstep usa la sua abilità su Nebros Clearmind (costo [Stivale]).
 - T6 G1 passa.
-- T6 Lama di Dalia: 1 danni a Nebros Clearmind (Salute 6/20).
+- T6 Lama di Dalia: 1 danni a Nebros Clearmind (Salute 7/20).
 - T6 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T6 G2 passa.
-- T6 Golem runico (test) entra in gioco in C5, tappato: agirà dal prossimo turno (F1-30).
+- T6 Fiamma di Nebros: Dalia Shadowstep è spostato da A4 a A2.
 - T6 G1 gioca Essenza blu (entra pronta).
-- T6 Nebros Clearmind si tappa e muove: B4 → B3.
+- T6 G1 gioca Golem runico (test) verso B3 (costo 1[Fiamma]).
+- T6 G2 passa.
+- T6 Golem runico (test) entra in gioco in B3, tappato: agirà dal prossimo turno (F1-30).
+- T6 Nebros Clearmind si tappa e muove: B5 → A4 → A3 → B2.
 - T6 G2 passa.
 - T6 [auto] Più nemici a portata: Nebros Clearmind attacca Dalia Shadowstep (scelta automatica).
 - T6 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Dalia Shadowstep (Salute 14/20).
 - T6 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T6 [auto] Dalia Shadowstep restituisce 2 a Nebros Clearmind (Salute 4/20).
-- T6 Nebros Clearmind usa la sua abilità su Dalia Shadowstep verso A4 (costo [Fiamma]).
-- T6 G2 passa.
-- T6 Fiamma di Nebros: Dalia Shadowstep è spostato da A3 a A4.
+- T6 [auto] Dalia Shadowstep restituisce 2 a Nebros Clearmind (Salute 5/20).
 - T6 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T6 G2 passa.
 - T6 G1 termina il turno. Risorse non spese perse (F1-45).
 - T7 [auto] — Turno 7: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T7 [auto] G2 pesca una carta.
-- T7 G2 gioca Lanciacoltelli (test) verso G8 (costo 1[Stivale]).
+- T7 G2 gioca Sicario (test) verso F4 (costo 2[Stivale]).
 - T7 G1 passa.
-- T7 Lanciacoltelli (test) entra in gioco in G8, tappato: agirà dal prossimo turno (F1-30).
-- T7 G2 gioca Polvere accecante (test) su Nebros Clearmind (costo [Stivale]).
+- T7 Sicario (test) entra in gioco in F4, pronto.
+- T7 Dalia Shadowstep si tappa e muove: A2 → A3.
 - T7 G1 passa.
-- T7 Polvere accecante (test): Nebros Clearmind -2 attack fino alla fine del turno 7.
-- T7 Dalia Shadowstep si tappa e muove: A4 → A3 → B2 → C2.
-- T7 G1 passa.
+- T7 [auto] Più nemici a portata: Dalia Shadowstep attacca Nebros Clearmind (scelta automatica).
 - T7 [auto] Nebros Clearmind riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T7 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 2/20).
+- T7 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Nebros Clearmind (Salute 3/20).
 - T7 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
-- T7 Tagliaborse (test) si tappa e muove: B5 → A4.
+- T7 Lanciacoltelli (test) si tappa e muove: C6 → B5 → B4 → C3.
 - T7 G1 passa.
-- T7 [auto] Combattimento automatico: Tagliaborse (test) (melee) infligge 1 a Nebros Clearmind (Salute 1/20).
+- T7 [auto] Più nemici a portata: Lanciacoltelli (test) attacca Nebros Clearmind (scelta automatica).
+- T7 [auto] Combattimento automatico: Lanciacoltelli (test) (ranged) infligge 1 a Nebros Clearmind (Salute 2/20).
 - T7 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
-- T7 G2 dichiara la fine del turno: finestra di risposta di fine turno.
+- T7 Sicario (test) si tappa e muove: F4 → E3 → D2 → C2.
 - T7 G1 passa.
-- T7 G2 termina il turno. Risorse non spese perse (F1-45).
-- T8 [auto] — Turno 8: G1. Le sue unità e le sue 3 carte risorsa si stappano.
-- T8 [auto] Nebros Clearmind è avvelenato: subisce 1 danno (Salute 0/20).
-- T8 [auto] Fine partita: vince G2. Nebros Clearmind è stato sconfitto (F1-54).
+- T7 [auto] Più nemici a portata: Sicario (test) attacca Nebros Clearmind (scelta automatica).
+- T7 [auto] Combattimento automatico: Sicario (test) (melee) infligge 3 a Nebros Clearmind (Salute -1/20).
+- T7 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
+- T7 [auto] Fine partita: vince G2. Nebros Clearmind è stato sconfitto (F1-54).
 
 ## Configurazione completa (copia)
 

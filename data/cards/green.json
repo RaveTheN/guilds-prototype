@@ -172,5 +172,46 @@
   "health": 2,
   "range": "ranged",
   "role": "bishop"
+ },
+ {
+  "id": "g_bear",
+  "version": 1,
+  "name": "Orso dei boschi (test)",
+  "guild": "Green",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 2,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato grosso in mischia: Assalto e scambi ripetuti",
+  "rationale": "3/4 per 3 risorse",
+  "attack": 3,
+  "health": 4,
+  "range": "melee",
+  "role": "pawn"
+ },
+ {
+  "id": "g_scout",
+  "version": 1,
+  "name": "Esploratrice (test)",
+  "guild": "Green",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato minimo a distanza con Swift: muore a qualsiasi danno",
+  "rationale": "1/1 per 1 risorsa",
+  "attack": 1,
+  "health": 1,
+  "range": "ranged",
+  "role": "queen",
+  "keywords": [
+   "swift"
+  ]
  }
 ]

@@ -26,11 +26,19 @@
   },
   {
    "card": "r_forge_recruit",
-   "count": 4
+   "count": 2
   },
   {
    "card": "r_bomber",
-   "count": 4
+   "count": 2
+  },
+  {
+   "card": "r_shieldbearer",
+   "count": 2
+  },
+  {
+   "card": "r_fire_lancer",
+   "count": 2
   }
  ]
 }

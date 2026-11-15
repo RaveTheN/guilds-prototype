@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P01-9x7 — Duello dei Guildmaster — mappa 9x7 (clone di P01) — TEST PARZIALE
 - Mappa: mappa_9x7 (originale)
 - Simbolo gilda gialla: stivale

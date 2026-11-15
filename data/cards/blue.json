@@ -167,5 +167,43 @@
   "health": 2,
   "range": "ranged",
   "role": "bishop"
+ },
+ {
+  "id": "b_frost_sentinel",
+  "version": 1,
+  "name": "Sentinella di brina (test)",
+  "guild": "Blue",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 2,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato difensivo costoso",
+  "rationale": "2/5 per 3 risorse",
+  "attack": 2,
+  "health": 5,
+  "range": "melee",
+  "role": "pawn"
+ },
+ {
+  "id": "b_spark_adept",
+  "version": 1,
+  "name": "Adepta della scintilla (test)",
+  "guild": "Blue",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato a distanza con attacco pieno",
+  "rationale": "2/2 per 2 risorse",
+  "attack": 2,
+  "health": 2,
+  "range": "ranged",
+  "role": "queen"
  }
 ]

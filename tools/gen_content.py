@@ -46,6 +46,8 @@ G = {
         card("r_flame_gauntlet", "Flame Gauntlet (test)", "Red", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Flame Gauntlet, oggetto"), "Oggetti assegnati al Guildmaster (F1-11/12)", "+1 permanente per 2 risorse; cumulabile (F1-12)"),
         ally("r_forge_recruit", "Recluta della Fucina (test)", "Red", 1, 1, 2, 3, "melee", "rook", "Alleato in mischia robusto: evocazione, obbligo di movimento con più unità, Assalto", "2/3 per 2 risorse: regge un attacco base"),
         ally("r_bomber", "Bombarolo (test)", "Red", 1, 0, 1, 2, "ranged", "bishop", "Alleato a distanza con Swift (F1-62)", "1/2 per 1 risorsa: fragile ma agisce subito", keywords=["swift"]),
+        ally("r_shieldbearer", "Portascudo (test)", "Red", 1, 1, 1, 5, "melee", "pawn", "Alleato difensivo: molta Salute, poco Attacco; blocca passaggi e linee di vista", "1/5 per 2 risorse: regge due attacchi base"),
+        ally("r_fire_lancer", "Lanciere di fiamma (test)", "Red", 1, 2, 3, 3, "melee", "queen", "Alleato costoso con Attacco superiore a quello di un Guildmaster", "3/3 per 3 risorse"),
     ],
     "Blue": [
         gm("gm_nebros", "Nebros Clearmind", "Blue", "ranged", "Spoilers - blue", ("any", [("reposition", 2)], "Fiamma di Nebros"), "nebros"),
@@ -56,6 +58,8 @@ G = {
         card("b_runic_staff", "Runic Staff (test)", "Blue", "Item", 1, 1, "none", [("mod", 1, "move", "permanent")], ADAPT("Runic Staff, oggetto"), "Oggetto di posizionamento per un Guildmaster a distanza", "+1 movimento permanente"),
         ally("b_rune_golem", "Golem runico (test)", "Blue", 1, 1, 2, 4, "melee", "rook", "Alleato in mischia che fa da scudo a un Guildmaster a distanza (le unità nemiche bloccano la linea di vista, F1-37)", "2/4 per 2 risorse"),
         ally("b_apprentice", "Apprendista arcano (test)", "Blue", 1, 0, 1, 2, "ranged", "bishop", "Secondo tiratore: scelta del bersaglio con più nemici a portata", "1/2 per 1 risorsa"),
+        ally("b_frost_sentinel", "Sentinella di brina (test)", "Blue", 1, 2, 2, 5, "melee", "pawn", "Alleato difensivo costoso", "2/5 per 3 risorse"),
+        ally("b_spark_adept", "Adepta della scintilla (test)", "Blue", 1, 1, 2, 2, "ranged", "queen", "Alleato a distanza con attacco pieno", "2/2 per 2 risorse"),
     ],
     "Green": [
         gm("gm_senya", "Senya Windseeker", "Green", "ranged", "Spoiler - green", ("enemy", [("damage", 1), ("healOwn", 1)], "Freccia di Senya"), "senya"),
@@ -66,6 +70,8 @@ G = {
         card("g_hunters_bow", "Hunter's Bow (test)", "Green", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Hunter's Bow, oggetto"), "Oggetto d'attacco su un Guildmaster a distanza", "+1 permanente"),
         ally("g_hound", "Segugio (test)", "Green", 1, 0, 2, 2, "melee", "knight", "Alleato veloce con Swift; col ruolo Cavallo salta gli ostacoli", "2/2 per 1 risorsa: colpisce subito ma muore a un attacco base", keywords=["swift"]),
         ally("g_wood_archer", "Arciere dei boschi (test)", "Green", 1, 1, 2, 2, "ranged", "bishop", "Alleato a distanza con attacco pieno", "2/2 per 2 risorse"),
+        ally("g_bear", "Orso dei boschi (test)", "Green", 1, 2, 3, 4, "melee", "pawn", "Alleato grosso in mischia: Assalto e scambi ripetuti", "3/4 per 3 risorse"),
+        ally("g_scout", "Esploratrice (test)", "Green", 1, 0, 1, 1, "ranged", "queen", "Alleato minimo a distanza con Swift: muore a qualsiasi danno", "1/1 per 1 risorsa", keywords=["swift"]),
     ],
     "Yellow": [
         gm("gm_dalia", "Dalia Shadowstep", "Yellow", "melee", "Spoilers - Yellow", ("any", [("damage", 1)], "Lama di Dalia"), "daalia", keywords=("venomous",)),
@@ -76,6 +82,8 @@ G = {
         card("y_venom_blades", "Venom Blades (test)", "Yellow", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Venom Blades, oggetto"), "Oggetto d'attacco su un Guildmaster in mischia", "+1 permanente; il veleno è rinviato"),
         ally("y_cutpurse", "Tagliaborse (test)", "Yellow", 1, 0, 1, 2, "melee", "knight", "Alleato economico con Swift", "1/2 per 1 risorsa", keywords=["swift"]),
         ally("y_knife_thrower", "Lanciacoltelli (test)", "Yellow", 1, 1, 1, 3, "ranged", "bishop", "Alleato con doppio profilo (N-05): a distanza 1, in mischia 2", "1/3 per 2 risorse; in mischia vale 2 solo con la variante «doppio profilo»", altAttack=2),
+        ally("y_bodyguard", "Guardaspalle (test)", "Yellow", 1, 1, 1, 4, "melee", "pawn", "Alleato difensivo economico", "1/4 per 2 risorse"),
+        ally("y_assassin", "Sicario (test)", "Yellow", 1, 2, 3, 2, "melee", "queen", "Alleato fragile con Swift e Attacco alto: colpisce subito", "3/2 per 3 risorse", keywords=["swift"]),
     ],
 }
 names = {"Red": ("rosso", "Artificers"), "Blue": ("blu", "Wizards"), "Green": ("verde", "Hunters"), "Yellow": ("giallo", "Rogues")}
@@ -91,7 +99,7 @@ for g, cards in G.items():
         cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=4) for c in cards[2:6]]))
     dump(root / "decks" / f"deck_{g.lower()}_alleati.json", dict(
         id=f"deck_{g.lower()}_alleati", name=f"Mazzo {names[g][0]} con alleati ({names[g][1]})", version=1, guildmaster=cards[0]["id"],
-        cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=2) for c in cards[2:6]] + [dict(card=c["id"], count=4) for c in cards[6:]]))
+        cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=2) for c in cards[2:6]] + [dict(card=c["id"], count=2) for c in cards[6:]]))
 
 HYP = [
     "H1 Carte risorsa: una per turno; restano in gioco sul tavolo; si TAPPANO per pagare 1 risorsa del loro colore e si stappano all'inizio del proprio turno. Entrano stappate e producono subito (deciso il 14 nov; parametro per provarle tappate). Quelle rimaste pronte servono per istantanee e abilità nel turno avversario. 9 per mazzo.",

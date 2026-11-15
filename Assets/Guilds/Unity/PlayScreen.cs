@@ -47,7 +47,7 @@ namespace Guilds.Unity
                 aiAt = Time.time + 0.9f; dirty = true;
             }
             if (game.Phase == Phase.Over && exported == null) exported = ExportReport();
-            if (dirty) { dirty = false; view.Sync(game); RefreshMarks(); }
+            if (dirty) { dirty = false; view.Sync(game); view.SyncTable(game); RefreshMarks(); }
         }
 
         void Act(string why) { if (Say(why)) { selCard = selTarget = selUnit = -1; selAbility = false; selDrop.Clear(); } dodgeUnit = -1; dirty = true; }
@@ -484,8 +484,10 @@ namespace Guilds.Unity
             }
             if (onBoard && e.type == EventType.MouseDown && e.button == 0)
             {
-                var c = view.Pick(cam.ScreenPointToRay(new Vector3(e.mousePosition.x, Screen.height - e.mousePosition.y)));
-                if (c != null) BoardClick(c.Value); else Deselect();
+                var ray = cam.ScreenPointToRay(new Vector3(e.mousePosition.x, Screen.height - e.mousePosition.y));
+                var c = view.Pick(ray); string card3d = view.PickCard(ray);
+                if (card3d != null) peek = game.Def(card3d);          // clic su una carta 3D del tavolo: la mostra in grande
+                else if (c != null) BoardClick(c.Value); else Deselect();
                 e.Use();
             }
             if (onBoard && e.type == EventType.MouseDrag && e.button == 1)
@@ -513,6 +515,7 @@ namespace Guilds.Unity
                 if (bg.a > 0) Fill(r, bg);
                 G.Label(new Rect(r.x + 4, r.y, r.width, 22), text, small);
             }
+            foreach (var tl in view.TableLabels) Tag(tl.Pos, tl.Text, new Color(0, 0, 0, 0.55f));
             for (int x = 0; x < b.W; x++) Tag(view.World(new Cell(x, -1), 0) + new Vector3(0, 0, 0.25f), ((char)('A' + x)).ToString(), Color.clear);
             for (int yy = 0; yy < b.H; yy++) Tag(view.World(new Cell(-1, yy), 0) + new Vector3(0.25f, 0, 0), (yy + 1).ToString(), Color.clear);
             foreach (var c in b.All())

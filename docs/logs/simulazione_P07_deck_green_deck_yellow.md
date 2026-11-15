@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P07 — Linea di vista a zone (clone di P01) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale

@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P02 — Alleati (clone di P01) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -96,8 +96,10 @@ Abilità del Guildmaster usata 4 volte.
 | Furia della Fucina (test) | r_fury@v1 | 2 | 2 | 2 |
 | Rincorsa (test) | r_rush@v1 | 2 | 1 | 1 |
 | Flame Gauntlet (test) | r_flame_gauntlet@v1 | 2 | 0 | 0 |
-| Recluta della Fucina (test) | r_forge_recruit@v1 | 4 | 2 | 2 |
-| Bombarolo (test) | r_bomber@v1 | 4 | 0 | 0 |
+| Recluta della Fucina (test) | r_forge_recruit@v1 | 2 | 2 | 2 |
+| Bombarolo (test) | r_bomber@v1 | 2 | 0 | 0 |
+| Portascudo (test) | r_shieldbearer@v1 | 2 | 0 | 0 |
+| Lanciere di fiamma (test) | r_fire_lancer@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo verde con alleati (Hunters) (deck_green_alleati v1) — Senya Windseeker gm_senya@v1, Salute finale -1/20
 
@@ -110,15 +112,17 @@ Abilità del Guildmaster usata 5 volte.
 | Regrowth (test) | g_regrowth@v1 | 2 | 0 | 0 |
 | Hunter's Net (test) | g_hunters_net@v1 | 2 | 2 | 1 |
 | Hunter's Bow (test) | g_hunters_bow@v1 | 2 | 0 | 0 |
-| Segugio (test) | g_hound@v1 | 4 | 1 | 1 |
-| Arciere dei boschi (test) | g_wood_archer@v1 | 4 | 2 | 1 |
+| Segugio (test) | g_hound@v1 | 2 | 0 | 0 |
+| Arciere dei boschi (test) | g_wood_archer@v1 | 2 | 1 | 1 |
+| Orso dei boschi (test) | g_bear@v1 | 2 | 1 | 0 |
+| Esploratrice (test) | g_scout@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
 - setup: 1 passaggi automatici
 - turn: 10 passaggi automatici
 - draw: 10 passaggi automatici
-- combat: 27 passaggi automatici
+- combat: 28 passaggi automatici
 - death: 2 passaggi automatici
 - end: 1 passaggi automatici
 
@@ -140,16 +144,17 @@ nota di prova
 - T1 [auto] — Turno 1: G2. Le sue unità e le sue 0 carte risorsa si stappano.
 - T1 [auto] Il primo giocatore salta la prima pesca (F1-52).
 - T1 G2 gioca Essenza verde (entra pronta).
-- T1 G2 gioca Segugio (test) verso F6 (costo [Arco]).
+- T1 G2 gioca Esploratrice (test) verso F6 (costo [Arco]).
 - T1 G1 passa.
-- T1 Segugio (test) entra in gioco in F6, pronto.
+- T1 Esploratrice (test) entra in gioco in F6, pronto.
 - T1 Senya Windseeker si tappa e muove: G8 → F7 → E6 → D6.
 - T1 G1 passa.
 - T1 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Fiaran Rushblood (Salute 18/20).
 - T1 [auto] Fiaran Rushblood non restituisce danni (non adiacente, H6).
-- T1 Segugio (test) si tappa e muove: F6 → E6 → D6 → C5.
+- T1 Esploratrice (test) si tappa e muove: F6 → E6 → D6 → C5.
 - T1 G1 passa.
-- T1 [auto] Nessun combattimento: nessun nemico a contatto di Segugio (test).
+- T1 [auto] Combattimento automatico: Esploratrice (test) (ranged) infligge 1 a Fiaran Rushblood (Salute 17/20).
+- T1 [auto] Fiaran Rushblood non restituisce danni (non adiacente, H6).
 - T1 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T1 G1 passa.
 - T1 G2 termina il turno. Risorse non spese perse (F1-45).
@@ -170,18 +175,18 @@ nota di prova
 - T3 [auto] G2 pesca una carta.
 - T3 Senya Windseeker usa la sua abilità su Fiaran Rushblood (costo [Arco]).
 - T3 G1 passa.
-- T3 Freccia di Senya: 1 danni a Fiaran Rushblood (Salute 17/20).
+- T3 Freccia di Senya: 1 danni a Fiaran Rushblood (Salute 16/20).
 - T3 Freccia di Senya: cura 1 a Senya Windseeker (Salute 19/20).
 - T3 G2 gioca Essenza verde (entra pronta).
 - T3 Senya Windseeker si tappa e muove: D6 → E7 → E8.
 - T3 G1 passa.
-- T3 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Fiaran Rushblood (Salute 15/20).
+- T3 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Fiaran Rushblood (Salute 14/20).
 - T3 [auto] Fiaran Rushblood restituisce 2 a Senya Windseeker (Salute 17/20).
-- T3 Segugio (test) si tappa e muove: C5 → C6.
+- T3 Esploratrice (test) si tappa e muove: C5 → C6.
 - T3 G1 passa.
-- T3 [auto] Combattimento automatico: Segugio (test) (melee) infligge 2 a Fiaran Rushblood (Salute 13/20).
-- T3 [auto] Fiaran Rushblood restituisce 2 a Segugio (test) (Salute 0/2).
-- T3 [auto] Segugio (test) è sconfitto e lascia la board.
+- T3 [auto] Combattimento automatico: Esploratrice (test) (ranged) infligge 1 a Fiaran Rushblood (Salute 13/20).
+- T3 [auto] Fiaran Rushblood restituisce 2 a Esploratrice (test) (Salute -1/1).
+- T3 [auto] Esploratrice (test) è sconfitto e lascia la board.
 - T3 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T3 G1 passa.
 - T3 G2 termina il turno. Risorse non spese perse (F1-45).

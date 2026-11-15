@@ -135,6 +135,9 @@ Richiesta di Peppe. Il pulsante del bersaglio ora elenca unità nemiche, Torre e
 ## Assalto senza Guildmaster contro Guildmaster (15 nov 2026, v0.12.3)
 Nuova scelta di «Assalto»: attivo anche contro i Guildmaster, ma non Guildmaster contro Guildmaster (un alleato può assaltare un Guildmaster e viceversa).
 
+## Otto alleati nuovi e carte in gioco in 3D (15 nov 2026, v0.13.0)
+Richiesta di Peppe. Due alleati di test in più per gilda (un difensore «pedone» e un attaccante «regina» ciascuna; valori proposti, nessuna fonte li fissa): 40 carte in tutto. I mazzi «con alleati» hanno ora 9 risorse, 4 carte ×2 e 4 alleati ×2. Le carte risorsa e gli oggetti in gioco compaiono come lastre 3D accanto alla board, dal lato della Torre di chi li ha giocati: tappate se ruotate, clic per vederle in grande. I pannelli 2D del tavolo restano. Parte 3D compilata, **non eseguita in Unity**: posizione, orientamento e inquadratura sono da verificare a schermo.
+
 ## Che cosa funziona
 - Logica in `Assets/Guilds/Core` (assembly con `noEngineReferences`), compilata anche da `core/Guilds.Core.csproj`.
 - Preset di base: la famiglia **P01** (duello dei Guildmaster e le sue varianti) e i preset delle evoluzioni **P02–P07** elencati sopra.

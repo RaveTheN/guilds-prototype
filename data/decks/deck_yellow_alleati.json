@@ -26,11 +26,19 @@
   },
   {
    "card": "y_cutpurse",
-   "count": 4
+   "count": 2
   },
   {
    "card": "y_knife_thrower",
-   "count": 4
+   "count": 2
+  },
+  {
+   "card": "y_bodyguard",
+   "count": 2
+  },
+  {
+   "card": "y_assassin",
+   "count": 2
   }
  ]
 }

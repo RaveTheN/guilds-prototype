@@ -26,11 +26,19 @@
   },
   {
    "card": "g_hound",
-   "count": 4
+   "count": 2
   },
   {
    "card": "g_wood_archer",
-   "count": 4
+   "count": 2
+  },
+  {
+   "card": "g_bear",
+   "count": 2
+  },
+  {
+   "card": "g_scout",
+   "count": 2
   }
  ]
 }

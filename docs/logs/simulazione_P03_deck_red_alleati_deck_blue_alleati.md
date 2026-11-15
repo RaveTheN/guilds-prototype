@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P03 — Scacchi — ogni unità col suo pezzo (clone di P02) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -8,7 +8,7 @@
 - Tema visivo: semplice
 - Seed: 20261114
 - Inizio: 2026-11-14 10:00:00 — durata: 20.0 minuti
-- Turni: 12 — primo giocatore: G2
+- Turni: 11 — primo giocatore: G2
 - Vincitore: G1 — Nebros Clearmind è stato sconfitto (F1-54)
 - Interventi di debug: 0
 
@@ -85,23 +85,25 @@
 
 ## Mazzi e carte (pescate / giocate)
 
-### G1: Mazzo rosso con alleati (Artificers) (deck_red_alleati v1) — Fiaran Rushblood gm_fiaran@v1, Salute finale 10/20
+### G1: Mazzo rosso con alleati (Artificers) (deck_red_alleati v1) — Fiaran Rushblood gm_fiaran@v1, Salute finale 8/20
 
-Abilità del Guildmaster usata 7 volte.
+Abilità del Guildmaster usata 6 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
 | Essenza rossa | res_red@v1 | 9 | 5 | 5 |
-| Thermal Surge (test) | r_thermal_surge@v1 | 2 | 1 | 0 |
+| Thermal Surge (test) | r_thermal_surge@v1 | 2 | 0 | 0 |
 | Furia della Fucina (test) | r_fury@v1 | 2 | 2 | 2 |
 | Rincorsa (test) | r_rush@v1 | 2 | 1 | 1 |
 | Flame Gauntlet (test) | r_flame_gauntlet@v1 | 2 | 0 | 0 |
-| Recluta della Fucina (test) | r_forge_recruit@v1 | 4 | 2 | 1 |
-| Bombarolo (test) | r_bomber@v1 | 4 | 0 | 0 |
+| Recluta della Fucina (test) | r_forge_recruit@v1 | 2 | 2 | 1 |
+| Bombarolo (test) | r_bomber@v1 | 2 | 0 | 0 |
+| Portascudo (test) | r_shieldbearer@v1 | 2 | 0 | 0 |
+| Lanciere di fiamma (test) | r_fire_lancer@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo blu con alleati (Wizards) (deck_blue_alleati v1) — Nebros Clearmind gm_nebros@v1, Salute finale 0/20
 
-Abilità del Guildmaster usata 5 volte.
+Abilità del Guildmaster usata 4 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
@@ -110,16 +112,19 @@ Abilità del Guildmaster usata 5 volte.
 | Dardo arcano (test) | b_arcane_dart@v1 | 2 | 0 | 0 |
 | Gelo (test) | b_frost@v1 | 2 | 2 | 2 |
 | Runic Staff (test) | b_runic_staff@v1 | 2 | 0 | 0 |
-| Golem runico (test) | b_rune_golem@v1 | 4 | 1 | 1 |
-| Apprendista arcano (test) | b_apprentice@v1 | 4 | 2 | 2 |
+| Golem runico (test) | b_rune_golem@v1 | 2 | 0 | 0 |
+| Apprendista arcano (test) | b_apprentice@v1 | 2 | 1 | 1 |
+| Sentinella di brina (test) | b_frost_sentinel@v1 | 2 | 1 | 1 |
+| Adepta della scintilla (test) | b_spark_adept@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
 - setup: 1 passaggi automatici
-- turn: 12 passaggi automatici
-- draw: 12 passaggi automatici
-- combat: 30 passaggi automatici
-- death: 3 passaggi automatici
+- turn: 11 passaggi automatici
+- draw: 11 passaggi automatici
+- combat: 31 passaggi automatici
+- death: 2 passaggi automatici
+- resolve: 1 passaggi automatici
 - end: 1 passaggi automatici
 
 ## Interventi di debug
@@ -191,9 +196,9 @@ nota di prova
 - T4 G1 termina il turno. Risorse non spese perse (F1-45).
 - T5 [auto] — Turno 5: G2. Le sue unità e le sue 2 carte risorsa si stappano.
 - T5 [auto] G2 pesca una carta.
-- T5 G2 gioca Golem runico (test) verso E8 (costo 1[Fiamma]).
+- T5 G2 gioca Adepta della scintilla (test) verso E8 (costo 1[Fiamma]).
 - T5 G1 passa.
-- T5 Golem runico (test) entra in gioco in E8, tappato: agirà dal prossimo turno (F1-30).
+- T5 Adepta della scintilla (test) entra in gioco in E8, tappato: agirà dal prossimo turno (F1-30).
 - T5 G2 gioca Essenza blu (entra pronta).
 - T5 Nebros Clearmind si tappa e muove: F6 → F5.
 - T5 G1 passa.
@@ -245,28 +250,31 @@ nota di prova
 - T7 [auto] Più nemici a portata: Nebros Clearmind attacca Fiaran Rushblood (scelta automatica).
 - T7 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Fiaran Rushblood (Salute 14/20).
 - T7 [auto] Fiaran Rushblood non restituisce danni (non adiacente, H6).
-- T7 Golem runico (test) si tappa e muove: E8 → E7 → E6.
+- T7 Adepta della scintilla (test) si tappa e muove: E8 → F7 → G6 → H5.
 - T7 G1 passa.
-- T7 [auto] Nessun combattimento: nessun nemico a contatto di Golem runico (test).
+- T7 [auto] Più nemici a portata: Adepta della scintilla (test) attacca Fiaran Rushblood (scelta automatica).
+- T7 [auto] Combattimento automatico: Adepta della scintilla (test) (ranged) infligge 2 a Fiaran Rushblood (Salute 12/20).
+- T7 [auto] Fiaran Rushblood non restituisce danni (non adiacente, H6).
 - T7 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T7 G1 passa.
 - T7 G2 termina il turno. Risorse non spese perse (F1-45).
 - T8 [auto] — Turno 8: G1. Le sue unità e le sue 3 carte risorsa si stappano.
 - T8 [auto] G1 pesca una carta.
-- T8 Fiaran Rushblood usa la sua abilità verso G3 (costo [Bomba]).
-- T8 G2 passa.
-- T8 Bomba di Fiaran: Croce su G3, 2 danni a Nebros Clearmind (Salute 14/20).
 - T8 G1 gioca Essenza rossa (entra pronta).
 - T8 G1 gioca Furia della Fucina (test) su Fiaran Rushblood (costo [Bomba]).
+- T8 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso F1 (costo [Fiamma]).
+- T8 Fiaran Rushblood usa la sua abilità verso G5 (costo [Bomba]).
 - T8 G2 passa.
-- T8 Furia della Fucina (test): Fiaran Rushblood +2 attack fino alla fine del turno 8.
-- T8 Fiaran Rushblood si tappa e muove: E1 → E2.
-- T8 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso F2 (costo [Fiamma]).
+- T8 Bomba di Fiaran: Croce su G5, 2 danni a Adepta della scintilla (test) (Salute 0/2), Nebros Clearmind (Salute 14/20).
+- T8 [auto] Adepta della scintilla (test) è sconfitto e lascia la board.
 - T8 G1 passa.
-- T8 Fiamma di Nebros: Fiaran Rushblood è spostato da E2 a F2.
+- T8 Fiamma di Nebros: Fiaran Rushblood è spostato da E1 a F1.
 - T8 G2 passa.
-- T8 [auto] Fiaran Rushblood è stato spostato dopo il suo movimento: colpisce il vuoto, nessun combattimento (RIC-ANNULLA).
-- T8 Recluta della Fucina (test) si tappa e muove: D3 → E3 → F3.
+- T8 [auto] Furia della Fucina (test) non ha effetto: il bersaglio ha cambiato casella ed evita l'effetto (F3-11).
+- T8 Fiaran Rushblood si tappa e muove: F1 → E2.
+- T8 G2 passa.
+- T8 [auto] Nessun combattimento: nessun nemico a contatto di Fiaran Rushblood.
+- T8 Recluta della Fucina (test) si tappa e muove: D3 → E3 → F3 → G3.
 - T8 G2 passa.
 - T8 [auto] Combattimento automatico: Recluta della Fucina (test) (melee) infligge 2 a Nebros Clearmind (Salute 12/20).
 - T8 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
@@ -275,40 +283,33 @@ nota di prova
 - T8 G1 termina il turno. Risorse non spese perse (F1-45).
 - T9 [auto] — Turno 9: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T9 [auto] G2 pesca una carta.
-- T9 G2 gioca Apprendista arcano (test) verso G5 (costo [Fiamma]).
-- T9 G1 passa.
-- T9 Apprendista arcano (test) entra in gioco in G5, tappato: agirà dal prossimo turno (F1-30).
-- T9 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso E3 (costo [Fiamma]).
-- T9 Fiaran Rushblood usa la sua abilità verso F4 (costo [Bomba]).
+- T9 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso F4 (costo [Fiamma]).
+- T9 Fiaran Rushblood usa la sua abilità verso H4 (costo [Bomba]).
 - T9 G2 passa.
-- T9 Bomba di Fiaran: Croce su F4, 2 danni a Nebros Clearmind (Salute 10/20), Recluta della Fucina (test) (Salute 1/3).
+- T9 Bomba di Fiaran: Croce su H4, 2 danni a Nebros Clearmind (Salute 10/20).
 - T9 G1 passa.
-- T9 Fiamma di Nebros: Fiaran Rushblood è spostato da F2 a E3.
-- T9 Nebros Clearmind si tappa e muove: G4 → F4.
+- T9 Fiamma di Nebros: Fiaran Rushblood è spostato da E2 a F4.
+- T9 Nebros Clearmind si tappa e muove: G4 → F5.
 - T9 G1 passa.
 - T9 [auto] Più nemici a portata: Nebros Clearmind attacca Fiaran Rushblood (scelta automatica).
-- T9 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Fiaran Rushblood (Salute 12/20).
+- T9 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Fiaran Rushblood (Salute 10/20).
 - T9 [auto] Fiaran Rushblood restituisce 2 a Nebros Clearmind (Salute 8/20).
-- T9 Golem runico (test) si tappa e muove: E6 → D6.
-- T9 G1 passa.
-- T9 [auto] Nessun combattimento: nessun nemico a contatto di Golem runico (test).
 - T9 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T9 G1 passa.
 - T9 G2 termina il turno. Risorse non spese perse (F1-45).
 - T10 [auto] — Turno 10: G1. Le sue unità e le sue 4 carte risorsa si stappano.
 - T10 [auto] G1 pesca una carta.
-- T10 Fiaran Rushblood usa la sua abilità verso G4 (costo [Bomba]).
-- T10 G2 passa.
-- T10 Bomba di Fiaran: Croce su G4, 2 danni a Nebros Clearmind (Salute 6/20), Apprendista arcano (test) (Salute 0/2).
-- T10 [auto] Apprendista arcano (test) è sconfitto e lascia la board.
 - T10 G1 gioca Essenza rossa (entra pronta).
-- T10 Fiaran Rushblood si tappa e muove: E3 → D2.
-- T10 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso C4 (costo [Fiamma]).
+- T10 Fiaran Rushblood si tappa e muove: F4 → G4.
+- T10 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso H6 (costo [Fiamma]).
 - T10 G1 passa.
-- T10 Fiamma di Nebros: Fiaran Rushblood è spostato da D2 a C4.
+- T10 Fiamma di Nebros: Fiaran Rushblood è spostato da G4 a H6.
 - T10 G2 passa.
 - T10 [auto] Fiaran Rushblood è stato spostato dopo il suo movimento: colpisce il vuoto, nessun combattimento (RIC-ANNULLA).
-- T10 Recluta della Fucina (test) si tappa e muove: F3 → E3.
+- T10 Fiaran Rushblood usa la sua abilità verso F6 (costo [Bomba]).
+- T10 G2 passa.
+- T10 Bomba di Fiaran: Croce su F6, 2 danni a Nebros Clearmind (Salute 6/20).
+- T10 Recluta della Fucina (test) si tappa e muove: G3 → G4.
 - T10 G2 passa.
 - T10 [auto] Combattimento automatico: Recluta della Fucina (test) (melee) infligge 2 a Nebros Clearmind (Salute 4/20).
 - T10 [auto] Nebros Clearmind non restituisce danni (difensore a distanza, F1-33).
@@ -317,30 +318,19 @@ nota di prova
 - T10 G1 termina il turno. Risorse non spese perse (F1-45).
 - T11 [auto] — Turno 11: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T11 [auto] G2 pesca una carta.
-- T11 G2 gioca Essenza blu (entra pronta).
-- T11 Nebros Clearmind si tappa e muove: F4 → F3.
-- T11 Fiaran Rushblood usa la sua abilità verso E3 (costo [Bomba]).
+- T11 G2 gioca Sentinella di brina (test) verso G6 (costo 2[Fiamma]).
+- T11 Fiaran Rushblood usa la sua abilità verso F5 (costo [Bomba]).
 - T11 G2 passa.
-- T11 Bomba di Fiaran: Croce su E3, 2 danni a Recluta della Fucina (test) (Salute -1/3), Nebros Clearmind (Salute 2/20).
-- T11 [auto] Recluta della Fucina (test) è sconfitto e lascia la board.
+- T11 Bomba di Fiaran: Croce su F5, 2 danni a Nebros Clearmind (Salute 2/20).
 - T11 G1 passa.
-- T11 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Fiaran Rushblood (Salute 10/20).
-- T11 [auto] Fiaran Rushblood non restituisce danni (non adiacente, H6).
-- T11 Golem runico (test) si tappa e muove: D6 → C6.
+- T11 Sentinella di brina (test) entra in gioco in G6, tappato: agirà dal prossimo turno (F1-30).
+- T11 G2 gioca Essenza blu (entra pronta).
+- T11 Nebros Clearmind si tappa e muove: F5 → G5.
 - T11 G1 passa.
-- T11 [auto] Nessun combattimento: nessun nemico a contatto di Golem runico (test).
-- T11 Nebros Clearmind usa la sua abilità su Fiaran Rushblood verso E2 (costo [Fiamma]).
-- T11 G1 passa.
-- T11 Fiamma di Nebros: Fiaran Rushblood è spostato da C4 a E2.
-- T11 G2 dichiara la fine del turno: finestra di risposta di fine turno.
-- T11 G1 passa.
-- T11 G2 termina il turno. Risorse non spese perse (F1-45).
-- T12 [auto] — Turno 12: G1. Le sue unità e le sue 5 carte risorsa si stappano.
-- T12 [auto] G1 pesca una carta.
-- T12 Fiaran Rushblood usa la sua abilità verso F4 (costo [Bomba]).
-- T12 G2 passa.
-- T12 Bomba di Fiaran: Croce su F4, 2 danni a Nebros Clearmind (Salute 0/20).
-- T12 [auto] Fine partita: vince G1. Nebros Clearmind è stato sconfitto (F1-54).
+- T11 [auto] Più nemici a portata: Nebros Clearmind attacca Fiaran Rushblood (scelta automatica).
+- T11 [auto] Combattimento automatico: Nebros Clearmind (ranged) infligge 2 a Fiaran Rushblood (Salute 8/20).
+- T11 [auto] Fiaran Rushblood restituisce 2 a Nebros Clearmind (Salute 0/20).
+- T11 [auto] Fine partita: vince G1. Nebros Clearmind è stato sconfitto (F1-54).
 
 ## Configurazione completa (copia)
 

@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P02c — Alleati — ogni unità deve muovere (clone di P02) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -85,7 +85,7 @@
 
 ## Mazzi e carte (pescate / giocate)
 
-### G1: Mazzo verde con alleati (Hunters) (deck_green_alleati v1) — Senya Windseeker gm_senya@v1, Salute finale 15/20
+### G1: Mazzo verde con alleati (Hunters) (deck_green_alleati v1) — Senya Windseeker gm_senya@v1, Salute finale 13/20
 
 Abilità del Guildmaster usata 5 volte.
 
@@ -96,8 +96,10 @@ Abilità del Guildmaster usata 5 volte.
 | Regrowth (test) | g_regrowth@v1 | 2 | 2 | 2 |
 | Hunter's Net (test) | g_hunters_net@v1 | 2 | 1 | 1 |
 | Hunter's Bow (test) | g_hunters_bow@v1 | 2 | 0 | 0 |
-| Segugio (test) | g_hound@v1 | 4 | 2 | 2 |
-| Arciere dei boschi (test) | g_wood_archer@v1 | 4 | 0 | 0 |
+| Segugio (test) | g_hound@v1 | 2 | 2 | 2 |
+| Arciere dei boschi (test) | g_wood_archer@v1 | 2 | 0 | 0 |
+| Orso dei boschi (test) | g_bear@v1 | 2 | 0 | 0 |
+| Esploratrice (test) | g_scout@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo blu con alleati (Wizards) (deck_blue_alleati v1) — Nebros Clearmind gm_nebros@v1, Salute finale -1/20
 
@@ -110,16 +112,18 @@ Abilità del Guildmaster usata 4 volte.
 | Dardo arcano (test) | b_arcane_dart@v1 | 2 | 0 | 0 |
 | Gelo (test) | b_frost@v1 | 2 | 2 | 2 |
 | Runic Staff (test) | b_runic_staff@v1 | 2 | 0 | 0 |
-| Golem runico (test) | b_rune_golem@v1 | 4 | 1 | 1 |
-| Apprendista arcano (test) | b_apprentice@v1 | 4 | 2 | 2 |
+| Golem runico (test) | b_rune_golem@v1 | 2 | 0 | 0 |
+| Apprendista arcano (test) | b_apprentice@v1 | 2 | 1 | 1 |
+| Sentinella di brina (test) | b_frost_sentinel@v1 | 2 | 1 | 0 |
+| Adepta della scintilla (test) | b_spark_adept@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
 - setup: 1 passaggi automatici
 - turn: 10 passaggi automatici
 - draw: 10 passaggi automatici
-- combat: 40 passaggi automatici
-- death: 2 passaggi automatici
+- combat: 41 passaggi automatici
+- death: 1 passaggi automatici
 - end: 1 passaggi automatici
 
 ## Interventi di debug
@@ -260,9 +264,9 @@ nota di prova
 - T6 G1 termina il turno. Risorse non spese perse (F1-45).
 - T7 [auto] — Turno 7: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T7 [auto] G2 pesca una carta.
-- T7 G2 gioca Golem runico (test) verso G4 (costo 1[Fiamma]).
+- T7 G2 gioca Adepta della scintilla (test) verso G4 (costo 1[Fiamma]).
 - T7 G1 passa.
-- T7 Golem runico (test) entra in gioco in G4, tappato: agirà dal prossimo turno (F1-30).
+- T7 Adepta della scintilla (test) entra in gioco in G4, tappato: agirà dal prossimo turno (F1-30).
 - T7 Nebros Clearmind usa la sua abilità su Senya Windseeker verso C4 (costo [Fiamma]).
 - T7 G1 passa.
 - T7 Fiamma di Nebros: Senya Windseeker è spostato da D6 a C4.
@@ -310,14 +314,11 @@ nota di prova
 - T9 Nebros Clearmind usa la sua abilità su Senya Windseeker verso A3 (costo [Fiamma]).
 - T9 G1 passa.
 - T9 Fiamma di Nebros: Senya Windseeker è spostato da B4 a A3.
-- T9 G2 gioca Apprendista arcano (test) verso H5 (costo [Fiamma]).
+- T9 Adepta della scintilla (test) si tappa e muove: G4 → F3 → E2 → D3.
 - T9 G1 passa.
-- T9 Apprendista arcano (test) entra in gioco in H5, tappato: agirà dal prossimo turno (F1-30).
-- T9 Golem runico (test) si tappa e muove: G4 → F3 → E2 → D3.
-- T9 G1 passa.
-- T9 [auto] Combattimento automatico: Golem runico (test) (melee) infligge 2 a Segugio (test) (Salute 0/2).
-- T9 [auto] Segugio (test) restituisce 2 a Golem runico (test) (Salute 2/4).
-- T9 [auto] Segugio (test) è sconfitto e lascia la board.
+- T9 [auto] Più nemici a portata: Adepta della scintilla (test) attacca Senya Windseeker (scelta automatica).
+- T9 [auto] Combattimento automatico: Adepta della scintilla (test) (ranged) infligge 2 a Senya Windseeker (Salute 12/20).
+- T9 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
 - T9 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T9 G1 passa.
 - T9 G2 termina il turno. Risorse non spese perse (F1-45).
@@ -326,7 +327,7 @@ nota di prova
 - T10 Senya Windseeker usa la sua abilità su Nebros Clearmind (costo [Arco]).
 - T10 G2 passa.
 - T10 Freccia di Senya: 1 danni a Nebros Clearmind (Salute 1/20).
-- T10 Freccia di Senya: cura 1 a Senya Windseeker (Salute 15/20).
+- T10 Freccia di Senya: cura 1 a Senya Windseeker (Salute 13/20).
 - T10 G1 gioca Essenza verde (entra pronta).
 - T10 Senya Windseeker si tappa e muove: A3 → A4.
 - T10 G2 passa.

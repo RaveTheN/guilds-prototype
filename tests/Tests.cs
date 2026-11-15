@@ -943,11 +943,11 @@ public class Tests
         d = R.OptimizedDeck("gm_fiaran", R.PresetById("P02"));
         Assert.Empty(R.ValidateDeck(d, R.PresetById("P02")));
         Assert.Equal((25, 9), (d.Cards.Sum(e => e.Count), d.Cards[0].Count));
-        Assert.Equal(2, d.Cards.Count(e => R.AnyVersion(e.Card).Type == CardType.Ally));      // con alleati
+        Assert.Equal(4, d.Cards.Count(e => R.AnyVersion(e.Card).Type == CardType.Ally));      // con alleati
         var big = Json.Clone(R.PresetById("P02")); big.Numbers["deckMin"] = 40;
         d = R.OptimizedDeck("gm_fiaran", big);
         Assert.Empty(R.ValidateDeck(d, big));
-        Assert.Equal((40, 16), (d.Cards.Sum(e => e.Count), d.Cards[0].Count));               // più carte, più risorse
+        Assert.Equal((41, 15), (d.Cards.Sum(e => e.Count), d.Cards[0].Count));               // più carte, più risorse
 
         var keys = PresetSchema.Groups.SelectMany(g => g.Keys).ToList();
         Assert.Equal(PresetSchema.Params.Select(p => p.Key).OrderBy(k => k), keys.OrderBy(k => k));   // ogni regola sta in un tema, una volta sola

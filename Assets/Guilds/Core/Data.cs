@@ -26,7 +26,7 @@ namespace Guilds.Core
 
     public class Repo
     {
-        public const string PrototypeVersion = "0.12.3 (M4+)";
+        public const string PrototypeVersion = "0.13.0 (M4+)";
         public string Root;
         public Dictionary<string, List<CardDef>> CardVersions = new Dictionary<string, List<CardDef>>();
         public List<DeckDef> Decks = new List<DeckDef>();

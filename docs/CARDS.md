@@ -80,6 +80,24 @@ Abilità, una volta per turno, anche in risposta (costo: 1 risorsa blu): Sposta 
 - Regole richieste: type.Ally, target.none, cost.resources, range.ranged
 - Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
 
+### Sentinella di brina (test)
+- ID e versione: `b_frost_sentinel@v1` — Alleato — costo 2[Fiamma] — Attacco 2, Salute 5, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 2, Salute 5. Con i ruoli degli scacchi muove come: Pedone.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato difensivo costoso
+- Motivazione dei valori: 2/5 per 3 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
+### Adepta della scintilla (test)
+- ID e versione: `b_spark_adept@v1` — Alleato — costo 1[Fiamma] — Attacco 2, Salute 2, ranged
+- Testo effettivo: Alleato: evocalo su una casella libera. A distanza. Attacco 2, Salute 2. Con i ruoli degli scacchi muove come: Regina.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato a distanza con attacco pieno
+- Motivazione dei valori: 2/2 per 2 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.ranged
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
 ## Gilda verde
 
 ### Senya Windseeker
@@ -154,6 +172,24 @@ Abilità, una volta per turno, anche in risposta (costo: 1 risorsa verde): Infli
 - Serve a testare: Alleato a distanza con attacco pieno
 - Motivazione dei valori: 2/2 per 2 risorse
 - Regole richieste: type.Ally, target.none, cost.resources, range.ranged
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
+### Orso dei boschi (test)
+- ID e versione: `g_bear@v1` — Alleato — costo 2[Arco] — Attacco 3, Salute 4, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 3, Salute 4. Con i ruoli degli scacchi muove come: Pedone.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato grosso in mischia: Assalto e scambi ripetuti
+- Motivazione dei valori: 3/4 per 3 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
+### Esploratrice (test)
+- ID e versione: `g_scout@v1` — Alleato — costo [Arco] — Attacco 1, Salute 1, ranged
+- Testo effettivo: Alleato: evocalo su una casella libera. A distanza. Attacco 1, Salute 1. Swift: può agire nel turno in cui entra. Con i ruoli degli scacchi muove come: Regina.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato minimo a distanza con Swift: muore a qualsiasi danno
+- Motivazione dei valori: 1/1 per 1 risorsa
+- Regole richieste: type.Ally, target.none, cost.resources, range.ranged, keyword.swift
 - Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
 
 ## Gilda rossa
@@ -232,6 +268,24 @@ Abilità, una volta per turno, anche in risposta (costo: 1 risorsa rossa): Scegl
 - Regole richieste: type.Ally, target.none, cost.resources, range.ranged, keyword.swift
 - Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
 
+### Portascudo (test)
+- ID e versione: `r_shieldbearer@v1` — Alleato — costo 1[Bomba] — Attacco 1, Salute 5, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 1, Salute 5. Con i ruoli degli scacchi muove come: Pedone.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato difensivo: molta Salute, poco Attacco; blocca passaggi e linee di vista
+- Motivazione dei valori: 1/5 per 2 risorse: regge due attacchi base
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
+### Lanciere di fiamma (test)
+- ID e versione: `r_fire_lancer@v1` — Alleato — costo 2[Bomba] — Attacco 3, Salute 3, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 3, Salute 3. Con i ruoli degli scacchi muove come: Regina.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato costoso con Attacco superiore a quello di un Guildmaster
+- Motivazione dei valori: 3/3 per 3 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
 ## Gilda gialla
 
 ### Dalia Shadowstep
@@ -308,16 +362,34 @@ Abilità, una volta per turno, anche in risposta (costo: 1 risorsa gialla): Infl
 - Regole richieste: type.Ally, target.none, cost.resources, range.ranged
 - Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
 
+### Guardaspalle (test)
+- ID e versione: `y_bodyguard@v1` — Alleato — costo 1[Stivale] — Attacco 1, Salute 4, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 1, Salute 4. Con i ruoli degli scacchi muove come: Pedone.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato difensivo economico
+- Motivazione dei valori: 1/4 per 2 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
+### Sicario (test)
+- ID e versione: `y_assassin@v1` — Alleato — costo 2[Stivale] — Attacco 3, Salute 2, melee
+- Testo effettivo: Alleato: evocalo su una casella libera. Corpo a corpo. Attacco 3, Salute 2. Swift: può agire nel turno in cui entra. Con i ruoli degli scacchi muove come: Regina.
+- Origine: nuova proposta — alleato di test proposto (nessuna fonte ne fissa i valori)
+- Serve a testare: Alleato fragile con Swift e Attacco alto: colpisce subito
+- Motivazione dei valori: 3/2 per 3 risorse
+- Regole richieste: type.Ally, target.none, cost.resources, range.melee, keyword.swift
+- Preset compatibili: P02, P02a, P02b, P02c, P03, P03b, P01l-copia1
+
 ## Mazzi
 
 - **Mazzo blu di prova (Wizards)** (`deck_blue` v1), Guildmaster Nebros Clearmind: 9× Essenza blu, 4× Blink Step (test), 4× Dardo arcano (test), 4× Gelo (test), 4× Runic Staff (test)
-- **Mazzo blu con alleati (Wizards)** (`deck_blue_alleati` v1), Guildmaster Nebros Clearmind: 9× Essenza blu, 2× Blink Step (test), 2× Dardo arcano (test), 2× Gelo (test), 2× Runic Staff (test), 4× Golem runico (test), 4× Apprendista arcano (test)
+- **Mazzo blu con alleati (Wizards)** (`deck_blue_alleati` v1), Guildmaster Nebros Clearmind: 9× Essenza blu, 2× Blink Step (test), 2× Dardo arcano (test), 2× Gelo (test), 2× Runic Staff (test), 2× Golem runico (test), 2× Apprendista arcano (test), 2× Sentinella di brina (test), 2× Adepta della scintilla (test)
 - **Mazzo verde di prova (Hunters)** (`deck_green` v1), Guildmaster Senya Windseeker: 9× Essenza verde, 4× Field Dressing (test), 4× Regrowth (test), 4× Hunter's Net (test), 4× Hunter's Bow (test)
-- **Mazzo verde con alleati (Hunters)** (`deck_green_alleati` v1), Guildmaster Senya Windseeker: 9× Essenza verde, 2× Field Dressing (test), 2× Regrowth (test), 2× Hunter's Net (test), 2× Hunter's Bow (test), 4× Segugio (test), 4× Arciere dei boschi (test)
+- **Mazzo verde con alleati (Hunters)** (`deck_green_alleati` v1), Guildmaster Senya Windseeker: 9× Essenza verde, 2× Field Dressing (test), 2× Regrowth (test), 2× Hunter's Net (test), 2× Hunter's Bow (test), 2× Segugio (test), 2× Arciere dei boschi (test), 2× Orso dei boschi (test), 2× Esploratrice (test)
 - **Mazzo rosso di prova (Artificers)** (`deck_red` v1), Guildmaster Fiaran Rushblood: 9× Essenza rossa, 4× Thermal Surge (test), 4× Furia della Fucina (test), 4× Rincorsa (test), 4× Flame Gauntlet (test)
-- **Mazzo rosso con alleati (Artificers)** (`deck_red_alleati` v1), Guildmaster Fiaran Rushblood: 9× Essenza rossa, 2× Thermal Surge (test), 2× Furia della Fucina (test), 2× Rincorsa (test), 2× Flame Gauntlet (test), 4× Recluta della Fucina (test), 4× Bombarolo (test)
+- **Mazzo rosso con alleati (Artificers)** (`deck_red_alleati` v1), Guildmaster Fiaran Rushblood: 9× Essenza rossa, 2× Thermal Surge (test), 2× Furia della Fucina (test), 2× Rincorsa (test), 2× Flame Gauntlet (test), 2× Recluta della Fucina (test), 2× Bombarolo (test), 2× Portascudo (test), 2× Lanciere di fiamma (test)
 - **Mazzo giallo di prova (Rogues)** (`deck_yellow` v1), Guildmaster Dalia Shadowstep: 9× Essenza gialla, 4× Smoke Step (test), 4× Toxic Shiv (test), 4× Polvere accecante (test), 4× Venom Blades (test)
-- **Mazzo giallo con alleati (Rogues)** (`deck_yellow_alleati` v1), Guildmaster Dalia Shadowstep: 9× Essenza gialla, 2× Smoke Step (test), 2× Toxic Shiv (test), 2× Polvere accecante (test), 2× Venom Blades (test), 4× Tagliaborse (test), 4× Lanciacoltelli (test)
+- **Mazzo giallo con alleati (Rogues)** (`deck_yellow_alleati` v1), Guildmaster Dalia Shadowstep: 9× Essenza gialla, 2× Smoke Step (test), 2× Toxic Shiv (test), 2× Polvere accecante (test), 2× Venom Blades (test), 2× Tagliaborse (test), 2× Lanciacoltelli (test), 2× Guardaspalle (test), 2× Sicario (test)
 - **Mazzo blu di prova (Wizards) (mio)** (`deck_blue-mio1` v1), Guildmaster Nebros Clearmind: 9× Essenza blu, 4× Blink Step (test), 4× Dardo arcano (test), 4× Gelo (test), 4× Runic Staff (test), 4× Golem runico (test), 4× Apprendista arcano (test)
 - **Mazzo verde di prova (Hunters) (mio)** (`deck_green-mio1` v1), Guildmaster Senya Windseeker: 9× Essenza verde, 4× Field Dressing (test), 4× Regrowth (test), 4× Hunter's Net (test), 4× Hunter's Bow (test), 4× Segugio (test), 4× Arciere dei boschi (test)
 - **Mazzo rosso di prova (Artificers) (mio)** (`deck_red-mio1` v1), Guildmaster Fiaran Rushblood: 9× Essenza rossa, 4× Thermal Surge (test), 4× Furia della Fucina (test), 4× Rincorsa (test), 4× Flame Gauntlet (test), 4× Bombarolo (test), 4× Recluta della Fucina (test)

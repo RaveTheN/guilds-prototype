@@ -172,5 +172,43 @@
   "keywords": [
    "swift"
   ]
+ },
+ {
+  "id": "r_shieldbearer",
+  "version": 1,
+  "name": "Portascudo (test)",
+  "guild": "Red",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato difensivo: molta Salute, poco Attacco; blocca passaggi e linee di vista",
+  "rationale": "1/5 per 2 risorse: regge due attacchi base",
+  "attack": 1,
+  "health": 5,
+  "range": "melee",
+  "role": "pawn"
+ },
+ {
+  "id": "r_fire_lancer",
+  "version": 1,
+  "name": "Lanciere di fiamma (test)",
+  "guild": "Red",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 2,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato costoso con Attacco superiore a quello di un Guildmaster",
+  "rationale": "3/3 per 3 risorse",
+  "attack": 3,
+  "health": 3,
+  "range": "melee",
+  "role": "queen"
  }
 ]

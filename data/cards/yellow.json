@@ -173,5 +173,46 @@
   "range": "ranged",
   "role": "bishop",
   "altAttack": 2
+ },
+ {
+  "id": "y_bodyguard",
+  "version": 1,
+  "name": "Guardaspalle (test)",
+  "guild": "Yellow",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato difensivo economico",
+  "rationale": "1/4 per 2 risorse",
+  "attack": 1,
+  "health": 4,
+  "range": "melee",
+  "role": "pawn"
+ },
+ {
+  "id": "y_assassin",
+  "version": 1,
+  "name": "Sicario (test)",
+  "guild": "Yellow",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 2,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato fragile con Swift e Attacco alto: colpisce subito",
+  "rationale": "3/2 per 3 risorse",
+  "attack": 3,
+  "health": 2,
+  "range": "melee",
+  "role": "queen",
+  "keywords": [
+   "swift"
+  ]
  }
 ]

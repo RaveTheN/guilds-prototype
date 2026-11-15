@@ -95,7 +95,7 @@ namespace Guilds.Unity
         static void Kill(Object o) { if (Application.isPlaying) Object.Destroy(o); else Object.DestroyImmediate(o); }
         public Vector3 World(Cell c, float y) => new Vector3(c.X - (b.W - 1) / 2f, y, c.Y - (b.H - 1) / 2f);
         public float Top(Cell c) => a.Height(b.Code(c));
-        public float Extent => Mathf.Max(b.W, b.H);
+        public float Extent => Mathf.Max(b.W, b.H) + 3; // +3: accanto alla board stanno le carte in gioco
 
         GameObject Prim(PrimitiveType t, string name, Vector3 pos, Vector3 scale, Color col, bool keepCollider = false, bool overlay = false)
         {
@@ -163,6 +163,49 @@ namespace Guilds.Unity
                 t.transform.localRotation = Quaternion.Euler(0, (u.Owner == 0 ? 0 : 180) + (u.Tapped ? 90 : 0), u.Tapped ? 18 : 0);
             }
         }
+
+        // ---------- carte in gioco (risorse e oggetti) come lastre 3D sul tavolo, dal lato della Torre di chi le ha giocate ----------
+        readonly List<GameObject> table = new List<GameObject>();
+        public readonly List<(Vector3 Pos, string Text)> TableLabels = new List<(Vector3, string)>();
+        public void SyncTable(Game g)
+        {
+            // shortcut: le lastre si ricreano a ogni cambio di stato (poche decine di oggetti); da riusare se le partite diventano lente
+            foreach (var o in table) Kill(o); table.Clear(); TableLabels.Clear();
+            for (int p = 0; p < 2; p++)
+            {
+                var t = b.Tower(p); var v = t != null ? World(t.Value, 0) : Vector3.zero;
+                var dir = Mathf.Abs(v.x) > Mathf.Abs(v.z) ? new Vector3(Mathf.Sign(v.x), 0, 0) : new Vector3(0, 0, v.z != 0 ? Mathf.Sign(v.z) : p == 0 ? -1 : 1);
+                var axis = new Vector3(dir.z, 0, dir.x); float half = (dir.x != 0 ? b.W : b.H) / 2f;
+                var rows = new[]
+                {
+                    g.Players[p].Resources.Select((r, i) => (Id: r.CardId, r.Tapped, Name: "res:" + p + ":" + i)).ToList(),
+                    g.Gm(p).Items.Select((id, i) => (Id: id, Tapped: false, Name: "item:" + p + ":" + i)).ToList(),
+                };
+                for (int row = 0; row < 2; row++)
+                    for (int i = 0; i < rows[row].Count; i++)
+                    {
+                        var c = rows[row][i]; var def = g.Def(c.Id); var col = Color.Lerp(a.GuildColor(def.Guild), Color.black, c.Tapped ? 0.6f : 0.15f);
+                        float step = Mathf.Min(0.72f, (half * 2 + 2) / Mathf.Max(1, rows[row].Count));
+                        var pos = dir * (half + 0.75f + row * 0.95f) + axis * ((i - (rows[row].Count - 1) / 2f) * step) + Vector3.up * (0.02f + i * 0.002f);
+                        var slab = Prim(PrimitiveType.Cube, "card:" + c.Id, pos, new Vector3(0.6f, 0.03f, 0.84f), col, true);
+                        // dritta verso chi l'ha giocata; tappata = ruotata di lato
+                        slab.transform.localRotation = Quaternion.LookRotation(-dir) * Quaternion.Euler(0, c.Tapped ? 90 : 0, 0);
+                        var tex = a.CardArt(def.Id) ?? a.Symbol(Names.SymbolId(def.Guild, g.Preset));
+                        if (tex != null)
+                        {
+                            var face = Prim(PrimitiveType.Quad, "face", Vector3.zero, Vector3.one, c.Tapped ? Color.gray : Color.white, false, true);
+                            face.GetComponent<Renderer>().sharedMaterial.mainTexture = tex;
+                            face.transform.SetParent(slab.transform, false);
+                            face.transform.localPosition = new Vector3(0, 0.6f, 0.08f); face.transform.localRotation = Quaternion.Euler(90, 0, 0); face.transform.localScale = new Vector3(0.8f, 0.6f, 1);
+                        }
+                        table.Add(slab);
+                        TableLabels.Add((pos + Vector3.up * 0.05f, def.Name.Replace(" (test)", "").Split(' ')[0] + (c.Tapped ? " (tap)" : "")));
+                    }
+            }
+            Physics.SyncTransforms();
+        }
+        /// <summary>ID della carta 3D sotto il puntatore, o null.</summary>
+        public string PickCard(Ray ray) => Physics.Raycast(ray, out var hit, 500f) && hit.collider.name.StartsWith("card:") ? hit.collider.name.Substring(5) : null;
 
         public void ClearMarks() { foreach (var m in marks) Kill(m); marks.Clear(); }
 

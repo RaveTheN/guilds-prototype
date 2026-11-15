@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P03b — Scacchi — pezzo scelto all'ingresso (clone di P03) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -85,7 +85,7 @@
 
 ## Mazzi e carte (pescate / giocate)
 
-### G1: Mazzo verde con alleati (Hunters) (deck_green_alleati v1) — Senya Windseeker gm_senya@v1, Salute finale 5/20
+### G1: Mazzo verde con alleati (Hunters) (deck_green_alleati v1) — Senya Windseeker gm_senya@v1, Salute finale 7/20
 
 Abilità del Guildmaster usata 6 volte.
 
@@ -96,12 +96,14 @@ Abilità del Guildmaster usata 6 volte.
 | Regrowth (test) | g_regrowth@v1 | 2 | 2 | 2 |
 | Hunter's Net (test) | g_hunters_net@v1 | 2 | 1 | 1 |
 | Hunter's Bow (test) | g_hunters_bow@v1 | 2 | 0 | 0 |
-| Segugio (test) | g_hound@v1 | 4 | 2 | 2 |
-| Arciere dei boschi (test) | g_wood_archer@v1 | 4 | 0 | 0 |
+| Segugio (test) | g_hound@v1 | 2 | 2 | 2 |
+| Arciere dei boschi (test) | g_wood_archer@v1 | 2 | 0 | 0 |
+| Orso dei boschi (test) | g_bear@v1 | 2 | 0 | 0 |
+| Esploratrice (test) | g_scout@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo giallo con alleati (Rogues) (deck_yellow_alleati v1) — Dalia Shadowstep gm_dalia@v1, Salute finale 0/20
 
-Abilità del Guildmaster usata 5 volte.
+Abilità del Guildmaster usata 3 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
@@ -110,16 +112,18 @@ Abilità del Guildmaster usata 5 volte.
 | Toxic Shiv (test) | y_toxic_shiv@v1 | 2 | 0 | 0 |
 | Polvere accecante (test) | y_blinding_dust@v1 | 2 | 2 | 2 |
 | Venom Blades (test) | y_venom_blades@v1 | 2 | 0 | 0 |
-| Tagliaborse (test) | y_cutpurse@v1 | 4 | 1 | 1 |
-| Lanciacoltelli (test) | y_knife_thrower@v1 | 4 | 2 | 2 |
+| Tagliaborse (test) | y_cutpurse@v1 | 2 | 0 | 0 |
+| Lanciacoltelli (test) | y_knife_thrower@v1 | 2 | 1 | 1 |
+| Guardaspalle (test) | y_bodyguard@v1 | 2 | 1 | 1 |
+| Sicario (test) | y_assassin@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
 - setup: 1 passaggi automatici
 - turn: 11 passaggi automatici
 - draw: 11 passaggi automatici
-- combat: 33 passaggi automatici
-- venom: 17 passaggi automatici
+- combat: 34 passaggi automatici
+- venom: 14 passaggi automatici
 - death: 2 passaggi automatici
 - end: 1 passaggi automatici
 
@@ -171,15 +175,12 @@ nota di prova
 - T3 G1 passa.
 - T3 Lama di Dalia: 1 danni a Senya Windseeker (Salute 19/20).
 - T3 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T3 G2 gioca Tagliaborse (test) verso G5 (costo [Stivale]).
+- T3 G2 gioca Polvere accecante (test) su Senya Windseeker (costo [Stivale]).
 - T3 G1 passa.
-- T3 Tagliaborse (test) entra in gioco in G5 come Cavallo, pronto.
+- T3 Polvere accecante (test): Senya Windseeker -2 attack fino alla fine del turno 3.
 - T3 Dalia Shadowstep si tappa e muove: D7 → D6.
 - T3 G1 passa.
 - T3 [auto] Nessun combattimento: nessun nemico a contatto di Dalia Shadowstep.
-- T3 Tagliaborse (test) si tappa e muove: G5 → E6.
-- T3 G1 passa.
-- T3 [auto] Nessun combattimento: nessun nemico a contatto di Tagliaborse (test).
 - T3 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T3 G1 passa.
 - T3 G2 termina il turno. Risorse non spese perse (F1-45).
@@ -191,41 +192,35 @@ nota di prova
 - T4 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 16/20).
 - T4 Freccia di Senya: cura 1 a Senya Windseeker (Salute 19/20).
 - T4 G1 gioca Essenza verde (entra pronta).
-- T4 G1 gioca Segugio (test) verso C5 (costo [Arco]).
+- T4 G1 gioca Segugio (test) verso C4 (costo [Arco]).
 - T4 G2 passa.
-- T4 Segugio (test) entra in gioco in C5 come Cavallo, pronto.
+- T4 Segugio (test) entra in gioco in C4 come Cavallo, pronto.
 - T4 Senya Windseeker si tappa e muove: A3 → B4.
 - T4 G2 passa.
 - T4 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 14/20).
 - T4 [auto] Dalia Shadowstep non restituisce danni (non adiacente, H6).
-- T4 Segugio (test) si tappa e muove: C5 → D7.
+- T4 Segugio (test) si tappa e muove: C4 → B6.
 - T4 G2 passa.
-- T4 [auto] Più nemici a portata: Segugio (test) attacca Dalia Shadowstep (scelta automatica).
-- T4 [auto] Combattimento automatico: Segugio (test) (melee) infligge 2 a Dalia Shadowstep (Salute 12/20).
-- T4 [auto] Segugio (test) riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T4 [auto] Dalia Shadowstep restituisce 2 a Segugio (test) (Salute 0/2).
-- T4 [auto] Segugio (test) è sconfitto e lascia la board.
+- T4 [auto] Nessun combattimento: nessun nemico a contatto di Segugio (test).
 - T4 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T4 G2 passa.
 - T4 G1 termina il turno. Risorse non spese perse (F1-45).
 - T5 [auto] — Turno 5: G2. Le sue unità e le sue 2 carte risorsa si stappano.
 - T5 [auto] G2 pesca una carta.
-- T5 G2 gioca Lanciacoltelli (test) verso G7 (costo 1[Stivale]).
-- T5 G1 passa.
-- T5 Lanciacoltelli (test) entra in gioco in G7 come Alfiere, tappato: agirà dal prossimo turno (F1-30).
-- T5 G2 gioca Essenza gialla (entra pronta).
 - T5 Dalia Shadowstep usa la sua abilità su Senya Windseeker (costo [Stivale]).
 - T5 G1 passa.
 - T5 Lama di Dalia: 1 danni a Senya Windseeker (Salute 18/20).
 - T5 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
+- T5 G2 gioca Essenza gialla (entra pronta).
+- T5 G2 gioca Lanciacoltelli (test) verso F4 (costo 1[Stivale]).
+- T5 G1 passa.
+- T5 Lanciacoltelli (test) entra in gioco in F4 come Cavallo, tappato: agirà dal prossimo turno (F1-30).
 - T5 Dalia Shadowstep si tappa e muove: D6 → C5.
 - T5 G1 passa.
+- T5 [auto] Più nemici a portata: Dalia Shadowstep attacca Senya Windseeker (scelta automatica).
 - T5 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T5 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Senya Windseeker (Salute 16/20).
 - T5 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
-- T5 Tagliaborse (test) si tappa e muove: E6 → C7.
-- T5 G1 passa.
-- T5 [auto] Nessun combattimento: nessun nemico a contatto di Tagliaborse (test).
 - T5 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T5 G1 passa.
 - T5 G2 termina il turno. Risorse non spese perse (F1-45).
@@ -234,112 +229,117 @@ nota di prova
 - T6 [auto] G1 pesca una carta.
 - T6 Senya Windseeker usa la sua abilità su Dalia Shadowstep (costo [Arco]).
 - T6 G2 passa.
-- T6 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 11/20).
+- T6 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 13/20).
 - T6 Freccia di Senya: cura 1 a Senya Windseeker (Salute 16/20).
-- T6 G1 gioca Segugio (test) verso A5 (costo [Arco]).
+- T6 G1 gioca Segugio (test) verso C2 (costo [Arco]).
 - T6 G2 passa.
-- T6 Segugio (test) entra in gioco in A5 come Cavallo, pronto.
+- T6 Segugio (test) entra in gioco in C2 come Alfiere, pronto.
 - T6 G1 gioca Essenza verde (entra pronta).
 - T6 G1 gioca Regrowth (test) su Segugio (test) (costo [Arco]).
 - T6 G2 passa.
 - T6 Regrowth (test): cura 2 a Segugio (test) (Salute 2/2).
-- T6 Senya Windseeker si tappa e muove: B4 → C4.
+- T6 Senya Windseeker si tappa e muove: B4 → B5.
 - T6 G2 passa.
-- T6 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 9/20).
+- T6 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 11/20).
 - T6 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T6 [auto] Dalia Shadowstep restituisce 2 a Senya Windseeker (Salute 14/20).
-- T6 Segugio (test) si tappa e muove: A5 → C6.
+- T6 Segugio (test) si tappa e muove: B6 → C4.
 - T6 G2 passa.
-- T6 [auto] Più nemici a portata: Segugio (test) attacca Dalia Shadowstep (scelta automatica).
-- T6 [auto] Combattimento automatico: Segugio (test) (melee) infligge 2 a Dalia Shadowstep (Salute 7/20).
+- T6 [auto] Combattimento automatico: Segugio (test) (melee) infligge 2 a Dalia Shadowstep (Salute 9/20).
 - T6 [auto] Segugio (test) riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T6 [auto] Dalia Shadowstep restituisce 2 a Segugio (test) (Salute 0/2).
 - T6 [auto] Segugio (test) è sconfitto e lascia la board.
+- T6 Segugio (test) si tappa e muove: C2 → B3.
+- T6 G2 passa.
+- T6 [auto] Nessun combattimento: nessun nemico a contatto di Segugio (test).
 - T6 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T6 G2 passa.
 - T6 G1 termina il turno. Risorse non spese perse (F1-45).
 - T7 [auto] — Turno 7: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T7 [auto] G2 pesca una carta.
-- T7 G2 gioca Polvere accecante (test) su Senya Windseeker (costo [Stivale]).
+- T7 G2 gioca Sicario (test) verso H4 (costo 2[Stivale]).
 - T7 G1 passa.
-- T7 Polvere accecante (test): Senya Windseeker -2 attack fino alla fine del turno 7.
-- T7 G2 gioca Polvere accecante (test) su Senya Windseeker (costo [Stivale]).
-- T7 G1 passa.
-- T7 Polvere accecante (test): Senya Windseeker -2 attack fino alla fine del turno 7.
+- T7 Sicario (test) entra in gioco in H4 come Alfiere, pronto.
 - T7 Dalia Shadowstep si tappa e muove: C5 → B4.
 - T7 G1 passa.
+- T7 [auto] Più nemici a portata: Dalia Shadowstep attacca Senya Windseeker (scelta automatica).
 - T7 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T7 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Senya Windseeker (Salute 12/20).
 - T7 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
-- T7 Tagliaborse (test) si tappa e muove: C7 → B5.
+- T7 Lanciacoltelli (test) si tappa e muove: F4 → D3.
 - T7 G1 passa.
-- T7 [auto] Combattimento automatico: Tagliaborse (test) (melee) infligge 1 a Senya Windseeker (Salute 11/20).
+- T7 [auto] Più nemici a portata: Lanciacoltelli (test) attacca Senya Windseeker (scelta automatica).
+- T7 [auto] Combattimento automatico: Lanciacoltelli (test) (ranged) infligge 1 a Senya Windseeker (Salute 11/20).
 - T7 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
-- T7 Dalia Shadowstep usa la sua abilità su Senya Windseeker (costo [Stivale]).
+- T7 Sicario (test) si tappa e muove: H4 → G5 → F6 → E7 → D8.
 - T7 G1 passa.
-- T7 Lama di Dalia: 1 danni a Senya Windseeker (Salute 10/20).
-- T7 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T7 Lanciacoltelli (test) si tappa e muove: G7 → F6.
-- T7 G1 passa.
-- T7 [auto] Nessun combattimento: nessun nemico in linea di vista di Lanciacoltelli (test).
+- T7 [auto] Nessun combattimento: nessun nemico a contatto di Sicario (test).
 - T7 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T7 G1 passa.
 - T7 G2 termina il turno. Risorse non spese perse (F1-45).
 - T8 [auto] — Turno 8: G1. Le sue unità e le sue 3 carte risorsa si stappano.
-- T8 [auto] Senya Windseeker è avvelenato: subisce 1 danno (Salute 9/20).
+- T8 [auto] Senya Windseeker è avvelenato: subisce 1 danno (Salute 10/20).
 - T8 [auto] G1 pesca una carta.
 - T8 Senya Windseeker usa la sua abilità su Dalia Shadowstep (costo [Arco]).
 - T8 G2 passa.
-- T8 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 6/20).
-- T8 Freccia di Senya: cura 1 a Senya Windseeker (Salute 10/20).
-- T8 G1 gioca Hunter's Net (test) su Dalia Shadowstep (costo 1[Arco]).
+- T8 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 8/20).
+- T8 Freccia di Senya: cura 1 a Senya Windseeker (Salute 11/20).
+- T8 G1 gioca Hunter's Net (test) su Sicario (test) (costo 1[Arco]).
 - T8 G2 passa.
-- T8 Hunter's Net (test): Dalia Shadowstep non può muoversi fino alla fine del turno 9.
+- T8 Hunter's Net (test): Sicario (test) non può muoversi fino alla fine del turno 9.
 - T8 G1 gioca Essenza verde (entra pronta).
 - T8 G1 gioca Regrowth (test) su Senya Windseeker (costo [Arco]).
 - T8 G2 passa.
-- T8 Regrowth (test): cura 2 a Senya Windseeker (Salute 12/20).
-- T8 Senya Windseeker si tappa e muove: C4 → C3.
+- T8 Regrowth (test): cura 2 a Senya Windseeker (Salute 13/20).
+- T8 Senya Windseeker si tappa e muove: B5 → C4.
 - T8 G2 passa.
 - T8 [auto] Più nemici a portata: Senya Windseeker attacca Dalia Shadowstep (scelta automatica).
-- T8 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 4/20).
+- T8 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 6/20).
 - T8 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T8 [auto] Dalia Shadowstep restituisce 2 a Senya Windseeker (Salute 10/20).
+- T8 [auto] Dalia Shadowstep restituisce 2 a Senya Windseeker (Salute 11/20).
+- T8 Segugio (test) si tappa e muove: B3 → A4.
+- T8 G2 passa.
+- T8 [auto] Combattimento automatico: Segugio (test) (melee) infligge 2 a Dalia Shadowstep (Salute 4/20).
+- T8 [auto] Segugio (test) riceve un segnalino veleno da Dalia Shadowstep (Venomous).
+- T8 [auto] Dalia Shadowstep restituisce 2 a Segugio (test) (Salute 0/2).
+- T8 [auto] Segugio (test) è sconfitto e lascia la board.
 - T8 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T8 G2 passa.
 - T8 G1 termina il turno. Risorse non spese perse (F1-45).
 - T9 [auto] — Turno 9: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T9 [auto] G2 pesca una carta.
-- T9 Dalia Shadowstep usa la sua abilità su Senya Windseeker (costo [Stivale]).
+- T9 G2 gioca Polvere accecante (test) su Senya Windseeker (costo [Stivale]).
 - T9 G1 passa.
-- T9 Lama di Dalia: 1 danni a Senya Windseeker (Salute 9/20).
+- T9 Polvere accecante (test): Senya Windseeker -2 attack fino alla fine del turno 9.
+- T9 G2 gioca Guardaspalle (test) verso F7 (costo 1[Stivale]).
+- T9 G1 passa.
+- T9 Guardaspalle (test) entra in gioco in F7 come Regina, tappato: agirà dal prossimo turno (F1-30).
+- T9 Dalia Shadowstep si tappa e muove: B4 → B5.
+- T9 G1 passa.
 - T9 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T9 G2 gioca Lanciacoltelli (test) verso F8 (costo 1[Stivale]).
+- T9 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Senya Windseeker (Salute 9/20).
+- T9 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
+- T9 Lanciacoltelli (test) si tappa e muove: D3 → C5.
 - T9 G1 passa.
-- T9 Lanciacoltelli (test) entra in gioco in F8 come Regina, tappato: agirà dal prossimo turno (F1-30).
-- T9 Tagliaborse (test) si tappa e muove: B5 → A3.
-- T9 G1 passa.
-- T9 [auto] Nessun combattimento: nessun nemico a contatto di Tagliaborse (test).
-- T9 Lanciacoltelli (test) si tappa e muove: F6 → G5.
-- T9 G1 passa.
-- T9 [auto] Nessun combattimento: nessun nemico in linea di vista di Lanciacoltelli (test).
+- T9 [auto] Combattimento automatico: Lanciacoltelli (test) (ranged) infligge 1 a Senya Windseeker (Salute 8/20).
+- T9 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
 - T9 G2 dichiara la fine del turno: finestra di risposta di fine turno.
 - T9 G1 passa.
 - T9 G2 termina il turno. Risorse non spese perse (F1-45).
 - T10 [auto] — Turno 10: G1. Le sue unità e le sue 4 carte risorsa si stappano.
-- T10 [auto] Senya Windseeker è avvelenato: subisce 1 danno (Salute 8/20).
+- T10 [auto] Senya Windseeker è avvelenato: subisce 1 danno (Salute 7/20).
 - T10 [auto] G1 pesca una carta.
-- T10 G1 gioca Essenza verde (entra pronta).
-- T10 Senya Windseeker si tappa e muove: C3 → B3.
-- T10 G2 passa.
-- T10 [auto] Più nemici a portata: Senya Windseeker attacca Dalia Shadowstep (scelta automatica).
-- T10 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 2/20).
-- T10 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T10 [auto] Dalia Shadowstep restituisce 2 a Senya Windseeker (Salute 6/20).
 - T10 Senya Windseeker usa la sua abilità su Dalia Shadowstep (costo [Arco]).
 - T10 G2 passa.
-- T10 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 1/20).
-- T10 Freccia di Senya: cura 1 a Senya Windseeker (Salute 7/20).
+- T10 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 3/20).
+- T10 Freccia di Senya: cura 1 a Senya Windseeker (Salute 8/20).
+- T10 G1 gioca Essenza verde (entra pronta).
+- T10 Senya Windseeker si tappa e muove: C4 → B4.
+- T10 G2 passa.
+- T10 [auto] Più nemici a portata: Senya Windseeker attacca Dalia Shadowstep (scelta automatica).
+- T10 [auto] Combattimento automatico: Senya Windseeker (ranged) infligge 2 a Dalia Shadowstep (Salute 1/20).
+- T10 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
+- T10 [auto] Dalia Shadowstep restituisce 2 a Senya Windseeker (Salute 6/20).
 - T10 G1 dichiara la fine del turno: finestra di risposta di fine turno.
 - T10 G2 passa.
 - T10 G1 termina il turno. Risorse non spese perse (F1-45).
@@ -347,19 +347,10 @@ nota di prova
 - T11 [auto] G2 pesca una carta.
 - T11 G2 gioca Essenza gialla (entra pronta).
 - T11 Dalia Shadowstep usa la sua abilità su Senya Windseeker (costo [Stivale]).
-- T11 G1 passa.
-- T11 Lama di Dalia: 1 danni a Senya Windseeker (Salute 6/20).
-- T11 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T11 Dalia Shadowstep si tappa e muove: B4 → C4.
-- T11 G1 passa.
-- T11 [auto] Senya Windseeker riceve un segnalino veleno da Dalia Shadowstep (Venomous).
-- T11 [auto] Combattimento automatico: Dalia Shadowstep (melee) infligge 2 a Senya Windseeker (Salute 4/20).
-- T11 [auto] Senya Windseeker non restituisce danni (difensore a distanza, F1-33).
-- T11 Tagliaborse (test) si tappa e muove: A3 → C2.
 - T11 Senya Windseeker usa la sua abilità su Dalia Shadowstep (costo [Arco]).
 - T11 G2 passa.
 - T11 Freccia di Senya: 1 danni a Dalia Shadowstep (Salute 0/20).
-- T11 Freccia di Senya: cura 1 a Senya Windseeker (Salute 5/20).
+- T11 Freccia di Senya: cura 1 a Senya Windseeker (Salute 7/20).
 - T11 [auto] Fine partita: vince G1. Dalia Shadowstep è stato sconfitto (F1-54).
 
 ## Configurazione completa (copia)

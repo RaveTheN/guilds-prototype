@@ -1,6 +1,6 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.12.3 (M4+)
+- Versione prototipo: 0.13.0 (M4+)
 - Preset: P02b — Alleati — doppio profilo d'attacco (clone di P02) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
@@ -85,23 +85,25 @@
 
 ## Mazzi e carte (pescate / giocate)
 
-### G1: Mazzo giallo con alleati (Rogues) (deck_yellow_alleati v1) — Dalia Shadowstep gm_dalia@v1, Salute finale 3/20
+### G1: Mazzo giallo con alleati (Rogues) (deck_yellow_alleati v1) — Dalia Shadowstep gm_dalia@v1, Salute finale 5/20
 
-Abilità del Guildmaster usata 2 volte.
+Abilità del Guildmaster usata 3 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
 | Essenza gialla | res_yellow@v1 | 9 | 4 | 4 |
 | Smoke Step (test) | y_smoke_step@v1 | 2 | 0 | 0 |
-| Toxic Shiv (test) | y_toxic_shiv@v1 | 2 | 2 | 2 |
+| Toxic Shiv (test) | y_toxic_shiv@v1 | 2 | 2 | 1 |
 | Polvere accecante (test) | y_blinding_dust@v1 | 2 | 1 | 1 |
 | Venom Blades (test) | y_venom_blades@v1 | 2 | 0 | 0 |
-| Tagliaborse (test) | y_cutpurse@v1 | 4 | 2 | 2 |
-| Lanciacoltelli (test) | y_knife_thrower@v1 | 4 | 0 | 0 |
+| Tagliaborse (test) | y_cutpurse@v1 | 2 | 2 | 2 |
+| Lanciacoltelli (test) | y_knife_thrower@v1 | 2 | 0 | 0 |
+| Guardaspalle (test) | y_bodyguard@v1 | 2 | 0 | 0 |
+| Sicario (test) | y_assassin@v1 | 2 | 0 | 0 |
 
 ### G2: Mazzo rosso con alleati (Artificers) (deck_red_alleati v1) — Fiaran Rushblood gm_fiaran@v1, Salute finale 0/20
 
-Abilità del Guildmaster usata 3 volte.
+Abilità del Guildmaster usata 2 volte.
 
 | Carta | Versione | Nel mazzo | Pescate | Giocate |
 |---|---|---|---|---|
@@ -110,8 +112,10 @@ Abilità del Guildmaster usata 3 volte.
 | Furia della Fucina (test) | r_fury@v1 | 2 | 0 | 0 |
 | Rincorsa (test) | r_rush@v1 | 2 | 2 | 1 |
 | Flame Gauntlet (test) | r_flame_gauntlet@v1 | 2 | 0 | 0 |
-| Recluta della Fucina (test) | r_forge_recruit@v1 | 4 | 1 | 1 |
-| Bombarolo (test) | r_bomber@v1 | 4 | 1 | 1 |
+| Recluta della Fucina (test) | r_forge_recruit@v1 | 2 | 0 | 0 |
+| Bombarolo (test) | r_bomber@v1 | 2 | 1 | 1 |
+| Portascudo (test) | r_shieldbearer@v1 | 2 | 0 | 0 |
+| Lanciere di fiamma (test) | r_fire_lancer@v1 | 2 | 1 | 1 |
 
 ## Automazioni e tracciamento (da valutare per il tavolo)
 
@@ -119,7 +123,7 @@ Abilità del Guildmaster usata 3 volte.
 - turn: 8 passaggi automatici
 - draw: 8 passaggi automatici
 - combat: 26 passaggi automatici
-- venom: 12 passaggi automatici
+- venom: 13 passaggi automatici
 - death: 3 passaggi automatici
 - end: 1 passaggi automatici
 
@@ -269,15 +273,12 @@ nota di prova
 - T7 [auto] — Turno 7: G2. Le sue unità e le sue 3 carte risorsa si stappano.
 - T7 [auto] Fiaran Rushblood è avvelenato: subisce 1 danno (Salute 3/20).
 - T7 [auto] G2 pesca una carta.
-- T7 G2 gioca Recluta della Fucina (test) verso H4 (costo 1[Bomba]).
+- T7 G2 gioca Lanciere di fiamma (test) verso H4 (costo 2[Bomba]).
 - T7 G1 passa.
-- T7 Recluta della Fucina (test) entra in gioco in H4, tappato: agirà dal prossimo turno (F1-30).
-- T7 Fiaran Rushblood usa la sua abilità verso C4 (costo [Bomba]).
+- T7 Lanciere di fiamma (test) entra in gioco in H4, tappato: agirà dal prossimo turno (F1-30).
+- T7 Fiaran Rushblood si tappa e muove: B3 → C3.
 - T7 G1 passa.
-- T7 Bomba di Fiaran: Croce su C4, 2 danni a Dalia Shadowstep (Salute 5/20).
-- T7 Fiaran Rushblood si tappa e muove: B3 → C2 → D3.
-- T7 G1 passa.
-- T7 [auto] Combattimento automatico: Fiaran Rushblood (melee) infligge 2 a Dalia Shadowstep (Salute 3/20).
+- T7 [auto] Combattimento automatico: Fiaran Rushblood (melee) infligge 2 a Dalia Shadowstep (Salute 5/20).
 - T7 [auto] Fiaran Rushblood riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T7 [auto] Dalia Shadowstep restituisce 2 a Fiaran Rushblood (Salute 1/20).
 - T7 G2 dichiara la fine del turno: finestra di risposta di fine turno.
@@ -286,9 +287,10 @@ nota di prova
 - T8 [auto] — Turno 8: G1. Le sue unità e le sue 3 carte risorsa si stappano.
 - T8 [auto] G1 pesca una carta.
 - T8 G1 gioca Essenza gialla (entra pronta).
-- T8 G1 gioca Toxic Shiv (test) su Fiaran Rushblood (costo [Stivale]).
+- T8 Dalia Shadowstep usa la sua abilità su Fiaran Rushblood (costo [Stivale]).
 - T8 G2 passa.
-- T8 Toxic Shiv (test): 1 danni a Fiaran Rushblood (Salute 0/20).
+- T8 Lama di Dalia: 1 danni a Fiaran Rushblood (Salute 0/20).
+- T8 [auto] Fiaran Rushblood riceve un segnalino veleno da Dalia Shadowstep (Venomous).
 - T8 [auto] Fine partita: vince G1. Fiaran Rushblood è stato sconfitto (F1-54).
 
 ## Configurazione completa (copia)

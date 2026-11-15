@@ -41,6 +41,6 @@ public class CatalogTest
         foreach (var k in R.Decks)
             sb.AppendLine($"- **{k.Name}** (`{k.Id}` v{k.Version}), Guildmaster {R.AnyVersion(k.Guildmaster).Name}: " + string.Join(", ", k.Cards.Select(e => $"{e.Count}× {R.AnyVersion(e.Card).Name}")));
         File.WriteAllText(Path.Combine(d.FullName, "docs", "CARDS.md"), sb.ToString());
-        Assert.Equal(32, R.CardVersions.Count);
+        Assert.Equal(40, R.CardVersions.Count);
     }
 }

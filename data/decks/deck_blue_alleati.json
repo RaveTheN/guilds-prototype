@@ -26,11 +26,19 @@
   },
   {
    "card": "b_rune_golem",
-   "count": 4
+   "count": 2
   },
   {
    "card": "b_apprentice",
-   "count": 4
+   "count": 2
+  },
+  {
+   "card": "b_frost_sentinel",
+   "count": 2
+  },
+  {
+   "card": "b_spark_adept",
+   "count": 2
   }
  ]
 }
