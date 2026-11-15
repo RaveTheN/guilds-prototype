@@ -1,0 +1,36 @@
+{
+ "id": "deck_blue_alleati",
+ "name": "Mazzo blu con alleati (Wizards)",
+ "version": 1,
+ "guildmaster": "gm_nebros",
+ "cards": [
+  {
+   "card": "res_blue",
+   "count": 9
+  },
+  {
+   "card": "b_blink_step",
+   "count": 2
+  },
+  {
+   "card": "b_arcane_dart",
+   "count": 2
+  },
+  {
+   "card": "b_frost",
+   "count": 2
+  },
+  {
+   "card": "b_runic_staff",
+   "count": 2
+  },
+  {
+   "card": "b_rune_golem",
+   "count": 4
+  },
+  {
+   "card": "b_apprentice",
+   "count": 4
+  }
+ ]
+}

@@ -20,6 +20,70 @@ namespace Guilds.Unity
         {
             deckChanges = decks.Where(d => d != null).SelectMany(d => Repo.DeckChanges(d, preset, p)).ToList();
             preset = p; assets = new Assets(DataRoot, p.Theme);
+            // i preset con gli alleati vogliono i mazzi «con alleati», gli altri quelli senza: il cambio è dichiarato, mai silenzioso
+            for (int i = 0; i < 2; i++)
+            {
+                string b = decks[i].Id.Replace("_alleati", ""); var want = Repo.Deck(p.C("units") == "alleati" ? b + "_alleati" : b);
+                if (want != null && want != decks[i]) { decks[i] = want; Say($"Preset «{p.Id}»: i mazzi sono stati cambiati in quelli {(p.C("units") == "alleati" ? "con alleati" : "senza alleati")}."); }
+            }
+        }
+
+        // ---------- editor di mazzi: lavora sempre su una copia, salvata in data/decks/user ----------
+        DeckDef editDeck; Vector2 editScroll;
+        void DeckEditorGUI(Rect ir, float cw)
+        {
+            if (editDeck == null)
+            {
+                G.Label(new Rect(ir.x, ir.y, cw, 48), "Tutti i mazzi: assegnane uno a G1 o a G2, oppure modificane una copia. L'originale non viene mai modificato; i tuoi mazzi sono salvati in data/decks/user.", small);
+                editScroll = G.BeginScrollView(new Rect(ir.x, ir.y + 52, cw, ir.height - 52), editScroll, new Rect(0, 0, cw - 24, Repo.Decks.Count * 44));
+                for (int i = 0; i < Repo.Decks.Count; i++)
+                {
+                    var dk = Repo.Decks[i]; float ry = i * 44; bool valid = Repo.ValidateDeck(dk, preset).Count == 0;
+                    if (i % 2 == 1) Fill(new Rect(0, ry, cw - 24, 44), new Color(0.15f, 0.15f, 0.17f));
+                    G.Label(new Rect(4, ry + 2, cw - 400, 40), dk.Name + $" — {dk.Cards.Sum(e => e.Count)} carte" + (valid ? "" : " <color=#ff9090>(non valido per questo preset)</color>")
+                        + (dk == decks[0] ? " <color=#9fd0ff>[G1]</color>" : "") + (dk == decks[1] ? " <color=#9fd0ff>[G2]</color>" : ""), small);
+                    for (int s = 0; s < 2; s++) if (G.Button(new Rect(cw - 390 + s * 84, ry + 6, 80, 32), $"a G{s + 1}")) decks[s] = dk;
+                    if (G.Button(new Rect(cw - 218, ry + 6, 190, 32), "Modifica una copia"))
+                    {
+                        string b = dk.Id.Split(new[] { "-mio" }, System.StringSplitOptions.None)[0]; int n = 1;
+                        while (Repo.Deck($"{b}-mio{n}") != null) n++;
+                        editDeck = Json.Clone(dk); editDeck.Id = $"{b}-mio{n}"; editDeck.Name = dk.Name + " (mio)";
+                    }
+                }
+                G.EndScrollView();
+                return;
+            }
+            var gm = Repo.AnyVersion(editDeck.Guildmaster);
+            G.Label(new Rect(ir.x, ir.y, 70, 30), "Nome", small); editDeck.Name = G.TextField(new Rect(ir.x + 70, ir.y, Mathf.Min(460, cw - 70), 30), editDeck.Name);
+            int total = editDeck.Cards.Sum(e => e.Count);
+            G.Label(new Rect(ir.x, ir.y + 34, cw, 24), $"{editDeck.Id} — Guildmaster {gm.Name} — {total} carte (minimo {preset.N("deckMin")}, massimo {preset.N("maxCopies")} copie, risorse escluse)", small);
+            var pool = Repo.CardVersions.Keys.Select(Repo.AnyVersion).Where(c => c.Guild == gm.Guild && c.Type != CardType.Guildmaster).ToList();
+            var list = new Rect(ir.x, ir.y + 62, cw, ir.height - 62 - 150);
+            editScroll = G.BeginScrollView(list, editScroll, new Rect(0, 0, cw - 24, pool.Count * 34));
+            for (int i = 0; i < pool.Count; i++)
+            {
+                var c = pool[i]; int n = editDeck.Cards.FirstOrDefault(e => e.Card == c.Id)?.Count ?? 0; float ry = i * 34;
+                if (i % 2 == 1) Fill(new Rect(0, ry, cw - 24, 34), new Color(0.15f, 0.15f, 0.17f));
+                bool ok = Repo.Card(c.Id, preset) != null;
+                G.Label(new Rect(4, ry + 4, cw - 190, 28), (ok ? "" : "<color=#ff9090>") + $"{c.Name} — {Names.Type(c.Type)}, costo {CardRules.Cost(c, preset)}" + (ok ? "" : " — non compatibile con questo preset</color>"), small);
+                int set = n;
+                GUI.enabled = n > 0; if (G.Button(new Rect(cw - 170, ry + 3, 36, 28), "−")) set = n - 1;
+                GUI.enabled = true; G.Label(new Rect(cw - 124, ry + 4, 40, 28), n.ToString(), bold);
+                if (G.Button(new Rect(cw - 86, ry + 3, 36, 28), "+")) set = n + 1;
+                if (set != n) { editDeck.Cards.RemoveAll(e => e.Card == c.Id); if (set > 0) editDeck.Cards.Add(new DeckEntry { Card = c.Id, Count = set }); }
+                if (G.Button(new Rect(cw - 210, ry + 3, 34, 28), "?")) Say(CardRules.Text(c));
+            }
+            G.EndScrollView();
+            var errs = Repo.ValidateDeck(editDeck, preset);
+            G.Label(new Rect(ir.x, list.yMax + 4, cw, 92), errs.Count == 0 ? "<color=#9fd0ff>Mazzo valido per questo preset.</color>" : string.Join("\n", errs.Select(s => "<color=#ff9090>Errore: " + s + "</color>")), tiny);
+            for (int s = -1; s < 2 && editDeck != null; s++)
+                if (G.Button(new Rect(ir.x + (s + 1) * 190, list.yMax + 100, 184, 40), s < 0 ? "Salva" : $"Salva e dai a G{s + 1}"))
+                {
+                    Repo.SaveDeck(editDeck); if (s >= 0) decks[s] = editDeck;
+                    Say($"Mazzo salvato in data/decks/user/{editDeck.Id}.json" + (s >= 0 ? $" e assegnato a G{s + 1}." : ".") + (errs.Count > 0 ? " Attenzione: non è valido per questo preset." : ""));
+                    editDeck = null;
+                }
+            if (editDeck != null && G.Button(new Rect(ir.x + 570, list.yMax + 100, 130, 40), "Annulla")) editDeck = null;
         }
 
         /// <summary>Tutte le regole dell'inventario divise in: attive, spente ma attivabili da un parametro, non disponibili (col motivo).</summary>
@@ -60,10 +124,11 @@ namespace Guilds.Unity
             // --- colonna 1: preset ---
             float c1 = 310;
             G.Label(new Rect(20, 60, c1, 28), "1. Scegli un preset", bold);
-            presetScroll = G.BeginScrollView(new Rect(20, 90, c1, 520), presetScroll, new Rect(0, 0, c1 - 24, Repo.Presets.Count * 64));
-            for (int i = 0; i < Repo.Presets.Count; i++)
+            var shown = Repo.Visible;
+            presetScroll = G.BeginScrollView(new Rect(20, 90, c1, 520), presetScroll, new Rect(0, 0, c1 - 24, shown.Count * 64));
+            for (int i = 0; i < shown.Count; i++)
             {
-                var p = Repo.Presets[i];
+                var p = shown[i];
                 var o = GUI.color; if (p == preset) GUI.color = new Color(0.6f, 1, 0.6f);
                 if (G.Button(new Rect(0, i * 64, c1 - 26, 58), $"{p.Id}{(p.BuiltIn ? "" : " (tuo)")}\n{p.Name}", wrapBtn) && p != preset) SelectPreset(p);
                 GUI.color = o;
@@ -72,17 +137,19 @@ namespace Guilds.Unity
             if (G.Button(new Rect(20, 620, 98, 40), "Clona")) Editable(true);
             GUI.enabled = !preset.BuiltIn;
             if (G.Button(new Rect(126, 620, 98, 40), "Salva")) { Repo.SavePreset(preset); Say("Preset salvato in data/presets/user/" + preset.Id + ".json"); }
-            // eliminazione definitiva: chiede un secondo clic di conferma
+            // eliminazione: chiede un secondo clic di conferma. I preset di base spariscono dall'elenco e si possono ripristinare.
+            GUI.enabled = shown.Count > 1;
             bool ask = deleteAsk == preset.Id; var oc = GUI.color; if (ask) GUI.color = new Color(1, 0.5f, 0.5f);
             if (G.Button(new Rect(232, 620, 98, 40), ask ? "Confermi?" : "Elimina"))
             {
-                if (!ask) { deleteAsk = preset.Id; Say($"Clicca di nuovo per eliminare definitivamente «{preset.Id}». I preset di base non si possono eliminare."); }
-                else { string id = preset.Id; Repo.DeletePreset(preset); deleteAsk = null; SelectPreset(Repo.Presets[0]); Say($"Preset «{id}» eliminato."); return; }
+                if (!ask) { deleteAsk = preset.Id; Say(preset.BuiltIn ? $"Clicca di nuovo per togliere dall'elenco il preset di base «{preset.Id}». Lo ritrovi con «Ripristina i preset di base»." : $"Clicca di nuovo per eliminare definitivamente «{preset.Id}»."); }
+                else { string id = preset.Id; bool bi = preset.BuiltIn; Repo.DeletePreset(preset); deleteAsk = null; SelectPreset(Repo.Visible[0]); Say(bi ? $"Preset di base «{id}» tolto dall'elenco." : $"Preset «{id}» eliminato."); return; }
             }
             GUI.color = oc; GUI.enabled = true;
             if (preset.BuiltIn) G.Label(new Rect(20, 668, c1, 70), "<color=#ffcc66>Preset di base. Puoi cambiare qualsiasi regola qui a destra: alla prima modifica ne creo una copia tua.</color>", small);
             else { G.Label(new Rect(20, 668, c1, 24), "Nome del tuo preset:", small); preset.Name = G.TextField(new Rect(20, 694, c1, 32), preset.Name); }
-            G.Label(new Rect(20, 745, c1, 300), preset.Description + (preset.Partial ? "\n<color=#ffcc66>TEST PARZIALE</color>" : ""), small);
+            if (Repo.Hidden.Count > 0 && G.Button(new Rect(20, 1036, c1, 34), $"Ripristina i preset di base ({Repo.Hidden.Count})")) { Repo.RestorePresets(); Say("Preset di base ripristinati."); }
+            G.Label(new Rect(20, 745, c1, 286), preset.Description + (preset.Partial ? "\n<color=#ffcc66>TEST PARZIALE</color>" : ""), small);
 
             // --- colonna 2: regole selezionabili (valgono dalla partita successiva) ---
             float x = 350, cw = Mathf.Clamp(W - 350 - 600, 430, 660); var map = Repo.Map(preset.Map);
@@ -114,7 +181,10 @@ namespace Guilds.Unity
             }
             grp++; Band(34); y += 8; G.Label(new Rect(4, y, cw, 24), "Tema visivo (presentazione)", bold); y += 26;
             foreach (var t in Assets.ThemeNames(DataRoot)) Row(t, preset.Theme == t, null, () => { Editable().Theme = t; assets = new Assets(DataRoot, t); });
-            foreach (var d in PresetSchema.Params)
+            foreach (var theme in PresetSchema.Groups)
+            {   // regole raggruppate per tema, con una fascia di titolo
+                y += 10; Fill(new Rect(0, y, cw - 24, 34), new Color(0.2f, 0.28f, 0.45f)); G.Label(new Rect(8, y + 4, cw - 40, 28), theme.Name.ToUpperInvariant(), bold); y += 34; grp = 0;
+            foreach (var d in theme.Keys.Select(k => PresetSchema.Params.First(q => q.Key == k)))
             {
                 grp++; Band(8); y += 8;
                 if (d.IsNumber)
@@ -127,13 +197,18 @@ namespace Guilds.Unity
                     GUI.enabled = true; y += 28; continue;
                 }
                 Band(26); G.Label(new Rect(4, y, cw, 24), d.Label, bold); y += 26;
-                if (d.Note != null) { Band(18); G.Label(new Rect(4, y - 4, rw, 20), d.Note, tiny); y += 18; }
+                if (d.Note != null)
+                {   // la nota può andare su più righe: l'altezza si misura, altrimenti finisce sotto la voce successiva
+                    float nh = G.Height(tiny, d.Note, rw - 8) + 4;
+                    Band(nh); G.Label(new Rect(4, y - 2, rw - 8, nh), d.Note, tiny); y += nh;
+                }
                 foreach (var o in d.Options)
                 {
                     string codes = o.Codes.Length > 0 ? "  [" + string.Join(", ", o.Codes) + "]" : "";
                     var dk = d.Key; var ov = o.Value;
                     Row($"{o.Value} — {o.Label}{codes}", preset.C(d.Key) == o.Value, PresetSchema.Unavailable(d.Key, o.Value, map), () => Editable().Choices[dk] = ov);
                 }
+            }
             }
             paramH = y + 40;
             G.EndScrollView();
@@ -144,8 +219,14 @@ namespace Guilds.Unity
             for (int i = 0; i < 2; i++)
             {
                 G.Label(new Rect(x, 92 + i * 40, 40, 30), $"G{i + 1}", bold);
-                if (G.Button(new Rect(x + 44, 92 + i * 40, Mathf.Min(460, cw - 44), 34), randomDecks ? "estratto a caso all'avvio" : decks[i].Name + "  (clic per cambiare)") && !randomDecks) decks[i] = Repo.Decks[(Repo.Decks.IndexOf(decks[i]) + 1) % Repo.Decks.Count];
+                if (G.Button(new Rect(x + 44, 92 + i * 40, Mathf.Min(460, cw - 44), 34), randomDecks ? "estratto a caso all'avvio" : optimized ? Eff(i).Name + "  (clic per cambiare gilda)" : decks[i].Name + "  (clic per cambiare)") && !randomDecks)
+                {   // con i mazzi ottimizzati conta solo il Guildmaster: si passa al prossimo mazzo con un Guildmaster diverso
+                    string gmNow = decks[i].Guildmaster; int k = Repo.Decks.IndexOf(decks[i]);
+                    do k = (k + 1) % Repo.Decks.Count; while (optimized && Repo.Decks[k].Guildmaster == gmNow && Repo.Decks[k] != decks[i]);
+                    decks[i] = Repo.Decks[k];
+                }
             }
+            optimized = G.Toggle(new Rect(x + 44 + Mathf.Min(460, cw - 44) + 12, 135, 300, 28), optimized, "Mazzi ottimizzati per il preset");
             randomDecks = G.Toggle(new Rect(x + 44 + Mathf.Min(460, cw - 44) + 12, 95, 260, 28), randomDecks, "Mazzi casuali all'avvio");
             G.Label(new Rect(x, 176, 60, 30), "Seed", lbl);
             seedText = G.TextField(new Rect(x + 60, 176, 140, 30), seedText ?? seed.ToString());
@@ -157,7 +238,7 @@ namespace Guilds.Unity
             GUI.enabled = !vsAi; // contro l'AI non c'è nessun passaggio: la mano dell'AI resta sempre coperta
             handoff = G.Toggle(new Rect(x + cw / 2, 244, cw / 2, 28), handoff && !vsAi, "Passaggio del controllo (copre la mano)") || (vsAi && handoff);
 
-            var errors = Repo.Validate(preset, decks[0], decks[1]);
+            var errors = Repo.Validate(preset, Eff(0), Eff(1));
             GUI.enabled = errors.Count == 0;
             if (G.Button(new Rect(x, 284, 240, 60), errors.Count == 0 ? "AVVIA PARTITA" : "Configurazione\nnon valida", wrapBtn))
             {
@@ -171,15 +252,16 @@ namespace Guilds.Unity
             if (errors.Count == 0) msg += "\n<color=#9fd0ff>Mazzi validi per questo preset.</color>";
             G.Label(new Rect(x + 250, 280, cw - 250, 116), msg, tiny);
 
-            string[] tabs = { "Tutte le regole", "Mazzi e carte" };
-            infoTab = Mathf.Min(infoTab, 1);
+            string[] tabs = { "Tutte le regole", "Mazzi e carte", "Editor di mazzi" };
+            infoTab = Mathf.Min(infoTab, 2);
             infoTab = G.Toolbar(new Rect(x, 400, cw, 32), infoTab, tabs);
             var ir = new Rect(x, 438, cw, H - 450);
-            if (infoTab == 1)
+            if (infoTab == 2) DeckEditorGUI(ir, cw);
+            else if (infoTab == 1)
             {
                 deckScroll = G.BeginScrollView(ir, deckScroll, new Rect(0, 0, cw - 24, 2600));
                 float dy = 0;
-                for (int i = 0; i < 2; i++) dy += DrawDeck(0, dy, cw - 30, decks[i], preset, $"G{i + 1} — ");
+                for (int i = 0; i < 2; i++) dy += DrawDeck(0, dy, cw - 30, Eff(i), preset, $"G{i + 1} — ");
                 G.EndScrollView();
             }
             else

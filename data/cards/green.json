@@ -16,6 +16,7 @@
   "attack": 2,
   "health": 20,
   "range": "ranged",
+  "altAttack": 1,
   "tokenModel": "models/senya.obj",
   "keywords": [],
   "ability": {
@@ -130,5 +131,46 @@
   "originSource": "Core set - fase 4: Hunter's Bow, oggetto (testo originale basato su regole boardless)",
   "tests": "Oggetto d'attacco su un Guildmaster a distanza",
   "rationale": "+1 permanente"
+ },
+ {
+  "id": "g_hound",
+  "version": 1,
+  "name": "Segugio (test)",
+  "guild": "Green",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato veloce con Swift; col ruolo Cavallo salta gli ostacoli",
+  "rationale": "2/2 per 1 risorsa: colpisce subito ma muore a un attacco base",
+  "attack": 2,
+  "health": 2,
+  "range": "melee",
+  "role": "knight",
+  "keywords": [
+   "swift"
+  ]
+ },
+ {
+  "id": "g_wood_archer",
+  "version": 1,
+  "name": "Arciere dei boschi (test)",
+  "guild": "Green",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato a distanza con attacco pieno",
+  "rationale": "2/2 per 2 risorse",
+  "attack": 2,
+  "health": 2,
+  "range": "ranged",
+  "role": "bishop"
  }
 ]

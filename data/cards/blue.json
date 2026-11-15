@@ -16,6 +16,7 @@
   "attack": 2,
   "health": 20,
   "range": "ranged",
+  "altAttack": 1,
   "tokenModel": "models/nebros.obj",
   "keywords": [],
   "ability": {
@@ -128,5 +129,43 @@
   "originSource": "Core set - fase 4: Runic Staff, oggetto (testo originale basato su regole boardless)",
   "tests": "Oggetto di posizionamento per un Guildmaster a distanza",
   "rationale": "+1 movimento permanente"
+ },
+ {
+  "id": "b_rune_golem",
+  "version": 1,
+  "name": "Golem runico (test)",
+  "guild": "Blue",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato in mischia che fa da scudo a un Guildmaster a distanza (le unità nemiche bloccano la linea di vista, F1-37)",
+  "rationale": "2/4 per 2 risorse",
+  "attack": 2,
+  "health": 4,
+  "range": "melee",
+  "role": "rook"
+ },
+ {
+  "id": "b_apprentice",
+  "version": 1,
+  "name": "Apprendista arcano (test)",
+  "guild": "Blue",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Secondo tiratore: scelta del bersaglio con più nemici a portata",
+  "rationale": "1/2 per 1 risorsa",
+  "attack": 1,
+  "health": 2,
+  "range": "ranged",
+  "role": "bishop"
  }
 ]

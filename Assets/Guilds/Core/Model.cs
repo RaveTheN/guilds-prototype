@@ -6,7 +6,7 @@ using System.Linq;
 namespace Guilds.Core
 {
     public enum Guild { Red, Blue, Green, Yellow }
-    public enum CardType { Guildmaster, Resource, Action, Instant, Item }
+    public enum CardType { Guildmaster, Resource, Action, Instant, Item, Ally }
     public enum Phase { Setup, Main, Response, Discard, Over, Mulligan }
 
     public struct Cell : IEquatable<Cell>
@@ -34,7 +34,9 @@ namespace Guilds.Core
         public string Id; public int Version = 1; public string Name;
         public Guild Guild; public CardType Type;
         public int CostColored, CostGeneric;
-        public int Attack, Health; public string Range; // melee | ranged (solo Guildmaster)
+        public int Attack, Health; public string Range; // melee | ranged (Guildmaster e alleati)
+        public int AltAttack;                           // N-05: Attacco del secondo profilo (0 = non ce l'ha); vale solo con «attackProfile = doppio»
+        public string Role;                             // F4C-01: pezzo degli scacchi dell'alleato: pawn | knight | bishop | rook | queen
         public string Target = "none";                  // none | self | own | enemy | any
         public List<EffectDef> Effects = new List<EffectDef>();
         public string OriginKind, OriginSource;         // fonte esistente | adattamento | nuova proposta
@@ -114,7 +116,7 @@ namespace Guilds.Core
                 ("S-A", "Angoli liberi opposti", new[] { "U-06" })),
             Ch("los", "Linea di vista (conflitto C2)", null,
                 ("LOS-G", "Geometrica fra gli angoli + regola highground", new[] { "F1-36", "F1-37", "F1-38", "U-05" }),
-                ("LOS-Z", "Solo fra zone adiacenti", new[] { "F4C-03" })),
+                ("LOS-Z", "Solo fra zone adiacenti: si vede chi sta nella propria zona o in una zona confinante (ipotesi H27 sui territori)", new[] { "F4C-03" })),
             Ch("losLine", "Linea di tiro: come si traccia la retta", "Vale con la linea di vista geometrica (LOS-G). Per l'highground resta sempre la regola base.",
                 ("angoli", "Da un angolo qualsiasi a un angolo qualsiasi; toccare solo l'angolo di un ostacolo è valido", null),
                 ("angoli-netta", "Da angolo ad angolo, ma la retta che tocca l'angolo di un muro o di un'unità non amica non è valida", null),
@@ -122,6 +124,42 @@ namespace Guilds.Core
             Ch("venom", "Segnalini veleno", "Un'unità con almeno un segnalino subisce 1 danno all'inizio del proprio turno (F1-65).",
                 ("resta", "Restano fino a fine partita", null),
                 ("cala", "Calano di uno ogni volta che fanno danno (all'inizio del turno dell'unità avvelenata)", null)),
+            Ch("units", "Unità sulla board (conflitto C13)", "Con gli alleati servono mazzi che li contengono (i mazzi «con alleati»).",
+                ("eroe", "Solo il Guildmaster", new[] { "F3-01", "F4B-01" }),
+                ("alleati", "Guildmaster e alleati evocati dalle carte", new[] { "F1-10", "F1-17", "F1-20", "F1-29", "F1-30", "F1-62", "F2-01" })),
+            Ch("summonZone", "Dove si evocano gli alleati", "Mai su highground, muri o caselle occupate. Ipotesi H27: il territorio di un giocatore sono le caselle normali collegate alle partenze accanto alla sua Torre senza passare da muri o highground.",
+                ("territorio", "Su una casella normale libera del proprio territorio", null),
+                ("accanto", "Su una casella normale libera adiacente al proprio Guildmaster", null),
+                ("torre", "Su una casella normale libera accanto alla propria Torre", null)),
+            Ch("summonSick", "Alleati appena evocati", null,
+                ("si", "Entrano tappati: non muovono e non attaccano nel turno d'ingresso, salvo Swift", null),
+                ("sni", "Entrano pronti ma con debolezza da evocazione: in quel turno non possono essere tappati (non muovono e non attaccano), salvo Swift", null),
+                ("no", "Entrano pronti", null)),
+            Ch("sameName", "Evocare un alleato con lo stesso nome di uno già in campo", "Vale per i propri alleati. «Sostituisce»: la carta si gioca sulla pedina già in campo, che resta nella sua casella.",
+                ("nuova", "Crea una nuova pedina", null),
+                ("rimpiazza", "Crea una nuova pedina e quella vecchia viene rimossa (la nuova può prenderne il pezzo degli scacchi)", null),
+                ("sostituisce", "Sostituisce la vecchia pedina: cura completa, via tutto il veleno, il giocatore può togliere gli effetti delle carte giocate su di lei e cambiarle il pezzo degli scacchi", null)),
+            Num("maxUnits", "Miniature massime per giocatore, Guildmaster incluso (F2-01)", 5, 1, 9),
+            Ch("allyLife", "Vita delle unità non Guildmaster", "I Guildmaster hanno sempre danni persistenti.",
+                ("persistente", "Danni persistenti, come i Guildmaster", null),
+                ("ripristinata", "Torna piena all'inizio del turno di ogni giocatore", new[] { "N-01" })),
+            Ch("assault", "Assalto", "Muovere sulla casella di un'unità nemica: gli scambi di danno si ripetono finché una delle due muore; il difensore a distanza fa 1 danno a scambio. Ipotesi H28: chi vince occupa la casella; se muoiono entrambe resta vuota; può dichiararlo anche un'unità a distanza.",
+                ("no", "Spento", null),
+                ("alleati", "Attivo, ma non contro i Guildmaster", new[] { "N-02", "N-03", "N-04" }),
+                ("nogm", "Attivo anche contro i Guildmaster, ma non Guildmaster contro Guildmaster", new[] { "N-02", "N-03", "N-04" }),
+                ("tutti", "Attivo anche contro i Guildmaster", new[] { "N-02", "N-03", "N-04" })),
+            Ch("attackProfile", "Profilo d'attacco", "Ipotesi H10: adiacente si usa il valore in mischia, altrimenti quello a distanza. Il secondo valore è scritto sulla carta.",
+                ("singolo", "Una sola portata per unità", null),
+                ("doppio", "Le unità col secondo profilo attaccano sia in mischia sia a distanza, con valori diversi", new[] { "N-05", "F3-10" })),
+            Ch("moveStyle", "Come si muovono le pedine", "Con gli scacchi i bonus al movimento non hanno effetto e non si attraversano le altre unità (il Cavallo salta). Le carte che spostano di N caselle restano a passi. Ipotesi H29: il Pedone muove di una casella in orizzontale o verticale.",
+                ("passi", "Da 1 a N caselle, anche in diagonale", new[] { "F1-22", "F1-23", "F3-04" }),
+                ("re", "Ogni unità come il Re: una casella in qualsiasi direzione", new[] { "F4B-04" }),
+                ("ruoli", "Ogni unità come il pezzo degli scacchi scritto sulla carta; un solo alleato per tipo", new[] { "F2-13", "F2-14", "F4C-01", "F4C-02" }),
+                ("scelta", "Prima di entrare l'alleato sceglie un pezzo fra quelli disponibili al giocatore: 1 Cavallo, 1 Alfiere, 1 Regina, 1 Torre, 2 Pedoni e 1 Re, se il Re non è del Guildmaster", new[] { "F2-13", "F2-14", "F4C-01" })),
+            Ch("gmRole", "Con i ruoli degli scacchi il Guildmaster muove come", "Vale con i pezzi degli scacchi, scritti sulla carta o scelti all'ingresso. Con i pezzi scelti all'ingresso, se il Guildmaster muove come il Re quel pezzo è suo; altrimenti il Re è fra i pezzi disponibili per gli alleati.",
+                ("king", "Re", null),
+                ("queenknight", "Regina + Cavallo", null),
+                ("steps", "3 passi: da 1 a N caselle anche in diagonale, come senza scacchi (N = movimento massimo base)", null)),
             Ch("mandatoryMove", "Movimento obbligatorio ogni turno", null,
                 ("si", "Il Guildmaster deve muovere prima di finire il turno (decade se non può)", new[] { "F3-03" }),
                 ("no", "Muovere è facoltativo", null)),
@@ -171,14 +209,41 @@ namespace Guilds.Core
                 ("no", "No", null), ("si", "Sì: cura di X a inizio turno", null)),
             Num("towerHealStartX", "X = cura a inizio turno", 1, 1, 10),
             Ch("towerDmgEnter", "Torre nemica: danno a chi entra", "Entrare in una casella adiacente alla Torre nemica, finché è attiva, fa scattare il danno.",
-                ("no", "No", null), ("si", "Sì: X danni all'ingresso", null)),
+                ("no", "No", null), ("si", "Sì: X danni all'ingresso", new[] { "F4b-14" })),
             Num("towerDmgEnterX", "X = danno all'ingresso", 1, 1, 10),
             Ch("towerDmgStart", "Torre nemica: danno a inizio turno", "Se il Guildmaster inizia il turno in una casella adiacente alla Torre nemica attiva.",
                 ("no", "No", null), ("si", "Sì: X danni a inizio turno", null)),
             Num("towerDmgStartX", "X = danno a inizio turno", 1, 1, 10),
             Ch("towerHp", "Torre con punti vita", "Ipotesi H26: la Torre si colpisce col combattimento automatico, se non c'è un'unità nemica da attaccare ed è a contatto (mischia) o in linea di tiro (distanza). A 0 non è più attiva: non cura e non fa danno.",
-                ("no", "No: la Torre è sempre attiva e non si può colpire", null), ("si", "Sì: la Torre ha X punti vita", null)),
+                ("no", "No: la Torre è sempre attiva e non si può colpire", null), ("si", "Sì: la Torre ha X punti vita", new[] { "F4b-12" })),
             Num("towerHpMax", "X = punti vita della Torre", 5, 1, 30),
+            Ch("towerWin", "Vittoria distruggendo la Torre", "Ha effetto solo se la Torre ha punti vita.",
+                ("no", "No", null), ("si", "Sì: chi porta a 0 la Torre avversaria vince", new[] { "F4b-15" })),
+            Ch("monsters", "Mostri (caselle M)", "Ipotesi H31: un mostro si colpisce col combattimento automatico quando non c'è un'unità nemica o una Torre da colpire; restituisce il suo danno solo a chi è a contatto; I mostri sono di tre tipi e a inizio partita si pescano da un mazzo dei mostri mescolato, fuori dal gioco: uno per ogni casella M.",
+                ("inerti", "Ostacoli inerti", null),
+                ("attivi", "Hanno punti vita, si attaccano e restituiscono danno; sconfitti danno un beneficio", new[] { "F3-06", "F4B-07", "F3-07" })),
+            Ch("monsterLife", "Vita dei mostri", null,
+                ("persistente", "Persistente: i danni restano", null),
+                ("ripristinata", "Ripristinata: a inizio di ogni turno i mostri tornano a vita piena", null)),
+            Ch("monsterNext", "Quando un mostro è sconfitto", "Le fonti non lo definiscono.",
+                ("resta", "Resta sulla casella come ostacolo", null),
+                ("nuovo", "Al suo posto esce il prossimo mostro del mazzo; a mazzo finito resta l'ostacolo", null)),
+            Num("monsterN_cura", "Mostro della cura (sconfitto: il Guildmaster di chi lo sconfigge si cura) — carte nel mazzo dei mostri", 4, 0, 10), Num("monsterHp_cura", "Mostro «cura»: punti vita", 4, 1, 20), Num("monsterAtk_cura", "Mostro «cura»: danno restituito a chi è a contatto", 1, 0, 10), Num("monsterGain_cura", "Mostro «cura»: beneficio = punti Salute curati al Guildmaster di chi lo sconfigge", 3, 0, 10),
+            Num("monsterN_attacco", "Mostro dell'attacco (sconfitto: quel Guildmaster ottiene Attacco permanente) — carte nel mazzo dei mostri", 3, 0, 10), Num("monsterHp_attacco", "Mostro «attacco»: punti vita", 4, 1, 20), Num("monsterAtk_attacco", "Mostro «attacco»: danno restituito a chi è a contatto", 1, 0, 10), Num("monsterGain_attacco", "Mostro «attacco»: beneficio = Attacco permanente dato al Guildmaster di chi lo sconfigge", 1, 0, 10),
+            Num("monsterN_pesca", "Mostro della pesca (sconfitto: quel giocatore pesca) — carte nel mazzo dei mostri", 3, 0, 10), Num("monsterHp_pesca", "Mostro «pesca»: punti vita", 4, 1, 20), Num("monsterAtk_pesca", "Mostro «pesca»: danno restituito a chi è a contatto", 1, 0, 10), Num("monsterGain_pesca", "Mostro «pesca»: beneficio = carte pescate da chi lo sconfigge", 1, 0, 10),
+            Num("monsterWin", "Vittoria con N mostri sconfitti (0 = spenta; F3-08)", 0, 0, 5),
+            Ch("resourceModel", "Modello delle risorse (conflitto C9)", "Con i modelli fuori dal mazzo le carte risorsa vengono tolte dai mazzi all'avvio: restano meno carte, quindi il mazzo finisce prima.",
+                ("carte", "Carte risorsa nel mazzo", new[] { "F2-09" }),
+                ("fisse", "X risorse fisse fuori dal mazzo, pronte dal primo turno", new[] { "F2-10" }),
+                ("crescente", "Una risorsa in più a ogni proprio turno, fino a X", new[] { "F2-10" })),
+            Num("resourceX", "X = risorse fuori dal mazzo (fisse, o massimo delle crescenti)", 3, 1, 10),
+            Ch("gmResource", "Risorsa base del Guildmaster", null,
+                ("no", "No", null),
+                ("si", "A inizio turno il Guildmaster produce 1 risorsa in più della sua gilda, persa a fine turno", new[] { "BL-21" })),
+            Ch("buildings", "Edifici", "Ipotesi H30: le carte risorsa in gioco sono gli edifici «Gilda» del giocatore, fuori dalla scacchiera. Si colpiscono con le carte e le abilità che fanno danni (senza linea di vista) e, distrutti, vanno negli scarti.",
+                ("no", "No: le carte risorsa non si possono colpire", null),
+                ("si", "Sì: le carte risorsa sono edifici con X punti Struttura, distruttibili", new[] { "F3-12", "F3-13", "F4b-18" })),
+            Num("buildingHp", "X = punti Struttura di un edificio", 2, 1, 10),
             Num("handStart", "Mano iniziale", 5, 1, 10), Num("handLimit", "Limite di mano a fine turno", 7, 1, 15),
             Num("drawPerTurn", "Carte pescate a turno", 1, 0, 3), Num("skipFirstDraw", "Il primo giocatore salta la prima pesca (1 = sì)", 1, 0, 1),
             Num("resourcesPerTurn", "Carte risorsa giocabili a turno (H1)", 1, 1, 3),
@@ -186,12 +251,26 @@ namespace Guilds.Core
             Num("deckMin", "Carte minime nel mazzo", 25, 5, 60), Num("maxCopies", "Copie massime per carta (risorse escluse, H14)", 4, 1, 9),
         };
 
+        /// <summary>Temi in cui la schermata di configurazione raggruppa le regole, nell'ordine in cui le mostra. Ogni parametro sta in un solo tema.</summary>
+        public static readonly (string Name, string[] Keys)[] Groups =
+        {
+            ("Preparazione, mano e mazzo", new[] { "start", "mulligan", "handStart", "handLimit", "drawPerTurn", "skipFirstDraw", "deckOut", "deckMin", "maxCopies" }),
+            ("Movimento", new[] { "mandatoryMove", "obligation", "stayMove", "moveStyle", "gmRole", "moveMax" }),
+            ("Combattimento", new[] { "attackNoMove", "adjacency", "attackProfile", "assault", "recheck" }),
+            ("Risposte e abilità", new[] { "dodge", "dodgeOnlyVsAttack", "gmAbilities" }),
+            ("Linea di vista", new[] { "los", "losLine" }),
+            ("Alleati", new[] { "units", "summonZone", "summonSick", "sameName", "maxUnits", "allyLife" }),
+            ("Risorse ed edifici", new[] { "resourceModel", "resourceX", "gmResource", "resourceEnters", "resourcesPerTurn", "buildings", "buildingHp" }),
+            ("Torri", new[] { "towerHealEnter", "towerHealEnterX", "towerHealStart", "towerHealStartX", "towerDmgEnter", "towerDmgEnterX", "towerDmgStart", "towerDmgStartX", "towerHp", "towerHpMax", "towerWin" }),
+            ("Mostri", new[] { "monsters", "monsterLife", "monsterNext", "monsterN_cura", "monsterHp_cura", "monsterAtk_cura", "monsterGain_cura", "monsterN_attacco", "monsterHp_attacco", "monsterAtk_attacco", "monsterGain_attacco", "monsterN_pesca", "monsterHp_pesca", "monsterAtk_pesca", "monsterGain_pesca", "monsterWin" }),
+            ("Effetti delle carte", new[] { "venom" }),
+            ("Presentazione", new[] { "tokenMode", "yellowSymbol" }),
+        };
+
         /// <summary>Motivo per cui un'opzione non è selezionabile, oppure null.</summary>
         public static string Unavailable(string key, string value, MapDef map)
         {
-            if (key == "los" && value == "LOS-Z") return "non implementata: la mappa non definisce i territori (foglio Zone: «da definire»)";
-            if (key == "obligation" && value == "OBB-B") return "non implementata: con un solo eroe coincide con OBB-A; si distinguerà nel preset degli alleati";
-            if (key == "tokenMode" && value != "generico") return "non applicabile: in questo preset non esistono unità diverse dai Guildmaster";
+            if (key == "tokenMode" && value != "generico") return "non implementata: ogni unità usa il modello della sua carta, se esiste, altrimenti il segnalino generico";
             if (key == "start" && value == "S-A" && map != null && new Board(map).StartCells(0, "S-A").Count == 0)
                 return "su questa mappa non esiste una coppia di angoli opposti liberi (domanda D11)";
             return null;
@@ -199,6 +278,7 @@ namespace Guilds.Core
 
         /// <summary>Capacità del motore per la famiglia di preset: una carta è compatibile solo se tutte le sue richieste sono qui.</summary>
         public static HashSet<string> Capabilities(Preset p) => new HashSet<string> {
+            p.C("units") == "alleati" ? "type.Ally" : "type.Guildmaster", "keyword.swift",
             "type.Guildmaster", "type.Resource", "type.Action", "type.Instant", "type.Item",
             "effect.damage", "effect.heal", "effect.mod", "effect.root", "effect.reposition", "effect.damageCross", "effect.healOwn", "ability.activated", "keyword.venomous",
             "stat.attack", "stat.health", "stat.move", "duration.turn", "duration.targetNextTurn", "duration.permanent",
@@ -212,7 +292,7 @@ namespace Guilds.Core
         {
             var r = new List<string> { "type." + c.Type, "target." + c.Target };
             if (c.CostColored + c.CostGeneric > 0) r.Add("cost.resources");
-            if (c.Type == CardType.Guildmaster) r.Add("range." + c.Range);
+            if (c.Type == CardType.Guildmaster || c.Type == CardType.Ally) r.Add("range." + c.Range);
             foreach (var e in c.Effects)
             {
                 r.Add("effect." + e.Kind);
@@ -234,13 +314,20 @@ namespace Guilds.Core
             switch (c.Type)
             {
                 case CardType.Guildmaster:
-                    return (c.Range == "ranged" ? "A distanza" : "Corpo a corpo") + $". Attacco {c.Attack}, Salute {c.Health}."
+                    return Profile(c)
                         + (c.Keywords.Contains("venomous") ? " Venomous: quando infligge danni a un'unità le mette un segnalino veleno; un'unità avvelenata subisce 1 danno all'inizio del turno del suo proprietario." : "")
                         + (c.Ability != null ? $"\nAbilità, una volta per turno, anche in risposta (costo: 1 risorsa {Names.Guild(c.Guild)}): " + Effects(c.Ability) : "");
+                case CardType.Ally: return "Alleato: evocalo su una casella libera. " + Profile(c);
                 case CardType.Resource: return $"Resta in gioco. All'inizio del tuo turno produce 1 risorsa {Names.Guild(c.Guild)}.";
             }
             return (c.Type == CardType.Instant && !c.IsAbility ? "Istantanea. " : c.Type == CardType.Item ? "Oggetto: assegnalo al tuo Guildmaster. " : "") + Effects(c);
         }
+
+        static string Profile(CardDef c) =>
+            (c.Range == "ranged" ? "A distanza" : "Corpo a corpo") + $". Attacco {c.Attack}, Salute {c.Health}."
+            + (c.AltAttack > 0 ? $" Secondo profilo, solo con la variante «doppio profilo»: {(c.Range == "ranged" ? "in mischia" : "a distanza")} Attacco {c.AltAttack}." : "")
+            + (c.Keywords.Contains("swift") ? " Swift: può agire nel turno in cui entra." : "")
+            + (c.Role != null ? $" Con i ruoli degli scacchi muove come: {Names.Role(c.Role)}." : "");
 
         static string Effects(CardDef c)
         {
@@ -276,7 +363,8 @@ namespace Guilds.Core
             : (p != null && p.C("yellowSymbol") == "pugnale" ? "[Pugnale]" : "[Stivale]");
         public static string SymbolId(Guild g, Preset p) => g == Core.Guild.Red ? "red_bomb" : g == Core.Guild.Blue ? "blue_flame" : g == Core.Guild.Green ? "green_bow"
             : (p != null && p.C("yellowSymbol") == "pugnale" ? "yellow_dagger" : "yellow_boot");
-        public static string Type(CardType t) => t == CardType.Guildmaster ? "Guildmaster" : t == CardType.Resource ? "Risorsa" : t == CardType.Action ? "Azione"
+        public static string Role(string r) => r == "knight" ? "Cavallo" : r == "bishop" ? "Alfiere" : r == "rook" ? "Torre" : r == "queen" ? "Regina" : r == "king" ? "Re" : r == "queenknight" ? "Regina + Cavallo" : r == "steps" ? "3 passi" : "Pedone";
+        public static string Type(CardType t) => t == CardType.Ally ? "Alleato" : t == CardType.Guildmaster ? "Guildmaster" : t == CardType.Resource ? "Risorsa" : t == CardType.Action ? "Azione"
             : t == CardType.Instant ? "Azione istantanea" : "Oggetto";
     }
 }

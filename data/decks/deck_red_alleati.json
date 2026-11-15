@@ -1,0 +1,36 @@
+{
+ "id": "deck_red_alleati",
+ "name": "Mazzo rosso con alleati (Artificers)",
+ "version": 1,
+ "guildmaster": "gm_fiaran",
+ "cards": [
+  {
+   "card": "res_red",
+   "count": 9
+  },
+  {
+   "card": "r_thermal_surge",
+   "count": 2
+  },
+  {
+   "card": "r_fury",
+   "count": 2
+  },
+  {
+   "card": "r_rush",
+   "count": 2
+  },
+  {
+   "card": "r_flame_gauntlet",
+   "count": 2
+  },
+  {
+   "card": "r_forge_recruit",
+   "count": 4
+  },
+  {
+   "card": "r_bomber",
+   "count": 4
+  }
+ ]
+}

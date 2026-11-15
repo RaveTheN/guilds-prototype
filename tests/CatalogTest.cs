@@ -25,7 +25,7 @@ public class CatalogTest
             {
                 sb.AppendLine($"### {c.Name}");
                 sb.AppendLine($"- ID e versione: `{c.Key}` — {Names.Type(c.Type)} — costo {CardRules.Cost(c, R.PresetById("P01"))}"
-                    + (c.Type == CardType.Guildmaster ? $" — Attacco {c.Attack}, Salute {c.Health}, {c.Range}" : ""));
+                    + (c.Type == CardType.Guildmaster || c.Type == CardType.Ally ? $" — Attacco {c.Attack}, Salute {c.Health}, {c.Range}" : ""));
                 sb.AppendLine($"- Testo effettivo: {CardRules.Text(c)}");
                 if (c.DeferredText != null) sb.AppendLine($"- Non attivo in questo set: {c.DeferredText}");
                 sb.AppendLine($"- Origine: {c.OriginKind} — {c.OriginSource}");
@@ -41,6 +41,6 @@ public class CatalogTest
         foreach (var k in R.Decks)
             sb.AppendLine($"- **{k.Name}** (`{k.Id}` v{k.Version}), Guildmaster {R.AnyVersion(k.Guildmaster).Name}: " + string.Join(", ", k.Cards.Select(e => $"{e.Count}× {R.AnyVersion(e.Card).Name}")));
         File.WriteAllText(Path.Combine(d.FullName, "docs", "CARDS.md"), sb.ToString());
-        Assert.Equal(24, R.CardVersions.Count);
+        Assert.Equal(32, R.CardVersions.Count);
     }
 }

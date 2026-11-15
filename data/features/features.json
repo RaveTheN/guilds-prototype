@@ -272,7 +272,7 @@
    "dependsOn": [],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "parziale: quattro mazzi pronti; editor di mazzi rinviato",
+   "implementation": "implementato: mazzi pronti ed editor di mazzi nella schermata di configurazione",
    "presets": [
     "P01"
    ],
@@ -384,7 +384,7 @@
    "dependsOn": [],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "parziale: Guildmaster, azioni, oggetti; alleati rinviati",
+   "implementation": "implementato: Guildmaster, azioni, oggetti; alleati con la variante «Unità sulla board»",
    "presets": [
     "P01"
    ],
@@ -404,7 +404,7 @@
     "F4B-01"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Unità sulla board» = alleati): ogni alleato ha una pedina",
    "presets": [],
    "presetNote": ""
   },
@@ -534,7 +534,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: zona di evocazione = territorio del giocatore (ipotesi H27, i territori non sono definiti nella mappa)",
    "presets": [],
    "presetNote": "inattiva con solo eroe (C13)"
   },
@@ -591,7 +591,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: non si evoca sull'highground",
    "presets": [],
    "presetNote": "inattiva con solo eroe"
   },
@@ -757,7 +757,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: alleati evocati nel proprio territorio, oppure accanto al Guildmaster",
    "presets": [],
    "presetNote": "inattiva con solo eroe"
   },
@@ -774,7 +774,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Alleati appena evocati»): entrano tappati",
    "presets": [],
    "presetNote": ""
   },
@@ -1359,7 +1359,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: Swift fa entrare l'alleato pronto",
    "presets": [],
    "presetNote": ""
   },
@@ -1480,7 +1480,7 @@
     "BL-47"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: limite di miniature per giocatore (parametro, default 5); il vincolo sui nomi diversi non è applicato",
    "presets": [],
    "presetNote": ""
   },
@@ -1652,7 +1652,7 @@
     "F4A-08"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Modello delle risorse» = fisse o crescente); le carte risorsa escono dai mazzi",
    "presets": [],
    "presetNote": "sostituita da F2-09 in P01 per decisione del 14 nov 2026; resta variante per M4"
   },
@@ -1702,7 +1702,7 @@
     "F3-04"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Come si muovono le pedine» = ruoli): mosse dei pezzi degli scacchi; Pedone ipotizzato (H29)",
    "presets": [],
    "presetNote": ""
   },
@@ -1719,7 +1719,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: ruolo scritto sulla carta dell'alleato; un alleato per ruolo",
    "presets": [],
    "presetNote": ""
   },
@@ -2017,7 +2017,7 @@
     "CS-21 (C7)"
    ],
    "analyzed": true,
-   "implementation": "implementato (OBB-A; OBB-B non distinguibile con un solo eroe)",
+   "implementation": "implementato (OBB-A e OBB-B)",
    "presets": [
     "P01"
    ],
@@ -2073,7 +2073,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Mostri» = attivi): punti vita, si attaccano, restituiscono danno (ipotesi H31)",
    "presets": [],
    "presetNote": ""
   },
@@ -2090,7 +2090,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Beneficio per chi sconfigge un mostro»): tre ipotesi, nessuna definita dalle fonti",
    "presets": [],
    "presetNote": ""
   },
@@ -2138,7 +2138,7 @@
    "dependsOn": [],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Profilo d'attacco» = doppio): secondo profilo dei Guildmaster con Attacco 1 (valore ipotizzato)",
    "presets": [],
    "presetNote": "non in P01"
   },
@@ -2172,7 +2172,7 @@
    "dependsOn": null,
    "incompatibleWith": null,
    "analyzed": false,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Edifici»): costruzione = giocare la carta, distruzione con i danni di carte e abilità (ipotesi H30)",
    "presets": [],
    "presetNote": ""
   },
@@ -2187,7 +2187,7 @@
    "dependsOn": null,
    "incompatibleWith": null,
    "analyzed": false,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Edifici»): l'edificio Gilda è la carta risorsa, gratuita, una per turno",
    "presets": [],
    "presetNote": ""
   },
@@ -2596,7 +2596,7 @@
     "F3-04"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Come si muovono le pedine» = re, oppure ruoli con Guildmaster Re o Regina + Cavallo)",
    "presets": [],
    "presetNote": ""
   },
@@ -2649,7 +2649,7 @@
    "dependsOn": null,
    "incompatibleWith": null,
    "analyzed": false,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: i mostri stanno sulle caselle M della mappa, su highground",
    "presets": [],
    "presetNote": ""
   },
@@ -2717,7 +2717,7 @@
     "F3-01"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: il pezzo è scritto sulla carta («ruoli») oppure scelto all'ingresso fra quelli disponibili («scelta»); la riassegnazione passa dalla variante «stesso nome»",
    "presets": [],
    "presetNote": ""
   },
@@ -2736,7 +2736,7 @@
     "F3-01"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: un solo alleato per tipo, per giocatore",
    "presets": [],
    "presetNote": ""
   },
@@ -2757,7 +2757,7 @@
     "F1-38"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante (LOS-Z): zone ricavate dalla mappa per ipotesi (H27)",
    "presets": [],
    "presetNote": "variante LOS-Z, non in P01"
   },
@@ -3261,7 +3261,7 @@
    "dependsOn": [],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Risorsa base del Guildmaster»)",
    "presets": [],
    "presetNote": ""
   },
@@ -4496,7 +4496,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Torre con punti vita»)",
    "presets": [],
    "presetNote": "non in P01"
   },
@@ -4528,7 +4528,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Torre nemica: danno a chi entra»)",
    "presets": [],
    "presetNote": "non in P01; valore e attivazione non definiti"
   },
@@ -4545,7 +4545,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Vittoria distruggendo la Torre»)",
    "presets": [],
    "presetNote": "non in P01"
   },
@@ -4604,7 +4604,7 @@
    "dependsOn": null,
    "incompatibleWith": null,
    "analyzed": false,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Edifici»): gli edifici stanno sul tavolo del giocatore, fuori dalla scacchiera",
    "presets": [],
    "presetNote": ""
   },
@@ -4660,7 +4660,7 @@
     "F1-65 Venomous e cure F1-67 (perdono quasi tutto il senso sulle unità non GM)"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Vita delle unità non Guildmaster» = ripristinata)",
    "presets": [],
    "presetNote": "variante 'Vita delle unità' del preset con alleati (P02)"
   },
@@ -4678,7 +4678,7 @@
    ],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante (dentro l'Assalto; fuori coincide col combattimento automatico)",
    "presets": [],
    "presetNote": "P02"
   },
@@ -4700,7 +4700,7 @@
     "F1-25 (la casella nemica diventa destinazione legale)"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Assalto»); casi limite risolti per ipotesi (H28)",
    "presets": [],
    "presetNote": "P02"
   },
@@ -4719,7 +4719,7 @@
     "F1-33 (il difensore ranged non restituisce danni)"
    ],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante: nell'Assalto il difensore a distanza infligge 1 a scambio",
    "presets": [],
    "presetNote": "P02"
   },
@@ -4734,7 +4734,7 @@
    "dependsOn": [],
    "incompatibleWith": [],
    "analyzed": true,
-   "implementation": "non implementato",
+   "implementation": "implementato come variante («Profilo d'attacco» = doppio)",
    "presets": [],
    "presetNote": "variante 'Profilo d'attacco' (P02; applicabile anche ai GM)"
   },

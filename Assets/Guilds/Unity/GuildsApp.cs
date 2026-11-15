@@ -17,6 +17,8 @@ namespace Guilds.Unity
         Preset preset; readonly DeckDef[] decks = new DeckDef[2];
         int seed; bool debugMode, autoPass = true, handoff = true, vsAi, randomDecks; float aiAt; Rng aiRng;
         int Ai => vsAi ? 1 : -1; // l'AI guida sempre G2
+        bool optimized; // mazzi ottimizzati: costruiti per il preset scelto a partire dal Guildmaster del mazzo selezionato
+        DeckDef Eff(int i) => optimized ? Repo.OptimizedDeck(decks[i].Guildmaster, preset) : decks[i];
         Game game; BoardView view; Assets assets; Camera cam;
         DateTime started; string notes = "", flash = ""; float flashUntil;
 
@@ -28,7 +30,7 @@ namespace Guilds.Unity
             ProjectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
             DataRoot = Path.Combine(ProjectRoot, "data"); // in una build: cartella data accanto all'eseguibile
             Repo = Repo.Load(DataRoot);
-            preset = Repo.PresetById("P01"); decks[0] = Repo.Deck("deck_red"); decks[1] = Repo.Deck("deck_green");
+            preset = Repo.Visible.FirstOrDefault(p => p.Id == "P01") ?? Repo.Visible.FirstOrDefault() ?? Repo.PresetById("P01"); decks[0] = Repo.Deck("deck_red"); decks[1] = Repo.Deck("deck_green");
             seed = Environment.TickCount & 0xFFFFF;
             assets = new Assets(DataRoot, preset.Theme);
             cam = Camera.main;
@@ -134,7 +136,7 @@ namespace Guilds.Unity
             Fill(art, Color.Lerp(gc, Color.white, 0.65f));
             var tex = assets.CardArt(c.Id) ?? assets.Symbol(Names.SymbolId(c.Guild, p));
             if (tex != null) G.DrawTexture(art, tex, ScaleMode.ScaleToFit);
-            string type = Names.Type(c.Type) + (c.Type == CardType.Guildmaster ? $" — Att {c.Attack} / Sal {c.Health}" : "");
+            string type = Names.Type(c.Type) + (c.Type == CardType.Guildmaster || c.Type == CardType.Ally ? $" — Att {c.Attack} / Sal {c.Health}" : "");
             G.Label(new Rect(n.x + 6, art.yMax + 1, n.width - 12, 24), type, big ? lbl : small);
             var txt = new Rect(n.x + 6, art.yMax + 26, n.width - 12, n.yMax - art.yMax - 32); Fill(txt, new Color(0.95f, 0.87f, 0.68f));
             string body = CardRules.Text(c) + (big && c.DeferredText != null ? "\n\n<i>Non attivo in questo set: " + c.DeferredText + "</i>" : "");
@@ -160,12 +162,12 @@ namespace Guilds.Unity
                 var r = new Rng(seed + 77); var ok = Repo.Decks.Where(d => Repo.Validate(preset, d, d).Count == 0).ToList();
                 if (ok.Count > 0) for (int i = 0; i < 2; i++) decks[i] = ok[r.Next(ok.Count)];
             }
-            game = Repo.NewGame(preset, decks[0], decks[1], seed);
-            if (randomDecks) game.Say(-1, "info", $"Mazzi estratti a caso: G1 {decks[0].Name}, G2 {decks[1].Name}.", true);
+            game = Repo.NewGame(preset, Eff(0), Eff(1), seed);
+            if (randomDecks || optimized) game.Say(-1, "info", $"Mazzi {(randomDecks ? "estratti a caso" : "ottimizzati")}: G1 {Eff(0).Name}, G2 {Eff(1).Name}.", true);
             assets = new Assets(DataRoot, preset.Theme);
             view?.Destroy(); view = new BoardView(); view.Build(game.Board, assets);
             for (int i = 0; i < 2; i++) view.SetTowerColor(i, assets.GuildColor(game.Def(game.Gm(i)).Guild));
-            started = DateTime.Now; notes = ""; exported = null; selCard = selTarget = selUnit = -1; selAbility = false; shownTo = -1; showBoth = false; overlay = null; mullSel.Clear(); yaw = 0;
+            started = DateTime.Now; notes = ""; exported = null; prefer = -1; selCard = selTarget = selUnit = -1; selAbility = false; shownTo = -1; showBoth = false; overlay = null; mullSel.Clear(); yaw = 0;
             aiRng = new Rng(seed + 1000);
             if (vsAi) game.Say(-1, "info", "G2 è guidato dall'AI (giocatore automatico semplice).", true);
             mode = Mode.Play; dirty = true;

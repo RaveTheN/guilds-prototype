@@ -26,7 +26,7 @@ namespace Guilds.Core
 
     public class Repo
     {
-        public const string PrototypeVersion = "0.9.2 (M4)";
+        public const string PrototypeVersion = "0.12.3 (M4+)";
         public string Root;
         public Dictionary<string, List<CardDef>> CardVersions = new Dictionary<string, List<CardDef>>();
         public List<DeckDef> Decks = new List<DeckDef>();
@@ -53,12 +53,19 @@ namespace Guilds.Core
             r.Decks = Files(Path.Combine(root, "decks")).Select(Json.Read<DeckDef>).ToList();
             r.Maps = Files(Path.Combine(root, "maps")).Select(Json.Read<MapDef>).ToList();
             r.Presets = Files(Path.Combine(root, "presets")).Select(Json.Read<Preset>).ToList();
+            string hf = Path.Combine(root, "presets", "user", "hidden.txt");
+            if (File.Exists(hf)) r.Hidden = new HashSet<string>(File.ReadAllLines(hf).Where(l => l.Trim() != ""));
             r.Features = JObject.Parse(File.ReadAllText(Path.Combine(root, "features", "features.json")))["features"].ToObject<List<FeatureInfo>>();
             return r;
         }
 
         public MapDef Map(string id) => Maps.FirstOrDefault(m => m.Id == id);
         public Preset PresetById(string id) => Presets.FirstOrDefault(p => p.Id == id);
+        // Preset di base «eliminati»: restano nei dati (gen_content li rigenera, i test li usano) ma spariscono dall'elenco.
+        public HashSet<string> Hidden = new HashSet<string>();
+        string HiddenFile => Path.Combine(Root, "presets", "user", "hidden.txt");
+        public List<Preset> Visible => Presets.Where(p => !Hidden.Contains(p.Id)).ToList();
+        public void RestorePresets() { Hidden.Clear(); if (File.Exists(HiddenFile)) File.Delete(HiddenFile); }
         public DeckDef Deck(string id) => Decks.FirstOrDefault(d => d.Id == id);
 
         /// <summary>Versione più recente della carta compatibile col preset, oppure null.</summary>
@@ -128,6 +135,11 @@ namespace Guilds.Core
             }
             if (p.N("handStart") > p.N("deckMin")) err.Add("La mano iniziale non può superare il minimo del mazzo.");
             if (err.Count == 0) err.AddRange(MapOps.Validate(map, p.C("start")));
+            if (err.Count == 0 && p.C("monsters") == "attivi")
+            {
+                var b = new Board(map); int cells = b.All().Count(c => b.Code(c) == "M"), deck = Game.MonsterKinds.Sum(k => p.N("monsterN_" + k));
+                if (deck < cells) err.Add($"Il mazzo dei mostri ha {deck} carte ma la mappa ha {cells} caselle mostro.");
+            }
             foreach (var f in FeaturesFor(p))
             {
                 if (f.Choice == "X" || f.Choice == "") err.Add($"La feature {f.Code} è {(f.Choice == "X" ? "esclusa (X)" : "non decisa")} e non può stare in un preset.");
@@ -146,12 +158,45 @@ namespace Guilds.Core
             return Game.Start(Json.Clone(p), Json.Clone(Map(mapId)), ids.Select(id => Json.Clone(Card(id, p))), Json.Clone(d0), Json.Clone(d1), seed);
         }
 
-        /// <summary>Elimina un preset dell'utente (file compreso). I preset di base non si eliminano.</summary>
+        /// <summary>Elimina un preset dell'utente (file compreso). Un preset di base viene solo nascosto dall'elenco: si ripristina con RestorePresets.</summary>
         public void DeletePreset(Preset p)
         {
-            if (p.BuiltIn) throw new InvalidOperationException("I preset di base non si eliminano.");
+            if (p.BuiltIn)
+            {
+                Hidden.Add(p.Id); Directory.CreateDirectory(Path.GetDirectoryName(HiddenFile));
+                File.WriteAllLines(HiddenFile, Hidden.OrderBy(x => x)); return;
+            }
             File.Delete(Path.Combine(Root, "presets", "user", p.Id + ".json"));
             Presets.RemoveAll(x => x.Id == p.Id);
+        }
+
+        /// <summary>Mazzo costruito per il preset: tutte le carte compatibili della gilda (alleati compresi, se il preset li ha), in parti uguali,
+        /// fino al minimo del mazzo. Le risorse sono il 36% del mazzo (9 su 25, come nei mazzi di prova) e non meno di 9 ogni 16 altre carte.</summary>
+        public DeckDef OptimizedDeck(string gmId, Preset p)
+        {
+            var gm = AnyVersion(gmId); int target = p.N("deckMin"), max = p.N("maxCopies");
+            var pool = CardVersions.Keys.Select(id => Card(id, p)).Where(c => c != null && c.Guild == gm.Guild).ToList();
+            var res = pool.FirstOrDefault(c => c.Type == CardType.Resource);
+            var cards = pool.Where(c => c.Type != CardType.Resource && c.Type != CardType.Guildmaster).ToList();
+            int other = Math.Min(target - (int)Math.Round(target * 0.36), cards.Count * max);
+            int nRes = res == null ? 0 : Math.Max((int)Math.Round(other * 9 / 16.0), target - other);
+            var d = new DeckDef { Id = "ottimizzato_" + gm.Guild.ToString().ToLowerInvariant(), Guildmaster = gmId,
+                Name = $"Mazzo ottimizzato, gilda {Names.Guild(gm.Guild)} ({(cards.Any(c => c.Type == CardType.Ally) ? "con alleati" : "senza alleati")})" };
+            if (nRes > 0) d.Cards.Add(new DeckEntry { Card = res.Id, Count = nRes });
+            for (int i = 0; i < cards.Count; i++)
+            {
+                int n = other / cards.Count + (i < other % cards.Count ? 1 : 0);
+                if (n > 0) d.Cards.Add(new DeckEntry { Card = cards[i].Id, Count = n });
+            }
+            return d;
+        }
+
+        /// <summary>Salva un mazzo dell'utente in decks/user. I mazzi di base non si toccano: l'editor lavora sempre su una copia con un Id nuovo.</summary>
+        public void SaveDeck(DeckDef d)
+        {
+            var dir = Path.Combine(Root, "decks", "user"); Directory.CreateDirectory(dir);
+            File.WriteAllText(Path.Combine(dir, d.Id + ".json"), Json.Write(d), Encoding.UTF8);
+            Decks.RemoveAll(x => x.Id == d.Id); Decks.Add(d);
         }
 
         public void SavePreset(Preset p)
@@ -193,7 +238,7 @@ namespace Guilds.Core
             sb.AppendLine($"- Preset: {g.Preset.Id} — {g.Preset.Name}" + (g.Preset.BasedOn != null ? $" (clone di {g.Preset.BasedOn})" : "") + (g.Preset.Partial ? " — TEST PARZIALE" : ""));
             sb.AppendLine($"- Mappa: {g.Map.Id}" + (g.Map.BaseMap != null ? $" (variante di {g.Map.BaseMap}; caselle cambiate: {string.Join("; ", g.Map.ChangedCells)})" : " (originale)"));
             sb.AppendLine($"- Simbolo gilda gialla: {g.Preset.C("yellowSymbol")}");
-            sb.AppendLine($"- Token delle altre unità: {g.Preset.C("tokenMode")} (in questo preset non ci sono altre unità)");
+            sb.AppendLine($"- Token delle altre unità: {g.Preset.C("tokenMode")}");
             sb.AppendLine($"- Tema visivo: {g.Preset.Theme}");
             sb.AppendLine($"- Seed: {g.Seed}");
             sb.AppendLine($"- Inizio: {start:yyyy-MM-dd HH:mm:ss} — durata: {(end - start).TotalMinutes:0.0} minuti");

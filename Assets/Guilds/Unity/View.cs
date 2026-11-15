@@ -135,7 +135,11 @@ namespace Guilds.Unity
         {
             foreach (var u in g.Units)
             {
-                if (!u.Placed) continue;
+                if (!u.Placed)
+                {   // un alleato sconfitto lascia la board
+                    if (tokens.TryGetValue(u.Id, out var gone)) { Kill(gone); tokens.Remove(u.Id); }
+                    continue;
+                }
                 if (!tokens.TryGetValue(u.Id, out var t))
                 {
                     var def = g.Def(u); var col = a.GuildColor(def.Guild);

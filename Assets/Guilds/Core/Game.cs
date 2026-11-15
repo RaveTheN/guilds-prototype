@@ -22,17 +22,19 @@ namespace Guilds.Core
     public class Unit
     {
         public int Id, Owner; public string CardId; public Cell Pos; public bool Placed;
-        public int Damage, Venom, AbilityUsedTurn; public bool Tapped, HasAttacked, MovedThisTurn;
+        public int Damage, Venom, AbilityUsedTurn; public bool Tapped, HasAttacked, MovedThisTurn, Dead;
         public List<Modifier> Mods = new List<Modifier>(); public List<string> Items = new List<string>();
+        public string Role; public int SummonTurn; // alleati: pezzo degli scacchi scelto all'ingresso, turno d'ingresso
     }
-    public class Permanent { public string CardId; public bool Tapped; }
+    public class Permanent { public string CardId; public bool Tapped; public int Damage; } // Damage: solo con gli edifici
     public class PlayerState
     {
         public string DeckId;
         public List<string> Deck = new List<string>(), Hand = new List<string>(), Discard = new List<string>();
         public List<Permanent> Resources = new List<Permanent>(); // carte risorsa in gioco: si tappano per pagare
         public Dictionary<Guild, int> Pool = new Dictionary<Guild, int>(); // risorse sciolte (solo effetti e debug): perse a fine turno
-        public int ResourcesPlayedThisTurn;
+        public List<string> SkipMonsters = new List<string>(); // caselle dei mostri che questo giocatore ha scelto di non attaccare
+        public int ResourcesPlayedThisTurn, MonsterKills, Granted; // Granted: risorse fuori dal mazzo già ricevute (F2-10)
         public List<string> Drawn = new List<string>(), Played = new List<string>(); // per il resoconto
     }
     public class StackItem
@@ -40,6 +42,7 @@ namespace Guilds.Core
         public string Kind; // move | card
         public int Controller, UnitId = -1, TargetId = -1; public string CardId;
         public Cell From, TargetPos, Dest; public bool HasDest;
+        public bool Assault; public int Prefer = -1, BuildingOwner = -1, BuildingIndex; public string Role; public List<int> Drop; // Prefer: bersaglio scelto del combattimento (o dell'Assalto)
         public Dictionary<int, Cell> Positions = new Dictionary<int, Cell>(); // posizioni alla dichiarazione (RIC-ANNULLA)
     }
     public class LogEntry { public int Turn, Player; public string Kind, Text; public bool Auto, Debug; }
@@ -72,6 +75,19 @@ namespace Guilds.Core
             }
             g.FirstPlayer = g.Rng.Next(2); g.Active = g.FirstPlayer;
             g.Say(-1, "setup", $"Partita iniziata. Preset {preset.Id}, mappa {map.Id}, seed {seed}. Primo giocatore sorteggiato: G{g.FirstPlayer + 1}.", true);
+            if (preset.C("monsters") == "attivi")
+            {   // mazzo dei mostri: solo coi mostri attivi, così i preset senza mostri usano gli stessi numeri casuali di prima
+                foreach (var k in MonsterKinds) for (int i = 0; i < preset.N("monsterN_" + k); i++) g.MonsterDeck.Add(k);
+                g.Rng.Shuffle(g.MonsterDeck);
+                foreach (var c in g.Board.All().Where(c => g.Board.Code(c) == "M")) g.SpawnMonster(c);
+            }
+            if (preset.C("resourceModel") != "carte")
+                for (int p = 0; p < 2; p++)
+                {   // F2-10: le risorse stanno fuori dal mazzo, quindi le carte risorsa escono dai mazzi
+                    int n = g.Players[p].Deck.RemoveAll(id => g.Cards[id].Type == CardType.Resource);
+                    if (preset.C("resourceModel") == "fisse") for (int i = 0; i < preset.N("resourceX"); i++) g.Grant(p);
+                    g.Say(p, "setup", $"Risorse fuori dal mazzo ({preset.C("resourceModel")}): {n} carte risorsa tolte dal mazzo di G{p + 1}, che resta di {g.Players[p].Deck.Count} carte.", true);
+                }
             for (int p = 0; p < 2; p++) for (int i = 0; i < preset.N("handStart"); i++) g.Draw(p, true);
             g.SetupPlayer = g.FirstPlayer;
             if (preset.C("mulligan") == "iniziale") g.Phase = Phase.Mulligan; else g.AfterMulligan();
@@ -117,8 +133,160 @@ namespace Guilds.Core
         public bool Rooted(Unit u) => u.Mods.Any(m => m.Stat == "root");
         int Adjacency => int.Parse(Preset.C("adjacency"));
         bool EnemyAt(int player, Cell c) { var u = UnitAt(c); return u != null && u.Owner != player; }
-        public bool Sees(Unit from, Cell target) => Board.Los(from.Pos, target, c => EnemyAt(from.Owner, c), Preset.C("losLine"));
-        public bool InAttackRange(Unit a, Unit d) => Def(a).Range == "ranged" ? Sees(a, d.Pos) : Board.Adjacent(a.Pos, d.Pos, Adjacency);
+        public bool Sees(Unit from, Cell target) => Preset.C("los") == "LOS-Z" ? Board.LosZone(from.Pos, target) : Board.Los(from.Pos, target, c => EnemyAt(from.Owner, c), Preset.C("losLine"));
+        public bool InAttackRange(Unit a, Unit d) => InRange(a, d.Pos);
+        // N-05 doppio profilo (H10): adiacente vale il profilo in mischia, altrimenti quello a distanza
+        bool Dual(Unit u) => Preset.C("attackProfile") == "doppio" && Def(u).AltAttack > 0;
+        bool Adj(Unit a, Cell c) => Board.Adjacent(a.Pos, c, Adjacency);
+        bool InRange(Unit a, Cell c) => Def(a).Range == "ranged" ? Sees(a, c) || (Dual(a) && Adj(a, c)) : Adj(a, c) || (Dual(a) && Sees(a, c));
+        public int AttackAt(Unit a, Cell c) => !Dual(a) || Adj(a, c) == (Def(a).Range == "melee") ? Attack(a) : Math.Max(0, Def(a).AltAttack + Mod(a, "attack"));
+        bool StrikesBack(Unit t, Unit a) => Adj(t, a.Pos) && (Def(t).Range == "melee" || Dual(t)); // F1-33 + H6
+        public string RoleOf(Unit u) => Preset.C("moveStyle") == "re" ? "king" : u.Id < 2 ? Preset.C("gmRole") : u.Role ?? Def(u).Role ?? "pawn";
+        Cell Was(StackItem it, Unit u) => it.Positions.TryGetValue(u.Id, out var c) ? c : u.Pos;
+
+        // ---------- risorse fuori dal mazzo (F2-10) ----------
+        void Grant(int player)
+        {
+            var guild = Def(Gm(player)).Guild; var card = Cards.Values.FirstOrDefault(c => c.Type == CardType.Resource && c.Guild == guild);
+            if (card == null) return; // mazzo senza carte risorsa della gilda: non c'è una carta da mettere in gioco
+            Players[player].Resources.Add(new Permanent { CardId = card.Id }); Players[player].Granted++;
+        }
+
+        // ---------- alleati (F1-10, F1-29) ----------
+        public List<Cell> SummonCells(int player) => Board.All().Where(c => Board.Code(c) == "." && UnitAt(c) == null &&
+            (Preset.C("summonZone") == "territorio" ? Board.Zone(c) == "G" + (player + 1)
+                : Preset.C("summonZone") == "torre" ? Board.Tower(player) != null && Board.Adjacent(c, Board.Tower(player).Value, 8) : Board.Adjacent(c, Gm(player).Pos, 8))).ToList();
+        public List<Unit> Namesakes(int player, CardDef c) => Units.Where(u => u.Owner == player && u.Id >= 2 && u.Placed && u.CardId == c.Id).ToList();
+        bool Replaces(int player, CardDef c) => Preset.C("sameName") == "sostituisce" && Namesakes(player, c).Count > 0;
+        /// <summary>Dove si gioca una carta alleato: una casella di evocazione, oppure (variante «sostituisce») la pedina con lo stesso nome.</summary>
+        public List<Cell> SummonDests(int player, CardDef c) => Replaces(player, c) ? Namesakes(player, c).Select(u => u.Pos).ToList() : SummonCells(player);
+        static readonly string[] RolePool = { "knight", "bishop", "king", "queen", "rook", "pawn", "pawn" };
+        /// <summary>Pezzi degli scacchi ancora liberi per un alleato che entra (variante «scelta»). Il pezzo di una pedina che sta per essere rimossa o sostituita è libero.</summary>
+        public List<string> AvailableRoles(int player, CardDef c)
+        {
+            var free = RolePool.ToList(); bool keep = Preset.C("sameName") == "nuova";
+            if (Preset.C("gmRole") == "king") free.Remove("king"); // il Re è del Guildmaster; se il Guildmaster muove in altro modo, il Re è disponibile
+            foreach (var u in Units.Where(u => u.Owner == player && u.Id >= 2 && u.Placed && (keep || u.CardId != c.Id))) free.Remove(RoleOf(u));
+            return free.Distinct().ToList();
+        }
+        bool Weak(Unit u) => Preset.C("summonSick") == "sni" && u.SummonTurn == Turn && !Def(u).Keywords.Contains("swift");
+        string SummonLimit(int player, CardDef c)
+        {
+            if (Replaces(player, c)) return null; // nessuna pedina nuova
+            var mine = Units.Where(u => u.Owner == player && u.Placed && (Preset.C("sameName") != "rimpiazza" || u.Id < 2 || u.CardId != c.Id)).ToList();
+            if (mine.Count >= Preset.N("maxUnits")) return $"hai già {mine.Count} miniature sulla board (massimo {Preset.N("maxUnits")}, F2-01)";
+            if (Preset.C("moveStyle") == "ruoli" && mine.Any(u => u.Id >= 2 && RoleOf(u) == (c.Role ?? "pawn"))) return $"hai già una pedina col ruolo {Names.Role(c.Role)} (una per tipo, F4C-02)";
+            if (Preset.C("moveStyle") == "scelta" && AvailableRoles(player, c).Count == 0) return "non hai più pezzi degli scacchi disponibili";
+            return null;
+        }
+        void Summon(StackItem it, CardDef c)
+        {
+            var p = Players[it.Controller]; bool pick = Preset.C("moveStyle") == "scelta";
+            if (Replaces(it.Controller, c))
+            {   // la pedina con lo stesso nome resta dov'è e viene rinnovata; la carta giocata va negli scarti
+                var old = Namesakes(it.Controller, c).FirstOrDefault(x => x.Pos.Equals(it.Dest));
+                p.Discard.Add(c.Id);
+                if (old == null) { Say(it.Controller, "resolve", $"{c.Name} non ha effetto: la pedina da sostituire non è più in {it.Dest}. La carta va negli scarti.", true); return; }
+                old.Damage = 0; old.Venom = 0; int removed = 0;
+                foreach (var i in (it.Drop ?? new List<int>()).Distinct().OrderByDescending(k => k)) if (i >= 0 && i < old.Mods.Count) { old.Mods.RemoveAt(i); removed++; }
+                if (pick && AvailableRoles(it.Controller, c).Contains(it.Role)) old.Role = it.Role;
+                Say(it.Controller, "resolve", $"{c.Name} sostituisce la pedina in {it.Dest}: vita piena, veleno rimosso, {removed} effetti tolti" + (pick ? $", pezzo {Names.Role(old.Role)}." : "."));
+                return;
+            }
+            string fail = !SummonCells(it.Controller).Contains(it.Dest) ? $"{it.Dest} non è più disponibile" : SummonLimit(it.Controller, c)
+                ?? (pick && !AvailableRoles(it.Controller, c).Contains(it.Role) ? $"il pezzo {Names.Role(it.Role)} non è più disponibile" : null);
+            if (fail != null) { p.Discard.Add(c.Id); Say(it.Controller, "resolve", $"{c.Name} non entra in gioco: {fail}. La carta va negli scarti.", true); return; }
+            if (Preset.C("sameName") == "rimpiazza")
+                foreach (var old in Namesakes(it.Controller, c))
+                {
+                    old.Placed = false; old.Dead = true; p.Discard.Add(old.CardId);
+                    Say(it.Controller, "resolve", $"La vecchia pedina di {c.Name} in {old.Pos} viene rimossa: entra quella nuova.", true);
+                }
+            string sick = c.Keywords.Contains("swift") ? "no" : Preset.C("summonSick");
+            var u = new Unit { Id = Units.Count, Owner = it.Controller, CardId = c.Id, Pos = it.Dest, Placed = true, Tapped = sick == "si", SummonTurn = Turn, Role = pick ? it.Role : null };
+            Units.Add(u);
+            Say(it.Controller, "resolve", $"{c.Name} entra in gioco in {it.Dest}" + (pick ? $" come {Names.Role(u.Role)}" : "")
+                + (sick == "si" ? ", tappato: agirà dal prossimo turno (F1-30)." : sick == "sni" ? ", pronto ma con debolezza da evocazione: in questo turno non può essere tappato." : ", pronto."));
+            TowerEffect(u, "Enter");
+        }
+
+        // ---------- mostri (F3-06) ----------
+        public Dictionary<string, int> MonsterDamage = new Dictionary<string, int>();
+        public static readonly string[] MonsterKinds = { "cura", "attacco", "pesca" };
+        public Dictionary<string, string> MonsterKind = new Dictionary<string, string>(); // casella → tipo del mostro che la occupa
+        public List<string> MonsterDeck = new List<string>();                             // mazzo dei mostri, fuori dal gioco
+        public int MonsterMax(Cell c) => MonsterKind.TryGetValue(c.Name, out var k) ? Preset.N("monsterHp_" + k) : 0;
+        public int MonsterHp(Cell c) => MonsterMax(c) - (MonsterDamage.TryGetValue(c.Name, out var d) ? d : 0);
+        void SpawnMonster(Cell c)
+        {
+            if (MonsterDeck.Count == 0) return;
+            string k = MonsterDeck[0]; MonsterDeck.RemoveAt(0); MonsterKind[c.Name] = k; MonsterDamage.Remove(c.Name);
+            Say(-1, "monster", $"Dal mazzo dei mostri esce un mostro «{k}» in {c}: punti vita {MonsterMax(c)}, danno {Preset.N("monsterAtk_" + k)} (nel mazzo restano {MonsterDeck.Count} carte).", true);
+        }
+        IEnumerable<Cell> LiveMonsters(int player) => Preset.C("monsters") != "attivi" ? Enumerable.Empty<Cell>()
+            : Board.All().Where(c => Board.Code(c) == "M" && MonsterHp(c) > 0 && !Players[player].SkipMonsters.Contains(c.Name));
+        Cell? MonsterInRange(Unit a) => LiveMonsters(a.Owner).Where(c => InRange(a, c)).Select(c => (Cell?)c).FirstOrDefault();
+        /// <summary>Codice di un bersaglio che non è un'unità (Torre o mostro), da passare come «prefer».</summary>
+        public static int CellTarget(Cell c) => -1000 - (c.Y * 100 + c.X);
+        /// <summary>Tutto ciò che il giocatore può scegliere come bersaglio del combattimento automatico (vale solo se è a portata).</summary>
+        public List<(int Code, string Label)> TargetChoices(int player)
+        {
+            var l = Units.Where(u => u.Owner != player && u.Placed).Select(u => (u.Id, $"{Def(u).Name} in {u.Pos}")).ToList();
+            int e = 1 - player;
+            if (Preset.C("towerHp") == "si" && TowerActive(e)) l.Add((CellTarget(Board.Tower(e).Value), $"Torre di G{e + 1}"));
+            foreach (var c in LiveMonsters(player)) l.Add((CellTarget(c), $"Mostro «{MonsterKind[c.Name]}» in {c}"));
+            return l;
+        }
+        void HitMonster(Unit a, Cell mc)
+        {
+            int hit = AttackAt(a, mc); a.HasAttacked = true;
+            string kind = MonsterKind[mc.Name];
+            MonsterDamage[mc.Name] = MonsterMax(mc) - MonsterHp(mc) + hit;
+            Say(a.Owner, "combat", $"Combattimento automatico: {Def(a).Name} infligge {hit} al mostro «{kind}» in {mc} (punti vita {Math.Max(0, MonsterHp(mc))}/{MonsterMax(mc)}).", true);
+            if (MonsterHp(mc) > 0)
+            {
+                int back = Preset.N("monsterAtk_" + kind);
+                if (back > 0 && Adj(a, mc)) { a.Damage += back; Say(a.Owner, "combat", $"Il mostro restituisce {back} a {Def(a).Name} (Salute {Health(a)}/{MaxHealth(a)}).", true); }
+                return;
+            }
+            var p = Players[a.Owner]; var gm = Gm(a.Owner); p.MonsterKills++;
+            Say(a.Owner, "monster", $"Il mostro «{kind}» in {mc} è sconfitto da G{a.Owner + 1} (mostri sconfitti: {p.MonsterKills}).", true);
+            int gain = Preset.N("monsterGain_" + kind);
+            switch (kind)
+            {
+                case "cura": gm.Damage = Math.Max(0, gm.Damage - gain); Say(a.Owner, "monster", $"Beneficio: {Def(gm).Name} cura {gain} (Salute {Health(gm)}/{MaxHealth(gm)}).", true); break;
+                case "pesca": Say(a.Owner, "monster", $"Beneficio: pesca {gain} {(gain == 1 ? "carta" : "carte")}.", true); for (int i = 0; i < gain; i++) Draw(a.Owner, false); break;
+                case "attacco": gm.Mods.Add(new Modifier { Stat = "attack", Amount = gain, ExpiresTurn = -1, Source = "mostro" }); Say(a.Owner, "monster", $"Beneficio: {Def(gm).Name} ottiene +{gain} Attacco permanente.", true); break;
+            }
+            if (Preset.C("monsterNext") == "nuovo") SpawnMonster(mc);
+            int need = Preset.N("monsterWin");
+            if (need > 0 && p.MonsterKills >= need && Phase != Phase.Over) Win(a.Owner, $"G{a.Owner + 1} ha sconfitto {p.MonsterKills} mostri (F3-08)");
+        }
+
+        // ---------- edifici (F3-12/13, H30): le carte risorsa in gioco, bersagliabili dai danni ----------
+        public static int BuildingTarget(int owner, int index) => -2 - (owner * 100 + index);
+        bool BuildingOk(int player, CardDef c, int targetId)
+        {
+            int k = -2 - targetId, owner = k / 100, idx = k % 100;
+            return Preset.C("buildings") == "si" && owner < 2 && idx < Players[owner].Resources.Count && (c.Target == "any" || (c.Target == "enemy" && owner != player))
+                && c.Effects.Any(e => e.Kind == "damage") && c.Effects.All(e => e.Kind == "damage" || e.Kind == "healOwn");
+        }
+        public bool AnyBuildingTarget(int player, CardDef c) => Enumerable.Range(0, 2).Any(o => BuildingOk(player, c, BuildingTarget(o, 0)));
+        void HitBuilding(StackItem it, CardDef c, Unit me)
+        {
+            var res = Players[it.BuildingOwner].Resources;
+            // shortcut: l'edificio è ricordato per posizione; se nel frattempo ne è stato distrutto un altro prima di lui, l'effetto cade su quello che ne ha preso il posto
+            if (it.BuildingIndex >= res.Count) { Say(it.Controller, "resolve", $"{c.Name} non ha effetto: l'edificio non è più in gioco.", true); return; }
+            var b = res[it.BuildingIndex]; int dmg = c.Effects.Where(e => e.Kind == "damage").Sum(e => e.Amount);
+            b.Damage += dmg;
+            Say(it.Controller, "resolve", $"{c.Name}: {dmg} danni all'edificio {Def(b.CardId).Name} di G{it.BuildingOwner + 1} (Struttura {Math.Max(0, Preset.N("buildingHp") - b.Damage)}/{Preset.N("buildingHp")}).");
+            if (b.Damage >= Preset.N("buildingHp"))
+            {
+                res.RemoveAt(it.BuildingIndex); Players[it.BuildingOwner].Discard.Add(b.CardId);
+                Say(it.Controller, "resolve", $"L'edificio {Def(b.CardId).Name} di G{it.BuildingOwner + 1} è distrutto e va negli scarti (F3-12).", true);
+            }
+            foreach (var e in c.Effects.Where(e => e.Kind == "healOwn")) { me.Damage = Math.Max(0, me.Damage - e.Amount); Say(it.Controller, "resolve", $"{c.Name}: cura {e.Amount} a {Def(me).Name} (Salute {Health(me)}/{MaxHealth(me)})."); }
+        }
 
         // ---------- setup ----------
         public List<Cell> StartOptions(int player) =>
@@ -168,7 +336,7 @@ namespace Guilds.Core
             int e = 1 - a.Owner;
             if (Preset.C("towerHp") != "si" || !TowerActive(e)) return false;
             var t = Board.Tower(e).Value;
-            return Def(a).Range == "ranged" ? Sees(a, t) : Board.Adjacent(a.Pos, t, Adjacency);
+            return InRange(a, t);
         }
 
         // ---------- turno ----------
@@ -178,8 +346,14 @@ namespace Guilds.Core
             var p = Players[Active]; p.ResourcesPlayedThisTurn = 0;
             foreach (var u in Units.Where(u => u.Owner == Active)) { u.Tapped = false; u.HasAttacked = false; u.MovedThisTurn = false; }
             foreach (var r in p.Resources) r.Tapped = false;
+            if (Preset.C("resourceModel") == "crescente" && p.Granted < Preset.N("resourceX")) Grant(Active);
+            if (Preset.C("gmResource") == "si") p.Pool[Def(Gm(Active)).Guild]++;
             Say(Active, "turn", $"— Turno {Turn}: G{Active + 1}. Le sue unità e le sue {p.Resources.Count} carte risorsa si stappano.", true);
-            foreach (var u in Units.Where(u => u.Owner == Active && u.Venom > 0))
+            if (Preset.C("monsterLife") == "ripristinata")
+                foreach (var c in Board.All().Where(c => MonsterHp(c) > 0 && MonsterDamage.ContainsKey(c.Name))) { MonsterDamage.Remove(c.Name); Say(-1, "rule", $"Il mostro in {c} torna a vita piena.", true); }
+            if (Preset.C("allyLife") == "ripristinata")
+                foreach (var u in Units.Where(u => u.Id >= 2 && u.Placed && u.Damage > 0)) { u.Damage = 0; Say(u.Owner, "rule", $"{Def(u).Name} torna a vita piena (N-01).", true); }
+            foreach (var u in Units.Where(u => u.Owner == Active && u.Placed && u.Venom > 0))
             {   // F1-65: 1 danno a inizio turno, indipendentemente dal numero di segnalini
                 u.Damage++; Say(Active, "venom", $"{Def(u).Name} è avvelenato: subisce 1 danno (Salute {Health(u)}/{MaxHealth(u)}).", true);
                 if (Preset.C("venom") == "cala") { u.Venom--; Say(Active, "venom", $"{Def(u).Name} perde un segnalino veleno (ne restano {u.Venom}).", true); }
@@ -207,10 +381,14 @@ namespace Guilds.Core
         public string WhyNotEndTurn(int player)
         {
             if (Phase != Phase.Main || player != Active) return "Puoi finire il turno solo nella tua fase principale, con la pila vuota.";
-            var gm = Gm(player);
-            if (Preset.C("mandatoryMove") == "si" && !gm.MovedThisTurn && WhyNotMove(player, gm.Id) == null)
-                return "Movimento obbligatorio (F3-03): devi muovere il tuo Guildmaster prima di finire il turno.";
-            return null;
+            if (Preset.C("mandatoryMove") != "si") return null;
+            var mine = Units.Where(u => u.Owner == player && u.Placed).ToList();
+            var can = mine.Where(u => !u.MovedThisTurn && WhyNotMove(player, u.Id) == null).ToList();
+            if (can.Count == 0) return null;
+            if (Preset.C("obligation") == "OBB-B" && mine.Count > 1) return "Movimento obbligatorio (F3-03, OBB-B): deve ancora muovere " + string.Join(", ", can.Select(u => Def(u).Name)) + ".";
+            if (mine.Any(u => u.MovedThisTurn)) return null;
+            return mine.Count == 1 ? "Movimento obbligatorio (F3-03): devi muovere il tuo Guildmaster prima di finire il turno."
+                : "Movimento obbligatorio (F3-03, OBB-A): devi muovere almeno una tua unità prima di finire il turno.";
         }
 
         public string EndTurn(int player)
@@ -226,7 +404,7 @@ namespace Guilds.Core
         string FinishTurn(int player)
         {
             var gm = Gm(player);
-            if (Preset.C("mandatoryMove") == "si" && !gm.MovedThisTurn) Say(player, "rule", $"{Def(gm).Name} non poteva muoversi: l'obbligo di movimento decade (decisione del 14 nov).", true);
+            if (Preset.C("mandatoryMove") == "si" && !Units.Any(u => u.Owner == player && u.Placed && u.MovedThisTurn)) Say(player, "rule", $"{Def(gm).Name} non poteva muoversi: l'obbligo di movimento decade (decisione del 14 nov).", true);
             foreach (var g in Players[player].Pool.Keys.ToList()) Players[player].Pool[g] = 0;
             foreach (var u in Units) u.Mods.RemoveAll(m => m.ExpiresTurn == Turn);
             Say(player, "turn", $"G{player + 1} termina il turno. Risorse non spese perse (F1-45).");
@@ -250,7 +428,16 @@ namespace Guilds.Core
         public Dictionary<Cell, List<Cell>> MovesFor(int unitId, int? maxSteps = null)
         {
             var u = Units[unitId];
-            var m = Board.Reach(u.Pos, maxSteps ?? MoveMax(u), c => !EnemyAt(u.Owner, c), c => UnitAt(c) == null);
+            bool steps = maxSteps != null || Preset.C("moveStyle") == "passi" || RoleOf(u) == "steps"; // le carte che spostano di N caselle restano a passi
+            var m = steps ? Board.Reach(u.Pos, maxSteps ?? MoveMax(u), c => !EnemyAt(u.Owner, c), c => UnitAt(c) == null)
+                : Board.ChessReach(u.Pos, RoleOf(u), c => UnitAt(c) == null);
+            if (maxSteps == null && Phase == Phase.Main && Preset.C("assault") != "no" && !u.HasAttacked)
+                foreach (var e in Units.Where(x => x.Owner != u.Owner && x.Placed && (x.Id >= 2 || Preset.C("assault") == "tutti" || (Preset.C("assault") == "nogm" && u.Id >= 2))))
+                {   // N-03: la casella di un nemico è una destinazione se ci si arriva accanto con un passo ancora da fare (o si è già accanto)
+                    var near = m.Where(k => Board.Adjacent(k.Key, e.Pos, 8) && (!steps || k.Value.Count < MoveMax(u))).OrderBy(k => k.Value.Count).Select(k => k.Value).FirstOrDefault();
+                    if (Board.Adjacent(u.Pos, e.Pos, 8)) near = new List<Cell>();
+                    if (near != null) m[e.Pos] = new List<Cell>(near) { e.Pos };
+                }
             // variante: restare fermi è una mossa (solo nel proprio turno, non per le carte che spostano né per lo spostamento in risposta)
             if (maxSteps == null && Phase == Phase.Main && Preset.C("stayMove") == "si") m[u.Pos] = new List<Cell>();
             return m;
@@ -264,18 +451,19 @@ namespace Guilds.Core
             if (player != Actor || Phase != Phase.Main) return "Si attacca solo nella propria fase principale.";
             if (u.Owner != player || !u.Placed) return "Puoi attaccare solo con le tue unità.";
             if (u.Tapped) return $"{Def(u).Name} è tappato: anche l'attacco senza cambiare casella si fa tappando la carta.";
+            if (Weak(u)) return $"{Def(u).Name} è appena entrato: ha debolezza da evocazione e in questo turno non può essere tappato.";
             if (u.HasAttacked) return $"{Def(u).Name} ha già attaccato in questo turno (F1-27).";
-            if (!Units.Any(d => d.Owner != player && d.Placed && InAttackRange(u, d)) && !CanHitTower(u)) return $"Nessun nemico {(Def(u).Range == "ranged" ? "in linea di tiro" : "a contatto")}.";
+            if (!Units.Any(d => d.Owner != player && d.Placed && InAttackRange(u, d)) && !CanHitTower(u) && MonsterInRange(u) == null) return $"Nessun nemico {(Def(u).Range == "ranged" ? "in linea di tiro" : "a contatto")}.";
             return null;
         }
-        public string DeclareAttack(int player, int unitId)
+        public string DeclareAttack(int player, int unitId, int prefer = -1)
         {
             var why = WhyNotAttack(player, unitId); if (why != null) return why;
             var u = Units[unitId];
             // decisione del 15 nov: il tap È il movimento, anche se la pedina non cambia casella. Ordine: tap > movimento > attacco.
             u.Tapped = true; u.MovedThisTurn = true;
             Say(player, "attack", $"{Def(u).Name} si tappa e attacca restando in {u.Pos}.");
-            var item = new StackItem { Kind = "attack", Controller = player, UnitId = unitId, From = u.Pos };
+            var item = new StackItem { Kind = "attack", Controller = player, UnitId = unitId, From = u.Pos, Prefer = prefer };
             foreach (var x in Units) item.Positions[x.Id] = x.Pos;
             Stack.Add(item); Phase = Phase.Response; Priority = 1 - player;
             return null;
@@ -290,6 +478,7 @@ namespace Guilds.Core
             bool byDiscard = Phase == Phase.Response && Preset.C("dodge") == "SCH-SCARTO";
             if (u.Tapped) // il movimento è sempre subordinato al tap, salvo che una carta dica altro
                 return $"{Def(u).Name} è tappato: " + (Phase == Phase.Response ? "un'unità tappata non può spostarsi in risposta." : "si muove tappando la carta (F1-24).");
+            if (Weak(u)) return $"{Def(u).Name} è appena entrato: ha debolezza da evocazione e in questo turno non può essere tappato.";
             if (Phase == Phase.Response && Preset.C("dodgeOnlyVsAttack") == "si" && !UnderAttack(u)) return "Ci si sposta in risposta solo a un attacco contro questa unità (N-08).";
             if (byDiscard && Players[player].Hand.Count == 0) return "Per spostarti in risposta devi scartare una carta, ma non ne hai in mano.";
             if (Rooted(u)) return $"{Def(u).Name} è bloccato da Root (CS-21).";
@@ -310,7 +499,7 @@ namespace Guilds.Core
         }
 
         /// <summary>discardIndex: carta della mano da scartare, richiesta solo per lo spostamento in risposta con SCH-SCARTO.</summary>
-        public string Move(int player, int unitId, Cell dest, int discardIndex = -1)
+        public string Move(int player, int unitId, Cell dest, int discardIndex = -1, int prefer = -1)
         {
             var why = WhyNotMove(player, unitId); if (why != null) return why;
             var u = Units[unitId];
@@ -335,11 +524,18 @@ namespace Guilds.Core
                 TowerEffect(u, "Enter");
                 Priority = 1 - player; return null;
             }
+            var foe = UnitAt(dest); bool assault = foe != null && foe.Owner != player; // N-03: la casella di un nemico come destinazione
+            if (assault)
+            {   // l'unità si ferma nell'ultima casella libera del percorso: entra in quella nemica solo se vince
+                prefer = foe.Id; route = from + string.Concat(path.Take(path.Count - 1).Select(c => " → " + c));
+                dest = path.Count >= 2 ? path[path.Count - 2] : from;
+            }
             u.Pos = dest; u.Tapped = true; u.MovedThisTurn = true;
-            Say(player, "move", dest.Equals(from) ? $"{Def(u).Name} si tappa e resta in {from}: vale come movimento." : $"{Def(u).Name} si tappa e muove: {route}.");
+            Say(player, "move", assault ? $"{Def(u).Name} si tappa e dichiara un Assalto contro {Def(foe).Name} in {foe.Pos} (N-03): {route}."
+                : dest.Equals(from) ? $"{Def(u).Name} si tappa e resta in {from}: vale come movimento." : $"{Def(u).Name} si tappa e muove: {route}.");
             if (!dest.Equals(from)) TowerEffect(u, "Enter");
-            if (Phase == Phase.Over) return null;
-            var item = new StackItem { Kind = "move", Controller = player, UnitId = unitId, From = from };
+            if (Phase == Phase.Over || !u.Placed) return null;
+            var item = new StackItem { Kind = "move", Controller = player, UnitId = unitId, From = from, Prefer = prefer, Assault = assault };
             foreach (var x in Units) item.Positions[x.Id] = x.Pos;
             Stack.Add(item); Phase = Phase.Response; Priority = 1 - player;
             return null;
@@ -379,10 +575,11 @@ namespace Guilds.Core
         {
             if (c.Effects.Any(x => x.Kind == "damageCross")) return Board.All().Where(k => !Board.Opaque(k) && Sees(Gm(player), k)).ToList();
             var e = c.Effects.FirstOrDefault(x => x.Kind == "reposition");
+            if (c.Type == CardType.Ally) return SummonDests(player, c);
             return e == null || targetId < 0 || Rooted(Units[targetId]) ? new List<Cell>() : MovesFor(targetId, e.Amount).Keys.ToList();
         }
         public bool NeedsTarget(CardDef c) => c.Target != "none" && c.Type != CardType.Item;
-        public bool NeedsDest(CardDef c) => c.Effects.Any(e => e.Kind == "reposition" || e.Kind == "damageCross");
+        public bool NeedsDest(CardDef c) => c.Type == CardType.Ally || c.Effects.Any(e => e.Kind == "reposition" || e.Kind == "damageCross");
         /// <summary>Croce (ipotesi H21): la casella scelta e le 4 adiacenti ortogonali.</summary>
         public static IEnumerable<Cell> Cross(Cell c) => new[] { c, new Cell(c.X + 1, c.Y), new Cell(c.X - 1, c.Y), new Cell(c.X, c.Y + 1), new Cell(c.X, c.Y - 1) };
 
@@ -397,7 +594,7 @@ namespace Guilds.Core
             if (Preset.C("gmAbilities") == "turno" && (Phase != Phase.Main || player != Active)) return "In questo preset l'abilità si usa solo nel proprio turno, non in risposta.";
             if (gm.AbilityUsedTurn == Turn) return "Abilità già usata in questo turno (una volta per turno).";
             if (!CanPay(player, a)) return $"Risorse insufficienti: l'abilità costa {CardRules.Cost(a, Preset)}.";
-            if (NeedsTarget(a) && TargetsFor(player, a).Count == 0) return "Nessun bersaglio valido in linea di vista (F1-57).";
+            if (NeedsTarget(a) && TargetsFor(player, a).Count == 0 && !AnyBuildingTarget(player, a)) return "Nessun bersaglio valido in linea di vista (F1-57).";
             return null;
         }
         public string UseAbility(int player, int targetId = -1, Cell? dest = null)
@@ -410,6 +607,7 @@ namespace Guilds.Core
 
         string CheckChoice(int player, CardDef c, int targetId, Cell? dest)
         {
+            if (NeedsTarget(c) && targetId <= -2) return BuildingOk(player, c, targetId) ? null : "Edificio non valido: servono la variante «Edifici», una carta che infligge solo danni e, se dice «nemica», un edificio avversario.";
             if (NeedsTarget(c) && !TargetsFor(player, c).Contains(targetId)) return "Bersaglio non valido.";
             if (NeedsDest(c) && (dest == null || !DestsFor(c, targetId, player).Contains(dest.Value))) return "Casella non valida.";
             return null;
@@ -417,7 +615,8 @@ namespace Guilds.Core
         void Declare(int player, CardDef c, int targetId, Cell? dest, string what)
         {
             Pay(player, c);
-            var item = new StackItem { Kind = "card", Controller = player, CardId = c.Id, TargetId = NeedsTarget(c) ? targetId : -1 };
+            var item = new StackItem { Kind = "card", Controller = player, CardId = c.Id, TargetId = NeedsTarget(c) && targetId >= 0 ? targetId : -1 };
+            if (NeedsTarget(c) && targetId <= -2) { item.BuildingOwner = (-2 - targetId) / 100; item.BuildingIndex = (-2 - targetId) % 100; what += $" sull'edificio {Def(Players[item.BuildingOwner].Resources[item.BuildingIndex].CardId).Name} di G{item.BuildingOwner + 1}"; }
             if (item.TargetId >= 0) item.TargetPos = Units[targetId].Pos;
             if (NeedsDest(c)) { item.Dest = dest.Value; item.HasDest = true; }
             Stack.Add(item);
@@ -434,15 +633,23 @@ namespace Guilds.Core
             if (c.Type == CardType.Resource)
                 return Players[player].ResourcesPlayedThisTurn >= Preset.N("resourcesPerTurn") ? "Hai già giocato le carte risorsa consentite in questo turno (H1)." : null;
             if (!CanPay(player, c)) return $"Risorse insufficienti: costa {CardRules.Cost(c, Preset)}.";
-            if (NeedsTarget(c) && TargetsFor(player, c).Count == 0) return "Nessun bersaglio valido in linea di vista (F1-57).";
+            if (c.Type == CardType.Ally)
+            {
+                var lim = SummonLimit(player, c); if (lim != null) return "Non puoi evocare: " + lim + ".";
+                if (SummonDests(player, c).Count == 0) return "Nessuna casella libera in cui evocare (F1-29).";
+            }
+            if (NeedsTarget(c) && TargetsFor(player, c).Count == 0 && !AnyBuildingTarget(player, c)) return "Nessun bersaglio valido in linea di vista (F1-57).";
             return null;
         }
 
-        public string Play(int player, int handIndex, int targetId = -1, Cell? dest = null)
+        /// <summary>role: pezzo degli scacchi scelto per l'alleato (variante «scelta»). drop: indici degli effetti da togliere dalla pedina sostituita (variante «sostituisce»).</summary>
+        public string Play(int player, int handIndex, int targetId = -1, Cell? dest = null, string role = null, List<int> drop = null)
         {
             var why = WhyNotPlay(player, handIndex); if (why != null) return why;
             var p = Players[player]; var c = Def(p.Hand[handIndex]);
             if (c.Type != CardType.Resource) { why = CheckChoice(player, c, targetId, dest); if (why != null) return why; }
+            if (c.Type == CardType.Ally && Preset.C("moveStyle") == "scelta" && !AvailableRoles(player, c).Contains(role))
+                return "Scegli il pezzo degli scacchi con cui entra, fra quelli disponibili: " + string.Join(", ", AvailableRoles(player, c).Select(Names.Role)) + ".";
             p.Hand.RemoveAt(handIndex); p.Played.Add(c.Id);
             if (c.Type == CardType.Resource)
             {   // H1/H2: la risorsa entra in gioco senza passare dalla pila e produce dal prossimo inizio turno
@@ -451,6 +658,7 @@ namespace Guilds.Core
                 Say(player, "resource", $"G{player + 1} gioca {c.Name}" + (tapped ? " (entra tappata: utilizzabile dal suo prossimo turno)." : " (entra pronta).")); return null;
             }
             Declare(player, c, targetId, dest, $"G{player + 1} gioca {c.Name}");
+            Stack[Stack.Count - 1].Role = role; Stack[Stack.Count - 1].Drop = drop;
             return null;
         }
 
@@ -475,47 +683,81 @@ namespace Guilds.Core
         void ResolveMove(StackItem it)
         {   // F2-03: combattimento automatico dopo il movimento. F1-27: un attacco per unità.
             var a = Units[it.UnitId];
+            if (!a.Placed) { Say(a.Owner, "combat", $"{Def(a).Name} non è più in gioco: nessun combattimento.", true); return; }
             if (a.HasAttacked) { Say(a.Owner, "combat", $"{Def(a).Name} ha già attaccato in questo turno (F1-27): nessun combattimento.", true); return; }
             bool annul = Preset.C("recheck") == "RIC-ANNULLA";
-            if (annul && !a.Pos.Equals(it.Positions[a.Id]))
+            if (annul && !a.Pos.Equals(Was(it, a)))
             {
                 Say(a.Owner, "combat", $"{Def(a).Name} è stato spostato dopo il suo movimento: colpisce il vuoto, nessun combattimento (RIC-ANNULLA).", true);
                 return;
             }
+            if (it.Assault) { Assault(it, a); return; }
             var targets = new List<Unit>();
             foreach (var d in Units.Where(d => d.Owner != a.Owner && d.Placed && InAttackRange(a, d)))
             {
-                if (annul && !d.Pos.Equals(it.Positions[d.Id]))
+                if (annul && !d.Pos.Equals(Was(it, d)))
                     Say(d.Owner, "combat", $"{Def(d).Name} ha cambiato casella in risposta: evita il combattimento (RIC-ANNULLA).", true);
                 else targets.Add(d);
             }
-            if (targets.Count == 0 && CanHitTower(a))
+            // bersagli validi: unità nemiche, Torre, mostri. Chi attacca può sceglierne uno; senza scelta: unità, poi Torre, poi mostro.
+            Cell? tw = CanHitTower(a) ? Board.Tower(1 - a.Owner) : null;
+            var mons = LiveMonsters(a.Owner).Where(c => InRange(a, c)).ToList();
+            bool pickTower = tw != null && it.Prefer == CellTarget(tw.Value);
+            Cell? pickMon = mons.Where(c => CellTarget(c) == it.Prefer).Select(c => (Cell?)c).FirstOrDefault();
+            if ((pickTower || pickMon != null) && targets.Count + (tw != null ? 1 : 0) + mons.Count > 1)
+                Say(a.Owner, "combat", $"Più bersagli validi: {Def(a).Name} attacca {(pickTower ? "la Torre" : "il mostro in " + pickMon)} (bersaglio scelto).", true);
+            if (pickTower || (targets.Count == 0 && tw != null && pickMon == null))
             {
-                int e = 1 - a.Owner, hit = Attack(a); a.HasAttacked = true; TowerDamage[e] += hit;
+                int e = 1 - a.Owner, hit = AttackAt(a, Board.Tower(e).Value); a.HasAttacked = true; TowerDamage[e] += hit;
                 Say(a.Owner, "combat", $"Combattimento automatico: {Def(a).Name} infligge {hit} alla Torre di G{e + 1} (punti vita {Math.Max(0, TowerHp(e))}/{Preset.N("towerHpMax")}).", true);
                 if (TowerHp(e) <= 0) Say(a.Owner, "tower", $"La Torre di G{e + 1} è a 0: non è più attiva, le sue caselle non hanno più effetto.", true);
+                if (TowerHp(e) <= 0 && Preset.C("towerWin") == "si") Win(a.Owner, $"la Torre di G{e + 1} è stata distrutta (F4b-15)");
                 return;
             }
+            if (pickMon != null || (targets.Count == 0 && mons.Count > 0)) { HitMonster(a, pickMon ?? mons[0]); return; }
             if (targets.Count == 0)
             {
                 Say(a.Owner, "combat", $"Nessun combattimento: nessun nemico {(Def(a).Range == "ranged" ? "in linea di vista" : "a contatto")} di {Def(a).Name}.", true);
                 return;
             }
-            // shortcut: con un solo eroe per parte il bersaglio è unico; con gli alleati (P02) servirà la scelta del bersaglio.
-            var t = targets[0]; a.HasAttacked = true;
-            int dmg = Attack(a); t.Damage += dmg; Envenom(a, t, dmg);
+            // con più nemici a portata: il bersaglio scelto da chi attacca; senza scelta, il primo in ordine (il Guildmaster per primo)
+            var t = targets.FirstOrDefault(x => x.Id == it.Prefer) ?? targets[0]; a.HasAttacked = true;
+            if (targets.Count > 1) Say(a.Owner, "combat", $"Più nemici a portata: {Def(a).Name} attacca {Def(t).Name} ({(t.Id == it.Prefer ? "bersaglio scelto" : "scelta automatica")}).", true);
+            int dmg = AttackAt(a, t.Pos); t.Damage += dmg; Envenom(a, t, dmg);
             Say(a.Owner, "combat", $"Combattimento automatico: {Def(a).Name} ({Def(a).Range}) infligge {dmg} a {Def(t).Name} (Salute {Health(t)}/{MaxHealth(t)}).", true);
-            if (Def(t).Range == "melee" && Board.Adjacent(a.Pos, t.Pos, Adjacency))
-            {   // F1-33 + H6
-                int back = Attack(t); a.Damage += back; Envenom(t, a, back);
+            if (StrikesBack(t, a))
+            {
+                int back = AttackAt(t, a.Pos); a.Damage += back; Envenom(t, a, back);
                 Say(t.Owner, "combat", $"{Def(t).Name} restituisce {back} a {Def(a).Name} (Salute {Health(a)}/{MaxHealth(a)}).", true);
             }
             else Say(t.Owner, "combat", $"{Def(t).Name} non restituisce danni ({(Def(t).Range == "ranged" ? "difensore a distanza, F1-33" : "non adiacente, H6")}).", true);
         }
 
+        /// <summary>N-03/N-04: gli scambi si ripetono finché una delle due unità muore; il difensore a distanza infligge 1 a scambio.</summary>
+        void Assault(StackItem it, Unit a)
+        {
+            var t = Units[it.Prefer];
+            if (!t.Placed || !t.Pos.Equals(Was(it, t)) || !Board.Adjacent(a.Pos, t.Pos, 8))
+            { Say(a.Owner, "combat", $"Assalto annullato: {Def(t).Name} non è più nella casella dichiarata.", true); return; }
+            a.HasAttacked = true; var cell = t.Pos;
+            for (int round = 1; round <= 200 && Health(a) > 0 && Health(t) > 0; round++)
+            {
+                int da = AttackAt(a, t.Pos), dt = Def(t).Range == "ranged" && !Dual(t) ? 1 : AttackAt(t, a.Pos);
+                if (da == 0 && dt == 0) { Say(a.Owner, "combat", "Assalto interrotto: nessuna delle due unità può fare danno (caso non definito: D19).", true); break; }
+                t.Damage += da; a.Damage += dt; Envenom(a, t, da); Envenom(t, a, dt);
+                Say(a.Owner, "combat", $"Assalto, scambio {round}: {Def(a).Name} infligge {da} a {Def(t).Name} (Salute {Health(t)}/{MaxHealth(t)}); {Def(t).Name} infligge {dt} a {Def(a).Name} (Salute {Health(a)}/{MaxHealth(a)}).", true);
+            }
+            bool won = Health(t) <= 0 && Health(a) > 0;
+            CheckDeaths();
+            if (Phase == Phase.Over || !won || !a.Placed) return;
+            a.Pos = cell; Say(a.Owner, "combat", $"{Def(a).Name} vince l'Assalto e occupa {cell}.", true);
+            TowerEffect(a, "Enter");
+        }
+
         void ResolveCard(StackItem it)
         {
             var c = Def(it.CardId); var me = Gm(it.Controller); var p = Players[it.Controller];
+            if (c.Type == CardType.Ally) { Summon(it, c); return; }
             if (c.Type == CardType.Item)
             {
                 me.Items.Add(c.Id);
@@ -523,10 +765,11 @@ namespace Guilds.Core
                 Say(it.Controller, "resolve", $"{c.Name} è assegnato a {Def(me).Name}."); return;
             }
             if (!c.IsAbility) p.Discard.Add(c.Id);
+            if (it.BuildingOwner >= 0) { HitBuilding(it, c, me); return; }
             var t = it.TargetId >= 0 ? Units[it.TargetId] : null;
             if (t != null)
             {   // ricontrollo del bersaglio alla risoluzione
-                string fail = !t.Pos.Equals(it.TargetPos) ? "il bersaglio ha cambiato casella ed evita l'effetto (F3-11)"
+                string fail = !t.Placed ? "il bersaglio non è più in gioco" : !t.Pos.Equals(it.TargetPos) ? "il bersaglio ha cambiato casella ed evita l'effetto (F3-11)"
                     : c.Target != "self" && !Sees(me, t.Pos) ? "il bersaglio non è più in linea di vista (F1-57)" : null;
                 if (fail != null) { Say(it.Controller, "resolve", $"{c.Name} non ha effetto: {fail}.", true); return; }
             }
@@ -564,7 +807,12 @@ namespace Guilds.Core
         void CheckDeaths()
         {
             if (Phase == Phase.Over) return;
-            var dead = Units.Where(u => u.Placed && Health(u) <= 0).Select(u => u.Owner).ToList();
+            foreach (var u in Units.Where(u => u.Id >= 2 && u.Placed && Health(u) <= 0).ToList())
+            {   // un alleato sconfitto lascia la board e la sua carta va negli scarti
+                u.Placed = false; u.Dead = true; Players[u.Owner].Discard.Add(u.CardId);
+                Say(u.Owner, "death", $"{Def(u).Name} è sconfitto e lascia la board.", true);
+            }
+            var dead = Units.Take(2).Where(u => u.Placed && Health(u) <= 0).Select(u => u.Owner).ToList();
             if (dead.Count == 2) { Winner = -2; WinReason = "entrambi i Guildmaster sconfitti nello stesso momento (esito non definito: D21)"; Phase = Phase.Over; Say(-1, "end", "Fine partita: " + WinReason + ".", true); }
             else if (dead.Count == 1) Win(1 - dead[0], $"{Def(Gm(dead[0])).Name} è stato sconfitto (F1-54)");
         }
@@ -613,15 +861,19 @@ namespace Guilds.Core
                     target = ts[r.Next(ts.Count)];
                     if (g.NeedsDest(c)) { var ds = g.DestsFor(c, target, me); dest = ds[r.Next(ds.Count)]; }
                 }
-                if (g.Play(me, i, target, dest) == null) return;
+                else if (g.NeedsDest(c)) { var ds = g.DestsFor(c, -1, me); if (ds.Count == 0) continue; dest = ds[r.Next(ds.Count)]; }
+                if (g.Play(me, i, target, dest, c.Type == CardType.Ally ? g.AvailableRoles(me, c).FirstOrDefault() : null) == null) return;
             }
             if (g.Phase == Phase.Response) { g.Pass(me); return; }
-            var gm = g.Gm(me); var foe = g.Gm(1 - me);
-            if (g.WhyNotAttack(me, gm.Id) == null) { g.DeclareAttack(me, gm.Id); return; }
-            if (!gm.MovedThisTurn && g.WhyNotMove(me, gm.Id) == null)
+            var foe = g.Gm(1 - me);
+            foreach (var u in g.Units.Where(u => u.Owner == me && u.Placed).ToList())
             {
-                var best = g.MovesFor(gm.Id).Keys.OrderBy(c => Math.Max(Math.Abs(c.X - foe.Pos.X), Math.Abs(c.Y - foe.Pos.Y)) * 10 + r.Next(10)).First();
-                g.Move(me, gm.Id, best); return;
+                if (g.WhyNotAttack(me, u.Id) == null) { g.DeclareAttack(me, u.Id); return; }
+                if (!u.MovedThisTurn && g.WhyNotMove(me, u.Id) == null)
+                {
+                    var best = g.MovesFor(u.Id).Keys.OrderBy(c => Math.Max(Math.Abs(c.X - foe.Pos.X), Math.Abs(c.Y - foe.Pos.Y)) * 10 + r.Next(10)).First();
+                    g.Move(me, u.Id, best); return;
+                }
             }
             var why = g.EndTurn(me);
             if (why != null) throw new InvalidOperationException("Bot bloccato: " + why);

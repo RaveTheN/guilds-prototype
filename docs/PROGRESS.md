@@ -87,9 +87,57 @@ La vita della Torre è scritta sopra la Torre. Le caselle accanto a una Torre at
 ## Attacco sulla pedina e carte giocate consultabili (15 nov 2026, v0.9.2)
 L'etichetta sopra ogni pedina mostra anche l'Attacco attuale (con i modificatori). Un clic sulla miniatura di un oggetto assegnato, di una carta risorsa o su una carta in pila la mostra in grande al centro; un clic qualsiasi la chiude.
 
+## Evoluzioni del piano, tutte come varianti (15 nov 2026, v0.10.0)
+Il punto di ritorno alla fase precedente è il tag git `v0.9.2`. P01 e i preset P01x non cambiano regole: tutte le novità sono parametri spenti di default.
+
+| Evoluzione | Parametri | Preset | Stato |
+|---|---|---|---|
+| Alleati sulla board: carte Alleato, evocazione nel proprio territorio o accanto al Guildmaster, ingresso tappato salvo Swift, limite di miniature, morte → scarti, scelta del bersaglio con più nemici, OBB-A / OBB-B | Unità sulla board, Dove si evocano, Alleati appena evocati, Miniature massime, Se obbligatorio con più unità | P02, P02c | implementato; territori per ipotesi H27 |
+| Vita ripristinata (N-01) e Assalto (N-02..04) | Vita delle unità non Guildmaster, Assalto | P02a | implementato; casi limite per ipotesi H28 |
+| Doppio profilo d'attacco (N-05, F3-10) | Profilo d'attacco | P02b | implementato; valori ipotizzati (H10) |
+| Scacchi: Guildmaster come il Re; ogni unità col suo pezzo, uno per tipo | Come si muovono le pedine, Guildmaster muove come | P03, P03a | implementato; Pedone per ipotesi H29 |
+| Mostri con punti vita, beneficio, vittoria coi mostri | Mostri, punti vita, danno, beneficio, vittoria con N | P04 | implementato; tutto per ipotesi H31 |
+| Vittoria distruggendo la Torre (F4b-15) | Vittoria distruggendo la Torre | P01o | implementato |
+| Risorse fuori dal mazzo, fisse o crescenti (F2-10); risorsa base del Guildmaster (BL-21) | Modello delle risorse, X, Risorsa base | P05, P05a | implementato |
+| Edifici distruttibili (F3-12/13, F4b-18) | Edifici, punti Struttura | P06 | implementato in forma minima (H30) |
+| Linea di vista a zone (F4C-03) | Linea di vista = LOS-Z | P07 | implementato; zone per ipotesi H27 |
+| Editor di mazzi | scheda «Editor di mazzi» nella configurazione | — | implementato; salva in `data/decks/user` |
+
+Carte nuove: 8 alleati di test (2 per gilda) e 4 mazzi «con alleati». Selezionando un preset con gli alleati i mazzi passano da soli a quelli con alleati, con un avviso.
+
+Verifica: `dotnet test` 72 su 72 (23 test nuovi, di cui 12 partite simulate sui preset nuovi). Script dell'interfaccia compilati contro le librerie di Unity; **non eseguiti in Unity**. Nelle partite simulate l'automa evoca alleati e li perde, ma non ha mai dichiarato un Assalto né attaccato un mostro o un edificio: quelle regole sono coperte solo dai test mirati.
+
+Non fatto: M5 (Blender), per scelta di Peppe. Scelta manuale del percorso (nessuna regola dipende dal percorso). Token per ruolo o per gilda. Jungle (le mappe non hanno caselle Jungle). Assegnazione libera dei pezzi degli scacchi (nota di F4C-01). Parole chiave Armor, Flying, Taunt, Unique. Punti azione e moneta.
+
+## Opzioni aggiunte su richiesta di Peppe (15 nov 2026, v0.10.1)
+- **Dove si evocano gli alleati**: anche «accanto alla propria Torre».
+- **Alleati appena evocati**: anche «pronti ma con debolezza da evocazione» (non si possono tappare nel turno d'ingresso, salvo Swift; restano stappati nel turno avversario).
+- **Guildmaster con gli scacchi**: anche «3 passi» (muove a passi come senza scacchi).
+- **Come si muovono le pedine**: anche «pezzo scelto all'ingresso» fra 1 Cavallo, 1 Alfiere, 1 Re, 1 Regina, 1 Torre, 2 Pedoni per giocatore (preset P03b). Deciso da Peppe: se il Guildmaster muove come il Re, il Re è suo; altrimenti è fra i pezzi disponibili.
+- **Evocare un alleato con lo stesso nome**: crea una nuova pedina (default) · crea la nuova e rimuove la vecchia · sostituisce la vecchia. Nella sostituzione la carta si gioca sulla pedina già in campo, che resta nella sua casella (lettura mia, da confermare): vita piena, veleno tolto, effetti delle carte tolti a scelta, pezzo cambiabile. Gli alleati oggi non portano oggetti, quindi «togliere oggetti» riguarda solo gli effetti delle carte.
+- Menu: le note lunghe sotto il titolo di una regola non finiscono più dietro la voce successiva.
+- Verifica: `dotnet test` 75 su 75; interfaccia compilata, non eseguita in Unity.
+
+## Menu per temi, editor su tutti i mazzi, mazzi ottimizzati (15 nov 2026, v0.11.0)
+- Le regole della configurazione sono raggruppate in 11 temi con una fascia di titolo (Preparazione, Movimento, Combattimento, Risposte, Linea di vista, Alleati, Risorse ed edifici, Torri, Mostri, Effetti, Presentazione).
+- Editor di mazzi: elenca tutti i mazzi; ognuno si può assegnare a G1 o G2 oppure modificare in copia; dal mazzo modificato si salva e si assegna a G1 o G2.
+- Casella «Mazzi ottimizzati per il preset»: all'avvio ogni giocatore riceve un mazzo costruito per il preset a partire dal suo Guildmaster, con gli alleati se il preset li ha e senza altrimenti. Regola (mia, modificabile): tutte le carte compatibili della gilda in parti uguali fino al minimo del mazzo; risorse = 36% del mazzo (9 su 25), mai meno di 9 ogni 16 altre carte.
+
+## Mostri di tre tipi e mazzo dei mostri (15 nov 2026, v0.12.0)
+Richiesta di Peppe. Coi mostri attivi i mostri sono di tre tipi (cura, attacco, pesca), ognuno con punti vita, danno e beneficio modificabili; escono da un mazzo dei mostri fuori dal gioco (default 4 + 3 + 3 = 10 carte, numeri modificabili), mescolato a inizio partita, uno per casella M. Opzioni nuove: «Vita dei mostri» (persistente / ripristinata) e «Quando un mostro è sconfitto» (resta / esce il prossimo). Tolti i parametri unici «punti vita», «danno» e «beneficio» dei mostri. Quando e dove esce un mostro nuovo è una mia ipotesi (D48). Verifica: test del motore; interfaccia compilata, **non eseguita in Unity**.
+
+## Preset di base eliminabili (15 nov 2026, v0.12.1)
+«Elimina» funziona anche sui preset di base: spariscono dall'elenco (l'elenco è in `data/presets/user/hidden.txt`), i file restano perché il generatore dei contenuti e i test li usano. «Ripristina i preset di base» li fa riapparire tutti. L'ultimo preset rimasto non si può eliminare.
+
+## Scelta fra tutti i bersagli validi e mostri da non attaccare (15 nov 2026, v0.12.2)
+Richiesta di Peppe. Il pulsante del bersaglio ora elenca unità nemiche, Torre e mostri: se il bersaglio scelto è a portata viene attaccato quello, anche al posto di un'unità nemica (prima Torre e mostri si colpivano solo in mancanza d'altro: H26, H31). Senza scelta resta l'ordine unità, Torre, mostro. Accanto a ogni mostro vivo c'è la spunta «non attaccare», una per giocatore: quel mostro esce dai suoi bersagli. Interfaccia compilata, **non eseguita in Unity**.
+
+## Assalto senza Guildmaster contro Guildmaster (15 nov 2026, v0.12.3)
+Nuova scelta di «Assalto»: attivo anche contro i Guildmaster, ma non Guildmaster contro Guildmaster (un alleato può assaltare un Guildmaster e viceversa).
+
 ## Che cosa funziona
 - Logica in `Assets/Guilds/Core` (assembly con `noEngineReferences`), compilata anche da `core/Guilds.Core.csproj`.
-- Preset di base: **P01** (8x8), **P01-9x7**, **P01c** (schivata solo con carte), **P01d** (RIC-ANNULLA), **P01b** (S-A: dichiarato ma non avviabile, gli angoli delle mappe non sono liberi).
+- Preset di base: la famiglia **P01** (duello dei Guildmaster e le sue varianti) e i preset delle evoluzioni **P02–P07** elencati sopra.
 - Varianti selezionabili: mappa, posizione iniziale, schivata, ricontrollo, mazzo esaurito, contatto 8/4, simbolo giallo, tema, sette parametri numerici. Opzioni non implementate visibili ma indisponibili con il motivo: LOS-Z, OBB-B, modalità token diverse da «generico».
 - 24 carte di test (4 Guildmaster, 4 risorse, 16 fra azioni, istantanee, oggetti), 4 mazzi da 25. Catalogo: `docs/CARDS.md`.
 - Token dei Guildmaster dai 4 STL convertiti (`docs/logs/stl_conversion.md`).
@@ -103,10 +151,9 @@ L'etichetta sopra ogni pedina mostra anche l'Attacco attuale (con i modificatori
 
 ## Che cosa manca
 - **Verifica visiva dell'interfaccia.** Unity in modalità finestra, lanciato da riga di comando, si chiude dopo la licenza («Access token is unavailable»): serve aprire il progetto dal Hub. Il codice OnGUI compila ma non è mai stato eseguito: aspettati difetti di impaginazione al primo avvio.
-- P02 «Alleati» (N-01..N-05), ruoli degli scacchi, mostri, Jungle, Torre attiva, edifici, altri modelli di risorse.
-- LOS-Z e la parte di F1-38 sulle zone: la mappa non definisce i territori.
-- Scelta manuale del percorso (H18) e del bersaglio del combattimento (inutile con un solo nemico).
-- Editor di mazzi; M5.
+- Jungle con regole proprie; il divieto di F1-38 fra le zone di evocazione; edifici come supporto per altre carte.
+- Scelta manuale del percorso (H18).
+- M5.
 
 ## Decisioni di Peppe (14 nov 2026)
 - Risorse di P01: carte risorsa nel mazzo (F2-09).
@@ -131,4 +178,4 @@ L'etichetta sopra ogni pedina mostra anche l'Attacco attuale (con i modificatori
 ## Prossimi passi
 1. Peppe apre il progetto dal Hub e prova una partita; mi riporta i difetti dell'interfaccia.
 2. Risposte alle domande in `docs/OPEN_QUESTIONS.md`.
-3. P02 «Alleati», poi M5.
+3. Prova a schermo dei preset P02–P07; poi M5.

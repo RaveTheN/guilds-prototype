@@ -1,0 +1,36 @@
+﻿{
+  "id": "deck_yellow-mio1",
+  "name": "Mazzo giallo di prova (Rogues) (mio)",
+  "guildmaster": "gm_dalia",
+  "version": 1,
+  "cards": [
+    {
+      "card": "res_yellow",
+      "count": 9
+    },
+    {
+      "card": "y_smoke_step",
+      "count": 4
+    },
+    {
+      "card": "y_toxic_shiv",
+      "count": 4
+    },
+    {
+      "card": "y_blinding_dust",
+      "count": 4
+    },
+    {
+      "card": "y_venom_blades",
+      "count": 4
+    },
+    {
+      "card": "y_cutpurse",
+      "count": 4
+    },
+    {
+      "card": "y_knife_thrower",
+      "count": 4
+    }
+  ]
+}

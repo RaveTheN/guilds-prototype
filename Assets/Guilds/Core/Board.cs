@@ -10,6 +10,7 @@ namespace Guilds.Core
         public readonly MapDef Map;
         public readonly int W, H;
         readonly int[,] hgRegion; // regione di highground connessa (0 = non highground)
+        readonly string[,] zone;  // H27: G1 / G2 = territorio del giocatore, H<n> = highground, J = Jungle, N = normale di nessuno, "" = muro
 
         public Board(MapDef map)
         {
@@ -28,6 +29,61 @@ namespace Guilds.Core
                         if (IsHighground(n) && hgRegion[n.X, n.Y] == 0) { hgRegion[n.X, n.Y] = next; q.Enqueue(n); }
                 }
             }
+            zone = new string[W, H];
+            foreach (var c in All())
+            {
+                var k = Code(c);
+                zone[c.X, c.Y] = hgRegion[c.X, c.Y] != 0 ? "H" + hgRegion[c.X, c.Y] : k == "J" ? "J" : k == "T1" ? "G1" : k == "T2" ? "G2" : k == "." ? "N" : "";
+            }
+            for (int p = 0; p < 2; p++)
+            {   // territorio: caselle normali collegate alle partenze accanto alla propria Torre
+                var q = new Queue<Cell>(StartCells(p, "S-B")); foreach (var s in q) zone[s.X, s.Y] = "G" + (p + 1);
+                while (q.Count > 0)
+                {
+                    var k = q.Dequeue();
+                    for (int dx = -1; dx <= 1; dx++) for (int dy = -1; dy <= 1; dy++)
+                    {
+                        var n = new Cell(k.X + dx, k.Y + dy);
+                        if (Code(n) == "." && zone[n.X, n.Y] == "N") { zone[n.X, n.Y] = "G" + (p + 1); q.Enqueue(n); }
+                    }
+                }
+            }
+        }
+
+        public string Zone(Cell c) => InMap(c) ? zone[c.X, c.Y] : "";
+        /// <summary>LOS-Z (F4C-03): si vede un bersaglio nella propria zona o in una zona confinante (lato in comune).</summary>
+        public bool LosZone(Cell a, Cell b)
+        {
+            string za = Zone(a), zb = Zone(b);
+            if (za == "" || zb == "") return false;
+            return za == zb || All().Any(c => Zone(c) == za && (Zone(new Cell(c.X + 1, c.Y)) == zb || Zone(new Cell(c.X - 1, c.Y)) == zb || Zone(new Cell(c.X, c.Y + 1)) == zb || Zone(new Cell(c.X, c.Y - 1)) == zb));
+        }
+
+        /// <summary>Mosse degli scacchi (F2-13). free: la casella è libera da unità. Non si attraversano le unità; il Cavallo salta.</summary>
+        public Dictionary<Cell, List<Cell>> ChessReach(Cell from, string role, Func<Cell, bool> free)
+        {
+            var res = new Dictionary<Cell, List<Cell>>();
+            bool Ok(Cell c) => !BlocksMove(c) && free(c);
+            bool orth = role != "bishop" && role != "knight", diag = role != "rook" && role != "knight" && role != "pawn";
+            int max = role == "king" || role == "pawn" ? 1 : 99;
+            for (int dx = -1; dx <= 1; dx++) for (int dy = -1; dy <= 1; dy++)
+            {
+                if ((dx == 0 && dy == 0) || !(dx != 0 && dy != 0 ? diag : orth)) continue;
+                var path = new List<Cell>();
+                for (int i = 1; i <= max; i++)
+                {
+                    var n = new Cell(from.X + dx * i, from.Y + dy * i);
+                    if (!Ok(n)) break;
+                    path.Add(n); res[n] = new List<Cell>(path);
+                }
+            }
+            if (role == "knight" || role == "queenknight")
+                foreach (var (dx, dy) in new[] { (1, 2), (2, 1), (-1, 2), (-2, 1), (1, -2), (2, -1), (-1, -2), (-2, -1) })
+                {
+                    var n = new Cell(from.X + dx, from.Y + dy);
+                    if (Ok(n) && !res.ContainsKey(n)) res[n] = new List<Cell> { n };
+                }
+            return res;
         }
 
         public IEnumerable<Cell> All() { for (int y = 0; y < H; y++) for (int x = 0; x < W; x++) if (Code(new Cell(x, y)) != "") yield return new Cell(x, y); }
@@ -149,7 +205,7 @@ namespace Guilds.Core
         {
             var w = new List<string>(m.ZoneWarnings); var b = new Board(m);
             if (b.All().Any(c => b.Code(c) == "J")) w.Add("La mappa contiene caselle Jungle: in questo preset non hanno regole (F4b-07 rinviata) e valgono come caselle normali.");
-            if (b.All().Any(c => b.Code(c) == "M")) w.Add("Le caselle mostro sono ostacoli inerti in questo preset (F3-06 rinviata).");
+            if (b.All().Any(c => b.Code(c) == "M")) w.Add("Le caselle mostro sono ostacoli inerti, salvo la variante «Mostri attivi» (F3-06).");
             return w;
         }
 

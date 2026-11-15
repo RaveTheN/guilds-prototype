@@ -1,0 +1,36 @@
+{
+ "id": "deck_green_alleati",
+ "name": "Mazzo verde con alleati (Hunters)",
+ "version": 1,
+ "guildmaster": "gm_senya",
+ "cards": [
+  {
+   "card": "res_green",
+   "count": 9
+  },
+  {
+   "card": "g_field_dressing",
+   "count": 2
+  },
+  {
+   "card": "g_regrowth",
+   "count": 2
+  },
+  {
+   "card": "g_hunters_net",
+   "count": 2
+  },
+  {
+   "card": "g_hunters_bow",
+   "count": 2
+  },
+  {
+   "card": "g_hound",
+   "count": 4
+  },
+  {
+   "card": "g_wood_archer",
+   "count": 4
+  }
+ ]
+}

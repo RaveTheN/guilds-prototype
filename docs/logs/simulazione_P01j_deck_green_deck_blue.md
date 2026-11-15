@@ -1,10 +1,10 @@
 # Resoconto partita — Guilds prototipo
 
-- Versione prototipo: 0.9.2 (M4)
+- Versione prototipo: 0.12.3 (M4+)
 - Preset: P01j — Duello — linea di tiro che non tocca gli angoli (clone di P01) — TEST PARZIALE
 - Mappa: mappa_8x8 (originale)
 - Simbolo gilda gialla: stivale
-- Token delle altre unità: generico (in questo preset non ci sono altre unità)
+- Token delle altre unità: generico
 - Tema visivo: semplice
 - Seed: 20261114
 - Inizio: 2026-11-14 10:00:00 — durata: 20.0 minuti
@@ -18,6 +18,16 @@
 - Linea di vista (conflitto C2): LOS-G
 - Linea di tiro: come si traccia la retta: angoli-netta
 - Segnalini veleno: resta
+- Unità sulla board (conflitto C13): eroe
+- Dove si evocano gli alleati: territorio
+- Alleati appena evocati: si
+- Evocare un alleato con lo stesso nome di uno già in campo: nuova
+- Miniature massime per giocatore, Guildmaster incluso (F2-01): 5
+- Vita delle unità non Guildmaster: persistente
+- Assalto: no
+- Profilo d'attacco: singolo
+- Come si muovono le pedine: passi
+- Con i ruoli degli scacchi il Guildmaster muove come: king
 - Movimento obbligatorio ogni turno: si
 - Restare fermi vale come mossa?: no
 - Attacco senza movimento: no
@@ -42,6 +52,28 @@
 - X = danno a inizio turno: 1
 - Torre con punti vita: no
 - X = punti vita della Torre: 5
+- Vittoria distruggendo la Torre: no
+- Mostri (caselle M): inerti
+- Vita dei mostri: persistente
+- Quando un mostro è sconfitto: resta
+- Mostro della cura (sconfitto: il Guildmaster di chi lo sconfigge si cura) — carte nel mazzo dei mostri: 4
+- Mostro «cura»: punti vita: 4
+- Mostro «cura»: danno restituito a chi è a contatto: 1
+- Mostro «cura»: beneficio = punti Salute curati al Guildmaster di chi lo sconfigge: 3
+- Mostro dell'attacco (sconfitto: quel Guildmaster ottiene Attacco permanente) — carte nel mazzo dei mostri: 3
+- Mostro «attacco»: punti vita: 4
+- Mostro «attacco»: danno restituito a chi è a contatto: 1
+- Mostro «attacco»: beneficio = Attacco permanente dato al Guildmaster di chi lo sconfigge: 1
+- Mostro della pesca (sconfitto: quel giocatore pesca) — carte nel mazzo dei mostri: 3
+- Mostro «pesca»: punti vita: 4
+- Mostro «pesca»: danno restituito a chi è a contatto: 1
+- Mostro «pesca»: beneficio = carte pescate da chi lo sconfigge: 1
+- Vittoria con N mostri sconfitti (0 = spenta; F3-08): 0
+- Modello delle risorse (conflitto C9): carte
+- X = risorse fuori dal mazzo (fisse, o massimo delle crescenti): 3
+- Risorsa base del Guildmaster: no
+- Edifici: no
+- X = punti Struttura di un edificio: 2
 - Mano iniziale: 5
 - Limite di mano a fine turno: 7
 - Carte pescate a turno: 1
@@ -367,26 +399,32 @@ nota di prova
     "H21 Croce (abilità di Fiaran): la casella scelta più le 4 adiacenti in orizzontale e verticale; colpisce tutte le unità, anche le proprie. La forma non è scritta nelle fonti lette.",
     "H22 Abilità dei Guildmaster: costano 1 risorsa della gilda, non tappano il Guildmaster, una volta per turno (anche in quello avversario), si usano come un'istantanea (esempio di Nebros nel documento fase 2) e passano dalla pila.",
     "H23 Senya: il nemico deve essere in linea di vista; l'unità amica curata è il suo Guildmaster (non ci sono altre unità).",
+    "H10 Doppio profilo (N-05): adiacente si usa il valore in mischia, altrimenti quello a distanza. Il secondo profilo dei Guildmaster vale 1 (valore ipotizzato).",
+    "H27 Territori: il territorio di un giocatore sono le caselle normali collegate alle partenze accanto alla sua Torre senza passare da muri o highground; ogni blocco di highground è una zona condivisa. La mappa non li definisce (D23). Servono per l'evocazione e per la linea di vista a zone.",
+    "H28 Assalto (N-03): può dichiararlo qualsiasi unità, anche a distanza; l'unità si ferma accanto e gli scambi sono simultanei; chi vince occupa la casella; se muoiono entrambe resta vuota; se nessuna può fare danno si interrompe. Contro i Guildmaster solo con la variante «tutti».",
+    "H29 Scacchi: Pedone = una casella in orizzontale o verticale; non si attraversano le unità (il Cavallo salta); i bonus al movimento non valgono; il ruolo dell'alleato è scritto sulla carta.",
+    "H30 Edifici: sono le carte risorsa in gioco; si colpiscono senza linea di vista con carte e abilità che fanno solo danni; a 0 punti Struttura vanno negli scarti.",
+    "H31 Mostri: stanno sulle caselle M; si colpiscono col combattimento automatico solo se non c'è un'unità nemica o una Torre da colpire; restituiscono danno solo a chi è a contatto; sconfitti restano come ostacolo; il beneficio è un'ipotesi fra tre.",
+    "H32 Alleati: entrano dalla pila come le azioni normali; alla morte la carta va negli scarti; gli oggetti e le abilità restano del Guildmaster; le carte vedono dal Guildmaster. Con più nemici a portata sceglie chi attacca, altrimenti il primo in ordine (Guildmaster per primo).",
     "ND Veleno (F1-65): le fonti non dicono come si toglie un segnalino: per ora non si toglie mai (D31).",
     "ND Entrambi i Guildmaster sconfitti nello stesso scambio: esito non definito (D21); la partita finisce senza vincitore."
   ],
   "limits": [
     "Test parziale: sottoinsieme delle feature dell'inventario. Non è il regolamento definitivo.",
-    "Nessun alleato, evocazione, mostro, edificio; Torre e mostri sono ostacoli inerti; Jungle senza regole.",
-    "Zone personali non definite nella mappa (foglio Zone: «da definire»): niente LOS-Z, niente parte di F1-38 sulle zone di evocazione.",
+    "Alleati, Assalto, scacchi, mostri, edifici, risorse fuori dal mazzo e linea di vista a zone esistono solo come varianti, quasi tutte basate su ipotesi (H27–H32). Jungle senza regole: le mappe non hanno caselle Jungle.",
+    "Zone personali non definite nella mappa (foglio Zone: «da definire»): i territori sono ricavati per ipotesi (H27). Il divieto di F1-38 fra le zone di evocazione non è applicato.",
     "Il foglio Note dell'Excel descrive una disposizione diversa dalle celle dei fogli Mappa: usate le celle (Torri in A1 e H8, non H1 e A8 come in F4b-11)."
   ],
   "deferred": [
-    "Alleati, evocazione, token (F1-10/17/29/30, F2-01, F4C-01/02)",
-    "Ruoli degli scacchi (F2-13/14, F4B-04)",
-    "Mostri, Jungle, vittoria coi mostri (F3-06/07/08, F4b-07)",
-    "Torre con PV, danno, vittoria (F4b-12/14/15, F4C-05/06)",
-    "Edifici (F2-08, F3-12/13, F4b-18)",
+    "Token per ruolo o per gilda; assegnazione libera dei pezzi degli scacchi (nota di F4C-01)",
+    "Jungle con regole proprie; reazione dei mostri coi dadi (F4A-16)",
+    "Torre da conquistare (F4C-05/06), danno della Torre a raggio (F3-14)",
+    "Edifici come supporto per altre carte, mazzo strutture (F2-08, F4A-03, CS-05..09)",
     "Punti azione e moneta (F4A-04..15, F2-16)",
-    "Parole chiave: Armor, Flying, Swift, Taunt, Unique",
+    "Parole chiave: Armor, Flying, Taunt, Unique",
     "Aree d'effetto diverse dalla Croce (F1-39/40)",
     "Magie continuative, esilio, ricerca nel mazzo, dadi",
-    "P02 Alleati: N-01..N-05 (vita ripristinata, Assalto, doppio profilo)"
+    "Scelta manuale del percorso (H18): nessuna regola dipende dal percorso"
   ]
 }
 ```

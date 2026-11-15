@@ -20,8 +20,15 @@ def gm(id, name, guild, rng, folder, ability, model, keywords=()):
     return card(id, name, guild, "Guildmaster", origin=("adattamento", f"reference/Guild References/{folder}/{name}"),
                 tests="Ciclo base e abilità propria del Guildmaster, una volta per turno",
                 why="Attacco 2, Salute 20, portata e abilità presi dalla carta spoiler. Costo dell'abilità: 1 risorsa della gilda (il simbolo prima dei due punti).",
-                attack=2, health=20, range=rng, tokenModel=f"models/{model}.obj", keywords=list(keywords),
+                attack=2, health=20, range=rng, altAttack=1, tokenModel=f"models/{model}.obj", keywords=list(keywords),
                 ability=dict(name=aname, costColored=1, target=target, effects=[dict(zip(("kind", "amount"), e)) for e in effects]))
+
+
+def ally(id, name, guild, cc, cg, attack, health, rng, role, tests, why, **kw):
+    return card(id, name, guild, "Ally", cc, cg, origin=NEW_ALLY, tests=tests, why=why, attack=attack, health=health, range=rng, role=role, **kw)
+
+
+NEW_ALLY = ("nuova proposta", "alleato di test proposto (nessuna fonte ne fissa i valori)")
 
 
 def ADAPT(n): return ("adattamento", f"Core set - fase 4: {n} (testo originale basato su regole boardless)")
@@ -37,6 +44,8 @@ G = {
         card("r_fury", "Furia della Fucina (test)", "Red", "Instant", 1, 0, "self", [("mod", 2, "attack", "turn")], NEW, "Modificatore di attacco (F1-68) giocato prima o in risposta al proprio movimento", "+2 raddoppia il danno del combattimento automatico per un turno"),
         card("r_rush", "Rincorsa (test)", "Red", "Action", 1, 0, "self", [("mod", 2, "move", "turn")], NEW, "Modificatore di movimento (F1-22): raggiungere il contatto in mischia", "Da 3 a 5 caselle per un turno: velocità, identità rossa"),
         card("r_flame_gauntlet", "Flame Gauntlet (test)", "Red", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Flame Gauntlet, oggetto"), "Oggetti assegnati al Guildmaster (F1-11/12)", "+1 permanente per 2 risorse; cumulabile (F1-12)"),
+        ally("r_forge_recruit", "Recluta della Fucina (test)", "Red", 1, 1, 2, 3, "melee", "rook", "Alleato in mischia robusto: evocazione, obbligo di movimento con più unità, Assalto", "2/3 per 2 risorse: regge un attacco base"),
+        ally("r_bomber", "Bombarolo (test)", "Red", 1, 0, 1, 2, "ranged", "bishop", "Alleato a distanza con Swift (F1-62)", "1/2 per 1 risorsa: fragile ma agisce subito", keywords=["swift"]),
     ],
     "Blue": [
         gm("gm_nebros", "Nebros Clearmind", "Blue", "ranged", "Spoilers - blue", ("any", [("reposition", 2)], "Fiamma di Nebros"), "nebros"),
@@ -45,6 +54,8 @@ G = {
         card("b_arcane_dart", "Dardo arcano (test)", "Blue", "Instant", 1, 1, "enemy", [("damage", 2)], NEW, "Danno diretto istantaneo e ricontrollo del bersaglio (F3-11)", "2 danni a velocità istantanea per 2 risorse"),
         card("b_frost", "Gelo (test)", "Blue", "Action", 1, 0, "enemy", [("mod", -2, "move", "targetNextTurn")], NEW, "Controllo del movimento avversario senza bloccarlo (confronto con Root)", "Il nemico muove di 1 nel suo prossimo turno"),
         card("b_runic_staff", "Runic Staff (test)", "Blue", "Item", 1, 1, "none", [("mod", 1, "move", "permanent")], ADAPT("Runic Staff, oggetto"), "Oggetto di posizionamento per un Guildmaster a distanza", "+1 movimento permanente"),
+        ally("b_rune_golem", "Golem runico (test)", "Blue", 1, 1, 2, 4, "melee", "rook", "Alleato in mischia che fa da scudo a un Guildmaster a distanza (le unità nemiche bloccano la linea di vista, F1-37)", "2/4 per 2 risorse"),
+        ally("b_apprentice", "Apprendista arcano (test)", "Blue", 1, 0, 1, 2, "ranged", "bishop", "Secondo tiratore: scelta del bersaglio con più nemici a portata", "1/2 per 1 risorsa"),
     ],
     "Green": [
         gm("gm_senya", "Senya Windseeker", "Green", "ranged", "Spoiler - green", ("enemy", [("damage", 1), ("healOwn", 1)], "Freccia di Senya"), "senya"),
@@ -53,6 +64,8 @@ G = {
         card("g_regrowth", "Regrowth (test)", "Green", "Instant", 1, 0, "own", [("heal", 2)], ADAPT("Regrowth, cura"), "Cura a velocità istantanea", "2 = un attacco base"),
         card("g_hunters_net", "Hunter's Net (test)", "Green", "Action", 1, 1, "enemy", [("root", 0)], ADAPT("Hunter's Net, Root (CS-21)"), "Root contro movimento obbligatorio: l'obbligo decade e il nemico non attacca", "2 risorse: nega un intero turno di movimento e quindi di combattimento"),
         card("g_hunters_bow", "Hunter's Bow (test)", "Green", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Hunter's Bow, oggetto"), "Oggetto d'attacco su un Guildmaster a distanza", "+1 permanente"),
+        ally("g_hound", "Segugio (test)", "Green", 1, 0, 2, 2, "melee", "knight", "Alleato veloce con Swift; col ruolo Cavallo salta gli ostacoli", "2/2 per 1 risorsa: colpisce subito ma muore a un attacco base", keywords=["swift"]),
+        ally("g_wood_archer", "Arciere dei boschi (test)", "Green", 1, 1, 2, 2, "ranged", "bishop", "Alleato a distanza con attacco pieno", "2/2 per 2 risorse"),
     ],
     "Yellow": [
         gm("gm_dalia", "Dalia Shadowstep", "Yellow", "melee", "Spoilers - Yellow", ("any", [("damage", 1)], "Lama di Dalia"), "daalia", keywords=("venomous",)),
@@ -61,6 +74,8 @@ G = {
         card("y_toxic_shiv", "Toxic Shiv (test)", "Yellow", "Instant", 1, 0, "enemy", [("damage", 1)], ADAPT("Toxic Shiv, 1 danno + veleno"), "Danno istantaneo economico", "Il veleno è rinviato: resta solo il danno"),
         card("y_blinding_dust", "Polvere accecante (test)", "Yellow", "Instant", 1, 0, "enemy", [("mod", -2, "attack", "turn")], NEW, "Risposta al movimento che riduce il danno del combattimento automatico", "-2 azzera un attacco base per un turno"),
         card("y_venom_blades", "Venom Blades (test)", "Yellow", "Item", 1, 1, "none", [("mod", 1, "attack", "permanent")], ADAPT("Venom Blades, oggetto"), "Oggetto d'attacco su un Guildmaster in mischia", "+1 permanente; il veleno è rinviato"),
+        ally("y_cutpurse", "Tagliaborse (test)", "Yellow", 1, 0, 1, 2, "melee", "knight", "Alleato economico con Swift", "1/2 per 1 risorsa", keywords=["swift"]),
+        ally("y_knife_thrower", "Lanciacoltelli (test)", "Yellow", 1, 1, 1, 3, "ranged", "bishop", "Alleato con doppio profilo (N-05): a distanza 1, in mischia 2", "1/3 per 2 risorse; in mischia vale 2 solo con la variante «doppio profilo»", altAttack=2),
     ],
 }
 names = {"Red": ("rosso", "Artificers"), "Blue": ("blu", "Wizards"), "Green": ("verde", "Hunters"), "Yellow": ("giallo", "Rogues")}
@@ -73,7 +88,10 @@ for g, cards in G.items():
     dump(root / "cards" / f"{g.lower()}.json", cards)
     dump(root / "decks" / f"deck_{g.lower()}.json", dict(
         id=f"deck_{g.lower()}", name=f"Mazzo {names[g][0]} di prova ({names[g][1]})", version=1, guildmaster=cards[0]["id"],
-        cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=4) for c in cards[2:]]))
+        cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=4) for c in cards[2:6]]))
+    dump(root / "decks" / f"deck_{g.lower()}_alleati.json", dict(
+        id=f"deck_{g.lower()}_alleati", name=f"Mazzo {names[g][0]} con alleati ({names[g][1]})", version=1, guildmaster=cards[0]["id"],
+        cards=[dict(card=cards[1]["id"], count=9)] + [dict(card=c["id"], count=2) for c in cards[2:6]] + [dict(card=c["id"], count=4) for c in cards[6:]]))
 
 HYP = [
     "H1 Carte risorsa: una per turno; restano in gioco sul tavolo; si TAPPANO per pagare 1 risorsa del loro colore e si stappano all'inizio del proprio turno. Entrano stappate e producono subito (deciso il 14 nov; parametro per provarle tappate). Quelle rimaste pronte servono per istantanee e abilità nel turno avversario. 9 per mazzo.",
@@ -98,27 +116,36 @@ HYP = [
     "H21 Croce (abilità di Fiaran): la casella scelta più le 4 adiacenti in orizzontale e verticale; colpisce tutte le unità, anche le proprie. La forma non è scritta nelle fonti lette.",
     "H22 Abilità dei Guildmaster: costano 1 risorsa della gilda, non tappano il Guildmaster, una volta per turno (anche in quello avversario), si usano come un'istantanea (esempio di Nebros nel documento fase 2) e passano dalla pila.",
     "H23 Senya: il nemico deve essere in linea di vista; l'unità amica curata è il suo Guildmaster (non ci sono altre unità).",
+    "H10 Doppio profilo (N-05): adiacente si usa il valore in mischia, altrimenti quello a distanza. Il secondo profilo dei Guildmaster vale 1 (valore ipotizzato).",
+    "H27 Territori: il territorio di un giocatore sono le caselle normali collegate alle partenze accanto alla sua Torre senza passare da muri o highground; ogni blocco di highground è una zona condivisa. La mappa non li definisce (D23). Servono per l'evocazione e per la linea di vista a zone.",
+    "H28 Assalto (N-03): può dichiararlo qualsiasi unità, anche a distanza; l'unità si ferma accanto e gli scambi sono simultanei; chi vince occupa la casella; se muoiono entrambe resta vuota; se nessuna può fare danno si interrompe. Contro i Guildmaster solo con la variante «tutti».",
+    "H29 Scacchi: Pedone = una casella in orizzontale o verticale; non si attraversano le unità (il Cavallo salta); i bonus al movimento non valgono; il ruolo dell'alleato è scritto sulla carta.",
+    "H30 Edifici: sono le carte risorsa in gioco; si colpiscono senza linea di vista con carte e abilità che fanno solo danni; a 0 punti Struttura vanno negli scarti.",
+    "H31 Mostri: stanno sulle caselle M; si colpiscono col combattimento automatico solo se non c'è un'unità nemica o una Torre da colpire; restituiscono danno solo a chi è a contatto; sconfitti restano come ostacolo; il beneficio è un'ipotesi fra tre.",
+    "H32 Alleati: entrano dalla pila come le azioni normali; alla morte la carta va negli scarti; gli oggetti e le abilità restano del Guildmaster; le carte vedono dal Guildmaster. Con più nemici a portata sceglie chi attacca, altrimenti il primo in ordine (Guildmaster per primo).",
     "ND Veleno (F1-65): le fonti non dicono come si toglie un segnalino: per ora non si toglie mai (D31).",
     "ND Entrambi i Guildmaster sconfitti nello stesso scambio: esito non definito (D21); la partita finisce senza vincitore.",
 ]
 LIM = [
     "Test parziale: sottoinsieme delle feature dell'inventario. Non è il regolamento definitivo.",
-    "Nessun alleato, evocazione, mostro, edificio; Torre e mostri sono ostacoli inerti; Jungle senza regole.",
-    "Zone personali non definite nella mappa (foglio Zone: «da definire»): niente LOS-Z, niente parte di F1-38 sulle zone di evocazione.",
+    "Alleati, Assalto, scacchi, mostri, edifici, risorse fuori dal mazzo e linea di vista a zone esistono solo come varianti, quasi tutte basate su ipotesi (H27–H32). Jungle senza regole: le mappe non hanno caselle Jungle.",
+    "Zone personali non definite nella mappa (foglio Zone: «da definire»): i territori sono ricavati per ipotesi (H27). Il divieto di F1-38 fra le zone di evocazione non è applicato.",
     "Il foglio Note dell'Excel descrive una disposizione diversa dalle celle dei fogli Mappa: usate le celle (Torri in A1 e H8, non H1 e A8 come in F4b-11).",
 ]
 DEF = [
-    "Alleati, evocazione, token (F1-10/17/29/30, F2-01, F4C-01/02)", "Ruoli degli scacchi (F2-13/14, F4B-04)",
-    "Mostri, Jungle, vittoria coi mostri (F3-06/07/08, F4b-07)", "Torre con PV, danno, vittoria (F4b-12/14/15, F4C-05/06)",
-    "Edifici (F2-08, F3-12/13, F4b-18)", "Punti azione e moneta (F4A-04..15, F2-16)",
-    "Parole chiave: Armor, Flying, Swift, Taunt, Unique", "Aree d'effetto diverse dalla Croce (F1-39/40)",
-    "Magie continuative, esilio, ricerca nel mazzo, dadi", "P02 Alleati: N-01..N-05 (vita ripristinata, Assalto, doppio profilo)",
+    "Token per ruolo o per gilda; assegnazione libera dei pezzi degli scacchi (nota di F4C-01)", "Jungle con regole proprie; reazione dei mostri coi dadi (F4A-16)",
+    "Torre da conquistare (F4C-05/06), danno della Torre a raggio (F3-14)", "Edifici come supporto per altre carte, mazzo strutture (F2-08, F4A-03, CS-05..09)",
+    "Punti azione e moneta (F4A-04..15, F2-16)", "Parole chiave: Armor, Flying, Taunt, Unique", "Aree d'effetto diverse dalla Croce (F1-39/40)",
+    "Magie continuative, esilio, ricerca nel mazzo, dadi", "Scelta manuale del percorso (H18): nessuna regola dipende dal percorso",
 ]
 
 
-def preset(id, name, desc, based=None, map="mappa_8x8", **choices):
+def preset(id, name, desc, based=None, map="mappa_8x8", numbers=None, **choices):
     return dict(id=id, name=name, basedOn=based, description=desc, featureSet="P01", map=map, theme="semplice", partial=True, builtIn=True,
-                choices=choices, numbers={}, hypotheses=HYP, limits=LIM, deferred=DEF)
+                choices=choices, numbers=numbers or {}, hypotheses=HYP, limits=LIM, deferred=DEF)
+
+
+ALLEATI = " Usa i mazzi «con alleati»."
 
 
 for p in [
@@ -136,6 +163,19 @@ for p in [
            towerHealEnter="si", towerHealStart="si", towerDmgEnter="si", towerDmgStart="si", towerHp="si"),
     preset("P01g", "Duello — abilità solo nel proprio turno", "Come P01, ma l'abilità del Guildmaster si usa solo nel proprio turno, non in risposta.", "P01", gmAbilities="turno"),
     preset("P01e", "Duello — movimento facoltativo", "Come P01, ma muovere non è obbligatorio.", "P01", mandatoryMove="no"),
+    preset("P01o", "Duello — vince chi distrugge la Torre", "Come P01, con la Torre a punti vita: chi porta a 0 la Torre avversaria vince.", "P01", towerHp="si", towerWin="si"),
+    preset("P02", "Alleati", "Come P01, con gli alleati: si evocano nel proprio territorio, entrano tappati, al massimo 5 miniature per giocatore." + ALLEATI, "P01", units="alleati"),
+    preset("P02a", "Alleati — vita ripristinata e Assalto", "Come P02: la vita degli alleati torna piena a ogni inizio turno e si può muovere sulla casella di un alleato nemico per l'Assalto (N-01..N-04)." + ALLEATI, "P02", units="alleati", allyLife="ripristinata", assault="alleati"),
+    preset("P02b", "Alleati — doppio profilo d'attacco", "Come P02: le unità col secondo profilo attaccano sia in mischia sia a distanza (N-05)." + ALLEATI, "P02", units="alleati", attackProfile="doppio"),
+    preset("P02c", "Alleati — ogni unità deve muovere", "Come P02, ma l'obbligo di movimento vale per ogni unità che può muovere (OBB-B)." + ALLEATI, "P02", units="alleati", obligation="OBB-B"),
+    preset("P03", "Scacchi — ogni unità col suo pezzo", "Come P02, ma ogni unità muove come il pezzo degli scacchi scritto sulla carta; il Guildmaster come il Re; un solo alleato per tipo." + ALLEATI, "P02", units="alleati", moveStyle="ruoli"),
+    preset("P03b", "Scacchi — pezzo scelto all'ingresso", "Come P03, ma ogni alleato sceglie il pezzo quando entra, fra quelli a disposizione del giocatore: 1 Cavallo, 1 Alfiere, 1 Regina, 1 Torre, 2 Pedoni. Il Re è del Guildmaster, che qui muove come il Re." + ALLEATI, "P03", units="alleati", moveStyle="scelta"),
+    preset("P03a", "Scacchi — Guildmaster come il Re", "Come P01, ma il Guildmaster muove di una sola casella in qualsiasi direzione (F4B-04).", "P01", moveStyle="re"),
+    preset("P04", "Mostri attivi", "Come P01, ma i mostri hanno punti vita e si attaccano: sono di tre tipi (cura, attacco, pesca), pescati da un mazzo di 10 carte; chi ne sconfigge 2 vince.", "P01", numbers=dict(monsterWin=2), monsters="attivi"),
+    preset("P05", "Risorse fisse fuori dal mazzo", "Come P01, ma ogni giocatore ha 3 risorse fisse dal primo turno e le carte risorsa escono dai mazzi. Con i mazzi più corti il mazzo esaurito non fa perdere.", "P01", resourceModel="fisse", deckOut="salta"),
+    preset("P05a", "Risorse crescenti fuori dal mazzo", "Come P05, ma si riceve una risorsa in più a ogni proprio turno, fino a 3.", "P05", resourceModel="crescente", deckOut="salta"),
+    preset("P06", "Edifici", "Come P01, ma le carte risorsa in gioco sono edifici con 2 punti Struttura: si distruggono con i danni di carte e abilità.", "P01", buildings="si"),
+    preset("P07", "Linea di vista a zone", "Come P01, ma si vede solo chi sta nella propria zona o in una zona confinante (LOS-Z).", "P01", los="LOS-Z"),
 ]:
     dump(root / "presets" / f"{p['id']}.json", p)
 

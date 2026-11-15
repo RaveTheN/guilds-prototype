@@ -1,7 +1,7 @@
 # Guilds — prototipo di playtest
 
 Prototipo giocabile in locale (due giocatori sullo stesso computer) per provare regole trasferibili al gioco fisico.
-**È un test parziale**: il preset P01 copre un sottoinsieme dell'inventario. Stato e limiti: `docs/PROGRESS.md`.
+**È un test parziale**: i preset coprono un sottoinsieme dell'inventario; P02–P07 aggiungono alleati, Assalto, scacchi, mostri, risorse fuori dal mazzo, edifici e linea di vista a zone, quasi tutti basati su ipotesi dichiarate. Stato e limiti: `docs/PROGRESS.md`.
 
 ## Avvio (Unity 6000.3.10f1)
 
@@ -58,7 +58,8 @@ dotnet test tests
 
 - **Preset e regole**: nella schermata di configurazione clicca direttamente la regola da cambiare. Se il preset è di base viene creata da sola una copia tua (`data/presets/user/`). La scheda «Tutte le regole» elenca quelle attive, quelle spente ma attivabili (con il parametro da cambiare) e quelle non disponibili in questa versione, col motivo.
 - **Mappe**: `data/maps/*.json`. In configurazione, **Ritocca → variante** crea `mappa_…_vN.json` senza toccare l'originale. Riconversione dall'Excel: `python tools/convert_maps.py`.
-- **Carte e mazzi**: modifica `tools/gen_content.py`, poi `python tools/gen_content.py`. Per una nuova versione di una carta aggiungi una voce con lo stesso `id` e `version` più alta: ogni preset usa la versione più recente compatibile.
+- **Mazzi tuoi**: scheda «Editor di mazzi» nella schermata di configurazione; parte da una copia di un mazzo esistente e salva in `data/decks/user/`.
+- **Carte e mazzi di base**: modifica `tools/gen_content.py`, poi `python tools/gen_content.py`. Per una nuova versione di una carta aggiungi una voce con lo stesso `id` e `version` più alta: ogni preset usa la versione più recente compatibile.
 - **Illustrazioni**: copia `data/art/cards/<id carta>.png` (o `.jpg`), `data/art/symbols/<red_bomb|blue_flame|green_bow|yellow_boot|yellow_dagger>.png`, `data/art/cardback.png`. Se un file manca compare un segnaposto.
 - **Temi visivi**: copia `data/themes/semplice` in `data/themes/<nome>`, cambia `theme.json` (colori, altezze, `"models": {"W": "models/muro.obj"}` per sostituire la geometria di un tipo di casella) e i file OBJ. Il tema compare da solo fra quelli selezionabili.
 - **Token dei Guildmaster**: campo `tokenModel` della carta, relativo alla cartella del tema; se il file manca si usa il segnalino generico. Riconversione dagli STL: `python tools/convert_stl.py`.

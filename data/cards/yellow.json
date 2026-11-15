@@ -16,6 +16,7 @@
   "attack": 2,
   "health": 20,
   "range": "melee",
+  "altAttack": 1,
   "tokenModel": "models/daalia.obj",
   "keywords": [
    "venomous"
@@ -130,5 +131,47 @@
   "originSource": "Core set - fase 4: Venom Blades, oggetto (testo originale basato su regole boardless)",
   "tests": "Oggetto d'attacco su un Guildmaster in mischia",
   "rationale": "+1 permanente; il veleno è rinviato"
+ },
+ {
+  "id": "y_cutpurse",
+  "version": 1,
+  "name": "Tagliaborse (test)",
+  "guild": "Yellow",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato economico con Swift",
+  "rationale": "1/2 per 1 risorsa",
+  "attack": 1,
+  "health": 2,
+  "range": "melee",
+  "role": "knight",
+  "keywords": [
+   "swift"
+  ]
+ },
+ {
+  "id": "y_knife_thrower",
+  "version": 1,
+  "name": "Lanciacoltelli (test)",
+  "guild": "Yellow",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato con doppio profilo (N-05): a distanza 1, in mischia 2",
+  "rationale": "1/3 per 2 risorse; in mischia vale 2 solo con la variante «doppio profilo»",
+  "attack": 1,
+  "health": 3,
+  "range": "ranged",
+  "role": "bishop",
+  "altAttack": 2
  }
 ]

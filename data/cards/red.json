@@ -16,6 +16,7 @@
   "attack": 2,
   "health": 20,
   "range": "melee",
+  "altAttack": 1,
   "tokenModel": "models/fiaran.obj",
   "keywords": [],
   "ability": {
@@ -130,5 +131,46 @@
   "originSource": "Core set - fase 4: Flame Gauntlet, oggetto (testo originale basato su regole boardless)",
   "tests": "Oggetti assegnati al Guildmaster (F1-11/12)",
   "rationale": "+1 permanente per 2 risorse; cumulabile (F1-12)"
+ },
+ {
+  "id": "r_forge_recruit",
+  "version": 1,
+  "name": "Recluta della Fucina (test)",
+  "guild": "Red",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 1,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato in mischia robusto: evocazione, obbligo di movimento con più unità, Assalto",
+  "rationale": "2/3 per 2 risorse: regge un attacco base",
+  "attack": 2,
+  "health": 3,
+  "range": "melee",
+  "role": "rook"
+ },
+ {
+  "id": "r_bomber",
+  "version": 1,
+  "name": "Bombarolo (test)",
+  "guild": "Red",
+  "type": "Ally",
+  "costColored": 1,
+  "costGeneric": 0,
+  "target": "none",
+  "effects": [],
+  "originKind": "nuova proposta",
+  "originSource": "alleato di test proposto (nessuna fonte ne fissa i valori)",
+  "tests": "Alleato a distanza con Swift (F1-62)",
+  "rationale": "1/2 per 1 risorsa: fragile ma agisce subito",
+  "attack": 1,
+  "health": 2,
+  "range": "ranged",
+  "role": "bishop",
+  "keywords": [
+   "swift"
+  ]
  }
 ]

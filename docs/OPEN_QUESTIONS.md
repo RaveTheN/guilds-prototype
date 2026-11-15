@@ -36,6 +36,18 @@
 
 - **D39 — Come si colpisce la Torre (H26).** Oggi: col combattimento automatico, se non c'è un'unità nemica da colpire e la Torre è a contatto o in linea di tiro; danno pari all'Attacco; la Torre non restituisce. A 0 smette sia di curare sia di fare danno. Passare da una casella della Torre a un'altra conta come entrare. Corretto?
 
+- **D40 — Territori (H27).** Per evocazione e LOS-Z ho preso come territorio di un giocatore le caselle normali collegate alle partenze accanto alla sua Torre, senza passare da muri o highground; ogni blocco di highground è una zona condivisa. Va bene, o i territori sono altri? (sostituisce D23 finché non rispondi)
+- **D41 — Assalto (H28).** Può dichiararlo anche un'unità a distanza; chi vince occupa la casella; se muoiono entrambe resta vuota; contro i Guildmaster solo con la variante «tutti». Confermi? (riprende D17, D19)
+- **D42 — Mostri (H31).** Punti vita 4, restituiscono 1 solo a chi è a contatto, si colpiscono solo se non c'è un'unità nemica o una Torre da colpire, sconfitti restano come ostacolo. Quale beneficio danno (cura 3, una carta, +1 Attacco)? Quanti ne servono per vincere?
+- **D43 — Scacchi (H29).** Il Pedone muove di una casella in orizzontale o verticale; il ruolo è stampato sulla carta dell'alleato. La nota di F4C-01 (assegnare liberamente un'unità a un pezzo, sacrificio per riassegnare) non è implementata: la vuoi?
+- **D44 — Edifici (H30).** Li ho resi le carte risorsa in gioco, con 2 punti Struttura, colpibili senza linea di vista dai danni di carte e abilità. È la direzione giusta, o gli edifici devono essere carte a parte con effetti propri?
+- **D45 — Risorse fuori dal mazzo.** Con «fisse» e «crescente» le carte risorsa escono dai mazzi, che restano di 16 carte. Preferisci mazzi dedicati senza risorse?
+- **D46 — Alleati (H32).** Entrano dalla pila come azioni normali, gli oggetti e le abilità restano del Guildmaster, le carte «vedono» dal Guildmaster. Con più nemici a portata sceglie chi attacca. Corretto?
+
+- **D47 — Sostituzione con lo stesso nome.** La pedina sostituita resta nella sua casella (non si sceglie una casella di evocazione) e mantiene lo stato tappata/stappata. Corretto?
+
+- **D48 — Mazzo dei mostri.** Ho fatto così: il mazzo (4 cura, 3 attacco, 3 pesca, numeri modificabili) si mescola a inizio partita e ogni casella M riceve la prima carta. Quando un mostro è sconfitto: resta come ostacolo, oppure (opzione) esce il prossimo del mazzo sulla stessa casella. Con la vita ripristinata i mostri tornano a vita piena a inizio di ogni turno. I benefici sono numeri modificabili (default: cura 3, +1 Attacco, una carta). È questo il funzionamento del mazzo? Quando si pesca un mostro nuovo, e dove entra?
+
 ## Risolte
 - **D36** → il movimento è sempre subordinato al tap, salvo che una carta dica altro. Spostamento in risposta: SCH-SCARTO (tap + scarto) oppure SCH-TAP (solo tap). SCH-CARTE tolta: le carte che spostano valgono sempre, secondo il proprio testo. 15 nov 2026.
 - **D31 (veleno)** → due varianti da provare: i segnalini restano (P01) oppure calano di uno ogni volta che fanno danno, all'inizio del turno dell'unità avvelenata (P01l). 15 nov 2026.
